@@ -16,7 +16,7 @@ One script per approach, in the order of the approaches table:
 | 03 | `approaches/03_newton.py` | NVIDIA Newton rods + measured cable height | fit on the 14 clips | 8-14 | 7.8 |
 | 04 | `approaches/04_dlolab.py` | DLO-Lab Cosserat rod, gradient fit | fit on the clips | 15-18 | 16.56 |
 | 05 | `approaches/05_phystwin.py` | PhysTwin spring-mass twin (Jiang et al. 2025) | one twin per clip | world 19 | 19.8 |
-| 06 | `approaches/06_physworld.py` | PhysWorld (Yang et al. 2025): twin-synthesised demos -> GNN | twins + per-node fit | world 20 | 31.4 |
+| 06 | `approaches/06_physworld.py` | PhysWorld (Yang et al. 2025): twin-synthesised demos -> GNN | twins + per-node fit | world 20 | 21.8 |
 | 07 | `approaches/07_deformnet.py` | DeformNet (Li et al. 2024): PointNet + RSSM in embedding space | tracked videos | world 21 | 30.6 |
 | 08 | `approaches/08_ropedreamer.py` | RopeDreamer (Missal et al. 2026): RSSM over a quaternion chain | tracked videos | world 22 | 16.8 |
 | 09 | `approaches/09_caporali.py` | Caporali et al. (RA-L 2024): MLP + online parameter estimation | simulator only (real-anchored data) | world 23 | 18.4 |
@@ -100,7 +100,7 @@ compared with the approaches table (2026-10-23; results in `results/`):
 | Newton | 12 / 13 / 14 | 7.9 / 8.0 / 7.7 | 7.88 / 8.02 / 7.66 | exact |
 | DLO-Lab | 15-18 | 33.9 / 18.6 / 17.0 / 16.56 | 56.7 / 44.1 / 42.8 / 30.9 | the main project's own code gives the same higher numbers today; under investigation |
 | PhysTwin | world 19 | 19.8 | 19.82 | exact |
-| PhysWorld | world 20 | 31.4 | running | |
+| PhysWorld | world 20 | 21.8 | 21.75 | exact (paper Bezier-only demos: 31.41, also exact) |
 | DeformNet | world 21 | 30.6 | 30.63 | exact |
 | RopeDreamer | world 22 | 16.8 | 16.80 | exact |
 | Caporali | world 23 | 18.4 | 18.44 | exact (original data: 56.80) |

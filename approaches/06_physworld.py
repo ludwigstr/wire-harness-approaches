@@ -1,6 +1,7 @@
 """PhysWorld (Yang et al. 2025): real video -> physics-aware demonstration
 synthesis with a digital twin -> a graph world model trained on the synthetic
-demonstrations. Table: world sheet row 20 -- 31.4 mm/node (median 25.6).
+demonstrations. Table: world sheet row 20 -- 21.8 mm/node (median 16.8) with --motion mix
+(the default); the paper's Bezier-only demos give 31.4.
 
 Pipeline (the digital twin is the PhysTwin spring-mass twin of each clip, row 19;
 the paper's MPM twin is replaced because a cable is 1-D):
@@ -17,11 +18,11 @@ the paper's MPM twin is replaced because a cable is 1-D):
      (the only contact with the real data, in-sample)
   5. evaluation: 5-frame warm-up, open loop from the measured end motions, ends pinned
 
-Variants (2026-10-23; defaults = the table's 31.4):
+Variants (2026-10-23; defaults = the table's 21.8):
   --k median|dense      per-cable median stiffness (table) or the full per-spring twin
   --rest start|frame0   episode start frame at rest (table) or the twin's own rest geometry
   --v0 zero|measured    initial velocity of an episode
-  --motion bezier|mix   paper Bezier paths (table) or 1/3 Bezier calibrated to the measured
+  --motion bezier|mix   paper Bezier paths (31.4) or (table, default) 1/3 Bezier calibrated to the measured
                         end displacements, 1/3 measured end paths, 1/3 measured paths
                         time-warped 0.5-2x and scaled 0.5-1.5x
 
@@ -180,7 +181,7 @@ def main():
     ap.add_argument("--epochs", type=int, default=15); ap.add_argument("--warm", type=int, default=5)
     ap.add_argument("--out", default="results/physworld_14.json"); ap.add_argument("--device", default="cuda")
     ap.add_argument("--k", default="median", choices=["median", "dense"]); ap.add_argument("--rest", default="start", choices=["start", "frame0"])
-    ap.add_argument("--v0", default="zero", choices=["zero", "measured"]); ap.add_argument("--motion", default="bezier", choices=["bezier", "mix"])
+    ap.add_argument("--v0", default="zero", choices=["zero", "measured"]); ap.add_argument("--motion", default="mix", choices=["bezier", "mix"])
     ap.add_argument("--twin-dir", default="checkpoints/phystwin_twins")
     a = ap.parse_args(); dev = a.device; rng = np.random.default_rng(0); torch.manual_seed(0)
     log = lambda s: print(f"[{time.strftime('%H:%M:%S')}] {s}", flush=True)
