@@ -1,0 +1,11 @@
+<mujoco>
+  <compiler angle="degree"/>
+  <worldbody>
+    <body name="hub" pos="0 0 0.00500">
+      <joint name="hub_x" type="slide" axis="1 0 0" damping="8"/>
+      <joint name="hub_y" type="slide" axis="0 1 0" damping="8"/>
+      <geom type="box" size="0.075 0.075 0.005"
+            mass="2" contype="0" conaffinity="0"/>
+    </body>
+  </worldbody>
+</mujoco>

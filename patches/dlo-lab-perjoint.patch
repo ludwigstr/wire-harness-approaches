@@ -1,0 +1,739 @@
+--- a/genesis/engine/solvers/rod_solver.py	2026-08-23 23:50:10.042209052 +0200
++++ b/genesis/engine/solvers/rod_solver.py	2026-08-28 22:28:55.139281257 +0200
+@@ -392,6 +392,19 @@
+             layout=qd.Layout.SOA
+         )
+ 
++        # PER-EDGE stretching stiffness scale. The rod carries ONE stretching
++        # stiffness (rods_stretching_stiffness is shaped (n_rods, B)), which
++        # cannot express a cable that is stiffer near its connectors than in
++        # the middle. This field multiplies that single value per edge, so the
++        # existing API keeps working unchanged (all scales start at 1.0) while
++        # a per-element profile becomes expressible -- and, since the adjoint
++        # here is auto-generated from the forward kernels, differentiable.
++        self.edges_stretching_scale = qd.field(
++            dtype=gs.qd_float, needs_grad=self._req_grad_K,
++            shape=self._batch_shape(self._n_edges)
++        )
++        self.edges_stretching_scale.fill(1.0)
++
+     def init_internal_vertex_fields(self):
+         # internal vertex information (static)
+         struct_internal_vertex_info = qd.types.struct(
+@@ -415,6 +428,119 @@
+             layout=qd.Layout.SOA
+         )
+ 
++        # PER-HINGE bending / twisting stiffness scales -- the hinge is the
++        # rod's joint, so this is the per-joint stiffness the rest of the
++        # project fits on its hinge-chain models. Same construction as
++        # edges_stretching_scale: a multiplier on the rod's single value,
++        # 1.0 by default, gradient-carrying.
++        # kappa_rest's gradient cannot be read off the state: truncate_adjoint()
++        # zeroes the WHOLE grad window every frame (that is what truncated BPTT
++        # means here), so by the time backward() returns it is gone. The
++        # stiffness parameters avoid this by accumulating into their own .grad,
++        # which is cleared only once per scene.reset(); the rest curvature needs
++        # the same treatment, hence this accumulator.
++        self.hinges_kappa_rest_grad_acc = qd.field(
++            dtype=gs.qd_vec2, needs_grad=False,
++            shape=self._batch_shape(self._n_internal_vertices)
++        )
++        self.hinges_kappa_rest_grad_acc.fill(0.0)
++
++        self.hinges_bending_scale = qd.field(
++            dtype=gs.qd_float, needs_grad=self._req_grad_E,
++            shape=self._batch_shape(self._n_internal_vertices)
++        )
++        self.hinges_bending_scale.fill(1.0)
++
++        # PER-HINGE BENDING DAMPING. Newton fits one damping value per joint
++        # (joint_target_kd); this solver has no bending damping at all -- only a
++        # global velocity bleed in the integrator
++        # (vertices.vel *= exp(-dt*damping)), identical for every vertex, so one
++        # part of the cable cannot settle faster than another. The rate is taken
++        # as kdot = sum_i (dkappa/dx_i) . v_i, using the dkappa/dx the bending
++        # kernel already computes, so this needs no extra state and no finite
++        # difference across substeps. 0.0 by default = unchanged behaviour.
++        # STATE-CONDITIONED STIFFNESS (EgoPhys, eq. 4-6): instead of a fixed
++        # stiffness per hinge, a log-offset that depends on the CURRENT
++        # deformation -- log k = log k_base + a*strain + b*strain_rate. A
++        # constant cannot express that a cable resists gentle bending
++        # differently from hard bending; this can, with two numbers instead of
++        # a new constitutive law. Both default to 0.0 -> exp(0) = 1 -> the
++        # solver behaves exactly as before.
++        self.rods_state_a = qd.field(
++            dtype=gs.qd_float, needs_grad=self._req_grad_E,
++            shape=self._batch_shape(self._n_rods)
++        )
++        self.rods_state_a.fill(0.0)
++        self.rods_state_b = qd.field(
++            dtype=gs.qd_float, needs_grad=self._req_grad_E,
++            shape=self._batch_shape(self._n_rods)
++        )
++        self.rods_state_b.fill(0.0)
++
++        # LOADING / UNLOADING ASYMMETRY, per hinge. EgoPhys keeps two prototype
++        # banks selected by the sign of the strain (tension vs compression of a
++        # spring). For a BENT ROD the meaningful split is a different one: is
++        # the hinge being bent FURTHER, or is it springing back? A real harness
++        # wire resists those two differently -- that is precisely what makes it
++        # hysteretic, and what Newton models with Dahl friction. Selected by the
++        # sign of d|kappa - kappa_rest|/dt, which the kernel can form from the
++        # elastic curvature and its rate. Zero everywhere = no asymmetry, and
++        # then this reduces exactly to the per-rod coefficients above.
++        self.hinges_state_a_load = qd.field(
++            dtype=gs.qd_float, needs_grad=self._req_grad_E,
++            shape=self._batch_shape(self._n_internal_vertices))
++        self.hinges_state_a_load.fill(0.0)
++        self.hinges_state_a_unload = qd.field(
++            dtype=gs.qd_float, needs_grad=self._req_grad_E,
++            shape=self._batch_shape(self._n_internal_vertices))
++        self.hinges_state_a_unload.fill(0.0)
++
++        # ---- EgoPhys CODEBOOK (eq. 6), sign-aware prototype mixture ----
++        # The linear form above (rods_state_a/b) is only the kernel of the
++        # idea. EgoPhys learns K material PROTOTYPES per sign bank and lets a
++        # small network decide, per element and per timestep, which mixture
++        # applies: pi = softmax(g(phi)/tau), Delta = pi^T C. Two banks, one for
++        # tension/loading and one for compression/unloading, because a real
++        # material answers the two differently.
++        #
++        # DELIBERATE REDUCTION: g is LINEAR here, not the paper's 64-wide MLP.
++        # A 64-unit MLP is not sensibly evaluable inside a compiled kernel, and
++        # the substance of eq. 6 is the sign-aware soft prototype mixture, not
++        # the width of the assignment network. Features are
++        # phi = [strain, rate, position-along-cable, 1].
++        self._cb_K = 4
++        self._cb_F = 4
++        self.cb_proto_pos = qd.field(          # C+ : loading bank
++            dtype=gs.qd_float, needs_grad=self._req_grad_E,
++            shape=self._batch_shape(self._cb_K))
++        self.cb_proto_pos.fill(0.0)
++        self.cb_proto_neg = qd.field(          # C- : unloading bank
++            dtype=gs.qd_float, needs_grad=self._req_grad_E,
++            shape=self._batch_shape(self._cb_K))
++        self.cb_proto_neg.fill(0.0)
++        self.cb_w = qd.field(                  # assignment weights g_theta
++            dtype=gs.qd_float, needs_grad=self._req_grad_E,
++            shape=self._batch_shape((self._cb_K, self._cb_F)))
++        self.cb_w.fill(0.0)
++        self.cb_tau = qd.field(dtype=gs.qd_float, needs_grad=False,
++                               shape=self._batch_shape(()))
++        self.cb_tau.fill(0.7)                  # paper default
++        self.cb_on = qd.field(dtype=gs.qd_int, needs_grad=False,
++                              shape=self._batch_shape(()))
++        self.cb_on.fill(0)                     # off -> solver unchanged
++
++        self.hinges_bending_damping = qd.field(
++            dtype=gs.qd_float, needs_grad=self._req_grad_E,
++            shape=self._batch_shape(self._n_internal_vertices)
++        )
++        self.hinges_bending_damping.fill(0.0)
++
++        self.hinges_twisting_scale = qd.field(
++            dtype=gs.qd_float, needs_grad=self._req_grad_G,
++            shape=self._batch_shape(self._n_internal_vertices)
++        )
++        self.hinges_twisting_scale.fill(1.0)
++
+     def init_constraints(self):
+         # NOTE: call this after call `_kernel_add_rods`
+         valid_edge_pairs = list()
+@@ -497,10 +623,22 @@
+         # only zeroed here (once per `scene.reset()`, i.e. once per optimization iteration).
+         if self._req_grad_K:
+             self.rods_stretching_stiffness.grad.fill(0)
++            self.edges_stretching_scale.grad.fill(0)
+         if self._req_grad_E:
+             self.rods_bending_stiffness.grad.fill(0)
++            self.hinges_bending_scale.grad.fill(0)
++            self.hinges_bending_damping.grad.fill(0)
++            self.rods_state_a.grad.fill(0)
++            self.rods_state_b.grad.fill(0)
++            self.cb_proto_pos.grad.fill(0)
++            self.cb_proto_neg.grad.fill(0)
++            self.cb_w.grad.fill(0)
++            self.hinges_state_a_load.grad.fill(0)
++            self.hinges_state_a_unload.grad.fill(0)
++            self.hinges_kappa_rest_grad_acc.fill(0.0)
+         if self._req_grad_G:
+             self.rods_twisting_stiffness.grad.fill(0)
++            self.hinges_twisting_scale.grad.fill(0)
+ 
+         for entity in self._entities:
+             entity.reset_grad()
+@@ -719,7 +857,7 @@
+             rod_id = self.vertices_info[v_s].rod_idx
+ 
+             # check stretching enabled
+-            K = self.rods_stretching_stiffness[rod_id, i_b]
++            K = self.rods_stretching_stiffness[rod_id, i_b] * self.edges_stretching_scale[i_e, i_b]
+             if K > 0.:
+                 r = (self.vertices_param[v_s, i_b].radius + self.vertices_param[v_e, i_b].radius) * 0.5
+                 a, b = r, r
+@@ -751,7 +889,7 @@
+             rod_id = self.vertices_info[v_s].rod_idx
+ 
+             # check bending enabled
+-            E = self.rods_bending_stiffness[rod_id, i_b]
++            E = self.rods_bending_stiffness[rod_id, i_b] * self.hinges_bending_scale[i_iv, i_b]
+             if E > 0.:
+                 r = self.vertices_param[v_m, i_b].radius
+                 a, b = r, r
+@@ -828,14 +966,103 @@
+                     B11 * (kappa1_i - kappa1_rest_i) * gradient_kappa1_i_x_i + \
+                     B22 * (kappa2_i - kappa2_rest_i) * gradient_kappa2_i_x_i
+                 ) / l_i
+-                for k in qd.static(range(3)):
+-                    qd.atomic_add(self.gradients[3 * v_s + k, i_b], gradient_dx_i[k])
+-                    qd.atomic_add(self.gradients[3 * v_m + k, i_b], gradient_dx_i[k + 3])
+-                    qd.atomic_add(self.gradients[3 * v_e + k, i_b], gradient_dx_i[k + 6])
+ 
+-                    qd.atomic_add(self.vertices_force[v_s, i_b].f_b[k], -gradient_dx_i[k])
+-                    qd.atomic_add(self.vertices_force[v_m, i_b].f_b[k], -gradient_dx_i[k + 3])
+-                    qd.atomic_add(self.vertices_force[v_e, i_b].f_b[k], -gradient_dx_i[k + 6])
++                # PER-HINGE BENDING DAMPING: resist the RATE of bending along
++                # the same generalised direction as the elastic term, i.e.
++                # kdot = sum_i (dkappa/dx_i) . v_i with the dkappa/dx this
++                # kernel has just computed. Written without a branch and
++                # without scalar accumulators on purpose -- both forms
++                # segfaulted the compiled kernel.
++                kd_i = self.hinges_bending_damping[i_iv, i_b]
++                g1_s = qd.Vector([gradient_kappa1_i_x_i[0],
++                                  gradient_kappa1_i_x_i[1],
++                                  gradient_kappa1_i_x_i[2]])
++                g1_m = qd.Vector([gradient_kappa1_i_x_i[3],
++                                  gradient_kappa1_i_x_i[4],
++                                  gradient_kappa1_i_x_i[5]])
++                g1_e = qd.Vector([gradient_kappa1_i_x_i[6],
++                                  gradient_kappa1_i_x_i[7],
++                                  gradient_kappa1_i_x_i[8]])
++                g2_s = qd.Vector([gradient_kappa2_i_x_i[0],
++                                  gradient_kappa2_i_x_i[1],
++                                  gradient_kappa2_i_x_i[2]])
++                g2_m = qd.Vector([gradient_kappa2_i_x_i[3],
++                                  gradient_kappa2_i_x_i[4],
++                                  gradient_kappa2_i_x_i[5]])
++                g2_e = qd.Vector([gradient_kappa2_i_x_i[6],
++                                  gradient_kappa2_i_x_i[7],
++                                  gradient_kappa2_i_x_i[8]])
++                kdot1 = (qm.dot(g1_s, self.vertices[f, v_s, i_b].vel)
++                         + qm.dot(g1_m, self.vertices[f, v_m, i_b].vel)
++                         + qm.dot(g1_e, self.vertices[f, v_e, i_b].vel))
++                kdot2 = (qm.dot(g2_s, self.vertices[f, v_s, i_b].vel)
++                         + qm.dot(g2_m, self.vertices[f, v_m, i_b].vel)
++                         + qm.dot(g2_e, self.vertices[f, v_e, i_b].vel))
++                damp_dx_i = kd_i * (kdot1 * gradient_kappa1_i_x_i
++                                    + kdot2 * gradient_kappa2_i_x_i) / l_i
++
++                # State-conditioned stiffness factor. Applied to the FORCE
++                # rather than folded into B11/B22, because both features are
++                # only available after the geometry terms above -- and because
++                # a state-dependent stiffness has no exact potential anyway,
++                # so this is a phenomenological force law, not a conservative
++                # energy. The exponent is bounded to +/-2 (a factor 0.14..7.4)
++                # so a fit cannot drive the rod unstable through it.
++                strain_i = qd.sqrt(qd.max(elastic_kappa_sq, 0.0)) * l_i
++                rate_i = qd.sqrt(qd.max(kdot1 * kdot1 + kdot2 * kdot2, 0.0)) * l_i
++                # loading if the hinge bends further away from its rest shape,
++                # unloading if it springs back
++                load_sign = (elastic_kappa[0] * kdot1
++                             + elastic_kappa[1] * kdot2)
++                a_hinge = self.hinges_state_a_load[i_iv, i_b]
++                if load_sign < 0.:
++                    a_hinge = self.hinges_state_a_unload[i_iv, i_b]
++                expo_i = ((self.rods_state_a[rod_id, i_b] + a_hinge) * strain_i
++                          + self.rods_state_b[rod_id, i_b] * rate_i)
++                # codebook contribution (eq. 6): softmax over K prototypes,
++                # bank chosen by the sign of the loading rate
++                cb_d = 0.0
++                if self.cb_on[i_b] == 1:
++                    s_along = qd.cast(i_iv, gs.qd_float) / qd.cast(
++                        qd.max(self.n_internal_vertices - 1, 1), gs.qd_float)
++                    load_s = (elastic_kappa[0] * kdot1
++                              + elastic_kappa[1] * kdot2)
++                    tau_c = qd.max(self.cb_tau[i_b], 1e-3)
++                    m_max = -1e30
++                    for kk in qd.static(range(4)):
++                        lg = (self.cb_w[kk, 0, i_b] * strain_i
++                              + self.cb_w[kk, 1, i_b] * rate_i
++                              + self.cb_w[kk, 2, i_b] * s_along
++                              + self.cb_w[kk, 3, i_b]) / tau_c
++                        m_max = qd.max(m_max, lg)
++                    z_sum = 0.0
++                    for kk in qd.static(range(4)):
++                        lg = (self.cb_w[kk, 0, i_b] * strain_i
++                              + self.cb_w[kk, 1, i_b] * rate_i
++                              + self.cb_w[kk, 2, i_b] * s_along
++                              + self.cb_w[kk, 3, i_b]) / tau_c
++                        z_sum += qd.exp(lg - m_max)
++                    for kk in qd.static(range(4)):
++                        lg = (self.cb_w[kk, 0, i_b] * strain_i
++                              + self.cb_w[kk, 1, i_b] * rate_i
++                              + self.cb_w[kk, 2, i_b] * s_along
++                              + self.cb_w[kk, 3, i_b]) / tau_c
++                        pi_k = qd.exp(lg - m_max) / qd.max(z_sum, 1e-12)
++                        c_k = self.cb_proto_pos[kk, i_b]
++                        if load_s < 0.:
++                            c_k = self.cb_proto_neg[kk, i_b]
++                        cb_d += pi_k * c_k
++                state_f = qd.exp(qd.max(-2.0, qd.min(2.0, expo_i + cb_d)))
++                gradient_dx_i = gradient_dx_i * state_f
++
++                for k in qd.static(range(3)):
++                    qd.atomic_add(self.gradients[3 * v_s + k, i_b], gradient_dx_i[k] + damp_dx_i[k])
++                    qd.atomic_add(self.gradients[3 * v_m + k, i_b], gradient_dx_i[k + 3] + damp_dx_i[k + 3])
++                    qd.atomic_add(self.gradients[3 * v_e + k, i_b], gradient_dx_i[k + 6] + damp_dx_i[k + 6])
++
++                    qd.atomic_add(self.vertices_force[v_s, i_b].f_b[k], -gradient_dx_i[k] - damp_dx_i[k])
++                    qd.atomic_add(self.vertices_force[v_m, i_b].f_b[k], -gradient_dx_i[k + 3] - damp_dx_i[k + 3])
++                    qd.atomic_add(self.vertices_force[v_e, i_b].f_b[k], -gradient_dx_i[k + 6] - damp_dx_i[k + 6])
+ 
+                 gradient_kappa1_i_theta_i = - qd.Vector([
+                     qm.dot(kb, self.edges[f, e_s, i_b].d1) * 0.5,
+@@ -863,7 +1090,7 @@
+             rod_id = self.vertices_info[v_s].rod_idx
+ 
+             # check twisting enabled
+-            G = self.rods_twisting_stiffness[rod_id, i_b]
++            G = self.rods_twisting_stiffness[rod_id, i_b] * self.hinges_twisting_scale[i_iv, i_b]
+             if G > 0.:
+                 r = self.vertices_param[v_m, i_b].radius
+                 a, b = r, r
+@@ -1092,6 +1319,14 @@
+             self.internal_vertices.grad[target, i_iv, i_b].kappa_rest = self.internal_vertices.grad[source, i_iv, i_b].kappa_rest
+ 
+     @qd.kernel
++    def accum_kappa_rest_grad(self, f: qd.i32):
++        """Sum the rest-curvature adjoint over the window before it is zeroed."""
++        for i_f, i_iv, i_b in qd.ndrange(f, self.n_internal_vertices, self._B):
++            for k in qd.static(range(2)):
++                self.hinges_kappa_rest_grad_acc[i_iv, i_b][k] += \
++                    self.internal_vertices.grad[i_f, i_iv, i_b].kappa_rest[k]
++
++    @qd.kernel
+     def reset_grad_till_frame(self, f: qd.i32):
+         # zero out v.grad in frame 0..(f-1) for all vertices, all batch indices
+         for i_f, i_v, i_b in qd.ndrange(f, self._n_vertices, self._B):
+@@ -1118,6 +1353,7 @@
+         # Truncated BPTT: detach the recurrent adjoint by zeroing the whole grad window (all frames),
+         # so no gradient carries to earlier steps.
+         if self.is_active and self._sim.requires_grad:
++            self.accum_kappa_rest_grad(self._sim.substeps_local + 1)
+             self.reset_grad_till_frame(self._sim.substeps_local + 1)
+ 
+     # ------------------------------------------------------------------------------------
+@@ -2044,6 +2280,206 @@
+             self.vertices_ng[f, i_global, i_b].fixed = fixed[i_b, i_v]
+ 
+     @qd.kernel
++    def _kernel_offset_kappa_rest(
++        self,
++        iv_start: qd.i32,
++        n_iv: qd.i32,
++        f: qd.i32,
++        offset: qd.types.ndarray(),          # shape [n_iv, 2]
++    ):
++        """Shift each hinge's REST CURVATURE -- the shape the cable returns to.
++
++        This is the rod's equivalent of the per-joint rest angle that the
++        Newton pipeline fits, and which this project has repeatedly found to be
++        the dominant shape parameter. Note the solver already moves this
++        quantity itself: plasticity works by accumulating into kappa_rest
++        (compute_bending_energy: kappa_rest[f+1] = delta_rest_kappa +
++        kappa_rest[f]). Making its INITIAL value settable therefore adds no new
++        mechanism -- it just lets the fit start the cable with a permanent set
++        instead of a straight-from-the-tracked-route one.
++        """
++        for i, i_b in qd.ndrange(n_iv, self._B):
++            for k in qd.static(range(2)):
++                self.internal_vertices[f, iv_start + i, i_b].kappa_rest[k] += offset[i, k]
++
++    @qd.kernel
++    def _kernel_get_kappa_rest_grad(
++        self,
++        iv_start: qd.i32,
++        n_iv: qd.i32,
++        f: qd.i32,
++        grad: qd.types.ndarray(),
++    ):
++        for i, i_b in qd.ndrange(n_iv, self._B):
++            for k in qd.static(range(2)):
++                grad[i, k, i_b] = self.hinges_kappa_rest_grad_acc[iv_start + i, i_b][k]
++
++    @qd.kernel
++    def _kernel_scale_rest_lengths(
++        self,
++        e_start: qd.i32,
++        n_e: qd.i32,
++        factor: qd.f32,
++    ):
++        """Make every edge's UNSTRETCHED length `factor` times the length it
++        was built with -- i.e. give the cable slack.
++
++        A rod built from a tracked route is exactly as long as that route,
++        so it starts taut between its connectors and can never show the real
++        cable's sag. Scaling only length_rest (not edge_rest, so the rest
++        CURVATURE and therefore the cable's natural shape stay untouched)
++        leaves the rod compressed by (1 - 1/factor) at t=0, which is what
++        slack physically is. Read-only during simulation, so this is safe to
++        apply once after build.
++        """
++        for i in range(n_e):
++            self.edges_info[e_start + i].length_rest *= factor
++
++    @qd.kernel
++    def _kernel_set_hinge_bending_scale(
++        self,
++        iv_start: qd.i32,
++        n_iv: qd.i32,
++        scale: qd.types.ndarray(),          # shape [n_iv, len(envs_idx)]
++        envs_idx: qd.types.ndarray(),
++    ):
++        for i, i_b_ in qd.ndrange(n_iv, envs_idx.shape[0]):
++            self.hinges_bending_scale[iv_start + i, envs_idx[i_b_]] = scale[i, i_b_]
++
++    @qd.kernel
++    def _kernel_set_state_coeffs(
++        self,
++        rod_idx: qd.i32,
++        a: qd.types.ndarray(),
++        b: qd.types.ndarray(),
++        envs_idx: qd.types.ndarray(),
++    ):
++        for i_b_ in range(envs_idx.shape[0]):
++            i_b = envs_idx[i_b_]
++            self.rods_state_a[rod_idx, i_b] = a[i_b_]
++            self.rods_state_b[rod_idx, i_b] = b[i_b_]
++
++    @qd.kernel
++    def _kernel_set_hinge_state_a(
++        self,
++        iv_start: qd.i32,
++        n_iv: qd.i32,
++        load: qd.types.ndarray(),
++        unload: qd.types.ndarray(),
++        envs_idx: qd.types.ndarray(),
++    ):
++        for i, i_b_ in qd.ndrange(n_iv, envs_idx.shape[0]):
++            i_b = envs_idx[i_b_]
++            self.hinges_state_a_load[iv_start + i, i_b] = load[i, i_b_]
++            self.hinges_state_a_unload[iv_start + i, i_b] = unload[i, i_b_]
++
++    @qd.kernel
++    def _kernel_get_hinge_state_a_grad(
++        self, iv_start: qd.i32, n_iv: qd.i32, grad: qd.types.ndarray(),
++    ):
++        for i, i_b in qd.ndrange(n_iv, self._B):
++            grad[0, i, i_b] = self.hinges_state_a_load.grad[iv_start + i, i_b]
++            grad[1, i, i_b] = self.hinges_state_a_unload.grad[iv_start + i, i_b]
++
++    @qd.kernel
++    def _kernel_set_codebook(
++        self,
++        proto_pos: qd.types.ndarray(),   # [K, B]
++        proto_neg: qd.types.ndarray(),
++        w: qd.types.ndarray(),           # [K, F, B]
++        tau: qd.f32,
++        on: qd.i32,
++    ):
++        for i_b in range(self._B):
++            self.cb_tau[i_b] = tau
++            self.cb_on[i_b] = on
++            for kk in range(self._cb_K):
++                self.cb_proto_pos[kk, i_b] = proto_pos[kk, i_b]
++                self.cb_proto_neg[kk, i_b] = proto_neg[kk, i_b]
++                for ff in range(self._cb_F):
++                    self.cb_w[kk, ff, i_b] = w[kk, ff, i_b]
++
++    @qd.kernel
++    def _kernel_get_codebook_grad(self, grad: qd.types.ndarray()):
++        """[2*K + K*F, B]: prototypes (pos, neg) then assignment weights."""
++        for i_b in range(self._B):
++            for kk in range(self._cb_K):
++                grad[kk, i_b] = self.cb_proto_pos.grad[kk, i_b]
++                grad[self._cb_K + kk, i_b] = self.cb_proto_neg.grad[kk, i_b]
++                for ff in range(self._cb_F):
++                    grad[2 * self._cb_K + kk * self._cb_F + ff, i_b] = \
++                        self.cb_w.grad[kk, ff, i_b]
++
++    @qd.kernel
++    def _kernel_get_state_coeffs_grad(
++        self, rod_idx: qd.i32, grad: qd.types.ndarray(),
++    ):
++        for i_b in range(self._B):
++            grad[0, i_b] = self.rods_state_a.grad[rod_idx, i_b]
++            grad[1, i_b] = self.rods_state_b.grad[rod_idx, i_b]
++
++    @qd.kernel
++    def _kernel_set_hinge_bending_damping(
++        self,
++        iv_start: qd.i32,
++        n_iv: qd.i32,
++        value: qd.types.ndarray(),
++        envs_idx: qd.types.ndarray(),
++    ):
++        for i, i_b_ in qd.ndrange(n_iv, envs_idx.shape[0]):
++            self.hinges_bending_damping[iv_start + i, envs_idx[i_b_]] = value[i, i_b_]
++
++    @qd.kernel
++    def _kernel_get_hinge_bending_damping_grad(
++        self, iv_start: qd.i32, n_iv: qd.i32, grad: qd.types.ndarray(),
++    ):
++        for i, i_b in qd.ndrange(n_iv, self._B):
++            grad[i, i_b] = self.hinges_bending_damping.grad[iv_start + i, i_b]
++
++    @qd.kernel
++    def _kernel_set_hinge_twisting_scale(
++        self,
++        iv_start: qd.i32,
++        n_iv: qd.i32,
++        scale: qd.types.ndarray(),
++        envs_idx: qd.types.ndarray(),
++    ):
++        for i, i_b_ in qd.ndrange(n_iv, envs_idx.shape[0]):
++            self.hinges_twisting_scale[iv_start + i, envs_idx[i_b_]] = scale[i, i_b_]
++
++    @qd.kernel
++    def _kernel_set_edge_stretching_scale(
++        self,
++        e_start: qd.i32,
++        n_e: qd.i32,
++        scale: qd.types.ndarray(),
++        envs_idx: qd.types.ndarray(),
++    ):
++        for i, i_b_ in qd.ndrange(n_e, envs_idx.shape[0]):
++            self.edges_stretching_scale[e_start + i, envs_idx[i_b_]] = scale[i, i_b_]
++
++    @qd.kernel
++    def _kernel_get_hinge_bending_scale_grad(
++        self, iv_start: qd.i32, n_iv: qd.i32, grad: qd.types.ndarray(),
++    ):
++        for i, i_b in qd.ndrange(n_iv, self._B):
++            grad[i, i_b] = self.hinges_bending_scale.grad[iv_start + i, i_b]
++
++    @qd.kernel
++    def _kernel_get_hinge_twisting_scale_grad(
++        self, iv_start: qd.i32, n_iv: qd.i32, grad: qd.types.ndarray(),
++    ):
++        for i, i_b in qd.ndrange(n_iv, self._B):
++            grad[i, i_b] = self.hinges_twisting_scale.grad[iv_start + i, i_b]
++
++    @qd.kernel
++    def _kernel_get_edge_stretching_scale_grad(
++        self, e_start: qd.i32, n_e: qd.i32, grad: qd.types.ndarray(),
++    ):
++        for i, i_b in qd.ndrange(n_e, self._B):
++            grad[i, i_b] = self.edges_stretching_scale.grad[e_start + i, i_b]
++
++    @qd.kernel
+     def _kernel_set_bending_stiffness(
+         self,
+         rod_idx: qd.i32,
+--- a/genesis/engine/entities/rod_entity.py	2026-08-23 23:50:10.023208716 +0200
++++ b/genesis/engine/entities/rod_entity.py	2026-08-28 22:28:55.140281274 +0200
+@@ -1284,6 +1284,203 @@
+         envs_idx = to_gs_tensor(envs_idx)
+         return envs_idx
+ 
++    # ------------------------------------------------------------------
++    # PER-JOINT stiffness. The solver stores exactly one stretching / bending
++    # / twisting stiffness per rod, so a cable can only ever be uniform along
++    # its length. These accessors drive a per-element MULTIPLIER on that value
++    # (1.0 everywhere by default, so nothing changes unless it is set), which
++    # makes a stiffness profile expressible -- stiffer near the connectors,
++    # softer in the middle -- without touching the existing API. The scales
++    # are read inside the forward energy kernels, whose adjoints are
++    # auto-generated, so they are fitted by gradient like K and E themselves.
++    # ------------------------------------------------------------------
++    def _scale_tensor(self, values, n):
++        """(n,) or (n, B) -> contiguous (n, B) float tensor."""
++        t = to_gs_tensor(values)
++        if t.ndim == 1:
++            t = t.unsqueeze(-1).expand(n, self._sim._B)
++        if t.shape[0] != n:
++            gs.raise_exception(
++                f"expected {n} values along dim 0, got {tuple(t.shape)}")
++        return t.contiguous()
++
++    @gs.assert_built
++    def set_kappa_rest_offset(self, offset, f=0):
++        """Add a per-hinge offset to the rest curvature, shape (n_hinges, 2)."""
++        t = to_gs_tensor(offset)
++        if t.shape[0] != self.n_internal_vertices:
++            gs.raise_exception(
++                f"expected {self.n_internal_vertices} hinges, got {tuple(t.shape)}")
++        self._solver._kernel_offset_kappa_rest(
++            self._iv_start, self.n_internal_vertices, int(f), t.contiguous())
++
++    def get_kappa_rest_grad(self, f=0):
++        """dL/d(rest curvature), shape (n_hinges, 2, n_envs)."""
++        n = self.n_internal_vertices
++        grad = torch.zeros((n, 2, self._sim._B), dtype=gs.tc_float,
++                           requires_grad=False)
++        self._solver._kernel_get_kappa_rest_grad(
++            self._iv_start, n, int(f), grad)
++        return grad
++
++    @gs.assert_built
++    def set_rest_length_scale(self, factor):
++        """Give this rod slack: unstretched length = factor x built length."""
++        self._solver._kernel_scale_rest_lengths(
++            self._e_start, self.n_edges, float(factor))
++
++    @gs.assert_built
++    def set_bending_scale(self, scale, envs_idx=None):
++        """Per-hinge multiplier on this rod's bending stiffness (n_hinges,)."""
++        self._solver._kernel_set_hinge_bending_scale(
++            iv_start=self._iv_start,
++            n_iv=self.n_internal_vertices,
++            scale=self._scale_tensor(scale, self.n_internal_vertices),
++            envs_idx=self._resolve_envs_idx(envs_idx),
++        )
++
++    @gs.assert_built
++    def set_state_coeffs(self, a, b, envs_idx=None):
++        """State-conditioned stiffness: log k = log k_base + a*strain + b*rate.
++
++        a and b are scalars (per environment). 0/0 reproduces the fixed-
++        stiffness behaviour exactly.
++        """
++        idx = self._resolve_envs_idx(envs_idx)
++        n = len(idx)
++        av = torch.as_tensor(np.full(n, float(a), np.float32))
++        bv = torch.as_tensor(np.full(n, float(b), np.float32))
++        self._solver._kernel_set_state_coeffs(
++            rod_idx=self._rod_idx, a=av.contiguous(), b=bv.contiguous(),
++            envs_idx=idx)
++
++    @gs.assert_built
++    def set_hinge_state_a(self, load, unload, envs_idx=None):
++        """Per-hinge state coefficient, split into loading and unloading.
++
++        Both (n_hinges,). Equal values = no hysteresis; different values make
++        the cable resist being bent differently from springing back, which is
++        what a stranded harness wire actually does.
++        """
++        self._solver._kernel_set_hinge_state_a(
++            iv_start=self._iv_start,
++            n_iv=self.n_internal_vertices,
++            load=self._scale_tensor(load, self.n_internal_vertices),
++            unload=self._scale_tensor(unload, self.n_internal_vertices),
++            envs_idx=self._resolve_envs_idx(envs_idx),
++        )
++
++    def get_hinge_state_a_grad(self):
++        """(2, n_hinges, n_envs): d L / d(loading, unloading) coefficients."""
++        n = self.n_internal_vertices
++        grad = torch.zeros((2, n, self._sim._B), dtype=gs.tc_float,
++                           requires_grad=False)
++        self._solver._kernel_get_hinge_state_a_grad(self._iv_start, n, grad)
++        return grad
++
++    @gs.assert_built
++    def set_codebook(self, proto_pos, proto_neg, w, tau=0.7, on=True):
++        """EgoPhys prototype codebook (eq. 6). proto_* are (K,), w is (K, F).
++
++        Shared across hinges and rods -- the codebook IS the transferable part
++        of the model; per-element variation comes from the features, not from
++        per-element parameters. That is what distinguishes it from simply
++        fitting one number per hinge, which this project has already tried.
++        """
++        B = self._sim._B
++        pp = np.tile(np.asarray(proto_pos, np.float32)[:, None], (1, B))
++        pn = np.tile(np.asarray(proto_neg, np.float32)[:, None], (1, B))
++        ww = np.tile(np.asarray(w, np.float32)[:, :, None], (1, 1, B))
++        self._solver._kernel_set_codebook(
++            torch.as_tensor(pp).contiguous(), torch.as_tensor(pn).contiguous(),
++            torch.as_tensor(ww).contiguous(), float(tau), int(bool(on)))
++
++    def get_codebook_grad(self):
++        """(2K + K*F,) gradient: prototypes then assignment weights."""
++        K, F = self._solver._cb_K, self._solver._cb_F
++        g = torch.zeros((2 * K + K * F, self._sim._B), dtype=gs.tc_float,
++                        requires_grad=False)
++        self._solver._kernel_get_codebook_grad(g)
++        return g[:, 0]
++
++    def get_state_coeffs_grad(self):
++        """(dL/da, dL/db) for this rod, shape (2, n_envs)."""
++        grad = torch.zeros((2, self._sim._B), dtype=gs.tc_float,
++                           requires_grad=False)
++        self._solver._kernel_get_state_coeffs_grad(self._rod_idx, grad)
++        return grad
++
++    @gs.assert_built
++    def set_bending_damping(self, value, envs_idx=None):
++        """Per-hinge bending damping (n_hinges,). 0 = the solver's original
++        behaviour, which has no bending damping at all."""
++        self._solver._kernel_set_hinge_bending_damping(
++            iv_start=self._iv_start,
++            n_iv=self.n_internal_vertices,
++            value=self._scale_tensor(value, self.n_internal_vertices),
++            envs_idx=self._resolve_envs_idx(envs_idx),
++        )
++
++    def get_bending_damping_grad(self):
++        """dL/d(per-hinge bending damping), shape (n_hinges, n_envs)."""
++        n = self.n_internal_vertices
++        grad = torch.zeros((n, self._sim._B), dtype=gs.tc_float,
++                           requires_grad=False)
++        self._solver._kernel_get_hinge_bending_damping_grad(
++            self._iv_start, n, grad)
++        return grad
++
++    @gs.assert_built
++    def set_twisting_scale(self, scale, envs_idx=None):
++        """Per-hinge multiplier on this rod's twisting stiffness."""
++        self._solver._kernel_set_hinge_twisting_scale(
++            iv_start=self._iv_start,
++            n_iv=self.n_internal_vertices,
++            scale=self._scale_tensor(scale, self.n_internal_vertices),
++            envs_idx=self._resolve_envs_idx(envs_idx),
++        )
++
++    @gs.assert_built
++    def set_stretching_scale(self, scale, envs_idx=None):
++        """Per-edge multiplier on this rod's stretching stiffness (n_edges,)."""
++        self._solver._kernel_set_edge_stretching_scale(
++            e_start=self._e_start,
++            n_e=self.n_edges,
++            scale=self._scale_tensor(scale, self.n_edges),
++            envs_idx=self._resolve_envs_idx(envs_idx),
++        )
++
++    def get_bending_scale_grad(self):
++        """dL/d(per-hinge bending scale), shape (n_hinges, n_envs).
++
++        Valid only after a backward pass and only with
++        ``RODOptions(requires_grad_E=True)``.
++        """
++        n = self.n_internal_vertices
++        grad = torch.zeros((n, self._sim._B), dtype=gs.tc_float,
++                           requires_grad=False)
++        self._solver._kernel_get_hinge_bending_scale_grad(
++            self._iv_start, n, grad)
++        return grad
++
++    def get_twisting_scale_grad(self):
++        """dL/d(per-hinge twisting scale); needs requires_grad_G=True."""
++        n = self.n_internal_vertices
++        grad = torch.zeros((n, self._sim._B), dtype=gs.tc_float,
++                           requires_grad=False)
++        self._solver._kernel_get_hinge_twisting_scale_grad(
++            self._iv_start, n, grad)
++        return grad
++
++    def get_stretching_scale_grad(self):
++        """dL/d(per-edge stretching scale); needs requires_grad_K=True."""
++        n = self.n_edges
++        grad = torch.zeros((n, self._sim._B), dtype=gs.tc_float,
++                           requires_grad=False)
++        self._solver._kernel_get_edge_stretching_scale_grad(
++            self._e_start, n, grad)
++        return grad
++
+     @gs.assert_built
+     def set_bending_stiffness(self, bending_stiffness, envs_idx=None):
+         """

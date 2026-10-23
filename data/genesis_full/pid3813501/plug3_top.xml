@@ -1,0 +1,17 @@
+<mujoco>
+  <compiler angle="degree"/>
+  <worldbody>
+    <body name="plug3" pos="0 0 0.00500">
+      <joint name="plug3_x" type="slide" axis="1 0 0" damping="8"/>
+      <joint name="plug3_y" type="slide" axis="0 1 0" damping="8"/>
+      <geom type="box" pos="0 0 0.01500"
+            size="0.04 0.04 0.01"
+            mass="0.5" contype="0" conaffinity="0"/>
+      <body name="plug3_mod" pos="0 0 0.05000" euler="0 0 42.2779">
+        <joint name="plug3_turn" type="hinge" axis="0 0 1" damping="0.5"/>
+        <geom type="box" size="0.025 0.025 0.025"
+              mass="0.3" contype="0" conaffinity="0"/>
+      </body>
+    </body>
+  </worldbody>
+</mujoco>

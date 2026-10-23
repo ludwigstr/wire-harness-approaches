@@ -1,0 +1,12 @@
+# core (world models, Caporali, AdaptiGraph, PhysTwin, PhysWorld, evaluation)
+numpy
+torch>=2.3
+cma
+opencv-python
+# physics engines -- install what you need
+mujoco>=3.11          # 01_mujoco
+newton>=1.5           # 03_newton  (NVIDIA Newton, with warp-lang)
+warp-lang>=1.16
+# 02_genesis needs genesis-world==1.3.3 in its own environment (see README)
+# 04_dlolab needs the patched DLO-Lab fork (./setup_dlolab.sh)
+# re-tracking from video only: scikit-image scipy

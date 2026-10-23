@@ -1,0 +1,76 @@
+<mujoco>
+  <compiler angle="degree"/>
+  <option gravity="0 0 -9.81"/>
+  <worldbody>
+    <body name="seg0" pos="0.22028 0.67130 0.05500">
+  <joint type="free"/>
+  <geom type="capsule" fromto="0 0 0 0.05405 0.01684 0.00000" size="0.00300" density="1302"/>
+  <body name="seg1" pos="0.05405 0.01684 0.00000">
+    <joint name="h1z" type="hinge" axis="0 0 1" stiffness="0.1" damping="0.5"/>
+    <joint name="h1y" type="hinge" axis="0 1 0" stiffness="0.1" damping="0.5"/>
+    <geom type="capsule" fromto="0 0 0 0.05199 0.00152 0.00000" size="0.00300" density="1302"/>
+  <body name="seg2" pos="0.05199 0.00152 0.00000">
+    <joint name="h2z" type="hinge" axis="0 0 1" stiffness="0.1" damping="0.5"/>
+    <joint name="h2y" type="hinge" axis="0 1 0" stiffness="0.1" damping="0.5"/>
+    <geom type="capsule" fromto="0 0 0 0.05194 -0.01009 0.00000" size="0.00300" density="1302"/>
+  <body name="seg3" pos="0.05194 -0.01009 0.00000">
+    <joint name="h3z" type="hinge" axis="0 0 1" stiffness="0.1" damping="0.5"/>
+    <joint name="h3y" type="hinge" axis="0 1 0" stiffness="0.1" damping="0.5"/>
+    <geom type="capsule" fromto="0 0 0 0.05021 -0.01492 0.00000" size="0.00300" density="1302"/>
+  <body name="seg4" pos="0.05021 -0.01492 0.00000">
+    <joint name="h4z" type="hinge" axis="0 0 1" stiffness="0.1" damping="0.5"/>
+    <joint name="h4y" type="hinge" axis="0 1 0" stiffness="0.1" damping="0.5"/>
+    <geom type="capsule" fromto="0 0 0 0.04618 -0.02619 0.00000" size="0.00300" density="1302"/>
+  <body name="seg5" pos="0.04618 -0.02619 0.00000">
+    <joint name="h5z" type="hinge" axis="0 0 1" stiffness="0.1" damping="0.5"/>
+    <joint name="h5y" type="hinge" axis="0 1 0" stiffness="0.1" damping="0.5"/>
+    <geom type="capsule" fromto="0 0 0 0.04629 -0.02587 0.00000" size="0.00300" density="1302"/>
+  <body name="seg6" pos="0.04629 -0.02587 0.00000">
+    <joint name="h6z" type="hinge" axis="0 0 1" stiffness="0.1" damping="0.5"/>
+    <joint name="h6y" type="hinge" axis="0 1 0" stiffness="0.1" damping="0.5"/>
+    <geom type="capsule" fromto="0 0 0 0.04541 -0.02834 0.00000" size="0.00300" density="1302"/>
+  <body name="seg7" pos="0.04541 -0.02834 0.00000">
+    <joint name="h7z" type="hinge" axis="0 0 1" stiffness="0.1" damping="0.5"/>
+    <joint name="h7y" type="hinge" axis="0 1 0" stiffness="0.1" damping="0.5"/>
+    <geom type="capsule" fromto="0 0 0 0.04480 -0.03005 0.00000" size="0.00300" density="1302"/>
+  <body name="seg8" pos="0.04480 -0.03005 0.00000">
+    <joint name="h8z" type="hinge" axis="0 0 1" stiffness="0.1" damping="0.5"/>
+    <joint name="h8y" type="hinge" axis="0 1 0" stiffness="0.1" damping="0.5"/>
+    <geom type="capsule" fromto="0 0 0 0.04541 -0.02834 0.00000" size="0.00300" density="1302"/>
+  <body name="seg9" pos="0.04541 -0.02834 0.00000">
+    <joint name="h9z" type="hinge" axis="0 0 1" stiffness="0.1" damping="0.5"/>
+    <joint name="h9y" type="hinge" axis="0 1 0" stiffness="0.1" damping="0.5"/>
+    <geom type="capsule" fromto="0 0 0 0.04704 -0.02379 0.00000" size="0.00300" density="1302"/>
+  <body name="seg10" pos="0.04704 -0.02379 0.00000">
+    <joint name="h10z" type="hinge" axis="0 0 1" stiffness="0.1" damping="0.5"/>
+    <joint name="h10y" type="hinge" axis="0 1 0" stiffness="0.1" damping="0.5"/>
+    <geom type="capsule" fromto="0 0 0 0.04602 -0.02663 0.00000" size="0.00300" density="1302"/>
+  <body name="seg11" pos="0.04602 -0.02663 0.00000">
+    <joint name="h11z" type="hinge" axis="0 0 1" stiffness="0.1" damping="0.5"/>
+    <joint name="h11y" type="hinge" axis="0 1 0" stiffness="0.1" damping="0.5"/>
+    <geom type="capsule" fromto="0 0 0 0.04846 -0.01980 0.00000" size="0.00300" density="1302"/>
+  <body name="seg12" pos="0.04846 -0.01980 0.00000">
+    <joint name="h12z" type="hinge" axis="0 0 1" stiffness="0.1" damping="0.5"/>
+    <joint name="h12y" type="hinge" axis="0 1 0" stiffness="0.1" damping="0.5"/>
+    <geom type="capsule" fromto="0 0 0 0.04802 -0.02105 0.00000" size="0.00300" density="1302"/>
+  <body name="seg13" pos="0.04802 -0.02105 0.00000">
+    <joint name="h13z" type="hinge" axis="0 0 1" stiffness="0.1" damping="0.5"/>
+    <joint name="h13y" type="hinge" axis="0 1 0" stiffness="0.1" damping="0.5"/>
+    <geom type="capsule" fromto="0 0 0 0.05345 0.00420 0.00000" size="0.00300" density="1302"/>
+  <body name="seg14" pos="0.05345 0.00420 0.00000">
+    <joint name="h14z" type="hinge" axis="0 0 1" stiffness="0.1" damping="0.5"/>
+    <joint name="h14y" type="hinge" axis="0 1 0" stiffness="0.1" damping="0.5"/>
+    <geom type="capsule" fromto="0 0 0 0.05525 0.01235 0.00000" size="0.00300" density="1302"/>
+  <body name="seg15" pos="0.05525 0.01235 0.00000">
+    <joint name="h15z" type="hinge" axis="0 0 1" stiffness="0.1" damping="0.5"/>
+    <joint name="h15y" type="hinge" axis="0 1 0" stiffness="0.1" damping="0.5"/>
+    <geom type="sphere" size="0.00300"/></body></body></body></body></body></body></body></body></body></body></body></body></body></body></body></body>
+    <body name="anchor" pos="0.95480 0.45114 0.05500">
+      <joint type="free"/>
+      <geom type="sphere" size="0.00150" contype="0" conaffinity="0" mass="0.0001"/>
+    </body>
+  </worldbody>
+  <equality>
+    <weld body1="anchor" body2="seg15" solref="0.004 1"/>
+  </equality>
+</mujoco>
