@@ -97,7 +97,7 @@ compared with the approaches table (2026-10-23; results in `results/`):
 | Genesis | 6 | 24.4 | 18.93 | table value from an older Genesis scene; current code gives 18.93 |
 | Genesis | 7 | 18.4 | 19.05 | under investigation |
 | Newton | 8 / 9 / 10 / 11 | 14.1 / 8.6 / 8.1 / 7.8 | 14.08 / 8.64 / 8.07 / 7.76 | exact |
-| Newton | 12 / 13 / 14 | 7.9 / 8.0 / 7.7 | running | |
+| Newton | 12 / 13 / 14 | 7.9 / 8.0 / 7.7 | 7.88 / 8.02 / 7.66 | exact |
 | DLO-Lab | 15-18 | 33.9 / 18.6 / 17.0 / 16.56 | 56.7 / 44.1 / 42.8 / 30.9 | the main project's own code gives the same higher numbers today; under investigation |
 | PhysTwin | world 19 | 19.8 | 19.82 | exact |
 | PhysWorld | world 20 | 31.4 | running | |
