@@ -22,6 +22,7 @@ One script per approach, in the order of the approaches table:
 | 09 | `approaches/09_caporali.py` | Caporali et al. (RA-L 2024): MLP + online parameter estimation | simulator only (real-anchored data) | world 23 | 18.4 |
 | 10 | `approaches/10_adaptigraph.py` | AdaptiGraph (Zhang et al. 2024): property-conditioned graph dynamics | simulator (real-anchored) + real fine-tune | world 24 | 24.4 |
 | 11 | `yang_et_al/` | Yang et al. 2022 (IN + bi-LSTM), Newton instead of AGX: DE identification -> synthetic data -> network; snapshot of the current scripts, not yet adapted/tested in this repo | DE + net | summary row 4 | 20.1 (3-clip DE; all-14 run pending) |
+| 12 | `caporali_et_al/` | Caporali et al. (RA-L 2024), one step per video frame (0.25 s) instead of 1 s: retrained MLP + online estimation every frame; snapshot of the current scripts, not yet adapted/tested in this repo | simulator only (real-anchored, speed x0.8-1.2) | summary row 5 | 20.6 |
 
 All numbers are **in-sample**: every approach is fitted or fine-tuned on the
 same 14 clips it is scored on (the physics rows fit their parameters there; the
