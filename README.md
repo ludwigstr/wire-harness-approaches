@@ -21,6 +21,7 @@ One script per approach, in the order of the approaches table:
 | 08 | `approaches/08_ropedreamer.py` | RopeDreamer (Missal et al. 2026): RSSM over a quaternion chain | tracked videos | world 22 | 16.8 |
 | 09 | `approaches/09_caporali.py` | Caporali et al. (RA-L 2024): MLP + online parameter estimation | simulator only (real-anchored data) | world 23 | 18.4 |
 | 10 | `approaches/10_adaptigraph.py` | AdaptiGraph (Zhang et al. 2024): property-conditioned graph dynamics | simulator (real-anchored) + real fine-tune | world 24 | 24.4 |
+| 11 | `yang_et_al/` | Yang et al. 2022 (IN + bi-LSTM), Newton instead of AGX: DE identification -> synthetic data -> network; snapshot of the current scripts, not yet adapted/tested in this repo | DE + net | summary row 4 | 20.1 (3-clip DE; all-14 run pending) |
 
 All numbers are **in-sample**: every approach is fitted or fine-tuned on the
 same 14 clips it is scored on (the physics rows fit their parameters there; the
