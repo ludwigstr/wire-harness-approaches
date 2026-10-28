@@ -1,0 +1,48 @@
+{
+ "params": {
+  "sigma_perp": 0.00072,
+  "sigma_tan": 0.0001,
+  "end_ext": 0.0035,
+  "end_ext_sd": 0.001,
+  "straighten": 0.5,
+  "sigma_end": 0.0005,
+  "sigma_shape_static": 0.0075,
+  "sigma_shape_dyn": 0.0095,
+  "rho_shape": 0.9,
+  "end_off0": 0.004,
+  "end_off15": 0.002,
+  "smooth_max": 0.6
+ },
+ "real": {
+  "turn_dt_mid_deg": 2.611932769695869,
+  "seg_dt_mid_mm": 0.5542219174009512,
+  "seg_end_mm": 50.99533042219423,
+  "seg_mid_mm": 48.05241269807508,
+  "turn_end_deg": 3.968428023391822,
+  "turn_mid_deg": 11.703815327603493,
+  "ddp_mm": 5.795976881296946
+ },
+ "twin": {
+  "turn_dt_mid_deg": 0.6436091382093689,
+  "seg_dt_mid_mm": 0.022186994740358658,
+  "seg_end_mm": 47.77524247603888,
+  "seg_mid_mm": 48.126702497026955,
+  "turn_end_deg": 8.0897205622137,
+  "turn_mid_deg": 13.090081548072556,
+  "ddp_mm": 5.1166751428501325
+ },
+ "twin_noise": {
+  "turn_dt_mid_deg": 2.625786835203628,
+  "seg_dt_mid_mm": 0.5702593940705551,
+  "seg_end_mm": 51.97519908884026,
+  "seg_mid_mm": 47.679593057950335,
+  "turn_end_deg": 4.684021935858842,
+  "turn_mid_deg": 11.264279688957545,
+  "ddp_mm": 5.533903223449842
+ },
+ "node_dist_to_twin_mm": {
+  "real": 7.8441819929803875,
+  "twin_noise": 8.036484905270274
+ },
+ "note": "v3 = v2 + spatial Laplacian smoothing w ~ U(0, 0.6) per trajectory; the training noise"
+}
