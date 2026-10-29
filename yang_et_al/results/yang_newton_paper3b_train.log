@@ -1,0 +1,65 @@
+711 rollouts -> 437324 transitions (6.1% dropped, gap > 15 mm or real-timing reference + 10 mm, whichever is larger)
+clip-level split: 93 train clips / 10 val clips
+train 395760, val 41564 transitions (70 of 711 rollouts held out)
+scales: pos 0.0310 m, vel 0.0217 m/s, act [0.0031440018210560083, 0.0043986402451992035, 0.08666501194238663], out 0.0054 m
+ep 1: train 0.6430  val 0.3943  val one-step 2.255 mm/node  (22s)  *
+ep 2: train 0.5118  val 0.3736  val one-step 2.284 mm/node  (45s)  *
+ep 3: train 0.4673  val 0.3322  val one-step 1.911 mm/node  (67s)  *
+ep 4: train 0.4227  val 0.2935  val one-step 1.848 mm/node  (90s)  *
+ep 5: train 0.3960  val 0.2758  val one-step 1.773 mm/node  (113s)  *
+ep 6: train 0.3748  val 0.2754  val one-step 1.942 mm/node  (135s)  *
+ep 7: train 0.3662  val 0.2713  val one-step 1.822 mm/node  (158s)  *
+ep 8: train 0.3531  val 0.2663  val one-step 1.700 mm/node  (180s)  *
+ep 9: train 0.3449  val 0.2466  val one-step 1.660 mm/node  (202s)  *
+ep 10: train 0.3373  val 0.2550  val one-step 1.657 mm/node  (225s)
+ep 11: train 0.3320  val 0.2439  val one-step 1.656 mm/node  (247s)  *
+ep 12: train 0.3236  val 0.2495  val one-step 1.676 mm/node  (269s)
+ep 13: train 0.3217  val 0.2708  val one-step 2.117 mm/node  (292s)
+ep 14: train 0.3174  val 0.2466  val one-step 1.697 mm/node  (314s)
+ep 15: train 0.3122  val 0.2455  val one-step 1.713 mm/node  (337s)
+ep 16: train 0.3104  val 0.2357  val one-step 1.637 mm/node  (359s)  *
+ep 17: train 0.3024  val 0.2432  val one-step 1.658 mm/node  (381s)
+ep 18: train 0.3021  val 0.2396  val one-step 1.671 mm/node  (404s)
+ep 19: train 0.2972  val 0.2412  val one-step 1.691 mm/node  (426s)
+ep 20: train 0.2949  val 0.2495  val one-step 1.700 mm/node  (468s)
+ep 21: train 0.2876  val 0.2420  val one-step 1.693 mm/node  (545s)
+ep 22: train 0.2849  val 0.2317  val one-step 1.644 mm/node  (583s)  *
+ep 23: train 0.2811  val 0.2292  val one-step 1.654 mm/node  (606s)  *
+ep 24: train 0.2781  val 0.2404  val one-step 1.824 mm/node  (628s)
+ep 25: train 0.2734  val 0.2372  val one-step 1.853 mm/node  (650s)
+ep 26: train 0.2718  val 0.2294  val one-step 1.658 mm/node  (673s)
+ep 27: train 0.2649  val 0.2232  val one-step 1.571 mm/node  (695s)  *
+ep 28: train 0.2611  val 0.2265  val one-step 1.633 mm/node  (717s)
+ep 29: train 0.2602  val 0.2384  val one-step 1.703 mm/node  (737s)
+ep 30: train 0.2590  val 0.2133  val one-step 1.520 mm/node  (758s)  *
+ep 31: train 0.2529  val 0.2230  val one-step 1.566 mm/node  (779s)
+ep 32: train 0.2505  val 0.2361  val one-step 1.700 mm/node  (800s)
+ep 33: train 0.2451  val 0.2260  val one-step 1.574 mm/node  (821s)
+ep 34: train 0.2403  val 0.2270  val one-step 1.514 mm/node  (901s)
+ep 35: train 0.2349  val 0.2456  val one-step 1.635 mm/node  (945s)
+ep 36: train 0.2394  val 0.2222  val one-step 1.552 mm/node  (970s)
+ep 37: train 0.2412  val 0.2156  val one-step 1.546 mm/node  (993s)
+ep 38: train 0.2313  val 0.2242  val one-step 1.595 mm/node  (1016s)
+ep 39: train 0.2386  val 0.2102  val one-step 1.501 mm/node  (1040s)  *
+ep 40: train 0.2227  val 0.2141  val one-step 1.500 mm/node  (1063s)
+ep 41: train 0.2173  val 0.2318  val one-step 1.610 mm/node  (1086s)
+ep 42: train 0.2341  val 0.2154  val one-step 1.529 mm/node  (1109s)
+ep 43: train 0.2168  val 0.2119  val one-step 1.581 mm/node  (1132s)
+ep 44: train 0.2130  val 0.2107  val one-step 1.477 mm/node  (1155s)
+ep 45: train 0.2152  val 0.2156  val one-step 1.530 mm/node  (1178s)
+ep 46: train 0.2118  val 0.2193  val one-step 1.541 mm/node  (1202s)
+ep 47: train 0.2247  val 0.2077  val one-step 1.497 mm/node  (1225s)  *
+ep 48: train 0.2094  val 0.2089  val one-step 1.462 mm/node  (1248s)
+ep 49: train 0.2024  val 0.2083  val one-step 1.450 mm/node  (1270s)
+ep 50: train 0.1999  val 0.2083  val one-step 1.530 mm/node  (1293s)
+ep 51: train 0.1976  val 0.2074  val one-step 1.490 mm/node  (1315s)  *
+ep 52: train 0.1955  val 0.2033  val one-step 1.437 mm/node  (1337s)  *
+ep 53: train 0.1975  val 0.2021  val one-step 1.455 mm/node  (1360s)  *
+ep 54: train 0.1964  val 0.2205  val one-step 1.633 mm/node  (1382s)
+ep 55: train 0.1908  val 0.2034  val one-step 1.423 mm/node  (1403s)
+ep 56: train 0.1904  val 0.2042  val one-step 1.489 mm/node  (1424s)
+ep 57: train 0.1871  val 0.2123  val one-step 1.564 mm/node  (1446s)
+ep 58: train 0.1857  val 0.1999  val one-step 1.460 mm/node  (1468s)  *
+ep 59: train 0.1813  val 0.2050  val one-step 1.457 mm/node  (1490s)
+ep 60: train 0.1793  val 0.2131  val one-step 1.535 mm/node  (1513s)
+best val 0.1999 -> data/wm/yang_newton_paper3b_inbilstm.pt

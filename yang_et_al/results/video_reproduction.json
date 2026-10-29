@@ -1,0 +1,86 @@
+{
+ "20260602_102713": {
+  "mittel": 34.62420982707824,
+  "json_mittel_warm5": 34.624210357666016,
+  "n_frames": 14,
+  "video": "./data/figures/table_videos_2026-10-28/9_yang_14.4/vergleich_20260602_102713.mp4"
+ },
+ "20260602_114019": {
+  "mittel": 9.402278970810585,
+  "json_mittel_warm5": 9.402278900146484,
+  "n_frames": 40,
+  "video": "./data/figures/table_videos_2026-10-28/9_yang_14.4/vergleich_20260602_114019.mp4"
+ },
+ "20260602_121006": {
+  "mittel": 12.019274224712717,
+  "json_mittel_warm5": 12.01927375793457,
+  "n_frames": 32,
+  "video": "./data/figures/table_videos_2026-10-28/9_yang_14.4/vergleich_20260602_121006.mp4"
+ },
+ "20260602_134613": {
+  "mittel": 17.856719396513654,
+  "json_mittel_warm5": 17.856718063354492,
+  "n_frames": 120,
+  "video": "./data/figures/table_videos_2026-10-28/9_yang_14.4/vergleich_20260602_134613.mp4"
+ },
+ "20260602_141210": {
+  "mittel": 9.251083623894374,
+  "json_mittel_warm5": 9.251083374023438,
+  "n_frames": 40,
+  "video": "./data/figures/table_videos_2026-10-28/9_yang_14.4/vergleich_20260602_141210.mp4"
+ },
+ "20260602_162650": {
+  "mittel": 9.346335002596284,
+  "json_mittel_warm5": 9.346334457397461,
+  "n_frames": 36,
+  "video": "./data/figures/table_videos_2026-10-28/9_yang_14.4/vergleich_20260602_162650.mp4"
+ },
+ "20260602_165113": {
+  "mittel": 10.91378585115308,
+  "json_mittel_warm5": 10.913785934448242,
+  "n_frames": 40,
+  "video": "./data/figures/table_videos_2026-10-28/9_yang_14.4/vergleich_20260602_165113.mp4"
+ },
+ "20260602_170108": {
+  "mittel": 6.331984858358434,
+  "json_mittel_warm5": 6.331984996795654,
+  "n_frames": 24,
+  "video": "./data/figures/table_videos_2026-10-28/9_yang_14.4/vergleich_20260602_170108.mp4"
+ },
+ "20260602_172435": {
+  "mittel": 17.141813515763715,
+  "json_mittel_warm5": 17.141813278198242,
+  "n_frames": 64,
+  "video": "./data/figures/table_videos_2026-10-28/9_yang_14.4/vergleich_20260602_172435.mp4"
+ },
+ "20260602_175847": {
+  "mittel": 11.590786140004639,
+  "json_mittel_warm5": 11.590786933898926,
+  "n_frames": 44,
+  "video": "./data/figures/table_videos_2026-10-28/9_yang_14.4/vergleich_20260602_175847.mp4"
+ },
+ "20260602_183620": {
+  "mittel": 23.350639423905008,
+  "json_mittel_warm5": 23.35063934326172,
+  "n_frames": 68,
+  "video": "./data/figures/table_videos_2026-10-28/9_yang_14.4/vergleich_20260602_183620.mp4"
+ },
+ "20260602_193329": {
+  "mittel": 9.804913706526955,
+  "json_mittel_warm5": 9.804913520812988,
+  "n_frames": 48,
+  "video": "./data/figures/table_videos_2026-10-28/9_yang_14.4/vergleich_20260602_193329.mp4"
+ },
+ "20260602_193953": {
+  "mittel": 8.215716584850774,
+  "json_mittel_warm5": 8.215717315673828,
+  "n_frames": 36,
+  "video": "./data/figures/table_videos_2026-10-28/9_yang_14.4/vergleich_20260602_193953.mp4"
+ },
+ "20260605_112939": {
+  "mittel": 21.472137702302362,
+  "json_mittel_warm5": 21.472137451171875,
+  "n_frames": 72,
+  "video": "./data/figures/table_videos_2026-10-28/9_yang_14.4/vergleich_20260605_112939.mp4"
+ }
+}

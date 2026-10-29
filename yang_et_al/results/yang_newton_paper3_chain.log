@@ -1,0 +1,7 @@
+[2026-10-28 14:18:30] identification start
+[2026-10-29 07:46:20] identification done: identified {'k_stretch': 4367.159972078118, 'd_stretch': 0.01607813593001771, 'k_bend': 3.657512306299443, 'd_bend': 7.45184927126756, 'k_twist': 0.05294028703242431, 'd_twist': 0.13850655620705415, 'mass_per_m': 0.08738482165782406, 'mu': 4.480353176343591}  one-step 3.98 mm/node (defaults 8.18, no-change 7.51); 40 generations, 4920 evaluations -> data/wm/yang_newton_paper3_ident.json
+[2026-10-29 07:48:52] sim control done: Newton simulator alone (identified): mean 11.15  median 10.10 mm/node, 14 clips, 151s -> data/wm/yang_newton_paper3_sim_control_14.json
+[2026-10-29 09:30:25] dataset done: 711 rollouts; newton speed done: 711 written, 113 rejected after 4 tries
+[2026-10-29 09:38:53] training done: 711 rollouts -> 130720 transitions (71.9% dropped, gap > 15 mm)
+[2026-10-29 09:38:59] eval done: mittel_warm5: mean 17.04  median 13.04 mm/node over 14 clips -> data/wm/yang_newton_paper3_inbilstm_14.json 
+[2026-10-29 09:38:59] ALL DONE
