@@ -27,8 +27,8 @@ paper: the training data are MuJoCo simulations around twins of the 14 evaluatio
    - **Result:** 5173 rollouts (557 rejected), 219k frames. Generation took 6.1 h on 16 workers.
 3. `scripts/ropedreamer_train.py` trains RopeDreamer size S (5.6 M weights) with the paper's
    settings (beta 1, lr 1e-4, batch 32, paper loss only).
-   - Validation is split at rollout level (10 %), with early stopping after 10 epochs; this run
-     stopped at epoch 104 after 5.2 h.
+   - Validation is split at rollout level (10 %), with early stopping after 10 epochs.
+   - Window length: use `--seq-len 14` (see Result).
    - Tracking-noise augmentation uses `data/ropedreamer_twins14_noise_params_v3.json`, calibrated
      with `ropedreamer_noise_calibrate.py`.
 4. `scripts/ropedreamer_eval.py` evaluates with a 5-frame warm-up, open loop and both end nodes
@@ -41,12 +41,21 @@ The full chain with the exact arguments is in `scripts/run_ropedreamer_twins14.s
 
 ## Result
 
-| Scored on | Mean (mm/node) | Median | Results file |
-|---|---|---|---|
-| The MuJoCo twins of the 14 clips (the paper's protocol) | **17.24** | 6.85 | `ropedreamer_twins14_S_noise_twins14_results.json` |
-| The real tracks of the 14 clips | 29.76 | 19.31 | `ropedreamer_twins14_S_noise_tracks14_results.json` |
+The table number is the score on the **real tracks** of the 14 clips. On the twins the score is
+in-sample: all 14 exact twins were in the training split.
 
-Checkpoint: `checkpoints/ropedreamer_twins14_S_noise.pt`.
+| Run | Real 14 clips (mean / median, mm/node) | Twins (mean / median) | Checkpoint |
+|---|---|---|---|
+| **14-frame windows** (`scripts/run_ropedreamer_twins14_seq14.sh`) | **18.31 / 13.00** | 16.29 / 11.07 | `checkpoints/ropedreamer_twins14_S_noise_seq14.pt` |
+| 32-frame windows (first run) | 29.76 / 19.31 | 17.24 / 6.85 | `checkpoints/ropedreamer_twins14_S_noise.pt` |
+
+The first run used 32-frame windows. `WindowDataset` silently drops trajectories shorter than one
+window, so none of clip 102713 (19 frames) and only 18 % of 170108 was ever trained on; 102713
+scored 146 mm. The shortest trajectory has 14 frames, so `--seq-len 14` uses all of them. The
+14-frame run stopped early at epoch 106 after 5.7 h.
+
+Results files: `ropedreamer_twins14_S_noise_seq14_{tracks14,twins14}_results.json` (the 32-frame
+run's files are kept alongside).
 
 ## Paths to adapt before running elsewhere
 

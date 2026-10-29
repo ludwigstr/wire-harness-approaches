@@ -1,0 +1,86 @@
+{
+ "20260602_102713": {
+  "mittel": 13.896050796444927,
+  "json_mittel": 13.896050804760307,
+  "n_frames": 14,
+  "video": "./data/figures/table_videos_2026-10-28/8_physworld_9.5/vergleich_20260602_102713.mp4"
+ },
+ "20260602_114019": {
+  "mittel": 5.954297602875158,
+  "json_mittel": 5.954298564756755,
+  "n_frames": 40,
+  "video": "./data/figures/table_videos_2026-10-28/8_physworld_9.5/vergleich_20260602_114019.mp4"
+ },
+ "20260602_121006": {
+  "mittel": 7.96596945156125,
+  "json_mittel": 7.965968422013248,
+  "n_frames": 32,
+  "video": "./data/figures/table_videos_2026-10-28/8_physworld_9.5/vergleich_20260602_121006.mp4"
+ },
+ "20260602_134613": {
+  "mittel": 25.93037645201548,
+  "json_mittel": 25.930350793350954,
+  "n_frames": 120,
+  "video": "./data/figures/table_videos_2026-10-28/8_physworld_9.5/vergleich_20260602_134613.mp4"
+ },
+ "20260602_141210": {
+  "mittel": 6.419813522370532,
+  "json_mittel": 6.4198151500022504,
+  "n_frames": 40,
+  "video": "./data/figures/table_videos_2026-10-28/8_physworld_9.5/vergleich_20260602_141210.mp4"
+ },
+ "20260602_162650": {
+  "mittel": 7.597517131620811,
+  "json_mittel": 7.597516766206051,
+  "n_frames": 36,
+  "video": "./data/figures/table_videos_2026-10-28/8_physworld_9.5/vergleich_20260602_162650.mp4"
+ },
+ "20260602_165113": {
+  "mittel": 5.46730353453313,
+  "json_mittel": 5.467303019759129,
+  "n_frames": 40,
+  "video": "./data/figures/table_videos_2026-10-28/8_physworld_9.5/vergleich_20260602_165113.mp4"
+ },
+ "20260602_170108": {
+  "mittel": 4.144121904876859,
+  "json_mittel": 4.144123123599759,
+  "n_frames": 24,
+  "video": "./data/figures/table_videos_2026-10-28/8_physworld_9.5/vergleich_20260602_170108.mp4"
+ },
+ "20260602_172435": {
+  "mittel": 10.943078952550422,
+  "json_mittel": 10.94308456708859,
+  "n_frames": 64,
+  "video": "./data/figures/table_videos_2026-10-28/8_physworld_9.5/vergleich_20260602_172435.mp4"
+ },
+ "20260602_175847": {
+  "mittel": 6.513851522785527,
+  "json_mittel": 6.513856877890331,
+  "n_frames": 44,
+  "video": "./data/figures/table_videos_2026-10-28/8_physworld_9.5/vergleich_20260602_175847.mp4"
+ },
+ "20260602_183620": {
+  "mittel": 10.704786784652455,
+  "json_mittel": 10.704787568743889,
+  "n_frames": 68,
+  "video": "./data/figures/table_videos_2026-10-28/8_physworld_9.5/vergleich_20260602_183620.mp4"
+ },
+ "20260602_193329": {
+  "mittel": 6.6497415997825255,
+  "json_mittel": 6.649736492363445,
+  "n_frames": 48,
+  "video": "./data/figures/table_videos_2026-10-28/8_physworld_9.5/vergleich_20260602_193329.mp4"
+ },
+ "20260602_193953": {
+  "mittel": 5.57058812490949,
+  "json_mittel": 5.570587713413665,
+  "n_frames": 36,
+  "video": "./data/figures/table_videos_2026-10-28/8_physworld_9.5/vergleich_20260602_193953.mp4"
+ },
+ "20260605_112939": {
+  "mittel": 15.454813536052825,
+  "json_mittel": 15.454819886751162,
+  "n_frames": 72,
+  "video": "./data/figures/table_videos_2026-10-28/8_physworld_9.5/vergleich_20260605_112939.mp4"
+ }
+}
