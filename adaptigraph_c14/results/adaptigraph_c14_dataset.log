@@ -1,0 +1,5 @@
+56 real trajectories from data/tracks14; mode seq, stride 1, chain_len 10
+  chains 10000/30000: 96292 transitions kept, 3.7% dropped (stretch > 1% or non-finite)  (91s)
+  chains 20000/30000: 192458 transitions kept, 3.8% dropped (stretch > 1% or non-finite)  (186s)
+  chains 30000/30000: 288779 transitions kept, 3.7% dropped (stretch > 1% or non-finite)  (277s)
+-> data/dlo_dataset_c14_seq.pt: 288779 transitions (277s)

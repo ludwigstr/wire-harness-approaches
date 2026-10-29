@@ -21,10 +21,11 @@ One script per approach, in the order of the approaches table:
 | 08 | `approaches/08_ropedreamer.py` | RopeDreamer (Missal et al. 2026): RSSM over a quaternion chain | tracked videos | world 22 | 16.8 |
 | 09 | `approaches/09_caporali.py` | Caporali et al. (RA-L 2024): MLP + online parameter estimation | simulator only (real-anchored data) | world 23 | 18.4 |
 | 10 | `approaches/10_adaptigraph.py` | AdaptiGraph (Zhang et al. 2024): property-conditioned graph dynamics | simulator (real-anchored) + real fine-tune | world 24 | 24.4 |
-| 11 | `yang_et_al/` | Yang et al. 2022 (IN + bi-LSTM), Newton instead of AGX: DE identification -> synthetic data -> network; snapshot of the current scripts, not yet adapted/tested in this repo | DE on 14 clips + net | summary row 4 | 14.4 |
-| 12 | `caporali_et_al/` | Caporali et al. (RA-L 2024), one step per video frame (0.25 s) instead of 1 s: retrained MLP + online estimation every frame; snapshot of the current scripts, not yet adapted/tested in this repo | simulator only (real-anchored, speed x0.8-1.2) | summary row 5 | 20.6 |
+| 11 | `yang_et_al/` | Yang et al. 2022 (IN + bi-LSTM), Newton instead of AGX: DE identification -> synthetic data -> network; snapshot of the current scripts, not yet adapted/tested in this repo | DE on 14 clips + net | summary row 4 | 13.3 (data from the 14 clips) |
+| 12 | `caporali_et_al/` | Caporali et al. (RA-L 2024), one step per video frame (0.25 s) instead of 1 s: retrained MLP + online estimation every frame; snapshot of the current scripts, not yet adapted/tested in this repo | simulator only (data from the 14 clips, speed x0.8-1.2) | summary row 5 | 14.5 |
 | 13 | `ropedreamer_twins14/` | RopeDreamer as in the paper: trained on MuJoCo simulations only (twins of the 14 clips + speed/parameter variations), scored on the twins; snapshot of the current scripts, not yet adapted/tested in this repo | simulator only (MuJoCo twins) | summary row 1 | 18.3 (real tracks; 14-frame windows) |
 | 14 | `physworld_mpm/` | PhysWorld as in the paper: own differentiable MPM twin per clip (global then per-particle E, rho, mu; nu, yield) -> 40 demos -> GNN; per-node Phi (E, rho) fitted on the real clip; snapshot of the current scripts, not yet adapted/tested in this repo | MPM twins + Phi on real | summary row 3 | 9.5 |
+| 15 | `adaptigraph_c14/` | AdaptiGraph with simulator data built from the 14 clips (speed-only variation) + real fine-tuning; snapshot of the current scripts, not yet adapted/tested in this repo | simulator (14 clips) + real fine-tune | summary row 6 | 21.1 |
 
 All numbers are **in-sample**: every approach is fitted or fine-tuned on the
 same 14 clips it is scored on (the physics rows fit their parameters there; the

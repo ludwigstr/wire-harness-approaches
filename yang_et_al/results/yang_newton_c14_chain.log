@@ -1,0 +1,4 @@
+[2026-10-29 16:41:10] dataset done: 1305 rollouts; newton speed done: 1305 written, 95 rejected after 4 tries
+[2026-10-29 16:57:06] training done: 1305 rollouts -> 246460 transitions (8.9% dropped, gap > 15 mm or real-timing reference + 10 mm, whichever is larger)
+[2026-10-29 16:57:17] eval done: mittel_warm5: mean 13.33  median 11.68 mm/node over 14 clips -> data/wm/yang_newton_c14_inbilstm_14.json 
+[2026-10-29 16:57:17] ALL DONE

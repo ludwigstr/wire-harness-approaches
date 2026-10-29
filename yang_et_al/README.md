@@ -24,7 +24,19 @@ Method (Yang, Stork, Stoyanov 2022, with Newton instead of AGX Dynamics):
 The chain with the exact arguments: `scripts/run_yang_newton_paper3_chain.sh` (identification,
 simulator control, dataset), then `scripts/run_yang_newton_paper3_cont.sh` (training + evaluation).
 
-## Result on the 14 clips
+## Update 2026-10-29: synthetic data from the 14 clips
+
+The dataset above starts from the 103 X-Planar clips. `scripts/run_yang_newton_c14_chain.sh` rebuilds it
+from the 14 evaluation clips (`--tracks data/tracks14 --allow-eval-clips --per-clip 100`), with the same
+identification, speed-only variation and domain randomization: 1305 rollouts (95 rejected), 246k
+transitions, shipped in `data/yang_newton_c14_synth/`. The validation split is per rollout, because a
+per-clip split would hold out whole evaluation clips.
+
+Result: **13.33 / median 11.68** mm/node (`results/yang_newton_c14_inbilstm_14.json`, checkpoint
+`checkpoints/yang_newton_c14_inbilstm.pt`). The overlay videos reproduce it exactly
+(`results/video_reproduction_c14.json`). Wall clock: dataset 1.0 h, training 0.3 h.
+
+## Result on the 14 clips (X-Planar dataset)
 
 Identified (DE, 40 generations, 4920 evaluations, one-step error 3.98 mm/node; all values inside
 the bounds): k_stretch 4367 N/m, d_stretch 0.016, k_bend 3.66 N m/rad, d_bend 7.45 N m s/rad,

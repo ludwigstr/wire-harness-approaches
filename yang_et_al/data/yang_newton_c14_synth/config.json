@@ -1,0 +1,70 @@
+{
+ "ident": "data/wm/yang_newton_paper3_ident.json",
+ "tracks": "data/tracks14",
+ "per_clip": 100,
+ "workers": 32,
+ "seed": 0,
+ "out": "data/wm/yang_newton_c14_synth",
+ "env": "yang",
+ "general_fit": "data/mujoco_general_fit3.npz",
+ "engine": "newton",
+ "batch": 128,
+ "randomize": true,
+ "allow_eval_clips": true,
+ "frames_per_clip": 0,
+ "twin_reference": false,
+ "motion": "speed",
+ "x": [
+  3.640199100718755,
+  -1.7937643039852396,
+  0.5631857960547508,
+  0.8722640618282314,
+  -1.2762137083640988,
+  -0.8585296687861339,
+  -1.0585639957718567,
+  0.6513122498221615
+ ],
+ "n_clips": 14,
+ "dr_ranges": {
+  "bend": [
+   0.5,
+   2.0
+  ],
+  "twist": [
+   0.5,
+   2.0
+  ],
+  "stretch": [
+   0.5,
+   2.0
+  ],
+  "damping": [
+   0.3333333333333333,
+   3.0
+  ],
+  "mass": [
+   0.7,
+   1.4
+  ],
+  "mu": [
+   0.5,
+   2.0
+  ],
+  "rest": [
+   0.8,
+   1.2
+  ],
+  "jitter": [
+   0.85,
+   1.18
+  ]
+ },
+ "mass_bounds": [
+  0.01,
+  0.5
+ ],
+ "speed_range": [
+  0.65,
+  1.4
+ ]
+}

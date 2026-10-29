@@ -7,6 +7,11 @@ The paths are still those of the main project; the ones to change are listed bel
 It replaces the 1 s step (4 video frames per transition) of `approaches/09_caporali.py`. There
 the step length was an arbitrary choice; here the MLP predicts one 0.25 s video frame per step.
 
+**Update 2026-10-29:** the training data is now built from the 14 evaluation clips (`--tracks data/tracks14`)
+instead of the 103 X-Planar clips: `scripts/run_train_on_14.sh`, checkpoint
+`checkpoints/bench_film_c14_step1.pt`, result 14.54 / median 11.96 (`results_caporali_c14.json`).
+The X-Planar version below (20.58) is kept for reference.
+
 ## Method
 
 1. `scripts/make_dataset_real.py --mode step --stride 1 --speed 0.8 1.2` builds the synthetic
