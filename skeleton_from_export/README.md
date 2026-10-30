@@ -1,5 +1,7 @@
 # Cable skeletons from a segmentation export folder
 
+For running it over many export folders (for example a whole drive) see `HOWTO_CLAUDE.md`.
+
 `scripts/track_replay_folder.py` turns the export folder of the segmentation pipeline (for example
 `20261028_124829/`) into cable skeletons for testing algorithms: 4 cables x 16 nodes per frame, in metres on
 the board. The output has the same format as `data/tracks14`, so every evaluation script in this repo that
