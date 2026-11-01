@@ -1,4 +1,4 @@
-# Skeleton results: 88 clips (79 ok, 9 check)
+# Skeleton results: 88 clips (78 ok, 10 check)
 
 Produced with `scripts/track_replay_folder.py` from the segmentation exports of 21/23/26/28 Oct 2026, as the
 loop of 31 Oct - 1 Nov 2026 converted them (`scripts/skeleton_convert_new.sh` in the main project). Updated as
@@ -102,7 +102,7 @@ hub (< 8 % length) are noted but left as ok.
 | 20261028_123040 | 10-154 | 145/145 | [156, 157] | 616-902 | 6 7 13 2 | 19 19 42 45 | ok |  |
 | 20261028_123311 | 10-165 | 156/156 | [167, 168] | 617-948 | 6 8 15 5 | 20 14 47 22 | ok |  |
 | 20261028_123540 | 10-155 | 146/146 | [157, 158] | 616-906 | 15 8 7 9 | 42 24 31 57 | ok |  |
-| 20261028_123828 | 10-160 | 151/151 | [162, 163] | 534-1005 | 19 14 5 6 | 20 52 17 29 | ok | cable 0 ~55 mm short in frames 138-160 -- strand reaches the top image edge under the gantry (possible occlusion), keep as check; 124048: cable 2 ~80 mm short in frames 64-69, 75, 122-130 -- shorter loop below the middle mover, keep as check |
+| 20261028_123828 | 10-160 | 151/151 | [162, 163] | 534-1005 | 19 14 5 6 | 20 52 17 29 | check | cable 0 ~55 mm short in frames 138-160 -- strand reaches the top image edge under the gantry (possible occlusion), keep as check; 124048: cable 2 ~80 mm short in frames 64-69, 75, 122-130 -- shorter loop below the middle mover, keep as check |
 | 20261028_124048 | 10-169 | 160/160 | [] | 534-906 | 7 3 30 5 | 22 27 48 50 | check |  |
 | 20261028_124319 | 10-199 | 190/190 | [] | 615-953 | 12 8 5 1 | 38 31 41 66 | ok | 66 mm jump of cable 3 at frame 140 is a real fast mover move (length constant 804 mm, strand follows) -> ok; 124555 ok |
 | 20261028_124555 | 10-156 | 147/147 | [158, 159] | 615-910 | 6 8 5 6 | 15 31 34 30 | ok |  |
