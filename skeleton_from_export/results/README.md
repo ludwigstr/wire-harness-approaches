@@ -1,4 +1,44 @@
-# Skeleton results: 107 clips (95 ok, 12 check)
+# Skeleton results: 107 clips
+
+## Current tracking: final_v1 (1 Nov 2026)
+
+`npz/`, `videos/` and `splitscreen/` now hold the improved tracking. The format is unchanged. Each npz additionally
+has `reset` (T, 4), which marks frames where the detector re-initialised a cable, and `pink_len_mm` (T).
+
+How it is made:
+
+1. `scripts/track_replay_folder_v2.py` with `wire_model/perception/tracking_v2.py` is a per-frame detector. It
+   generates diverse route candidates, uses one global length per cable, and runs Viterbi over the clip.
+2. `scripts/track_hybrid.py` is a TrackDLO-style tracker (CPD/GMM with motion-coherence prior, all four cables in
+   one model). It follows the cables frame to frame. A chain is reset to the detector's route when it leaves the
+   evidence or when the ends jump by more than 60 mm (recording cuts).
+3. `scripts/track_pink.py` with `wire_model/perception/thin_wire.py` re-traces cable 3 (magenta). It is a loose
+   bundle of 2-3 thin wires that the class map misses over long stretches. It is traced directly in the camera
+   image: thin dark lines are found with a black-hat filter, and the route is the cheapest path from the hub to its
+   mover, with extra cost on the three thick cables and a pull towards the previous frame.
+
+Hub and mover positions come from the previous result. The scripts expect it as
+`data/videos/skeletons_2026-10-30/<clip>.npz`.
+
+Benchmark over all 107 clips (`scripts/skeleton_benchmark.py`; per clip in `bench_before.csv` and
+`bench_final_v1.csv`). There is no ground truth, so the scores are what is physically certain:
+
+| score | before | final_v1 |
+|---|---|---|
+| frames with a cable length > 8 % off its clip median | 3.22 % | 0.37 % |
+| frame-to-frame jump, 95th percentile (mm) | 13.8 | 10.8 |
+| largest frame-to-frame jump (mm, mean over clips) | 46.9 | 36.1 |
+| magenta route farther than 10 px from its thin wire | 2.76 % | 0.03 % |
+| class-map cable pixels no route explains | 5.56 % | 5.19 % |
+| route samples over empty board | 0.83 % | 0.83 % |
+| frames flagged as wrong in the review (12 clips) | 266 of 354 | 12 of 354 |
+
+Remaining weak clips by length score: 175358 (11.8 %), 124048 (11.2 %), 123828 (7.9 %, cable under the gantry),
+103236 (4.9 %). All others are below 2 %.
+
+The status table below describes the PREVIOUS tracking (before 1 Nov 2026) and is kept as history.
+
+## Previous tracking (before 1 Nov 2026)
 
 Produced with `scripts/track_replay_folder.py` from the segmentation exports of 21/23/26/28 Oct 2026, as the
 loop of 31 Oct - 1 Nov 2026 converted them (`scripts/skeleton_convert_new.sh` in the main project). All exports

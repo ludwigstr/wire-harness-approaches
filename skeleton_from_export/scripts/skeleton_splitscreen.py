@@ -23,14 +23,24 @@ COLORS = [(0, 0, 255), (255, 0, 0), (0, 160, 0), (200, 0, 200)]     # BGR per ca
 W, H = 600, 798                 # each half
 
 
-def draw(img, tf, P, label):
+HEAD = 92                       # header bar above each panel (user, 2026-11-01: larger text on top)
+
+
+def header(panel, title, sub=""):
+    """Panel (already W x H) with a dark header bar carrying a large title and an optional sub-line."""
+    bar = np.full((HEAD, panel.shape[1], 3), 30, np.uint8)
+    cv2.putText(bar, title, (14, 42), cv2.FONT_HERSHEY_SIMPLEX, 1.25, (255, 255, 255), 3, cv2.LINE_AA)
+    if sub:
+        cv2.putText(bar, sub, (14, 80), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (210, 210, 210), 2, cv2.LINE_AA)
+    return np.concatenate([bar, panel], 0)
+
+
+def draw(img, tf, P):
     for k in range(4):
         px = tf.to_px(P[k] * 1000.0).astype(int)
         cv2.polylines(img, [px.reshape(-1, 1, 2)], False, COLORS[k], 4, cv2.LINE_AA)
         for p in px:
             cv2.circle(img, tuple(int(v) for v in p), 7, COLORS[k], -1, cv2.LINE_AA)
-    cv2.putText(img, label, (20, img.shape[0] - 30), cv2.FONT_HERSHEY_SIMPLEX, 1.4, (20, 20, 20), 6, cv2.LINE_AA)
-    cv2.putText(img, label, (20, img.shape[0] - 30), cv2.FONT_HERSHEY_SIMPLEX, 1.4, (255, 255, 255), 2, cv2.LINE_AA)
     return cv2.resize(img, (W, H), interpolation=cv2.INTER_AREA)
 
 
@@ -53,26 +63,24 @@ def main():
         im = cv2.imread(f"{panels[n]}/01_raw.png")
         return cv2.resize(im, (int(im.shape[1] * SCALE), int(im.shape[0] * SCALE)), interpolation=cv2.INTER_AREA)
 
-    def label(img, text):
-        cv2.putText(img, text, (20, img.shape[0] - 30), cv2.FONT_HERSHEY_SIMPLEX, 1.4, (20, 20, 20), 6, cv2.LINE_AA)
-        cv2.putText(img, text, (20, img.shape[0] - 30), cv2.FONT_HERSHEY_SIMPLEX, 1.4, (255, 255, 255), 2, cv2.LINE_AA)
+    def fit(img):
         return cv2.resize(img, (W, H), interpolation=cv2.INTER_AREA)
 
     tf = find_board(raw(sf[0]))
     frames = []
     for i, n in enumerate(sf):
-        left = draw(raw(n), tf, P[:, i], f"{clip}  frame {n}  ours")
+        left = header(draw(raw(n), tf, P[:, i]), "tracking (ours)", f"{clip}   frame {n}")
         # middle: the pipeline's class map (yellow = cable, green = mover), text band masked
         cm = cv2.imread(f"{panels[n]}/02_class_map.png")
         cm[: int(0.06 * cm.shape[0])] = 0
-        middle = label(cm, "segmentation")
+        middle = header(fit(cm), "segmentation", "cable yellow, movers green")
         # right: the pipeline's raw skeleton alone (user, 2026-11-01: no overlay)
         sk = cv2.imread(f"{panels[n]}/03_1_full_skeleton.png", cv2.IMREAD_GRAYSCALE)
         sk[: int(0.06 * sk.shape[0])] = 0
         strand = cv2.dilate((sk > 128).astype(np.uint8), np.ones((5, 5), np.uint8))
         img = np.full((strand.shape[0], strand.shape[1], 3), 20, np.uint8)
         img[strand > 0] = (230, 230, 230)
-        right = label(img, "raw skeleton")
+        right = header(fit(img), "raw skeleton", "pipeline 03_1_full_skeleton")
         frames.append(cv2.cvtColor(np.concatenate([left, middle, right], 1), cv2.COLOR_BGR2RGB))
     iio.mimsave(out, frames, fps=a.fps, macro_block_size=1)
     print(f"-> {out}: {len(frames)} frames")
