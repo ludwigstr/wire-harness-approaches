@@ -1,0 +1,83 @@
+[2026-10-31 16:24:36] 20261028_124048: incomplete (0 panels, 0 raw, 0 class maps) -- skipped
+[2026-10-31 16:55:31] 20261028_123540: incomplete (27 panels, 26 raw, 26 class maps) -- skipped
+[2026-10-31 16:56:21] REVIEW 20261028_124319: 66 mm jump of cable 3 at frame 140 is a real fast mover move (length constant 804 mm, strand follows) -> ok; 124555 ok
+[2026-10-31 17:23:33] REVIEW 20261028_123828: cable 0 ~55 mm short in frames 138-160 -- strand reaches the top image edge under the gantry (possible occlusion), keep as check; 124048: cable 2 ~80 mm short in frames 64-69, 75, 122-130 -- shorter loop below the middle mover, keep as check
+[2026-10-31 17:34:52] 20261028_122819: incomplete (0 panels, 0 raw, 0 class maps) -- skipped
+[2026-10-31 18:01:00] 20261028_122147: incomplete (43 panels, 42 raw, 42 class maps) -- skipped
+[2026-10-31 18:22:39] 20261028_120911: incomplete (0 panels, 0 raw, 0 class maps) -- skipped
+[2026-10-31 18:23:38] REVIEW 20261028_122521: recording discontinuity between frames 111 and 112 (hub and bottom mover jump ~200 mm in the class map itself, raw-image change 2x normal) -> dropped frames in the RECORDING; cable 2 traces the wrong strand (magenta's) in frames 112-123, back on track from 124. Recommend cutting at 111 or excluding cable 2 in 112-123. 123311, 123040, 122819, 123540 ok
+[2026-10-31 18:31:43] 20261028_120911: incomplete (123 panels, 123 raw, 122 class maps) -- skipped
+[2026-10-31 18:32:12] REVIEW 20261028_122147: same recording discontinuity as 122521, between frames 118 and 119 (hub 739->364 px, bottom mover jumps, raw change 2x normal); cable 2 on the wrong strand in 119-123, back from 124. Recommend cutting at 118 or excluding cable 2 in 119-123. 122819 ok
+[2026-10-31 18:45:21] 20261028_120651: incomplete (112 panels, 111 raw, 111 class maps) -- skipped
+[2026-10-31 18:45:39] REVIEW 20261028_121810: ok; green and blue run bundled, green briefly on the neighbouring strand in 85-88 and 145-164 (<=8% length), no jumps
+[2026-10-31 18:57:55] 20261028_120430: incomplete (57 panels, 56 raw, 56 class maps) -- skipped
+[2026-10-31 19:13:54] 20261028_115924: incomplete (95 panels, 94 raw, 94 class maps) -- skipped
+[2026-10-31 19:30:49] 20261028_115424: incomplete (0 panels, 0 raw, 0 class maps) -- skipped
+[2026-10-31 19:56:20] 20261028_115140: incomplete (129 panels, 128 raw, 128 class maps) -- skipped
+[2026-10-31 20:11:14] 20261028_114335: incomplete (0 panels, 0 raw, 0 class maps) -- skipped
+[2026-10-31 20:22:06] 20261028_114103: incomplete (0 panels, 0 raw, 0 class maps) -- skipped
+[2026-10-31 20:34:11] 20261028_114103: incomplete (147 panels, 146 raw, 146 class maps) -- skipped
+[2026-10-31 20:34:26] REVIEW 20261028_114911: 67 mm jump of cable 3 at frame 118 is a real fast mover move (all lengths constant) -> ok. 120651, 120430, 115924, 115704, 115424, 115140 ok
+[2026-10-31 20:45:49] 20261028_113827: incomplete (123 panels, 122 raw, 122 class maps) -- skipped
+[2026-10-31 20:58:32] 20261028_113545: incomplete (123 panels, 122 raw, 122 class maps) -- skipped
+[2026-10-31 20:58:50] REVIEW 20261028_114103: ok; red/green/blue share a tight loop above the middle mover, green on the neighbouring strand for single frames 105 and 109; red ~140 mm short in the last two frames 154-155. 114335 ok
+[2026-10-31 21:11:22] 20261028_113039: incomplete (129 panels, 128 raw, 128 class maps) -- skipped
+[2026-10-31 21:23:34] 20261028_112821: incomplete (115 panels, 114 raw, 114 class maps) -- skipped
+[2026-10-31 21:23:51] REVIEW 20261028_113545: ok with note; green on the neighbouring strand of the bundle in single frames 122 and 125 (61 mm jump), otherwise clean. 113827 ok
+[2026-10-31 21:48:20] 20261028_112319: incomplete (79 panels, 78 raw, 78 class maps) -- skipped
+[2026-10-31 21:48:57] 20261028_112319: incomplete (91 panels, 90 raw, 90 class maps) -- skipped
+[2026-10-31 22:17:27] 20261028_111837: incomplete (133 panels, 132 raw, 132 class maps) -- skipped
+[2026-10-31 22:29:22] 20261028_111602: incomplete (108 panels, 107 raw, 107 class maps) -- skipped
+[2026-10-31 22:42:06] 20261028_111329: incomplete (83 panels, 82 raw, 82 class maps) -- skipped
+[2026-10-31 23:11:41] 20261028_110625: incomplete (85 panels, 84 raw, 84 class maps) -- skipped
+[2026-10-31 23:55:14] 20261028_105803: incomplete (88 panels, 87 raw, 87 class maps) -- skipped
+[2026-10-31 23:55:30] REVIEW 20261028_110352: ok with note; green makes a single-frame loop in the bundle at the hub at frame 121 (61 mm), otherwise clean. 110625, 111116, 111329, 111602, 111837, 112107, 112319, 112535, 112821, 113039 ok
+[2026-11-01 00:09:44] 20261028_105524: incomplete (95 panels, 94 raw, 94 class maps) -- skipped
+[2026-11-01 00:22:49] 20261028_105230: incomplete (72 panels, 71 raw, 71 class maps) -- skipped
+[2026-11-01 00:38:16] 20261028_104941: incomplete (70 panels, 69 raw, 69 class maps) -- skipped
+[2026-11-01 00:38:31] REVIEW 20261028_105524: ok with note; green loops in the bundle at the hub in single frames (28, 111, 114, 116, 117), otherwise clean. 110056, 105803 ok
+[2026-11-01 00:54:27] 20261028_104630: incomplete (74 panels, 73 raw, 73 class maps) -- skipped
+[2026-11-01 01:10:04] REVIEW 20261028_104941: ok with note; green loops in the bundle at the hub in frames 119, 123-124 (59 mm), otherwise clean. 105230 ok
+[2026-11-01 01:26:48] 20261028_103722: incomplete (67 panels, 66 raw, 66 class maps) -- skipped
+[2026-11-01 01:27:03] REVIEW 20261028_104630: ok with note; green loops in the bundle at the hub in single frames 117, 119, 122-123, 127 (61 mm), otherwise clean
+[2026-11-01 01:43:03] REVIEW 20261028_104336: ok with note; green loops in the bundle at the hub in frames 125-127 and 140 (62 mm), otherwise clean
+[2026-11-01 02:30:48] 20261028_110851: incomplete (65 panels, 64 raw, 64 class maps) -- skipped
+[2026-11-01 02:31:02] REVIEW 20261028_120200: ok; green loops in the bundle at the hub in single frames 121 and 127 (54 mm). 103722, 103501 ok
+[2026-11-01 02:47:03] 20261028_103236: incomplete (65 panels, 64 raw, 64 class maps) -- skipped
+[2026-11-01 02:47:17] REVIEW 20261028_113317: ok with note; green makes a single-frame loop in the bundle at the hub at frame 117 (60 mm), otherwise clean
+[2026-11-01 03:03:35] 20261028_103000: incomplete (67 panels, 66 raw, 66 class maps) -- skipped
+[2026-11-01 03:19:54] REVIEW 20261028_103236: check; cable 3 (bottom mover) has a slack loop at its mover that the tracer alternately follows (~805 mm) or cuts (~665 mm): flickers in 72-83, 113, 119, 147-150, and stays on the shortcut from 156 to the end (173). Endpoints right, no cable swap; cable 2 ~60 mm short in 162-166. Recommend excluding cable 3 in the flagged frames or cutting at 155. 110851 ok
+[2026-11-01 03:35:00] 20261028_102459: incomplete (65 panels, 64 raw, 64 class maps) -- skipped
+[2026-11-01 03:35:13] REVIEW 20261028_103000: ok with note; green loops in the bundle at the hub in frames 121, 124-126 (57 mm), otherwise clean
+[2026-11-01 03:51:52] REVIEW 20261028_102724: ok with note; green loops in the bundle at the hub in frames 118-119 (97 mm), cable 3's 73 mm at 118 is the bottom mover moving (length constant), otherwise clean
+[2026-11-01 04:10:17] REVIEW 20261028_102459: ok with note; green loops in the bundle at the hub in single frames 127 and 130 (67 mm), otherwise clean
+[2026-11-01 04:28:34] 20261028_101743: incomplete (101 panels, 100 raw, 100 class maps) -- skipped
+[2026-11-01 04:28:48] REVIEW 20261028_102229: ok with note; green loops in the bundle at the hub in scattered frames 123-134 (67 mm), otherwise clean
+[2026-11-01 04:44:00] 20261028_101510: incomplete (79 panels, 78 raw, 78 class maps) -- skipped
+[2026-11-01 04:44:14] REVIEW 20261028_102001: ok; green loops in the bundle at the hub in single frames 38-39 and 126 (56 mm)
+[2026-11-01 04:59:32] 20261028_101227: incomplete (61 panels, 60 raw, 60 class maps) -- skipped
+[2026-11-01 04:59:47] REVIEW 20261028_101743: ok; green loops in the bundle at the hub in single frames 130 and 132 (59 mm)
+[2026-11-01 05:32:56] 20261028_100701: incomplete (63 panels, 62 raw, 62 class maps) -- skipped
+[2026-11-01 05:33:10] REVIEW 20261028_101227: ok; green loops in the bundle at the hub in frames 125-130 (47 mm). 101510 ok
+[2026-11-01 05:49:49] REVIEW 20261028_101001: ok; green loops in the bundle at the hub in frames 121-127 (54 mm)
+[2026-11-01 06:16:27] REVIEW 20261028_100222: check; cable 2 (middle mover) on the bundle strand instead of its own bow in frames 126-133 (444-471 mm vs 640), back from 134; single-frame loops at 28, 37, 122. Recommend excluding cable 2 in 126-133. 100701 ok
+[2026-11-01 06:31:00] 20261028_095144: incomplete (63 panels, 62 raw, 62 class maps) -- skipped
+[2026-11-01 06:31:20] REVIEW 20261028_095907: ok with note; green loops in the bundle at the hub in single frames 101, 104, 108 (72 mm), otherwise clean
+[2026-11-01 06:46:53] 20261026_130734: incomplete (75 panels, 74 raw, 74 class maps) -- skipped
+[2026-11-01 07:02:10] 20261026_130441: incomplete (77 panels, 76 raw, 76 class maps) -- skipped
+[2026-11-01 07:17:56] REVIEW 20261026_130734: ok; first clip of the 26.10. series, different choreography (hub starts bottom-left, moves to top-left), hub identified correctly. 095144, 095519 ok
+[2026-11-01 07:34:18] 20261026_125511: incomplete (88 panels, 87 raw, 87 class maps) -- skipped
+[2026-11-01 07:50:15] 20261023_141131: incomplete (80 panels, 79 raw, 79 class maps) -- skipped
+[2026-11-01 08:06:49] 20261021_180646: incomplete (82 panels, 81 raw, 81 class maps) -- skipped
+[2026-11-01 08:07:06] REVIEW 20261026_125511: 60 mm jump of cable 3 at frame 155 is the mover moving (length constant) -> ok. 130441, 130128 ok
+[2026-11-01 08:24:18] 20261021_180422: incomplete (124 panels, 123 raw, 123 class maps) -- skipped
+[2026-11-01 08:37:35] 20261021_180139: incomplete (79 panels, 78 raw, 78 class maps) -- skipped
+[2026-11-01 08:54:01] REVIEW 20261021_180422: ok; cable 3 length rises smoothly 854->910 mm over frames 155-163 and stays flat to the end (cable straightened by the mover, no flicker or jump), gap-free clip of 176 frames. 180646, 141131 ok
+[2026-11-01 09:07:41] REVIEW 20261021_180139: check (status raised from ok); cables 0 and 1 swap strands in the loop at the top-left hub: blue too long (985 vs 897 mm) from 121, red too short (545 vs 620) from 124, both to the end (165). Recommend cutting at 120 or excluding cables 0-1 from 121
+[2026-11-01 09:20:19] 20261021_175358: incomplete (97 panels, 96 raw, 96 class maps) -- skipped
+[2026-11-01 09:34:14] REVIEW 20261021_175638: check (status raised from ok); cable 2 (middle mover) flickers between its own strand (~640 mm) and the neighbouring bundle strand (~570 mm) in frames 90-95 and 136-155, endpoints right. Recommend excluding cable 2 in those frames. 175850 ok
+[2026-11-01 09:49:01] REVIEW 20261021_175358: check; cable 0 (red) on a shortcut strand (~555 vs 618 mm) from 129 to the end (161), cable 2 (green) on the longer neighbouring strand (~690 vs 638) in 127-147, cable 3's rise 826->909 in 150-161 is smooth (straightening). Recommend cutting at 126 or excluding cables 0 and 2 from 127
+[2026-11-01 10:35:51] 20261021_174117: incomplete (108 panels, 107 raw, 107 class maps) -- skipped
+[2026-11-01 10:50:16] 20261021_173858: incomplete (86 panels, 85 raw, 85 class maps) -- skipped
+[2026-11-01 11:06:13] 20261021_173628: incomplete (105 panels, 104 raw, 104 class maps) -- skipped
+[2026-11-01 11:20:08] 20261021_173234: incomplete (94 panels, 93 raw, 93 class maps) -- skipped
