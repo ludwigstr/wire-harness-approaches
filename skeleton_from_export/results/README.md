@@ -1,21 +1,28 @@
-# Skeleton results: 88 clips (78 ok, 10 check)
+# Skeleton results: 107 clips (95 ok, 12 check)
 
 Produced with `scripts/track_replay_folder.py` from the segmentation exports of 21/23/26/28 Oct 2026, as the
-loop of 31 Oct - 1 Nov 2026 converted them (`scripts/skeleton_convert_new.sh` in the main project). Updated as
-more clips finish.
+loop of 31 Oct - 1 Nov 2026 converted them (`scripts/skeleton_convert_new.sh` in the main project). All exports
+present on 1 Nov 2026 16:37 are included.
 
 - `npz/<clip>.npz`: `c0`..`c3` (T, 16, 2) in metres on the board, node 0 at the hub; `t0`, `t1`, `fps` (4.0 assumed);
   `source_frames` = source frame number of each row. Same format as `data/tracks14`.
 - `videos/skeleton_check_<clip>.mp4`: the 16-node skeletons on the camera image (red c0, blue c1, green c2, magenta c3).
+- `splitscreen/skeleton_split_<clip>.mp4` (`scripts/skeleton_splitscreen.py`): left the same as above, right the
+  segmentation pipeline's own raw skeleton (`03_1_full_skeleton.png`, grey) with our 16-node skeleton on top, so a
+  wrong strand shows as a coloured line off the grey one. 20261028_124829's raw skeleton panel is empty in its export.
 - `checks.csv`: the automatic checks as the loop wrote them (clips converted before it existed are only in the table).
 - `review_log.txt`: the per-clip review notes.
 
-**status**: the reviewed verdict (the review column overrides the numeric `checks.csv` status). `ok` = the stills and the flagged frames look right; `check` = a tracking defect was found, the
-review column says which cable and frames to exclude. Three kinds of defect occur: (1) two cables swap strands in a
-loop (160124, 180139, 175358); (2) a cable follows the neighbouring bundle strand or skips its own loop for some
-frames (123828, 124048, 103236, 100222, 175638); (3) the recording itself has a cut, i.e. dropped frames, where the
-hub and a mover jump ~200 mm between consecutive frames (122521, 122147). Single-frame loops of the green cable at the
-hub (< 8 % length) are noted but left as ok.
+**status**: the reviewed verdict (the review column overrides the numeric `checks.csv` status). `ok` = the stills and
+the flagged frames look right; `check` = a tracking defect was found, the review column says which cable and frames to
+exclude. Three kinds of defect occur: (1) two cables swap strands in a loop at the hub (160124, 180139, 175358,
+171354); (2) a cable follows the neighbouring bundle strand, skips its own loop or is cut off under the gantry for
+some frames (123828, 124048, 103236, 100222, 175638, 171620); (3) the recording itself has a cut, i.e. dropped
+frames, where the hub and a mover jump ~200 mm between consecutive frames (122521, 122147). Single-frame loops of the
+green cable at the hub (< 8 % length) are noted but left as ok.
+
+Worst clips by share of frames with a cable length off by more than 8 %: 171354 (35 %), 180139 (27 %), 175358
+(24 %), 103236 (20 %), 175638 (16 %), 123828 (15 %); median over all clips 1.1 %.
 
 | clip | frames used | tracked | dropped | cable length mm | spread % per cable | max jump mm per cable | status | review |
 |---|---|---|---|---|---|---|---|---|
@@ -26,6 +33,25 @@ hub (< 8 % length) are noted but left as ok.
 | 20261021_162931 | 10-178 | 169/169 | [] | 599-944 | 8 8 13 9 | 28 21 21 27 | ok |  |
 | 20261021_163244 | 10-132 | 123/123 | [] | 617-941 | 5 5 8 11 | 20 23 27 23 | ok |  |
 | 20261021_163624 | 10-179 | 170/170 | [] | 619-915 | 6 2 4 15 | 21 25 19 22 | ok |  |
+| 20261021_164010 | 10-190 | 181/181 | [] | 614-932 | 8 10 8 5 | 24 26 20 16 | ok | ok; gap-free clip of 181 frames, clean. 164524 ok. Queue empty at 16:37 |
+| 20261021_164524 | 10-185 | 176/176 | [187, 188] | 617-936 | 6 5 7 15 | 25 27 18 17 | ok | ok; cable 3 rises smoothly 839->922 mm over 155-166 and stays exactly flat to the end (straightened, stationary; same as 164755/180422) |
+| 20261021_164755 | 10-173 | 164/164 | [175, 176] | 620-909 | 6 4 10 14 | 30 26 44 41 | ok | ok; cable 3 length rises smoothly 837->899 mm over 150-157 and stays exactly flat to the end (cable straightened and stationary, same as 180422). 165018, 165246 ok |
+| 20261021_165018 | 10-175 | 166/166 | [177, 178] | 607-945 | 9 6 11 4 | 29 25 31 29 | ok |  |
+| 20261021_165246 | 10-190 | 181/181 | [192, 193] | 619-921 | 7 3 3 7 | 28 31 25 32 | ok |  |
+| 20261021_165533 | 10-164 | 155/155 | [166, 167] | 562-920 | 16 3 6 3 | 24 21 21 22 | ok | ok; red includes a small slack hook at the hub in single frames 60, 63, 66, 67 (562 vs 620 mm), otherwise clean. 165753, 170019, 170327 ok |
+| 20261021_165753 | 10-181 | 172/172 | [183, 184] | 619-938 | 7 7 7 6 | 27 23 23 24 | ok |  |
+| 20261021_170019 | 10-165 | 156/156 | [167, 168] | 617-913 | 8 2 6 4 | 24 14 17 20 | ok |  |
+| 20261021_170327 | 10-180 | 171/171 | [] | 619-911 | 7 4 11 7 | 19 25 34 24 | ok |  |
+| 20261021_170550 | 10-167 | 158/158 | [169, 170] | 529-919 | 8 3 21 11 | 25 23 72 28 | ok | ok with note; green takes a shortcut along the bundle instead of its own bow in single frames 151 (529 vs 647 mm, 72 mm jump) and 164, otherwise clean. 170836 ok |
+| 20261021_170836 | 10-115 | 106/106 | [117, 118] | 618-933 | 9 2 6 15 | 45 25 42 59 | ok | ok with note; cable 3's 59 mm at 71 is the bottom mover moving; from 110 cable 3 includes its full slack bow on the left (858->901->933 mm) that it cut short before, no swap. 171053 ok |
+| 20261021_171053 | 10-168 | 159/159 | [170, 171] | 565-970 | 19 8 5 9 | 35 27 15 29 | ok | ok with note; in frames 10-29 red alternately includes a small slack hook at the hub (678 vs 633 mm, +45), from 31 straight; in 160-168 red runs along the top image edge under the gantry, length falls smoothly 592->565 (mild occlusion). No swaps, endpoints right |
+| 20261021_171354 | 10-167 | 158/158 | [169, 170] | 441-1001 | 59 11 45 20 | 69 23 46 34 | check | check; cable 0 (red, top mover) follows the green/blue bundle to the right and loops back instead of its own direct strand up from the hub in 121-154 (900-1000 vs 640 mm, grey strand unused); cable 2 (green) flickers onto the bundle strand in single frames 74-106 (545 vs 635) and 118, 130; cable 3 rises smoothly 856->948 in 158-167 (mover moving, plausible). Recommend excluding cable 0 in 121-154 and cable 2 in the listed frames. 171842, 172103 ok |
+| 20261021_171620 | 10-158 | 149/149 | [160, 161] | 558-942 | 15 5 5 7 | 30 20 21 52 | check | check (status raised from ok); cable 0 (red) runs along the top image edge under the gantry from 148 and its loop there is progressively cut off, length falls smoothly 601->558 mm over 148-158 (occlusion, not a swap; endpoints right). Same situation as 123828. Recommend excluding cable 0 in 151-158. 172103, 171842 ok |
+| 20261021_171842 | 10-173 | 164/164 | [175, 176] | 621-960 | 6 8 8 9 | 25 22 38 37 | ok |  |
+| 20261021_172103 | 10-165 | 156/156 | [167, 168] | 599-938 | 9 6 10 9 | 25 23 31 42 | ok |  |
+| 20261021_172318 | 10-170 | 161/161 | [] | 620-964 | 10 8 8 8 | 31 46 44 22 | ok | ok; gap-free clip of 161 frames; single-frame loop of cable 0 at the hub at frame 165. 172928, 172716 ok |
+| 20261021_172716 | 10-168 | 159/159 | [170, 171] | 621-933 | 6 5 7 6 | 27 13 25 23 | ok |  |
+| 20261021_172928 | 10-158 | 149/149 | [160, 161] | 620-916 | 8 9 6 9 | 25 27 43 41 | ok |  |
 | 20261021_173234 | 10-163 | 154/154 | [165, 166] | 620-950 | 7 9 7 8 | 22 32 40 31 | ok |  |
 | 20261021_173628 | 10-177 | 168/168 | [179, 180] | 613-927 | 7 5 14 6 | 21 21 37 28 | ok |  |
 | 20261021_173858 | 10-169 | 160/160 | [171, 172] | 619-915 | 8 3 5 6 | 25 17 35 24 | ok |  |

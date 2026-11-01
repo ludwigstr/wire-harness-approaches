@@ -81,3 +81,26 @@
 [2026-11-01 10:50:16] 20261021_173858: incomplete (86 panels, 85 raw, 85 class maps) -- skipped
 [2026-11-01 11:06:13] 20261021_173628: incomplete (105 panels, 104 raw, 104 class maps) -- skipped
 [2026-11-01 11:20:08] 20261021_173234: incomplete (94 panels, 93 raw, 93 class maps) -- skipped
+[2026-11-01 12:33:08] 20261021_171842: incomplete (76 panels, 75 raw, 75 class maps) -- skipped
+[2026-11-01 12:33:20] REVIEW 20261021_172318: ok; gap-free clip of 161 frames; single-frame loop of cable 0 at the hub at frame 165. 172928, 172716 ok
+[2026-11-01 12:48:37] 20261021_171620: incomplete (84 panels, 83 raw, 83 class maps) -- skipped
+[2026-11-01 13:03:06] 20261021_171354: incomplete (97 panels, 96 raw, 96 class maps) -- skipped
+[2026-11-01 13:16:34] 20261021_171053: incomplete (82 panels, 81 raw, 81 class maps) -- skipped
+[2026-11-01 13:17:01] REVIEW 20261021_171620: check (status raised from ok); cable 0 (red) runs along the top image edge under the gantry from 148 and its loop there is progressively cut off, length falls smoothly 601->558 mm over 148-158 (occlusion, not a swap; endpoints right). Same situation as 123828. Recommend excluding cable 0 in 151-158. 172103, 171842 ok
+[2026-11-01 13:31:09] 20261021_170550: incomplete (0 panels, 0 raw, 0 class maps) -- skipped
+[2026-11-01 13:31:37] REVIEW 20261021_171354: check; cable 0 (red, top mover) follows the green/blue bundle to the right and loops back instead of its own direct strand up from the hub in 121-154 (900-1000 vs 640 mm, grey strand unused); cable 2 (green) flickers onto the bundle strand in single frames 74-106 (545 vs 635) and 118, 130; cable 3 rises smoothly 856->948 in 158-167 (mover moving, plausible). Recommend excluding cable 0 in 121-154 and cable 2 in the listed frames. 171842, 172103 ok
+[2026-11-01 13:45:53] REVIEW 20261021_171053: ok with note; in frames 10-29 red alternately includes a small slack hook at the hub (678 vs 633 mm, +45), from 31 straight; in 160-168 red runs along the top image edge under the gantry, length falls smoothly 592->565 (mild occlusion). No swaps, endpoints right
+[2026-11-01 13:52:45] 20261021_170327: incomplete (23 panels, 22 raw, 22 class maps) -- skipped
+[2026-11-01 13:55:38] 20261021_170327: incomplete (75 panels, 74 raw, 74 class maps) -- skipped
+[2026-11-01 13:55:59] REVIEW 20261021_170836: ok with note; cable 3's 59 mm at 71 is the bottom mover moving; from 110 cable 3 includes its full slack bow on the left (858->901->933 mm) that it cut short before, no swap. 171053 ok
+[2026-11-01 14:11:21] REVIEW 20261021_170550: ok with note; green takes a shortcut along the bundle instead of its own bow in single frames 151 (529 vs 647 mm, 72 mm jump) and 164, otherwise clean. 170836 ok
+[2026-11-01 14:26:32] 20261021_165753: incomplete (92 panels, 91 raw, 91 class maps) -- skipped
+[2026-11-01 14:41:19] 20261021_165533: incomplete (83 panels, 82 raw, 82 class maps) -- skipped
+[2026-11-01 14:56:46] 20261021_165246: incomplete (82 panels, 81 raw, 81 class maps) -- skipped
+[2026-11-01 15:12:47] REVIEW 20261021_165533: ok; red includes a small slack hook at the hub in single frames 60, 63, 66, 67 (562 vs 620 mm), otherwise clean. 165753, 170019, 170327 ok
+[2026-11-01 15:44:28] 20261021_164524: incomplete (71 panels, 70 raw, 70 class maps) -- skipped
+[2026-11-01 16:01:09] 20261021_164010: incomplete (61 panels, 60 raw, 60 class maps) -- skipped
+[2026-11-01 16:01:25] REVIEW 20261021_164755: ok; cable 3 length rises smoothly 837->899 mm over 150-157 and stays exactly flat to the end (cable straightened and stationary, same as 180422). 165018, 165246 ok
+[2026-11-01 16:20:30] REVIEW 20261021_164524: ok; cable 3 rises smoothly 839->922 mm over 155-166 and stays exactly flat to the end (straightened, stationary; same as 164755/180422)
+[2026-11-01 16:37:38] REVIEW 20261021_164010: ok; gap-free clip of 181 frames, clean. 164524 ok. Queue empty at 16:37
+[2026-11-01 18:07:30] SPLITSCREEN: 107 videos in splitscreen/ (left ours on camera, right raw skeleton panel 03_1_full_skeleton.png + ours); 20261028_124829's raw skeleton panel is empty in the export (first export, 29.10.), its right half shows only our skeleton
