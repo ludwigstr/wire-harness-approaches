@@ -1,4 +1,4 @@
-# Skeleton results: 88 clips (76 ok, 12 check)
+# Skeleton results: 88 clips (79 ok, 9 check)
 
 Produced with `scripts/track_replay_folder.py` from the segmentation exports of 21/23/26/28 Oct 2026, as the
 loop of 31 Oct - 1 Nov 2026 converted them (`scripts/skeleton_convert_new.sh` in the main project). Updated as
@@ -41,7 +41,7 @@ hub (< 8 % length) are noted but left as ok.
 | 20261021_180422 | 10-185 | 176/176 | [] | 619-957 | 7 7 6 13 | 21 31 22 26 | ok | ok; cable 3 length rises smoothly 854->910 mm over frames 155-163 and stays flat to the end (cable straightened by the mover, no flicker or jump), gap-free clip of 176 frames. 180646, 141131 ok |
 | 20261021_180646 | 10-156 | 147/147 | [158, 159] | 619-961 | 5 8 8 4 | 35 48 30 39 | ok |  |
 | 20261023_141131 | 10-190 | 181/181 | [192, 193] | 618-966 | 4 8 8 4 | 15 22 21 19 | ok |  |
-| 20261026_125511 | 10-177 | 168/168 | [179, 180] | 615-932 | 5 5 4 1 | 28 37 55 60 | check | 60 mm jump of cable 3 at frame 155 is the mover moving (length constant) -> ok. 130441, 130128 ok |
+| 20261026_125511 | 10-177 | 168/168 | [179, 180] | 615-932 | 5 5 4 1 | 28 37 55 60 | ok | 60 mm jump of cable 3 at frame 155 is the mover moving (length constant) -> ok. 130441, 130128 ok |
 | 20261026_130128 | 10-187 | 178/178 | [189, 190] | 616-948 | 2 7 8 1 | 13 21 23 19 | ok |  |
 | 20261026_130441 | 10-173 | 164/164 | [175, 176] | 590-926 | 12 10 5 2 | 20 26 12 27 | ok |  |
 | 20261026_130734 | 10-168 | 159/159 | [170, 171] | 589-904 | 9 3 11 3 | 13 13 31 14 | ok | ok; first clip of the 26.10. series, different choreography (hub starts bottom-left, moves to top-left), hub identified correctly. 095144, 095519 ok |
@@ -86,7 +86,7 @@ hub (< 8 % length) are noted but left as ok.
 | 20261028_113827 | 10-159 | 150/150 | [161, 162] | 617-944 | 6 7 13 8 | 22 26 43 40 | ok |  |
 | 20261028_114103 | 10-155 | 146/146 | [157, 158] | 491-923 | 13 5 24 4 | 33 18 48 40 | ok | ok; red/green/blue share a tight loop above the middle mover, green on the neighbouring strand for single frames 105 and 109; red ~140 mm short in the last two frames 154-155. 114335 ok |
 | 20261028_114335 | 10-152 | 143/143 | [154, 155] | 615-933 | 6 7 12 10 | 38 15 37 39 | ok |  |
-| 20261028_114911 | 10-154 | 145/145 | [156, 157] | 616-901 | 6 2 2 2 | 36 29 47 67 | check | 67 mm jump of cable 3 at frame 118 is a real fast mover move (all lengths constant) -> ok. 120651, 120430, 115924, 115704, 115424, 115140 ok |
+| 20261028_114911 | 10-154 | 145/145 | [156, 157] | 616-901 | 6 2 2 2 | 36 29 47 67 | ok | 67 mm jump of cable 3 at frame 118 is a real fast mover move (all lengths constant) -> ok. 120651, 120430, 115924, 115704, 115424, 115140 ok |
 | 20261028_115140 | 10-142 | 133/133 | [144, 145] | 617-956 | 5 10 3 2 | 27 29 43 42 | ok |  |
 | 20261028_115424 | 10-175 | 166/166 | [177, 178] | 616-933 | 6 7 16 3 | 21 18 59 40 | ok |  |
 | 20261028_115704 | 10-158 | 149/149 | [160, 161] | 610-909 | 11 4 11 2 | 26 29 39 59 | ok |  |
@@ -104,6 +104,6 @@ hub (< 8 % length) are noted but left as ok.
 | 20261028_123540 | 10-155 | 146/146 | [157, 158] | 616-906 | 15 8 7 9 | 42 24 31 57 | ok |  |
 | 20261028_123828 | 10-160 | 151/151 | [162, 163] | 534-1005 | 19 14 5 6 | 20 52 17 29 | ok | cable 0 ~55 mm short in frames 138-160 -- strand reaches the top image edge under the gantry (possible occlusion), keep as check; 124048: cable 2 ~80 mm short in frames 64-69, 75, 122-130 -- shorter loop below the middle mover, keep as check |
 | 20261028_124048 | 10-169 | 160/160 | [] | 534-906 | 7 3 30 5 | 22 27 48 50 | check |  |
-| 20261028_124319 | 10-199 | 190/190 | [] | 615-953 | 12 8 5 1 | 38 31 41 66 | check | 66 mm jump of cable 3 at frame 140 is a real fast mover move (length constant 804 mm, strand follows) -> ok; 124555 ok |
+| 20261028_124319 | 10-199 | 190/190 | [] | 615-953 | 12 8 5 1 | 38 31 41 66 | ok | 66 mm jump of cable 3 at frame 140 is a real fast mover move (length constant 804 mm, strand follows) -> ok; 124555 ok |
 | 20261028_124555 | 10-156 | 147/147 | [158, 159] | 615-910 | 6 8 5 6 | 15 31 34 30 | ok |  |
 | 20261028_124829 | 10-162 | 153/153 | [] | 619-923 | 14 10 14 11 | 43 41 46 42 | ok |  |
