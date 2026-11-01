@@ -7,9 +7,10 @@ present on 1 Nov 2026 16:37 are included.
 - `npz/<clip>.npz`: `c0`..`c3` (T, 16, 2) in metres on the board, node 0 at the hub; `t0`, `t1`, `fps` (4.0 assumed);
   `source_frames` = source frame number of each row. Same format as `data/tracks14`.
 - `videos/skeleton_check_<clip>.mp4`: the 16-node skeletons on the camera image (red c0, blue c1, green c2, magenta c3).
-- `splitscreen/skeleton_split_<clip>.mp4` (`scripts/skeleton_splitscreen.py`): left the same as above, right the
-  segmentation pipeline's own raw skeleton (`03_1_full_skeleton.png`, grey) with our 16-node skeleton on top, so a
-  wrong strand shows as a coloured line off the grey one. 20261028_124829's raw skeleton panel is empty in its export.
+- `splitscreen/skeleton_split_<clip>.mp4` (`scripts/skeleton_splitscreen.py`): triple screen, left the same as
+  above, middle the segmentation pipeline's class map (`02_class_map.png`, yellow cable / green movers), right the
+  pipeline's own raw skeleton (`03_1_full_skeleton.png`) on its own. 20261028_124829's raw skeleton panel is empty in
+  its export, so its right third is black.
 - `checks.csv`: the automatic checks as the loop wrote them (clips converted before it existed are only in the table).
 - `review_log.txt`: the per-clip review notes.
 

@@ -1,8 +1,8 @@
-"""Split-screen check videos (user, 2026-11-01): left = our 16-node skeleton on the camera image (as in
-skeleton_check_<clip>.mp4), right = the segmentation pipeline's own raw skeleton panel
-(visualization/panels/<k>_frame_<n>/03_1_full_skeleton.png, white 1-px strand on black) with the same
-16-node skeleton drawn on top, so the two can be compared frame by frame. The raw strand is dilated and
-shown grey so it stays visible under the coloured lines; the panel's yellow text band is masked out.
+"""Triple-screen check videos (user, 2026-11-01): left = our 16-node skeleton on the camera image (as in
+skeleton_check_<clip>.mp4), middle = the segmentation pipeline's class map (02_class_map.png: yellow cable,
+green movers), right = the pipeline's own raw skeleton panel (03_1_full_skeleton.png, white 1-px strand on
+black, dilated for visibility), all from visualization/panels/<k>_frame_<n>/ of the export folder, so the
+three can be compared frame by frame. The panels' yellow text band is masked out.
 
     python scripts/skeleton_splitscreen.py --npz data/videos/skeletons_2026-10-30/<clip>.npz \
         --folder data/videos/<clip> --out data/videos/skeletons_2026-10-30/splitscreen/skeleton_split_<clip>.mp4
@@ -53,18 +53,27 @@ def main():
         im = cv2.imread(f"{panels[n]}/01_raw.png")
         return cv2.resize(im, (int(im.shape[1] * SCALE), int(im.shape[0] * SCALE)), interpolation=cv2.INTER_AREA)
 
+    def label(img, text):
+        cv2.putText(img, text, (20, img.shape[0] - 30), cv2.FONT_HERSHEY_SIMPLEX, 1.4, (20, 20, 20), 6, cv2.LINE_AA)
+        cv2.putText(img, text, (20, img.shape[0] - 30), cv2.FONT_HERSHEY_SIMPLEX, 1.4, (255, 255, 255), 2, cv2.LINE_AA)
+        return cv2.resize(img, (W, H), interpolation=cv2.INTER_AREA)
+
     tf = find_board(raw(sf[0]))
     frames = []
     for i, n in enumerate(sf):
         left = draw(raw(n), tf, P[:, i], f"{clip}  frame {n}  ours")
+        # middle: the pipeline's class map (yellow = cable, green = mover), text band masked
+        cm = cv2.imread(f"{panels[n]}/02_class_map.png")
+        cm[: int(0.06 * cm.shape[0])] = 0
+        middle = label(cm, "segmentation")
+        # right: the pipeline's raw skeleton alone (user, 2026-11-01: no overlay)
         sk = cv2.imread(f"{panels[n]}/03_1_full_skeleton.png", cv2.IMREAD_GRAYSCALE)
-        sk[: int(0.06 * sk.shape[0])] = 0                      # the panel's text band
+        sk[: int(0.06 * sk.shape[0])] = 0
         strand = cv2.dilate((sk > 128).astype(np.uint8), np.ones((5, 5), np.uint8))
-        strand = cv2.resize(strand, (int(sk.shape[1] * SCALE), int(sk.shape[0] * SCALE)), interpolation=cv2.INTER_AREA)
         img = np.full((strand.shape[0], strand.shape[1], 3), 20, np.uint8)
-        img[strand > 0] = (190, 190, 190)
-        right = draw(img, tf, P[:, i], "raw skeleton + ours")
-        frames.append(cv2.cvtColor(np.concatenate([left, right], 1), cv2.COLOR_BGR2RGB))
+        img[strand > 0] = (230, 230, 230)
+        right = label(img, "raw skeleton")
+        frames.append(cv2.cvtColor(np.concatenate([left, middle, right], 1), cv2.COLOR_BGR2RGB))
     iio.mimsave(out, frames, fps=a.fps, macro_block_size=1)
     print(f"-> {out}: {len(frames)} frames")
 

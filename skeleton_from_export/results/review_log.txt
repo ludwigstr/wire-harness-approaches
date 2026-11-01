@@ -104,3 +104,4 @@
 [2026-11-01 16:20:30] REVIEW 20261021_164524: ok; cable 3 rises smoothly 839->922 mm over 155-166 and stays exactly flat to the end (straightened, stationary; same as 164755/180422)
 [2026-11-01 16:37:38] REVIEW 20261021_164010: ok; gap-free clip of 181 frames, clean. 164524 ok. Queue empty at 16:37
 [2026-11-01 18:07:30] SPLITSCREEN: 107 videos in splitscreen/ (left ours on camera, right raw skeleton panel 03_1_full_skeleton.png + ours); 20261028_124829's raw skeleton panel is empty in the export (first export, 29.10.), its right half shows only our skeleton
+[2026-11-01 18:56:54] SPLITSCREEN rebuilt as triple-screen (user: no overlay on the right, segmentation in the middle); earlier versions in archive_splitscreen_overlay_2026-11-01/ and archive_splitscreen_2panel_2026-11-01/
