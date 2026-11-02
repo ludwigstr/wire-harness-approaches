@@ -67,7 +67,7 @@ Worst clips by share of frames with a cable length off by more than 8 %: 171354 
 
 | clip | frames used | tracked | dropped | cable length mm | spread % per cable | max jump mm per cable | status | review |
 |---|---|---|---|---|---|---|---|---|
-| 20261021_160124 | 10-175 | 166/166 | [] | 547-962 | 18 9 17 17 | 47 34 47 30 | check | red/green swap strands in the loop at the hub in frames 88-98 (red 617->550 mm); endpoints right. Recommend excluding frames 88-98 |
+| 20261021_160124 | 10-175 | 166/166 | [] | 547-962 | 18 9 17 17 | 47 34 47 30 | check | red/green swap strands in the loop at the hub in frames 88-98 (red 617->550 mm); endpoints right. Recommend excluding frames 88-98, Kishan: video cutted from frame 87 |
 | 20261021_162025 | 10-174 | 165/165 | [] | 607-914 | 6 3 7 3 | 17 15 26 20 | ok |  |
 | 20261021_162340 | 10-184 | 175/175 | [] | 619-941 | 6 6 6 11 | 18 28 23 32 | ok |  |
 | 20261021_162632 | 10-180 | 171/171 | [] | 618-918 | 5 4 3 10 | 15 13 15 29 | ok |  |
