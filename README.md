@@ -27,7 +27,7 @@ One script per approach, in the order of the approaches table:
 | 14 | `physworld_mpm/` | PhysWorld as in the paper: own differentiable MPM twin per clip (global then per-particle E, rho, mu; nu, yield) -> 40 demos -> GNN; per-node Phi (E, rho) fitted on the real clip; snapshot of the current scripts, not yet adapted/tested in this repo | MPM twins + Phi on real | summary row 3 | 9.5 |
 | 15 | `adaptigraph_c14/` | AdaptiGraph with simulator data built from the 14 clips (speed-only variation) + real fine-tuning; snapshot of the current scripts, not yet adapted/tested in this repo | simulator (14 clips) + real fine-tune | summary row 6 | 21.1 |
 | 16 | `skeleton_from_export/` | Cable skeletons (4 x 16 nodes, metres, tracks14 format) from a segmentation export folder (raw image + class map per frame), using the project's tracking pipeline | tool | - | - |
-| 17 | `clips36_final_v1/` | **The 36 selected clips** (2 Nov 2026) with the newest tracking (final_v1): skeleton npz, check videos, split-screen videos | data | - | - |
+| 17 | `clips36_final_v1/` | **The 36 selected clips** (2 Nov 2026) with the newest tracking (final_v1): skeleton npz, check videos, split-screen videos, prediction overlay videos of the finished approaches | data | - | - |
 
 All numbers are **in-sample**: every approach is fitted or fine-tuned on the
 same 14 clips it is scored on (the physics rows fit their parameters there; the

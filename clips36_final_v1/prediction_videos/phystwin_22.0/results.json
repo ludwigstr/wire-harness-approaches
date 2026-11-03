@@ -1,0 +1,304 @@
+{
+ "approach": "PhysTwin, per-clip dense twins refitted on the 36-clip selection",
+ "params": "data/wm/phystwin_twins_t107/<clip>.pt",
+ "device": "cuda",
+ "reported_source": "data/wm/phystwin_sel_t107_full_<clip>.json ('mittel'); summary data/wm/phystwin_t36_summary.json",
+ "metric": "14 inner nodes (ends kinematic), mean over cables, every frame",
+ "n_clips": 36,
+ "mean_reproduced": 22.034105618794758,
+ "mean_reported": 22.034105618794758,
+ "max_abs_clip_diff": 0.0,
+ "tolerance_mm": 0.5,
+ "clips_over_tolerance": {},
+ "ok": true,
+ "clips": {
+  "20261021_160124": {
+   "reproduced": 43.04207992553711,
+   "reported": 43.04207992553711,
+   "diff": 0.0,
+   "topology_matches_saved_adj": true,
+   "nan_nodes": 0,
+   "n_frames": 166
+  },
+  "20261021_162340": {
+   "reproduced": 11.932455062866211,
+   "reported": 11.932455062866211,
+   "diff": 0.0,
+   "topology_matches_saved_adj": true,
+   "nan_nodes": 0,
+   "n_frames": 175
+  },
+  "20261021_162632": {
+   "reproduced": 17.0297794342041,
+   "reported": 17.0297794342041,
+   "diff": 0.0,
+   "topology_matches_saved_adj": true,
+   "nan_nodes": 0,
+   "n_frames": 171
+  },
+  "20261021_163244": {
+   "reproduced": 17.506017684936523,
+   "reported": 17.506017684936523,
+   "diff": 0.0,
+   "topology_matches_saved_adj": true,
+   "nan_nodes": 0,
+   "n_frames": 123
+  },
+  "20261021_163624": {
+   "reproduced": 14.767583847045898,
+   "reported": 14.767583847045898,
+   "diff": 0.0,
+   "topology_matches_saved_adj": true,
+   "nan_nodes": 0,
+   "n_frames": 170
+  },
+  "20261021_164010": {
+   "reproduced": 11.099649429321289,
+   "reported": 11.099649429321289,
+   "diff": 0.0,
+   "topology_matches_saved_adj": true,
+   "nan_nodes": 0,
+   "n_frames": 181
+  },
+  "20261021_164524": {
+   "reproduced": 13.537705421447754,
+   "reported": 13.537705421447754,
+   "diff": 0.0,
+   "topology_matches_saved_adj": true,
+   "nan_nodes": 0,
+   "n_frames": 176
+  },
+  "20261021_164755": {
+   "reproduced": 11.958793640136719,
+   "reported": 11.958793640136719,
+   "diff": 0.0,
+   "topology_matches_saved_adj": true,
+   "nan_nodes": 0,
+   "n_frames": 164
+  },
+  "20261021_165018": {
+   "reproduced": 17.16459846496582,
+   "reported": 17.16459846496582,
+   "diff": 0.0,
+   "topology_matches_saved_adj": true,
+   "nan_nodes": 0,
+   "n_frames": 166
+  },
+  "20261021_165246": {
+   "reproduced": 23.145071029663086,
+   "reported": 23.145071029663086,
+   "diff": 0.0,
+   "topology_matches_saved_adj": true,
+   "nan_nodes": 0,
+   "n_frames": 181
+  },
+  "20261021_165753": {
+   "reproduced": 14.588189125061035,
+   "reported": 14.588189125061035,
+   "diff": 0.0,
+   "topology_matches_saved_adj": true,
+   "nan_nodes": 0,
+   "n_frames": 172
+  },
+  "20261021_170550": {
+   "reproduced": 14.631295204162598,
+   "reported": 14.631295204162598,
+   "diff": 0.0,
+   "topology_matches_saved_adj": true,
+   "nan_nodes": 0,
+   "n_frames": 158
+  },
+  "20261021_171620": {
+   "reproduced": 36.50224304199219,
+   "reported": 36.50224304199219,
+   "diff": 0.0,
+   "topology_matches_saved_adj": true,
+   "nan_nodes": 0,
+   "n_frames": 149
+  },
+  "20261021_171842": {
+   "reproduced": 22.9952449798584,
+   "reported": 22.9952449798584,
+   "diff": 0.0,
+   "topology_matches_saved_adj": true,
+   "nan_nodes": 0,
+   "n_frames": 164
+  },
+  "20261021_172103": {
+   "reproduced": 15.44450855255127,
+   "reported": 15.44450855255127,
+   "diff": 0.0,
+   "topology_matches_saved_adj": true,
+   "nan_nodes": 0,
+   "n_frames": 156
+  },
+  "20261021_172318": {
+   "reproduced": 15.831876754760742,
+   "reported": 15.831876754760742,
+   "diff": 0.0,
+   "topology_matches_saved_adj": true,
+   "nan_nodes": 0,
+   "n_frames": 161
+  },
+  "20261021_172716": {
+   "reproduced": 17.495065689086914,
+   "reported": 17.495065689086914,
+   "diff": 0.0,
+   "topology_matches_saved_adj": true,
+   "nan_nodes": 0,
+   "n_frames": 159
+  },
+  "20261021_172928": {
+   "reproduced": 15.467317581176758,
+   "reported": 15.467317581176758,
+   "diff": 0.0,
+   "topology_matches_saved_adj": true,
+   "nan_nodes": 0,
+   "n_frames": 149
+  },
+  "20261021_173234": {
+   "reproduced": 20.66407585144043,
+   "reported": 20.66407585144043,
+   "diff": 0.0,
+   "topology_matches_saved_adj": true,
+   "nan_nodes": 0,
+   "n_frames": 154
+  },
+  "20261021_173628": {
+   "reproduced": 14.57078742980957,
+   "reported": 14.57078742980957,
+   "diff": 0.0,
+   "topology_matches_saved_adj": true,
+   "nan_nodes": 0,
+   "n_frames": 168
+  },
+  "20261021_173858": {
+   "reproduced": 17.524951934814453,
+   "reported": 17.524951934814453,
+   "diff": 0.0,
+   "topology_matches_saved_adj": true,
+   "nan_nodes": 0,
+   "n_frames": 160
+  },
+  "20261021_174117": {
+   "reproduced": 21.650598526000977,
+   "reported": 21.650598526000977,
+   "diff": 0.0,
+   "topology_matches_saved_adj": true,
+   "nan_nodes": 0,
+   "n_frames": 174
+  },
+  "20261021_174701": {
+   "reproduced": 22.96026039123535,
+   "reported": 22.96026039123535,
+   "diff": 0.0,
+   "topology_matches_saved_adj": true,
+   "nan_nodes": 0,
+   "n_frames": 173
+  },
+  "20261021_175638": {
+   "reproduced": 53.777034759521484,
+   "reported": 53.777034759521484,
+   "diff": 0.0,
+   "topology_matches_saved_adj": true,
+   "nan_nodes": 0,
+   "n_frames": 155
+  },
+  "20261021_180139": {
+   "reproduced": 51.34962844848633,
+   "reported": 51.34962844848633,
+   "diff": 0.0,
+   "topology_matches_saved_adj": true,
+   "nan_nodes": 0,
+   "n_frames": 156
+  },
+  "20261021_180422": {
+   "reproduced": 17.016071319580078,
+   "reported": 17.016071319580078,
+   "diff": 0.0,
+   "topology_matches_saved_adj": true,
+   "nan_nodes": 0,
+   "n_frames": 176
+  },
+  "20261021_180646": {
+   "reproduced": 18.163434982299805,
+   "reported": 18.163434982299805,
+   "diff": 0.0,
+   "topology_matches_saved_adj": true,
+   "nan_nodes": 0,
+   "n_frames": 147
+  },
+  "20261026_125511": {
+   "reproduced": 24.32636070251465,
+   "reported": 24.32636070251465,
+   "diff": 0.0,
+   "topology_matches_saved_adj": true,
+   "nan_nodes": 0,
+   "n_frames": 168
+  },
+  "20261026_130128": {
+   "reproduced": 10.796564102172852,
+   "reported": 10.796564102172852,
+   "diff": 0.0,
+   "topology_matches_saved_adj": true,
+   "nan_nodes": 0,
+   "n_frames": 178
+  },
+  "20261026_130441": {
+   "reproduced": 43.69739532470703,
+   "reported": 43.69739532470703,
+   "diff": 0.0,
+   "topology_matches_saved_adj": true,
+   "nan_nodes": 0,
+   "n_frames": 164
+  },
+  "20261028_100701": {
+   "reproduced": 17.516565322875977,
+   "reported": 17.516565322875977,
+   "diff": 0.0,
+   "topology_matches_saved_adj": true,
+   "nan_nodes": 0,
+   "n_frames": 165
+  },
+  "20261028_101001": {
+   "reproduced": 16.393709182739258,
+   "reported": 16.393709182739258,
+   "diff": 0.0,
+   "topology_matches_saved_adj": true,
+   "nan_nodes": 0,
+   "n_frames": 161
+  },
+  "20261028_101510": {
+   "reproduced": 15.850399017333984,
+   "reported": 15.850399017333984,
+   "diff": 0.0,
+   "topology_matches_saved_adj": true,
+   "nan_nodes": 0,
+   "n_frames": 166
+  },
+  "20261028_105803": {
+   "reproduced": 23.35877227783203,
+   "reported": 23.35877227783203,
+   "diff": 0.0,
+   "topology_matches_saved_adj": true,
+   "nan_nodes": 0,
+   "n_frames": 146
+  },
+  "20261028_114103": {
+   "reproduced": 46.531917572021484,
+   "reported": 46.531917572021484,
+   "diff": 0.0,
+   "topology_matches_saved_adj": true,
+   "nan_nodes": 0,
+   "n_frames": 146
+  },
+  "20261028_121810": {
+   "reproduced": 22.939800262451172,
+   "reported": 22.939800262451172,
+   "diff": 0.0,
+   "topology_matches_saved_adj": true,
+   "nan_nodes": 0,
+   "n_frames": 155
+  }
+ }
+}

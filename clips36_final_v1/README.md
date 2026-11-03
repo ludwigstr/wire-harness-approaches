@@ -8,6 +8,7 @@ The tracking is final_v1 from 1 Nov 2026, the newest skeletonisation. These file
 |---|---|
 | `npz/` | skeletons: `c0..c3` (T, 16, 2) in metres, node 0 = hub; `t0`/`t1`, `fps`, `source_frames`, `reset` (T, 4), `pink_len_mm` (T) |
 | `check_videos/` | camera image with the tracked skeleton drawn on top |
+| `prediction_videos/` | prediction overlays of the approaches whose 36-clip refit is finished (see its README) |
 | `splitscreen_videos/` | camera + our skeleton, segmentation, raw skeleton side by side |
 
 The node positions are identical to `newton_fit_t36/data/tracks36/`. Those files only lack the extra fields `reset`
