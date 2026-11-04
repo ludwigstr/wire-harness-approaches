@@ -211,23 +211,19 @@
     b.addEventListener('click', function () {
       filter.paradigm = b.getAttribute('data-filter');
       document.querySelectorAll('.filter-row .chip-btn').forEach(function (x) { x.classList.toggle('is-active', x === b); });
-      renderRank(); renderTable();
+      renderRank();
     });
   });
   document.getElementById('show-interim').addEventListener('change', function (e) {
-    filter.interim = e.target.checked; renderRank(); renderTable();
+    filter.interim = e.target.checked; renderRank();
   });
 
   function approachTip(a) {
     var p = PARADIGM[a.paradigm];
     return '<div class="tt-title"><span class="swatch" style="--sw:' + p.color + '"></span>' + esc(a.name) + '</div>' +
-      '<div class="tt-row"><span>Mean</span><b>' + fmt(a.score) + ' mm/node</b></div>' +
-      '<div class="tt-row"><span>Median</span><b>' + fmt(a.median, 2) + '</b></div>' +
+      '<div class="tt-row"><span>Error</span><b>' + fmt(a.score) + ' mm/node</b></div>' +
       '<div class="tt-row"><span>Paradigm</span><b>' + p.label + '</b></div>' +
-      '<div class="tt-row"><span>Status</span><b>' + statusText(a) + '</b></div>' +
-      '<div class="tt-row"><span>Clips</span><b>' + a.clips + '</b></div>' +
-      '<div class="tt-row"><span>Scored</span><b>' + esc(a.scored) + '</b></div>' +
-      '<div class="tt-row"><span></span><span>Click for details</span></div>';
+      '<div class="tt-row"><span>Clips</span><b>' + a.clips + '</b></div>';
   }
 
   // ---------------------------------------------------------------- results: ranked bar chart
@@ -290,47 +286,6 @@
     });
   }
 
-  // ---------------------------------------------------------------- results: sortable table
-  var tbody = document.querySelector('#results-table tbody');
-  var sortState = { key: 'score', dir: 1 };
-  function renderTable() {
-    var rows = APPROACHES.slice().sort(function (p, q) {
-      var a = p[sortState.key], b = q[sortState.key];
-      if (sortState.key === 'paradigm') { a = PARADIGM[a].label; b = PARADIGM[b].label; }
-      if (a == null) return 1;
-      if (b == null) return -1;
-      if (typeof a === 'string') return a.localeCompare(b) * sortState.dir;
-      return (a - b) * sortState.dir;
-    });
-    tbody.innerHTML = rows.map(function (a) {
-      var p = PARADIGM[a.paradigm];
-      return '<tr class="' + (a.rank === 1 ? 'best-row ' : '') + (visible(a) ? '' : 'is-hidden') + '" data-key="' + a.key + '">' +
-        '<td class="num">' + a.rank + '</td>' +
-        '<td><a href="#detail-' + a.key + '" class="row-link" data-key="' + a.key + '">' + esc(a.name) + '</a></td>' +
-        '<td><span class="dot" style="--sw:' + p.color + '"></span>' + p.label + '</td>' +
-        '<td class="num">' + fmt(a.score) + '</td>' +
-        '<td class="num">' + fmt(a.median, 2) + '</td>' +
-        '<td>' + statusChip(a) + '</td></tr>';
-    }).join('');
-  }
-  document.querySelectorAll('#results-table th[data-sort]').forEach(function (th) {
-    th.tabIndex = 0;
-    function go() {
-      var k = th.getAttribute('data-sort');
-      sortState.dir = sortState.key === k ? -sortState.dir : 1;
-      sortState.key = k;
-      document.querySelectorAll('#results-table th[data-sort]').forEach(function (x) { x.removeAttribute('aria-sort'); });
-      th.setAttribute('aria-sort', sortState.dir === 1 ? 'ascending' : 'descending');
-      renderTable();
-    }
-    th.addEventListener('click', go);
-    th.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); go(); } });
-  });
-  tbody.addEventListener('click', function (e) {
-    var a = e.target.closest('.row-link');
-    if (a) { e.preventDefault(); openApproach(a.getAttribute('data-key')); }
-  });
-
   // ---------------------------------------------------------------- per-clip strip chart
   var stripBox = document.getElementById('strip-chart');
   var state = { clip: D.clips.length ? '20261021_164755' : null, hover: null };
@@ -350,7 +305,74 @@
     return html + '<div class="tt-row"><span></span><span>Click to pin</span></div>';
   }
 
+  // ---- zoom state (x axis, mm/node)
   var stripDots = [];
+  var FULL_MAX = (function () {
+    var all = [];
+    VIDEO_KEYS.forEach(function (k) { D.clips.forEach(function (c) { all.push(D.perClip[k][c]); }); });
+    var vmax = all.length ? Math.max.apply(null, all) : 10;
+    return niceMax(vmax, vmax > 40 ? 10 : 5);
+  })();
+  var MIN_SPAN = 1;
+  var zoom = { lo: 0, hi: FULL_MAX };
+  function isZoomed() { return zoom.lo > 0 || zoom.hi < FULL_MAX; }
+  function setZoom(lo, hi) {
+    var span = hi - lo;
+    if (span < MIN_SPAN) { var c = (lo + hi) / 2; lo = c - MIN_SPAN / 2; hi = c + MIN_SPAN / 2; span = MIN_SPAN; }
+    if (span >= FULL_MAX) { lo = 0; hi = FULL_MAX; }
+    else {
+      if (lo < 0) { hi -= lo; lo = 0; }
+      if (hi > FULL_MAX) { lo -= hi - FULL_MAX; hi = FULL_MAX; }
+    }
+    zoom.lo = lo; zoom.hi = hi;
+    hideTip();
+    renderStrip();
+  }
+  function zoomBy(factor, center) {
+    var c = center == null ? (zoom.lo + zoom.hi) / 2 : center;
+    setZoom(c - (c - zoom.lo) * factor, c + (zoom.hi - c) * factor);
+  }
+  function panBy(frac) { var d = (zoom.hi - zoom.lo) * frac; setZoom(zoom.lo + d, zoom.hi + d); }
+  function niceStep(span) {
+    var raw = span / 6, p = Math.pow(10, Math.floor(Math.log(raw) / Math.LN10)), m = raw / p;
+    return (m < 1.5 ? 1 : m < 3.5 ? 2 : m < 7.5 ? 5 : 10) * p;
+  }
+  function tickLabel(t, step) { return step < 1 ? t.toFixed(1) : String(Math.round(t)); }
+
+  var zoomBtns = {
+    inn: document.getElementById('zoom-in'), out: document.getElementById('zoom-out'),
+    left: document.getElementById('zoom-left'), right: document.getElementById('zoom-right'),
+    reset: document.getElementById('zoom-reset'), range: document.getElementById('zoom-range')
+  };
+  if (zoomBtns.inn) {
+    zoomBtns.inn.addEventListener('click', function () { zoomBy(1 / 1.6); });
+    zoomBtns.out.addEventListener('click', function () { zoomBy(1.6); });
+    zoomBtns.left.addEventListener('click', function () { panBy(-0.3); });
+    zoomBtns.right.addEventListener('click', function () { panBy(0.3); });
+    zoomBtns.reset.addEventListener('click', function () { setZoom(0, FULL_MAX); });
+  }
+  function syncZoomControls() {
+    if (!zoomBtns.inn) return;
+    var z = isZoomed();
+    zoomBtns.out.disabled = !z;
+    zoomBtns.reset.disabled = !z;
+    zoomBtns.left.disabled = zoom.lo <= 0;
+    zoomBtns.right.disabled = zoom.hi >= FULL_MAX;
+    zoomBtns.inn.disabled = zoom.hi - zoom.lo <= MIN_SPAN + 1e-9;
+    var d = zoom.hi - zoom.lo < 10 ? 1 : 0;
+    zoomBtns.range.textContent = 'Showing ' + zoom.lo.toFixed(d) + '–' + zoom.hi.toFixed(d) + ' mm/node';
+  }
+
+  // Ctrl + wheel (and trackpad pinch, which arrives as ctrl + wheel) zooms at the cursor.
+  stripBox.addEventListener('wheel', function (e) {
+    if (!(e.ctrlKey || e.metaKey) || !stripBox._geo) return;
+    e.preventDefault();
+    var g = stripBox._geo;
+    var x = g.toPx(e);
+    if (x < g.x0 || x > g.x1) return;
+    zoomBy(e.deltaY < 0 ? 1 / 1.25 : 1.25, g.inv(x));
+  }, { passive: false });
+
   function renderStrip() {
     if (!VIDEO_KEYS.length) { stripBox.innerHTML = '<p class="muted-note">No per-clip data found.</p>'; return; }
     var W = Math.max(300, stripBox.clientWidth);
@@ -359,44 +381,75 @@
     var rowH = 54, top = 6, axisH = 30;
     var H = top + VIDEO_KEYS.length * rowH + axisH;
     var x0 = labelW, x1 = W - rightPad;
-    var all = [];
-    VIDEO_KEYS.forEach(function (k) { D.clips.forEach(function (c) { all.push(D.perClip[k][c]); }); });
-    var vmax = Math.max.apply(null, all);
-    var step = vmax > 40 ? 10 : 5;
-    var xMax = niceMax(vmax, step);
-    var sx = function (v) { return x0 + (v / xMax) * (x1 - x0); };
+    var lo = zoom.lo, hi = zoom.hi;
+    var step = niceStep(hi - lo);
+    var sx = function (v) { return x0 + ((v - lo) / (hi - lo)) * (x1 - x0); };
+    var inv = function (px) { return lo + ((px - x0) / (x1 - x0)) * (hi - lo); };
+    var eps = (hi - lo) * 1e-6;
 
     stripBox.innerHTML = '';
     stripDots = [];
     var svg = el('svg', { viewBox: '0 0 ' + W + ' ' + H, width: W, height: H }, stripBox);
+    var toPx = function (e) { var r = svg.getBoundingClientRect(); return (e.clientX - r.left) * (W / r.width); };
     var grid = el('g', { 'class': 'grid' }, svg);
     var ticks = el('g', { 'class': 'tick' }, svg);
     var plotBottom = top + VIDEO_KEYS.length * rowH;
-    for (var t = 0; t <= xMax; t += step) {
+    for (var t = Math.ceil(lo / step - 1e-9) * step; t <= hi + eps; t += step) {
       el('line', { x1: sx(t), x2: sx(t), y1: top, y2: plotBottom }, grid);
       var tx = el('text', { x: sx(t), y: plotBottom + 16, 'text-anchor': 'middle' }, ticks);
-      tx.textContent = t;
+      tx.textContent = tickLabel(t, step);
     }
     el('line', { 'class': 'baseline', x1: x0, x2: x0, y1: top, y2: plotBottom }, svg);
     var ax = el('text', { x: x1, y: plotBottom + 29, 'text-anchor': 'end' }, svg);
     ax.textContent = 'mm/node per clip';
     ax.setAttribute('style', 'fill: var(--muted); font-size: 11px');
 
+    // Drag across the plot to zoom into that range; double-click resets.
+    var area = el('rect', { 'class': 'zoom-area', x: x0, y: top, width: x1 - x0, height: plotBottom - top, fill: 'transparent' }, svg);
+    var brush = null;
+    var clampX = function (x) { return Math.max(x0, Math.min(x1, x)); };
+    area.addEventListener('pointerdown', function (e) {
+      if (e.button !== 0) return;
+      var x = clampX(toPx(e));
+      brush = { start: x, rect: el('rect', { 'class': 'brush', x: x, y: top, width: 0, height: plotBottom - top }, svg) };
+      svg.setPointerCapture(e.pointerId);
+      hideTip();
+    });
+    svg.addEventListener('pointermove', function (e) {
+      if (!brush) return;
+      var x = clampX(toPx(e));
+      brush.rect.setAttribute('x', Math.min(x, brush.start));
+      brush.rect.setAttribute('width', Math.abs(x - brush.start));
+    });
+    function endBrush(e) {
+      if (!brush) return;
+      var x = clampX(toPx(e)), a = Math.min(x, brush.start), b = Math.max(x, brush.start);
+      var r = brush.rect; brush = null;
+      if (b - a > 6) setZoom(inv(a), inv(b)); else if (r.parentNode) r.parentNode.removeChild(r);
+    }
+    svg.addEventListener('pointerup', endBrush);
+    svg.addEventListener('pointercancel', function () { if (brush && brush.rect.parentNode) brush.rect.parentNode.removeChild(brush.rect); brush = null; });
+    area.addEventListener('dblclick', function () { setZoom(0, FULL_MAX); });
+
     var linkLayer = el('g', {}, svg);
     VIDEO_KEYS.forEach(function (k, ri) {
       var cy = top + ri * rowH + rowH / 2;
       var a = BY_KEY[k];
-      el('line', { x1: x0, x2: x1, y1: cy, y2: cy, style: 'stroke: var(--line)' }, svg);
+      el('line', { x1: x0, x2: x1, y1: cy, y2: cy, style: 'stroke: var(--line); pointer-events: none' }, svg);
       var lab = el('text', { 'class': 'row-label', x: x0 - 10, y: cy - 2, 'text-anchor': 'end' }, svg);
       lab.textContent = a.name;
       var sub = el('text', { x: x0 - 10, y: cy + 13, 'text-anchor': 'end' }, svg);
       sub.textContent = 'median ' + fmt(D.meta[k].median, 1);
       sub.setAttribute('style', 'fill: var(--muted); font-size: 11px');
-      var mx = sx(D.meta[k].median);
-      el('line', { 'class': 'median-tick', x1: mx, x2: mx, y1: cy - 14, y2: cy + 14 }, svg);
+      var med = D.meta[k].median;
+      if (med >= lo - eps && med <= hi + eps) {
+        var mx = sx(med);
+        el('line', { 'class': 'median-tick', x1: mx, x2: mx, y1: cy - 14, y2: cy + 14 }, svg);
+      }
 
       D.clips.forEach(function (c, ci) {
         var v = D.perClip[k][c];
+        if (v < lo - eps || v > hi + eps) return; // outside the zoomed range
         var jitter = (((ci * 37) % 11) - 5) * 1.6; // deterministic spread so dots don't sit on one line
         var cx = sx(v), y = cy + jitter;
         var g = el('g', { tabindex: -1 }, svg);
@@ -411,6 +464,8 @@
       });
     });
     stripBox._linkLayer = linkLayer;
+    stripBox._geo = { x0: x0, x1: x1, toPx: toPx, inv: inv };
+    syncZoomControls();
     paintStrip();
   }
   function paintStrip() {
@@ -483,7 +538,6 @@
 
   // ---------------------------------------------------------------- initial render + resize
   renderRank();
-  renderTable();
   renderStrip();
   renderClipCard();
 

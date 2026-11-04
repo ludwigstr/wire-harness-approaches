@@ -358,3 +358,15 @@ button { font-family: inherit; }
 .footer { border-top: 1px solid var(--line); padding: 2.4rem 0; background: var(--bg-alt); }
 .footer p { font-size: 0.84rem; color: var(--muted); max-width: 640px; margin: 0.8rem auto 0; }
 .footer .icon-link { font-size: 1.5rem; color: var(--ink-2); }
+
+/* ---------- Per-clip zoom ---------- */
+.chart-toolbar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.5rem 1rem; }
+.chart-toolbar .legend { margin-bottom: 0; }
+.zoom-controls { display: flex; align-items: center; gap: 0.3rem; }
+.icon-btn.small { width: 30px; height: 30px; border-radius: 8px; font-size: 0.8rem; }
+.icon-btn:disabled, .text-btn:disabled { opacity: 0.35; cursor: default; pointer-events: none; }
+.zoom-controls .text-btn { margin-left: 0.3rem; }
+.zoom-hint { font-size: 0.78rem; color: var(--muted); margin: 0.4rem 0 0.2rem; }
+.zoom-hint span { color: var(--ink-2); font-weight: 600; font-variant-numeric: tabular-nums; }
+.chart .zoom-area { cursor: crosshair; touch-action: pan-y; }
+.chart .brush { fill: var(--accent); fill-opacity: 0.12; stroke: var(--accent); stroke-width: 1; pointer-events: none; }

@@ -829,7 +829,7 @@
     <h2 class="section-title">Results</h2>
     <p class="prose">
       Mean node error (mm/node) per approach. Physics engines are still running CMA-ES optimisation
-      (since 2026-11-02) and their scores are interim. Hover a bar for details; the table below holds every value.
+      (since 2026-11-02) and their scores are interim. Hover a bar for its error, paradigm and clip count; click it to open that approach.
     </p>
 
     <div class="filter-row" role="group" aria-label="Filter by paradigm">
@@ -849,22 +849,6 @@
       </div>
       <div id="rank-chart" class="chart" role="img" aria-label="Ranked bar chart of mean node error per approach"></div>
     </div>
-
-    <div class="table-scroll">
-      <table class="data-table results-table sortable" id="results-table">
-        <thead>
-          <tr>
-            <th data-sort="rank" class="num sortable-th">Rank</th>
-            <th data-sort="name" class="sortable-th">Approach</th>
-            <th data-sort="paradigm" class="sortable-th">Paradigm</th>
-            <th data-sort="score" class="num sortable-th" aria-sort="ascending">mm/node</th>
-            <th data-sort="median" class="num sortable-th">Median</th>
-            <th>Status</th>
-          </tr>
-        </thead>
-        <tbody></tbody>
-      </table>
-    </div>
     <p class="muted-note"><i class="fas fa-circle-info"></i> The values are not defined identically: scored nodes and frames differ by family (see
       <a href="#pipeline">Benchmark Setup</a>). The Yang et al. and RopeDreamer scores come from the 14-clip runs; their 36-clip refits are pending.</p>
   </div>
@@ -879,11 +863,21 @@
       Hover a dot to see the same clip in every row; click it to pin that clip in the card below.
     </p>
     <div class="chart-card">
-      <div class="legend" aria-hidden="true">
+      <div class="chart-toolbar">
+        <div class="legend" aria-hidden="true">
         <span><span class="swatch round" style="--sw: var(--series-world)"></span>World Model</span>
         <span><span class="swatch round" style="--sw: var(--series-dynamics)"></span>Dynamics Model</span>
         <span><span class="tick-key"></span>Median</span>
       </div>
+        <div class="zoom-controls" role="group" aria-label="Zoom the per-clip chart">
+          <button class="icon-btn small" id="zoom-left" aria-label="Pan left" title="Pan left"><i class="fas fa-chevron-left"></i></button>
+          <button class="icon-btn small" id="zoom-out" aria-label="Zoom out" title="Zoom out"><i class="fas fa-magnifying-glass-minus"></i></button>
+          <button class="icon-btn small" id="zoom-in" aria-label="Zoom in" title="Zoom in"><i class="fas fa-magnifying-glass-plus"></i></button>
+          <button class="icon-btn small" id="zoom-right" aria-label="Pan right" title="Pan right"><i class="fas fa-chevron-right"></i></button>
+          <button class="text-btn" id="zoom-reset">Reset</button>
+        </div>
+      </div>
+      <p class="zoom-hint"><span id="zoom-range"></span> &middot; drag across the chart to zoom into a range, Ctrl + scroll or pinch to zoom, double-click to reset</p>
       <div id="strip-chart" class="chart" role="img" aria-label="Per-clip error for PhysWorld, Caporali, PhysTwin and AdaptiGraph"></div>
     </div>
     <div class="clip-card" id="clip-card" aria-live="polite"></div>
