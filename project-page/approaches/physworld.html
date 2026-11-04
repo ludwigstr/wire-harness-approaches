@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="PhysWorld in the DLO world-model benchmark: Real video → a differentiable MPM digital twin per clip → physics-aware synthetic demonstrations → a graph world model trained on them, with a per-node physical property Φ adapted on the real clip.">
+  <title>PhysWorld &middot; DLO Benchmark</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="../static/css/index.css">
+  <script>
+    try { var t = localStorage.getItem('dlo-theme-v2'); if (t) document.documentElement.setAttribute('data-theme', t); } catch (e) {}
+  </script>
+</head>
+<body data-approach="physworld">
+
+<header class="topnav" id="topnav">
+  <div class="topnav-inner">
+    <a class="brand" href="../index.html"><i class="fas fa-wave-square"></i><span>DLO World Models</span></a>
+    <nav class="nav-links" id="nav-links" aria-label="Sections">
+      <a href="../index.html#overview">Overview</a>
+      <a href="../index.html#pipeline">Pipeline</a>
+      <a href="../index.html#approaches" class="is-current">Approaches</a>
+      <a href="../index.html#results">Results</a>
+      <a href="../index.html#per-clip">Per clip</a>
+      <a href="../index.html#BibTeX">BibTeX</a>
+    </nav>
+    <div class="nav-actions">
+      <button class="icon-btn" id="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark mode"><i class="fas fa-moon"></i></button>
+      <button class="icon-btn nav-burger" id="nav-burger" aria-label="Menu" aria-expanded="false" aria-controls="nav-links"><i class="fas fa-bars"></i></button>
+    </div>
+  </div>
+</header>
+
+<main>
+<section class="section ap-hero">
+  <div class="wrap">
+    <a class="back-link" href="../index.html#approaches"><i class="fas fa-arrow-left"></i>All approaches</a>
+    <p class="ap-kicker"><span class="swatch" style="--sw: var(--series-world)"></span>World Model</p>
+    <h1 class="ap-title">PhysWorld</h1>
+    <p class="ap-cite">Yang et al. 2025 &middot; MPM digital twin &rarr; synthetic demos &rarr; graph world model, per-node &Phi; adapted on the real clip</p>
+    <div class="kpi-grid" id="ap-kpis"></div>
+  </div>
+</section>
+
+<section class="section ap-section">
+  <div class="wrap ap-dash" id="ap-dash">
+
+    <div class="dash-card">
+      <div class="dash-head">
+        <h3>Error on each of the 36 clips</h3>
+        <div class="dash-controls">
+          <div class="seg" role="group" aria-label="Order">
+            <button type="button" class="seg-btn is-on" data-order="clip">Recording order</button>
+            <button type="button" class="seg-btn" data-order="sorted">Sorted by error</button>
+          </div>
+          <label class="select-wrap compact"><span class="muted">Compare</span><select id="ap-compare" aria-label="Compare with another model"></select></label>
+        </div>
+      </div>
+      <div class="legend" id="ap-clips-legend"></div>
+      <div id="ap-clips" class="chart" role="img" aria-label="Error on each clip"></div>
+    </div>
+
+    <div class="dash-grid">
+      <div class="dash-card">
+        <div class="dash-head"><h3>Head-to-head on the same clips</h3></div>
+        <p class="dash-sub">Clips where PhysWorld has the lower error, out of 36</p>
+        <div id="ap-h2h"></div>
+      </div>
+      <div class="dash-card">
+        <div class="dash-head"><h3>Distribution of clip errors</h3></div>
+        <p class="dash-sub" id="ap-hist-sub"></p>
+        <div id="ap-hist" class="chart" role="img" aria-label="Histogram of clip errors"></div>
+      </div>
+    </div>
+
+    <div class="dash-card">
+      <div class="dash-head"><h3>Variants</h3></div>
+      <p class="dash-sub">Mean error per variant (bar) and median (tick). 14-clip variants are scored on the earlier 14-clip set.</p>
+      <div id="ap-variants" class="chart" role="img" aria-label="Mean error per variant"></div>
+    </div>
+
+    <div class="dash-grid">
+      <div class="dash-card">
+        <div class="dash-head"><h3>Error vs clip length</h3><span class="dash-badge" id="ap-corr"></span></div>
+        <p class="dash-sub">Does the open-loop error grow on longer clips?</p>
+        <div id="ap-scatter" class="chart" role="img" aria-label="Clip error against number of frames"></div>
+      </div>
+      <div class="dash-card">
+        <div class="dash-head"><h3>Compute</h3><span class="dash-badge" id="ap-compute-total"></span></div>
+        <p class="dash-sub" id="ap-compute-sub"></p>
+        <div id="ap-compute" class="chart" role="img" aria-label="Wall-clock hours per stage"></div>
+      </div>
+    </div>
+
+    <div class="dash-card">
+      <div class="dash-head"><h3>Spec sheet</h3></div>
+      <div class="num-tiles" id="ap-numbers"></div>
+      <dl class="spec" id="ap-spec"></dl>
+    </div>
+
+    <details class="method-details">
+      <summary><i class="fas fa-book-open"></i>Method details</summary>
+      <div class="approach-inner ap-body">
+          <h4>Pipeline</h4>
+          <ol>
+            <li><strong>Twin fit</strong> (<code>physworld_mpm_fit.py</code>, elastoplastic, NVIDIA Warp). Global stage: homogeneous Young's modulus E, density &rho;,
+              board friction &mu;, Poisson ratio &nu; and yield stress. Local stage: per-particle E, &rho; and &mu; on about 23k particles per clip; &nu; and yield stay global.
+              Loss as in the paper: Chamfer + 0.1&nbsp;&times; smooth-L1 track loss over all frames.</li>
+            <li><strong>Demonstrations</strong> (<code>physworld_mpm_demos.py --n 40</code>): 40 demos per clip generated from the twin.</li>
+            <li><strong>GNN world model</strong> (<code>physworld_mpm_gnn.py</code>): trained on the demos with the multi-step loss of Eq.&nbsp;8, noise on the history and on &Phi;.</li>
+            <li><strong>&Phi; fine-tuning</strong>: per-node (log E, log &rho;), 2&nbsp;&times;&nbsp;16&nbsp;&times;&nbsp;4 = 128 values per clip, fitted on the real clip with the network frozen.
+              Objective: open-loop rollout MSE + Chamfer; &Phi; stays within &plusmn;1.5 (log) of the twin's value.</li>
+            <li><strong>Evaluation</strong>: 5-frame warm-up, then open loop from the measured end motions, ends pinned.</li>
+          </ol>
+          <h4>Deviation from the paper</h4>
+          <ul><li>On the 36 clips <strong>one pooled GNN</strong> is trained on the demos of all clips; the paper trains one per scene. &Phi; is still fitted per clip.</li></ul>
+          <div class="detail-actions">
+            <span class="code-path"><i class="fas fa-folder"></i><code>physworld_mpm/</code>, <code>approaches/06_physworld.py</code></span>
+          </div>
+      </div>
+    </details>
+
+    <nav class="ap-pager" aria-label="Other world models">
+      <span></span>
+      <a class="ap-pager-link next" href="ropedreamer.html"><span>Next world model<i class="fas fa-arrow-right"></i></span><b>RopeDreamer</b></a>
+    </nav>
+  </div>
+</section>
+</main>
+
+<script type="application/json" id="ap-data">
+{
+  "variants": [
+    { "label": "MPM twins, pooled GNN + per-node Φ", "clips": 36, "mean": 4.51, "median": 4.40, "current": true },
+    { "label": "Per-clip GNN, after Φ fine-tuning", "clips": 14, "mean": 9.52, "median": 7.12 },
+    { "label": "MPM twin alone", "clips": 14, "mean": 11.31, "median": 10.60 },
+    { "label": "Per-clip GNN, before Φ fine-tuning", "clips": 14, "mean": 13.47, "median": 11.33 },
+    { "label": "Spring-mass twin, mixed motions", "clips": 14, "mean": 21.8, "median": 16.8 },
+    { "label": "Spring-mass twin, Bézier-only demos", "clips": 14, "mean": 31.4 }
+  ],
+  "compute": [
+    { "label": "Twin fits", "hours": 14.2 },
+    { "label": "Demo synthesis", "hours": 12.8 },
+    { "label": "GNN training", "hours": 2.7 },
+    { "label": "Φ fine-tuning", "hours": 1.3 }
+  ],
+  "computeNote": "Wall clock for the 14-clip run",
+  "numbers": [
+    { "value": "~23k", "label": "particles per twin" },
+    { "value": "40", "label": "demos per clip" },
+    { "value": "128", "label": "Φ values per clip" },
+    { "value": "0.86 M", "label": "GNN weights" },
+    { "value": "h = 3", "label": "history frames" },
+    { "value": "5", "label": "warm-up frames" }
+  ],
+  "spec": [
+    ["Learns from", "MPM twins of the 36 clips, 40 demos each"],
+    ["Physical properties", "Twin: E, ρ, μ, ν, yield stress · GNN: per-node Φ = (log E, log ρ)"],
+    ["Adapted on the real clip", "Φ only, network frozen, Φ within ±1.5 (log) of the twin"],
+    ["Twin loss", "Chamfer + 0.1 × smooth-L1 track loss, all frames"],
+    ["Scored", "16 nodes, ends pinned, frames 5…T−1, open loop"],
+    ["Deviation from the paper", "One pooled GNN for all 36 clips (paper: one per scene)"]
+  ]
+}
+</script>
+
+<footer class="footer">
+  <div class="wrap narrow center">
+    <a class="icon-link" href="https://github.com/ludwigstr/wire-harness-approaches" aria-label="Code on GitHub"><i class="fab fa-github"></i></a>
+  </div>
+</footer>
+
+<div class="tooltip" id="tooltip" role="tooltip" hidden></div>
+<script src="../static/js/data.js"></script>
+<script src="../static/js/approach.js"></script>
+</body>
+</html>

@@ -229,6 +229,44 @@ window.BENCH_DATA = {
    "20261028_105803": 35.69,
    "20261028_114103": 36.43,
    "20261028_121810": 44.784
+  },
+  "genesis": {
+   "20261021_160124": 22.6,
+   "20261021_162340": 8.238,
+   "20261021_162632": 12.183,
+   "20261021_163244": 15.167,
+   "20261021_163624": 9.006,
+   "20261021_164010": 7.812,
+   "20261021_164524": 8.982,
+   "20261021_164755": 8.184,
+   "20261021_165018": 9.737,
+   "20261021_165246": 8.521,
+   "20261021_165753": 8.584,
+   "20261021_170550": 13.243,
+   "20261021_171620": 18.917,
+   "20261021_171842": 9.47,
+   "20261021_172103": 8.273,
+   "20261021_172318": 9.104,
+   "20261021_172716": 11.464,
+   "20261021_172928": 9.228,
+   "20261021_173234": 11.045,
+   "20261021_173628": 10.376,
+   "20261021_173858": 9.769,
+   "20261021_174117": 8.908,
+   "20261021_174701": 8.566,
+   "20261021_175638": 25.459,
+   "20261021_180139": 36.44,
+   "20261021_180422": 11.096,
+   "20261021_180646": 10.616,
+   "20261026_125511": 7.026,
+   "20261026_130128": 7.129,
+   "20261026_130441": 26.749,
+   "20261028_100701": 13.007,
+   "20261028_101001": 9.189,
+   "20261028_101510": 11.129,
+   "20261028_105803": 17.513,
+   "20261028_114103": 16.98,
+   "20261028_121810": 16.868
   }
  },
  "meta": {
@@ -259,6 +297,13 @@ window.BENCH_DATA = {
    "approach": "AdaptiGraph, sim-trained on data from the 36 clips + real fine-tuning",
    "median": 27.833,
    "folder": "adaptigraph_29.4"
+  },
+  "genesis": {
+   "mean": 12.682763598171766,
+   "metric": "16 nodes, mean over cables, every frame (genesis_general_fit_cmaes._eval_one)",
+   "approach": "Genesis general fit, 36-clip refit (stopped after generation 33)",
+   "median": 10.0725,
+   "folder": "genesis_12.7"
   }
  },
  "stills": {
@@ -1707,6 +1752,368 @@ window.BENCH_DATA = {
     "worst": {
      "file": "adaptigraph_20261028_121810_frame154_worst.png",
      "frame": 154
+    }
+   }
+  },
+  "genesis": {
+   "20261021_160124": {
+    "middle": {
+     "file": "genesis_20261021_160124_frame083_middle.png",
+     "frame": 83
+    },
+    "worst": {
+     "file": "genesis_20261021_160124_frame163_worst.png",
+     "frame": 163
+    }
+   },
+   "20261021_162340": {
+    "worst": {
+     "file": "genesis_20261021_162340_frame068_worst.png",
+     "frame": 68
+    },
+    "middle": {
+     "file": "genesis_20261021_162340_frame087_middle.png",
+     "frame": 87
+    }
+   },
+   "20261021_162632": {
+    "worst": {
+     "file": "genesis_20261021_162632_frame063_worst.png",
+     "frame": 63
+    },
+    "middle": {
+     "file": "genesis_20261021_162632_frame085_middle.png",
+     "frame": 85
+    }
+   },
+   "20261021_163244": {
+    "worst": {
+     "file": "genesis_20261021_163244_frame053_worst.png",
+     "frame": 53
+    },
+    "middle": {
+     "file": "genesis_20261021_163244_frame061_middle.png",
+     "frame": 61
+    }
+   },
+   "20261021_163624": {
+    "worst": {
+     "file": "genesis_20261021_163624_frame059_worst.png",
+     "frame": 59
+    },
+    "middle": {
+     "file": "genesis_20261021_163624_frame085_middle.png",
+     "frame": 85
+    }
+   },
+   "20261021_164010": {
+    "worst": {
+     "file": "genesis_20261021_164010_frame069_worst.png",
+     "frame": 69
+    },
+    "middle": {
+     "file": "genesis_20261021_164010_frame090_middle.png",
+     "frame": 90
+    }
+   },
+   "20261021_164524": {
+    "middle": {
+     "file": "genesis_20261021_164524_frame088_middle.png",
+     "frame": 88
+    },
+    "worst": {
+     "file": "genesis_20261021_164524_frame166_worst.png",
+     "frame": 166
+    }
+   },
+   "20261021_164755": {
+    "middle": {
+     "file": "genesis_20261021_164755_frame082_middle.png",
+     "frame": 82
+    },
+    "worst": {
+     "file": "genesis_20261021_164755_frame163_worst.png",
+     "frame": 163
+    }
+   },
+   "20261021_165018": {
+    "worst": {
+     "file": "genesis_20261021_165018_frame080_worst.png",
+     "frame": 80
+    },
+    "middle": {
+     "file": "genesis_20261021_165018_frame083_middle.png",
+     "frame": 83
+    }
+   },
+   "20261021_165246": {
+    "middle": {
+     "file": "genesis_20261021_165246_frame090_middle.png",
+     "frame": 90
+    },
+    "worst": {
+     "file": "genesis_20261021_165246_frame154_worst.png",
+     "frame": 154
+    }
+   },
+   "20261021_165753": {
+    "worst": {
+     "file": "genesis_20261021_165753_frame067_worst.png",
+     "frame": 67
+    },
+    "middle": {
+     "file": "genesis_20261021_165753_frame086_middle.png",
+     "frame": 86
+    }
+   },
+   "20261021_170550": {
+    "middle": {
+     "file": "genesis_20261021_170550_frame079_middle.png",
+     "frame": 79
+    },
+    "worst": {
+     "file": "genesis_20261021_170550_frame138_worst.png",
+     "frame": 138
+    }
+   },
+   "20261021_171620": {
+    "middle": {
+     "file": "genesis_20261021_171620_frame074_middle.png",
+     "frame": 74
+    },
+    "worst": {
+     "file": "genesis_20261021_171620_frame139_worst.png",
+     "frame": 139
+    }
+   },
+   "20261021_171842": {
+    "worst": {
+     "file": "genesis_20261021_171842_frame061_worst.png",
+     "frame": 61
+    },
+    "middle": {
+     "file": "genesis_20261021_171842_frame082_middle.png",
+     "frame": 82
+    }
+   },
+   "20261021_172103": {
+    "middle": {
+     "file": "genesis_20261021_172103_frame078_middle.png",
+     "frame": 78
+    },
+    "worst": {
+     "file": "genesis_20261021_172103_frame083_worst.png",
+     "frame": 83
+    }
+   },
+   "20261021_172318": {
+    "worst": {
+     "file": "genesis_20261021_172318_frame066_worst.png",
+     "frame": 66
+    },
+    "middle": {
+     "file": "genesis_20261021_172318_frame080_middle.png",
+     "frame": 80
+    }
+   },
+   "20261021_172716": {
+    "worst": {
+     "file": "genesis_20261021_172716_frame063_worst.png",
+     "frame": 63
+    },
+    "middle": {
+     "file": "genesis_20261021_172716_frame079_middle.png",
+     "frame": 79
+    }
+   },
+   "20261021_172928": {
+    "worst": {
+     "file": "genesis_20261021_172928_frame070_worst.png",
+     "frame": 70
+    },
+    "middle": {
+     "file": "genesis_20261021_172928_frame074_middle.png",
+     "frame": 74
+    }
+   },
+   "20261021_173234": {
+    "worst": {
+     "file": "genesis_20261021_173234_frame031_worst.png",
+     "frame": 31
+    },
+    "middle": {
+     "file": "genesis_20261021_173234_frame077_middle.png",
+     "frame": 77
+    }
+   },
+   "20261021_173628": {
+    "worst": {
+     "file": "genesis_20261021_173628_frame073_worst.png",
+     "frame": 73
+    },
+    "middle": {
+     "file": "genesis_20261021_173628_frame084_middle.png",
+     "frame": 84
+    }
+   },
+   "20261021_173858": {
+    "worst": {
+     "file": "genesis_20261021_173858_frame069_worst.png",
+     "frame": 69
+    },
+    "middle": {
+     "file": "genesis_20261021_173858_frame080_middle.png",
+     "frame": 80
+    }
+   },
+   "20261021_174117": {
+    "worst": {
+     "file": "genesis_20261021_174117_frame068_worst.png",
+     "frame": 68
+    },
+    "middle": {
+     "file": "genesis_20261021_174117_frame087_middle.png",
+     "frame": 87
+    }
+   },
+   "20261021_174701": {
+    "middle": {
+     "file": "genesis_20261021_174701_frame086_middle.png",
+     "frame": 86
+    },
+    "worst": {
+     "file": "genesis_20261021_174701_frame090_worst.png",
+     "frame": 90
+    }
+   },
+   "20261021_175638": {
+    "middle": {
+     "file": "genesis_20261021_175638_frame077_middle.png",
+     "frame": 77
+    },
+    "worst": {
+     "file": "genesis_20261021_175638_frame154_worst.png",
+     "frame": 154
+    }
+   },
+   "20261021_180139": {
+    "middle": {
+     "file": "genesis_20261021_180139_frame078_middle.png",
+     "frame": 78
+    },
+    "worst": {
+     "file": "genesis_20261021_180139_frame148_worst.png",
+     "frame": 148
+    }
+   },
+   "20261021_180422": {
+    "middle": {
+     "file": "genesis_20261021_180422_frame088_middle.png",
+     "frame": 88
+    },
+    "worst": {
+     "file": "genesis_20261021_180422_frame175_worst.png",
+     "frame": 175
+    }
+   },
+   "20261021_180646": {
+    "middle": {
+     "file": "genesis_20261021_180646_frame073_middle.png",
+     "frame": 73
+    },
+    "worst": {
+     "file": "genesis_20261021_180646_frame081_worst.png",
+     "frame": 81
+    }
+   },
+   "20261026_125511": {
+    "worst": {
+     "file": "genesis_20261026_125511_frame070_worst.png",
+     "frame": 70
+    },
+    "middle": {
+     "file": "genesis_20261026_125511_frame084_middle.png",
+     "frame": 84
+    }
+   },
+   "20261026_130128": {
+    "worst": {
+     "file": "genesis_20261026_130128_frame068_worst.png",
+     "frame": 68
+    },
+    "middle": {
+     "file": "genesis_20261026_130128_frame089_middle.png",
+     "frame": 89
+    }
+   },
+   "20261026_130441": {
+    "middle": {
+     "file": "genesis_20261026_130441_frame082_middle.png",
+     "frame": 82
+    },
+    "worst": {
+     "file": "genesis_20261026_130441_frame086_worst.png",
+     "frame": 86
+    }
+   },
+   "20261028_100701": {
+    "middle": {
+     "file": "genesis_20261028_100701_frame082_middle.png",
+     "frame": 82
+    },
+    "worst": {
+     "file": "genesis_20261028_100701_frame151_worst.png",
+     "frame": 151
+    }
+   },
+   "20261028_101001": {
+    "worst": {
+     "file": "genesis_20261028_101001_frame066_worst.png",
+     "frame": 66
+    },
+    "middle": {
+     "file": "genesis_20261028_101001_frame080_middle.png",
+     "frame": 80
+    }
+   },
+   "20261028_101510": {
+    "middle": {
+     "file": "genesis_20261028_101510_frame083_middle.png",
+     "frame": 83
+    },
+    "worst": {
+     "file": "genesis_20261028_101510_frame152_worst.png",
+     "frame": 152
+    }
+   },
+   "20261028_105803": {
+    "worst": {
+     "file": "genesis_20261028_105803_frame035_worst.png",
+     "frame": 35
+    },
+    "middle": {
+     "file": "genesis_20261028_105803_frame073_middle.png",
+     "frame": 73
+    }
+   },
+   "20261028_114103": {
+    "middle": {
+     "file": "genesis_20261028_114103_frame073_middle.png",
+     "frame": 73
+    },
+    "worst": {
+     "file": "genesis_20261028_114103_frame130_worst.png",
+     "frame": 130
+    }
+   },
+   "20261028_121810": {
+    "worst": {
+     "file": "genesis_20261028_121810_frame075_worst.png",
+     "frame": 75
+    },
+    "middle": {
+     "file": "genesis_20261028_121810_frame077_middle.png",
+     "frame": 77
     }
    }
   }

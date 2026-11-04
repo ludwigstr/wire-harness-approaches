@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="DLO-Lab in the DLO world-model benchmark: The native, differentiable Cosserat rod of the DLO-Lab fork of Genesis, one rod per cable in the measured scene. Fits use reverse-mode gradient descent on a distance-transform loss against the video masks.">
+  <title>DLO-Lab &middot; DLO Benchmark</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="../static/css/index.css">
+  <script>
+    try { var t = localStorage.getItem('dlo-theme-v2'); if (t) document.documentElement.setAttribute('data-theme', t); } catch (e) {}
+  </script>
+</head>
+<body data-approach="dlolab">
+
+<header class="topnav" id="topnav">
+  <div class="topnav-inner">
+    <a class="brand" href="../index.html"><i class="fas fa-wave-square"></i><span>DLO World Models</span></a>
+    <nav class="nav-links" id="nav-links" aria-label="Sections">
+      <a href="../index.html#overview">Overview</a>
+      <a href="../index.html#pipeline">Pipeline</a>
+      <a href="../index.html#approaches" class="is-current">Approaches</a>
+      <a href="../index.html#results">Results</a>
+      <a href="../index.html#per-clip">Per clip</a>
+      <a href="../index.html#BibTeX">BibTeX</a>
+    </nav>
+    <div class="nav-actions">
+      <button class="icon-btn" id="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark mode"><i class="fas fa-moon"></i></button>
+      <button class="icon-btn nav-burger" id="nav-burger" aria-label="Menu" aria-expanded="false" aria-controls="nav-links"><i class="fas fa-bars"></i></button>
+    </div>
+  </div>
+</header>
+
+<main>
+<section class="section ap-hero">
+  <div class="wrap">
+    <a class="back-link" href="../index.html#approaches"><i class="fas fa-arrow-left"></i>All approaches</a>
+    <p class="ap-kicker"><span class="swatch" style="--sw: var(--series-physics)"></span>Physics Engine</p>
+    <h1 class="ap-title">DLO-Lab</h1>
+    <p class="ap-cite">Cosserat rods of the DLO-Lab fork of Genesis, per-element stiffness scales and rest curvatures fitted by CMA-ES on all 36 clips
+      <span class="status-chip running"><i class="fas fa-rotate"></i>Running &middot; gen 21</span></p>
+    <div class="kpi-grid" id="fit-kpis"></div>
+  </div>
+</section>
+
+<section class="section ap-section">
+  <div class="wrap ap-dash" id="fit-dash">
+
+    <div class="dash-card">
+      <div class="dash-head"><h3>Fit progress on the 36 clips</h3><span class="dash-badge" id="fit-progress-badge"></span></div>
+      <p class="dash-sub">Best candidate per CMA-ES generation (dots) and the best so far (line). Generation 0 is the 14-clip optimum copied onto every cable.</p>
+      <div id="fit-progress" class="chart" role="img" aria-label="Best error per generation"></div>
+      <p class="muted-note" id="fit-progress-note"></p>
+    </div>
+
+    <div class="dash-card">
+      <div class="dash-head">
+        <h3>Per-joint parameters along each cable</h3>
+        <div class="dash-controls">
+          <div class="seg" role="group" aria-label="View">
+            <button type="button" class="seg-btn is-on" data-view="heat">Heatmap</button>
+            <button type="button" class="seg-btn" data-view="profile">Profile</button>
+          </div>
+        </div>
+      </div>
+      <div class="param-tabs" role="tablist" aria-label="Parameter" id="pj-tabs"></div>
+      <p class="dash-sub" id="pj-sub"></p>
+      <div class="legend" id="pj-legend"></div>
+      <div id="pj-chart" class="chart" role="img" aria-label="Fitted per-joint parameter values"></div>
+      <div class="pj-cards" id="pj-cards"></div>
+    </div>
+
+    <div class="dash-grid">
+      <div class="dash-card">
+        <div class="dash-head"><h3>Global constants</h3></div>
+        <p class="dash-sub">Fitted value (filled) inside the search bounds, with the warm start (hollow). Scales are logarithmic.</p>
+        <div id="fit-globals" class="gauges"></div>
+      </div>
+      <div class="dash-card">
+        <div class="dash-head"><h3>Mass per cable</h3></div>
+        <p class="dash-sub">Free per cable in 0.02&ndash;0.5&nbsp;kg/m; warm start 0.045&nbsp;kg/m (hollow). The measured cable mass is 0.044&nbsp;kg/m.</p>
+        <div id="fit-mass" class="gauges"></div>
+      </div>
+    </div>
+
+    <div class="dash-grid">
+      <div class="dash-card">
+        <div class="dash-head"><h3>Where the 293 parameters go</h3></div>
+        <p class="dash-sub">Number of fitted values per group</p>
+        <div id="fit-groups" class="chart" role="img" aria-label="Number of parameters per group"></div>
+      </div>
+      <div class="dash-card">
+        <div class="dash-head"><h3>How the fit grew (14 clips)</h3></div>
+        <p class="dash-sub">Earlier rows on the 14-clip set, by what was fitted</p>
+        <div id="fit-rows" class="chart" role="img" aria-label="Error of the earlier 14-clip rows"></div>
+      </div>
+    </div>
+
+    <div class="dash-card">
+      <div class="dash-head"><h3>Spec sheet</h3><a class="dash-badge dash-link" id="fit-download" href="../../dlolab_fit_t36/state/dlolab_general_fit_t36_gen21.json" download><i class="fas fa-download"></i> fitted values (JSON)</a></div>
+      <div class="num-tiles" id="fit-numbers"></div>
+      <dl class="spec" id="fit-spec"></dl>
+    </div>
+
+    <details class="method-details">
+      <summary><i class="fas fa-book-open"></i>Method details: the earlier 14-clip rows</summary>
+      <div class="approach-inner ap-body">
+          <h4>How the fit grew (14 clips)</h4>
+          <div class="table-scroll"><table class="data-table compact">
+            <thead><tr><th>Row</th><th>What is fitted</th><th class="num">mm/node</th></tr></thead>
+            <tbody>
+              <tr><td>15</td><td>Uncalibrated: K 1e4, E 1e5 (as shipped)</td><td class="num">33.9</td></tr>
+              <tr><td>16</td><td>Gradient fit, uniform stiffness K, E</td><td class="num">18.6</td></tr>
+              <tr><td>17</td><td>+ per-joint stiffness: 14 hinge scales, K/E frozen</td><td class="num">17.0</td></tr>
+              <tr><td>18</td><td>+ rest curvature: the full fit over all 14 clips</td><td class="num">16.56</td></tr>
+            </tbody>
+          </table></div>
+          <p class="muted-note">Rows 16 and 17 were fitted on one clip (20260602_170108) only. The repository currently reproduces higher numbers for rows 15&ndash;18 (56.7 / 44.1 / 42.8 / 30.9); this is under investigation.</p>
+          <div class="detail-actions">
+            <span class="code-path"><i class="fas fa-folder"></i><code>approaches/04_dlolab.py</code>, <code>patches/dlo-lab-perjoint.patch</code></span>
+          </div>
+      </div>
+    </details>
+
+    <nav class="ap-pager" aria-label="Other physics engines">
+      <a class="ap-pager-link prev" href="genesis.html"><span><i class="fas fa-arrow-left"></i>Previous physics engine</span><b>Genesis</b></a>
+      <span></span>
+    </nav>
+  </div>
+</section>
+</main>
+
+<footer class="footer">
+  <div class="wrap narrow center">
+    <a class="icon-link" href="https://github.com/ludwigstr/wire-harness-approaches" aria-label="Code on GitHub"><i class="fab fa-github"></i></a>
+  </div>
+</footer>
+
+<div class="tooltip" id="tooltip" role="tooltip" hidden></div>
+<script src="../static/js/data.js"></script>
+<script src="../static/js/approach.js"></script>
+<script src="../static/js/dlolab_fit.js"></script>
+<script src="../static/js/dlolab.js"></script>
+</body>
+</html>

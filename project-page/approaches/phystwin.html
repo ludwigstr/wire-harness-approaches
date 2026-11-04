@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="PhysTwin in the DLO world-model benchmark: A planar spring-mass digital twin fitted to each clip&#x27;s video, then re-simulated from frame 0 with the measured end motions.">
+  <title>PhysTwin &middot; DLO Benchmark</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="../static/css/index.css">
+  <script>
+    try { var t = localStorage.getItem('dlo-theme-v2'); if (t) document.documentElement.setAttribute('data-theme', t); } catch (e) {}
+  </script>
+</head>
+<body data-approach="phystwin">
+
+<header class="topnav" id="topnav">
+  <div class="topnav-inner">
+    <a class="brand" href="../index.html"><i class="fas fa-wave-square"></i><span>DLO World Models</span></a>
+    <nav class="nav-links" id="nav-links" aria-label="Sections">
+      <a href="../index.html#overview">Overview</a>
+      <a href="../index.html#pipeline">Pipeline</a>
+      <a href="../index.html#approaches" class="is-current">Approaches</a>
+      <a href="../index.html#results">Results</a>
+      <a href="../index.html#per-clip">Per clip</a>
+      <a href="../index.html#BibTeX">BibTeX</a>
+    </nav>
+    <div class="nav-actions">
+      <button class="icon-btn" id="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark mode"><i class="fas fa-moon"></i></button>
+      <button class="icon-btn nav-burger" id="nav-burger" aria-label="Menu" aria-expanded="false" aria-controls="nav-links"><i class="fas fa-bars"></i></button>
+    </div>
+  </div>
+</header>
+
+<main>
+<section class="section ap-hero">
+  <div class="wrap narrow">
+    <a class="back-link" href="../index.html#approaches"><i class="fas fa-arrow-left"></i>All approaches</a>
+    <p class="ap-kicker"><span class="swatch" style="--sw: var(--series-world)"></span>World Model</p>
+    <h1 class="ap-title">PhysTwin</h1>
+    <p class="ap-cite">Jiang et al. 2025</p>
+    <div class="ap-stats">
+      <div class="stat"><span class="stat-value">22.0</span><span class="stat-label">mm/node error</span></div>
+      <div class="stat"><span class="stat-value ap-stat-text">World Model</span><span class="stat-label">paradigm</span></div>
+      <div class="stat"><span class="stat-value">36</span><span class="stat-label">clips</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="section ap-section">
+  <div class="wrap narrow">
+    <div class="approach-inner ap-body">
+          <p class="lead">A planar <strong>spring-mass digital twin</strong> fitted to each clip's video, then re-simulated from frame 0
+            with the measured end motions.</p>
+          <dl class="facts">
+            <div><dt>Learns from</dt><dd>Nothing learned: one twin fitted per clip</dd></div>
+            <div><dt>Physical properties</dt><dd>Stiffness per spring, dashpot &gamma;, drag &delta;, board friction &mu;</dd></div>
+            <div><dt>Rest shape</dt><dd>Spring rest lengths from frame 0</dd></div>
+            <div><dt>Fit time</dt><dd>About 15 min per clip on one GPU</dd></div>
+            <div><dt>Scored</dt><dd>14 inner nodes (ends kinematic), every frame</dd></div>
+            <div><dt>36-clip result</dt><dd>22.03 mean / 17.50 median</dd></div>
+          </dl>
+          <h4>The twin</h4>
+          <ul>
+            <li><strong>Mass points</strong>: the 16 tracked nodes of each cable, 2&nbsp;g each, not fitted.</li>
+            <li><strong>Springs</strong>: chain neighbours + node pairs closer than a fitted radius in the first frame (at most 6 per node). They also carry bending, because a spring-mass model has no bending angle.</li>
+            <li><strong>Forces</strong>: springs, dashpots on connected pairs, drag, Coulomb board friction. The two end nodes move kinematically on their tracks; 1&nbsp;ms steps.</li>
+          </ul>
+          <h4>Fit, per clip (the four cables share damping, drag and friction)</h4>
+          <ol>
+            <li><strong>Stage 1, CMA-ES</strong> on homogeneous k, dashpot &gamma;, drag &delta;, friction &mu; and radius. Cost: mean node error of the full re-simulation from frame 0.</li>
+            <li><strong>Stage 2, Adam through the simulator</strong> on a stiffness <em>per spring</em> (+ &gamma;, &delta;, &mu;) on random 8-frame windows. Every 10 iterations the full re-simulation is scored and the best iterate is kept, because window-only optimisation diverged on long clips.</li>
+          </ol>
+          <h4>Not implemented from the paper</h4>
+          <ul><li>Gaussian-splat rendering (node tracks are compared, not images), 3-D, and collisions.</li></ul>
+          <h4>How the variants compare</h4>
+          <div class="table-scroll"><table class="data-table compact">
+            <thead><tr><th>Variant</th><th>Clips</th><th class="num">Mean</th><th class="num">Median</th></tr></thead>
+            <tbody>
+              <tr class="hl"><td>Dense per-clip twins, refitted on the 36-clip selection</td><td>36</td><td class="num">22.03</td><td class="num">17.50</td></tr>
+              <tr><td>One twin per clip, fitted on all frames</td><td>14</td><td class="num">19.8</td><td class="num">17.0</td></tr>
+              <tr><td>Paper's 7:3 split, on the fitting 70&nbsp;%</td><td>14</td><td class="num">13.7</td><td class="num">&ndash;</td></tr>
+              <tr><td>Paper's 7:3 split, on the held-out 30&nbsp;%</td><td>14</td><td class="num">30.5</td><td class="num">&ndash;</td></tr>
+            </tbody>
+          </table></div>
+          <div class="detail-actions">
+            <span class="code-path"><i class="fas fa-folder"></i><code>approaches/05_phystwin.py</code>, <code>wire_model/phystwin/</code></span>
+          </div>
+    </div>
+
+    <div class="ap-perclip" id="ap-perclip" hidden>
+      <h2 class="sub-title">Per-clip error on the 36 clips</h2>
+      <div class="ap-perclip-stats" id="ap-perclip-stats"></div>
+      <div class="chart-card"><div id="ap-perclip-chart" class="chart" role="img" aria-label="Error of PhysTwin on each of the 36 clips"></div></div>
+    </div>
+
+    <nav class="ap-pager" aria-label="Other world models">
+      <a class="ap-pager-link prev" href="ropedreamer.html"><span><i class="fas fa-arrow-left"></i>Previous world model</span><b>RopeDreamer</b></a>
+      <span></span>
+    </nav>
+  </div>
+</section>
+</main>
+
+<footer class="footer">
+  <div class="wrap narrow center">
+    <a class="icon-link" href="https://github.com/ludwigstr/wire-harness-approaches" aria-label="Code on GitHub"><i class="fab fa-github"></i></a>
+  </div>
+</footer>
+
+<div class="tooltip" id="tooltip" role="tooltip" hidden></div>
+<script src="../static/js/data.js"></script>
+<script src="../static/js/approach.js"></script>
+</body>
+</html>

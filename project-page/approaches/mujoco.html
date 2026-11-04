@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="MuJoCo in the DLO world-model benchmark: The four cables as MuJoCo elasticity.cable composites in the measured scene (board, hub, movers). The hub and the four plugs are driven by PD actuators along their tracked poses; after a 300-step settle the whole clip is replayed.">
+  <title>MuJoCo &middot; DLO Benchmark</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="../static/css/index.css">
+  <script>
+    try { var t = localStorage.getItem('dlo-theme-v2'); if (t) document.documentElement.setAttribute('data-theme', t); } catch (e) {}
+  </script>
+</head>
+<body data-approach="mujoco">
+
+<header class="topnav" id="topnav">
+  <div class="topnav-inner">
+    <a class="brand" href="../index.html"><i class="fas fa-wave-square"></i><span>DLO World Models</span></a>
+    <nav class="nav-links" id="nav-links" aria-label="Sections">
+      <a href="../index.html#overview">Overview</a>
+      <a href="../index.html#pipeline">Pipeline</a>
+      <a href="../index.html#approaches" class="is-current">Approaches</a>
+      <a href="../index.html#results">Results</a>
+      <a href="../index.html#per-clip">Per clip</a>
+      <a href="../index.html#BibTeX">BibTeX</a>
+    </nav>
+    <div class="nav-actions">
+      <button class="icon-btn" id="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark mode"><i class="fas fa-moon"></i></button>
+      <button class="icon-btn nav-burger" id="nav-burger" aria-label="Menu" aria-expanded="false" aria-controls="nav-links"><i class="fas fa-bars"></i></button>
+    </div>
+  </div>
+</header>
+
+<main>
+<section class="section ap-hero">
+  <div class="wrap narrow">
+    <a class="back-link" href="../index.html#approaches"><i class="fas fa-arrow-left"></i>All approaches</a>
+    <p class="ap-kicker"><span class="swatch" style="--sw: var(--series-physics)"></span>Physics Engine</p>
+    <h1 class="ap-title">MuJoCo</h1>
+    <p class="ap-cite">elasticity.cable <span class="status-chip running"><i class="fas fa-rotate"></i>Running gen 20</span></p>
+    <div class="ap-stats">
+      <div class="stat"><span class="stat-value">10.9</span><span class="stat-label">mm/node error</span></div>
+      <div class="stat"><span class="stat-value ap-stat-text">Physics Engine</span><span class="stat-label">paradigm</span></div>
+      <div class="stat"><span class="stat-value">36</span><span class="stat-label">clips</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="section ap-section">
+  <div class="wrap narrow">
+    <div class="approach-inner ap-body">
+          <p class="lead">The four cables as MuJoCo <strong><code>elasticity.cable</code> composites</strong> in the measured scene (board, hub, movers).
+            The hub and the four plugs are driven by PD actuators along their tracked poses; after a 300-step settle the whole clip is replayed.</p>
+          <dl class="facts">
+            <div><dt>Parameters (best row)</dt><dd>56 ball-joint springs + 56 rest angles about the board normal</dd></div>
+            <div><dt>Optimiser</dt><dd>CMA-ES, 60 generations (14-clip fit)</dd></div>
+            <div><dt>Objective</dt><dd>Exactly the reported metric</dd></div>
+            <div><dt>Scored</dt><dd>16 nodes, every frame from frame 0</dd></div>
+            <div><dt>Needs</dt><dd>mujoco &ge; 3.11, cma</dd></div>
+          </dl>
+          <h4>How the fit grew (14 clips)</h4>
+          <div class="table-scroll"><table class="data-table compact">
+            <thead><tr><th>Row</th><th>What is fitted</th><th class="num">mm/node</th></tr></thead>
+            <tbody>
+              <tr><td>1</td><td>Uncalibrated: mass 0.05&nbsp;kg/m, &mu; 3.0</td><td class="num">20.3</td></tr>
+              <tr><td>2</td><td>Mass + friction tuned (sweep): mass 0.150, &mu; 1.0</td><td class="num">20.3</td></tr>
+              <tr><td>3</td><td>+ per-joint rest angles: a weld constraint per joint pulling to the <em>measured</em> angle, solref per joint (coordinate descent, 56 values)</td><td class="num">11.6</td></tr>
+              <tr><td>4</td><td>+ per-joint bending stiffness: ball-joint springs (56) + a fitted rest angle per joint (56), CMA-ES</td><td class="num">8.5 <span class="muted">(median 7.9)</span></td></tr>
+            </tbody>
+          </table></div>
+          <p class="muted-note">Rows 2 &rarr; 3 show the rest-angle effect most clearly: tuning mass and friction changes nothing, adding per-joint rest angles almost halves the error.</p>
+          <div class="detail-actions">
+            <span class="code-path"><i class="fas fa-folder"></i><code>approaches/01_mujoco.py</code>, <code>engines/mujoco_*.py</code></span>
+          </div>
+    </div>
+
+    <div class="ap-perclip" id="ap-perclip" hidden>
+      <h2 class="sub-title">Per-clip error on the 36 clips</h2>
+      <div class="ap-perclip-stats" id="ap-perclip-stats"></div>
+      <div class="chart-card"><div id="ap-perclip-chart" class="chart" role="img" aria-label="Error of MuJoCo on each of the 36 clips"></div></div>
+    </div>
+
+    <nav class="ap-pager" aria-label="Other physics engines">
+      <a class="ap-pager-link prev" href="newton.html"><span><i class="fas fa-arrow-left"></i>Previous physics engine</span><b>Newton</b></a>
+      <a class="ap-pager-link next" href="genesis.html"><span>Next physics engine<i class="fas fa-arrow-right"></i></span><b>Genesis</b></a>
+    </nav>
+  </div>
+</section>
+</main>
+
+<footer class="footer">
+  <div class="wrap narrow center">
+    <a class="icon-link" href="https://github.com/ludwigstr/wire-harness-approaches" aria-label="Code on GitHub"><i class="fab fa-github"></i></a>
+  </div>
+</footer>
+
+<div class="tooltip" id="tooltip" role="tooltip" hidden></div>
+<script src="../static/js/data.js"></script>
+<script src="../static/js/approach.js"></script>
+</body>
+</html>

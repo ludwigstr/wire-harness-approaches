@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="RopeDreamer in the DLO world-model benchmark: A Dreamer-style recurrent state-space model whose state is a kinematic chain (base position + one unit quaternion per link), so a decoded state can never stretch the cable.">
+  <title>RopeDreamer &middot; DLO Benchmark</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="../static/css/index.css">
+  <script>
+    try { var t = localStorage.getItem('dlo-theme-v2'); if (t) document.documentElement.setAttribute('data-theme', t); } catch (e) {}
+  </script>
+</head>
+<body data-approach="ropedreamer">
+
+<header class="topnav" id="topnav">
+  <div class="topnav-inner">
+    <a class="brand" href="../index.html"><i class="fas fa-wave-square"></i><span>DLO World Models</span></a>
+    <nav class="nav-links" id="nav-links" aria-label="Sections">
+      <a href="../index.html#overview">Overview</a>
+      <a href="../index.html#pipeline">Pipeline</a>
+      <a href="../index.html#approaches" class="is-current">Approaches</a>
+      <a href="../index.html#results">Results</a>
+      <a href="../index.html#per-clip">Per clip</a>
+      <a href="../index.html#BibTeX">BibTeX</a>
+    </nav>
+    <div class="nav-actions">
+      <button class="icon-btn" id="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark mode"><i class="fas fa-moon"></i></button>
+      <button class="icon-btn nav-burger" id="nav-burger" aria-label="Menu" aria-expanded="false" aria-controls="nav-links"><i class="fas fa-bars"></i></button>
+    </div>
+  </div>
+</header>
+
+<main>
+<section class="section ap-hero">
+  <div class="wrap narrow">
+    <a class="back-link" href="../index.html#approaches"><i class="fas fa-arrow-left"></i>All approaches</a>
+    <p class="ap-kicker"><span class="swatch" style="--sw: var(--series-world)"></span>World Model</p>
+    <h1 class="ap-title">RopeDreamer</h1>
+    <p class="ap-cite">Missal et al. 2026</p>
+    <div class="ap-stats">
+      <div class="stat"><span class="stat-value">18.3</span><span class="stat-label">mm/node error</span></div>
+      <div class="stat"><span class="stat-value ap-stat-text">World Model</span><span class="stat-label">paradigm</span></div>
+      <div class="stat"><span class="stat-value">14</span><span class="stat-label">clips</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="section ap-section">
+  <div class="wrap narrow">
+    <div class="approach-inner ap-body">
+          <p class="lead">A Dreamer-style <strong>recurrent state-space model</strong> whose state is a <strong>kinematic chain</strong>
+            (base position + one unit quaternion per link), so a decoded state can never stretch the cable.</p>
+          <dl class="facts">
+            <div><dt>Learns from</dt><dd>MuJoCo simulations only, around twins of the evaluation clips</dd></div>
+            <div><dt>Physical properties</dt><dd>None explicit: they enter only through the randomised simulation data</dd></div>
+            <div><dt>Rest shape</dt><dd>Through the twins' fitted rest angles (randomised &times;0.8&ndash;1.2)</dd></div>
+            <div><dt>Model</dt><dd>RSSM size S, 5.6&nbsp;M weights</dd></div>
+            <div><dt>Scored</dt><dd>16 nodes, both ends pinned, frames 5&hellip;T&minus;1</dd></div>
+            <div><dt>Result</dt><dd>18.31 mean / 13.00 median (14 clips)</dd></div>
+          </dl>
+          <h4>Pipeline (as in the paper: simulation only)</h4>
+          <ol>
+            <li><strong>Twins</strong> (<code>ropedreamer_twins14.py</code>): every clip is replayed in the MuJoCo general-fit environment with the real mover paths and timing.</li>
+            <li><strong>Variations</strong> (<code>yang_make_dataset.py</code>): speed-only motion variation (one shared time warp) and domain randomisation around the fit:
+              <ul>
+                <li>bend and twist &times;0.5&ndash;2, per-cable jitter &times;0.85&ndash;1.18</li>
+                <li>damping &times;1/3&ndash;3, mass &times;0.7&ndash;1.4 (clipped to 0.01&ndash;0.5&nbsp;kg/m), &mu; &times;0.5&ndash;2</li>
+                <li>rest angles &times;0.8&ndash;1.2</li>
+              </ul>
+              Rollouts that add mover&ndash;cable contacts not present in the real recording are rejected: 5,173 rollouts kept (557 rejected), 219k frames, 6.1&nbsp;h on 16 workers.</li>
+            <li><strong>Training</strong> with the paper's settings: &beta; = 1, lr 1e-4, batch 32, paper loss only; 10&nbsp;% rollout-level validation, early stopping after 10 epochs;
+              tracking-noise augmentation calibrated on the real tracks. Stopped at epoch 106 after 5.7&nbsp;h.</li>
+            <li><strong>Evaluation</strong>: 5-frame warm-up, open loop, both end nodes pinned.</li>
+          </ol>
+          <h4>Deviations from the paper</h4>
+          <ul>
+            <li>Two driven ends instead of one grasp.</li>
+            <li>Quaternion loss up to sign; ELBO as a sum over z-standardised dimensions; free nats.</li>
+          </ul>
+          <h4>How the variants compare (14 clips)</h4>
+          <div class="table-scroll"><table class="data-table compact">
+            <thead><tr><th>Variant</th><th class="num">Mean</th><th class="num">Median</th></tr></thead>
+            <tbody>
+              <tr class="hl"><td>Simulation only, 14-frame windows</td><td class="num">18.31</td><td class="num">13.00</td></tr>
+              <tr><td>Simulation only, 32-frame windows</td><td class="num">29.76</td><td class="num">19.31</td></tr>
+              <tr><td>Real video: pre-trained on 103 X-Planar clips, fine-tuned on the 14</td><td class="num">16.8</td><td class="num">&ndash;</td></tr>
+              <tr><td>Real video, X-Planar model without fine-tuning</td><td class="num">62.4</td><td class="num">&ndash;</td></tr>
+            </tbody>
+          </table></div>
+          <p class="muted-note"><i class="fas fa-triangle-exclamation"></i> Why the window length matters: with 32-frame windows the data loader silently drops
+            trajectories shorter than one window, so clip 102713 (19 frames) was never trained on and scored 146&nbsp;mm.
+            The shortest trajectory has 14 frames, so 14-frame windows use all of them.</p>
+          <div class="detail-actions">
+            <span class="code-path"><i class="fas fa-folder"></i><code>ropedreamer_twins14/</code>, <code>approaches/08_ropedreamer.py</code></span>
+          </div>
+    </div>
+
+    <div class="ap-perclip" id="ap-perclip" hidden>
+      <h2 class="sub-title">Per-clip error on the 36 clips</h2>
+      <div class="ap-perclip-stats" id="ap-perclip-stats"></div>
+      <div class="chart-card"><div id="ap-perclip-chart" class="chart" role="img" aria-label="Error of RopeDreamer on each of the 36 clips"></div></div>
+    </div>
+
+    <nav class="ap-pager" aria-label="Other world models">
+      <a class="ap-pager-link prev" href="physworld.html"><span><i class="fas fa-arrow-left"></i>Previous world model</span><b>PhysWorld</b></a>
+      <a class="ap-pager-link next" href="phystwin.html"><span>Next world model<i class="fas fa-arrow-right"></i></span><b>PhysTwin</b></a>
+    </nav>
+  </div>
+</section>
+</main>
+
+<footer class="footer">
+  <div class="wrap narrow center">
+    <a class="icon-link" href="https://github.com/ludwigstr/wire-harness-approaches" aria-label="Code on GitHub"><i class="fab fa-github"></i></a>
+  </div>
+</footer>
+
+<div class="tooltip" id="tooltip" role="tooltip" hidden></div>
+<script src="../static/js/data.js"></script>
+<script src="../static/js/approach.js"></script>
+</body>
+</html>

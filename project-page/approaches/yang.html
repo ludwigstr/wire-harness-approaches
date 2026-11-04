@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Yang et al. in the DLO world-model benchmark: Identify a simulator from the real clips, generate synthetic data from it, and train an interaction network + bidirectional LSTM along the chain. We use NVIDIA Newton instead of the paper&#x27;s AGX Dynamics.">
+  <title>Yang et al. &middot; DLO Benchmark</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="../static/css/index.css">
+  <script>
+    try { var t = localStorage.getItem('dlo-theme-v2'); if (t) document.documentElement.setAttribute('data-theme', t); } catch (e) {}
+  </script>
+</head>
+<body data-approach="yang">
+
+<header class="topnav" id="topnav">
+  <div class="topnav-inner">
+    <a class="brand" href="../index.html"><i class="fas fa-wave-square"></i><span>DLO World Models</span></a>
+    <nav class="nav-links" id="nav-links" aria-label="Sections">
+      <a href="../index.html#overview">Overview</a>
+      <a href="../index.html#pipeline">Pipeline</a>
+      <a href="../index.html#approaches" class="is-current">Approaches</a>
+      <a href="../index.html#results">Results</a>
+      <a href="../index.html#per-clip">Per clip</a>
+      <a href="../index.html#BibTeX">BibTeX</a>
+    </nav>
+    <div class="nav-actions">
+      <button class="icon-btn" id="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark mode"><i class="fas fa-moon"></i></button>
+      <button class="icon-btn nav-burger" id="nav-burger" aria-label="Menu" aria-expanded="false" aria-controls="nav-links"><i class="fas fa-bars"></i></button>
+    </div>
+  </div>
+</header>
+
+<main>
+<section class="section ap-hero">
+  <div class="wrap narrow">
+    <a class="back-link" href="../index.html#approaches"><i class="fas fa-arrow-left"></i>All approaches</a>
+    <p class="ap-kicker"><span class="swatch" style="--sw: var(--series-dynamics)"></span>Dynamics Model</p>
+    <h1 class="ap-title">Yang et al.</h1>
+    <p class="ap-cite">RAS 2022</p>
+    <div class="ap-stats">
+      <div class="stat"><span class="stat-value">13.3</span><span class="stat-label">mm/node error</span></div>
+      <div class="stat"><span class="stat-value ap-stat-text">Dynamics Model</span><span class="stat-label">paradigm</span></div>
+      <div class="stat"><span class="stat-value">14</span><span class="stat-label">clips</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="section ap-section">
+  <div class="wrap narrow">
+    <div class="approach-inner ap-body">
+          <p class="lead">Identify a simulator from the real clips, generate synthetic data from it, and train an
+            <strong>interaction network + bidirectional LSTM</strong> along the chain. We use NVIDIA Newton instead of the paper's AGX Dynamics.</p>
+          <dl class="facts">
+            <div><dt>Learns from</dt><dd>Synthetic data from the identified Newton simulator</dd></div>
+            <div><dt>Physical properties</dt><dd>8 global Newton parameters, identified by differential evolution</dd></div>
+            <div><dt>Model</dt><dd>IN + bi-LSTM, 1.16&nbsp;M weights, 60 epochs</dd></div>
+            <div><dt>Scored</dt><dd>16 nodes, ends pinned, frames 5&hellip;T&minus;1</dd></div>
+            <div><dt>Result</dt><dd>13.33 mean / 11.68 median (14 clips)</dd></div>
+          </dl>
+          <h4>Pipeline</h4>
+          <ol>
+            <li><strong>Identification</strong> (<code>yang_identify.py --engine newton</code>): differential evolution on the one-step error (Eq.&nbsp;1) over k_stretch, d_stretch, k_bend, d_bend, k_twist, d_twist, mass per metre and &mu;, on all evaluation clips.</li>
+            <li><strong>Simulator control</strong>: the identified simulator alone on the clips.</li>
+            <li><strong>Synthetic data</strong>: real mover paths with speed-only variation &times;0.65&ndash;1.4 (one shared time warp), parameters randomised around the identified set.
+              Built from the 14 clips: 1,305 rollouts (95 rejected), 246k transitions.</li>
+            <li><strong>Training</strong>: IN + bi-LSTM, validation split per rollout. A transition is dropped only if its stretch gap exceeds that of its clip's real-timing rollout by more than 10&nbsp;mm, so violations the real recording already has are tolerated.</li>
+            <li><strong>Evaluation</strong>: 5-frame warm-up, open loop, ends pinned.</li>
+          </ol>
+          <h4>Identified parameters (X-Planar run)</h4>
+          <p class="muted-note">DE over 40 generations and 4,920 evaluations, one-step error 3.98&nbsp;mm/node, all values inside the bounds:</p>
+          <div class="param-grid">
+            <span><b>k_stretch</b> 4367&nbsp;N/m</span><span><b>d_stretch</b> 0.016</span>
+            <span><b>k_bend</b> 3.66&nbsp;N&middot;m/rad</span><span><b>d_bend</b> 7.45&nbsp;N&middot;m&middot;s/rad</span>
+            <span><b>k_twist</b> 0.053&nbsp;N&middot;m/rad</span><span><b>d_twist</b> 0.14</span>
+            <span><b>mass</b> 0.087&nbsp;kg/m</span><span><b>&mu;</b> 4.48</span>
+          </div>
+          <h4>Additions to the paper</h4>
+          <ul><li>Domain randomisation, speed-only motion variation, and the tolerant stretch-gap filter. Without the filter, the soft identified stretch dropped 71.9&nbsp;% of the transitions; with it, 93.9&nbsp;% are kept.</li></ul>
+          <h4>How the variants compare (14 clips)</h4>
+          <div class="table-scroll"><table class="data-table compact">
+            <thead><tr><th>Variant</th><th class="num">Mean</th><th class="num">Median</th></tr></thead>
+            <tbody>
+              <tr class="hl"><td>Synthetic data from the 14 clips</td><td class="num">13.33</td><td class="num">11.68</td></tr>
+              <tr><td>Identified Newton simulator alone</td><td class="num">11.15</td><td class="num">10.10</td></tr>
+              <tr><td>Synthetic data from the 103 X-Planar clips</td><td class="num">14.38</td><td class="num">11.25</td></tr>
+              <tr><td>X-Planar data without the tolerant gap filter</td><td class="num">17.04</td><td class="num">13.04</td></tr>
+              <tr><td>DE on 3 clips only</td><td class="num">20.09</td><td class="num">14.72</td></tr>
+            </tbody>
+          </table></div>
+          <p class="muted-note">Wall clock: DE 17.5&nbsp;h, dataset 1.0&nbsp;h, training 0.3&nbsp;h.</p>
+          <div class="detail-actions">
+            <span class="code-path"><i class="fas fa-folder"></i><code>yang_et_al/</code></span>
+          </div>
+    </div>
+
+    <div class="ap-perclip" id="ap-perclip" hidden>
+      <h2 class="sub-title">Per-clip error on the 36 clips</h2>
+      <div class="ap-perclip-stats" id="ap-perclip-stats"></div>
+      <div class="chart-card"><div id="ap-perclip-chart" class="chart" role="img" aria-label="Error of Yang et al. on each of the 36 clips"></div></div>
+    </div>
+
+    <nav class="ap-pager" aria-label="Other dynamics models">
+      <span></span>
+      <a class="ap-pager-link next" href="caporali.html"><span>Next dynamics model<i class="fas fa-arrow-right"></i></span><b>Caporali et al.</b></a>
+    </nav>
+  </div>
+</section>
+</main>
+
+<footer class="footer">
+  <div class="wrap narrow center">
+    <a class="icon-link" href="https://github.com/ludwigstr/wire-harness-approaches" aria-label="Code on GitHub"><i class="fab fa-github"></i></a>
+  </div>
+</footer>
+
+<div class="tooltip" id="tooltip" role="tooltip" hidden></div>
+<script src="../static/js/data.js"></script>
+<script src="../static/js/approach.js"></script>
+</body>
+</html>

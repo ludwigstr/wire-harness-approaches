@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Newton in the DLO world-model benchmark: Newton&#x27;s native rod model (VBD solver, 10 iterations, 1 ms steps) in the full 3-D scene, with board, hub and movers as colliding bodies and the cable ends kinematic on their tracks.">
+  <title>Newton &middot; DLO Benchmark</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="../static/css/index.css">
+  <script>
+    try { var t = localStorage.getItem('dlo-theme-v2'); if (t) document.documentElement.setAttribute('data-theme', t); } catch (e) {}
+  </script>
+</head>
+<body data-approach="newton">
+
+<header class="topnav" id="topnav">
+  <div class="topnav-inner">
+    <a class="brand" href="../index.html"><i class="fas fa-wave-square"></i><span>DLO World Models</span></a>
+    <nav class="nav-links" id="nav-links" aria-label="Sections">
+      <a href="../index.html#overview">Overview</a>
+      <a href="../index.html#pipeline">Pipeline</a>
+      <a href="../index.html#approaches" class="is-current">Approaches</a>
+      <a href="../index.html#results">Results</a>
+      <a href="../index.html#per-clip">Per clip</a>
+      <a href="../index.html#BibTeX">BibTeX</a>
+    </nav>
+    <div class="nav-actions">
+      <button class="icon-btn" id="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark mode"><i class="fas fa-moon"></i></button>
+      <button class="icon-btn nav-burger" id="nav-burger" aria-label="Menu" aria-expanded="false" aria-controls="nav-links"><i class="fas fa-bars"></i></button>
+    </div>
+  </div>
+</header>
+
+<main>
+<section class="section ap-hero">
+  <div class="wrap narrow">
+    <a class="back-link" href="../index.html#approaches"><i class="fas fa-arrow-left"></i>All approaches</a>
+    <p class="ap-kicker"><span class="swatch" style="--sw: var(--series-physics)"></span>Physics Engine</p>
+    <h1 class="ap-title">Newton</h1>
+    <p class="ap-cite">NVIDIA Newton 1.5 <span class="status-chip running"><i class="fas fa-rotate"></i>Running gen 12</span></p>
+    <div class="ap-stats">
+      <div class="stat"><span class="stat-value">8.1</span><span class="stat-label">mm/node error</span></div>
+      <div class="stat"><span class="stat-value ap-stat-text">Physics Engine</span><span class="stat-label">paradigm</span></div>
+      <div class="stat"><span class="stat-value">36</span><span class="stat-label">clips</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="section ap-section">
+  <div class="wrap narrow">
+    <div class="approach-inner ap-body">
+          <p class="lead">Newton's native <strong>rod model</strong> (VBD solver, 10 iterations, 1&nbsp;ms steps) in the full 3-D scene,
+            with board, hub and movers as colliding bodies and the cable ends kinematic on their tracks.</p>
+          <dl class="facts">
+            <div><dt>Parameters (36-clip fit)</dt><dd>231, all per cable</dd></div>
+            <div><dt>Mass</dt><dd>Pinned at the measured 0.044&nbsp;kg/m</dd></div>
+            <div><dt>Optimiser</dt><dd>CMA-ES, population 18</dd></div>
+            <div><dt>Objective</dt><dd>Exactly the table metric, mean over all 36 clips</dd></div>
+            <div><dt>Scored</dt><dd>16 nodes (xy), every frame from frame 0</dd></div>
+            <div><dt>Hardware</dt><dd>9 workers on 2 RTX A6000s, 10.5&ndash;12&nbsp;h per generation</dd></div>
+          </dl>
+          <h4>The 36-clip parameter set</h4>
+          <div class="table-scroll"><table class="data-table compact">
+            <thead><tr><th>Parameter</th><th class="num">Values</th></tr></thead>
+            <tbody>
+              <tr><td>Bend stiffness ke (4 cables &times; 14 joints)</td><td class="num">56</td></tr>
+              <tr><td>Twist stiffness kt</td><td class="num">56</td></tr>
+              <tr><td>Bend damping kd</td><td class="num">56</td></tr>
+              <tr><td>Rest angle (rad)</td><td class="num">56</td></tr>
+              <tr><td>Dahl hysteresis &epsilon;, &tau;</td><td class="num">2</td></tr>
+              <tr><td>Stretch stiffness K</td><td class="num">1</td></tr>
+              <tr><td>Frictions (shape, cable, torsional, rolling)</td><td class="num">4</td></tr>
+            </tbody>
+          </table></div>
+          <p>The warm start is the finished 14-clip optimum (7.42&nbsp;mm/node in-sample on its 14 clips).
+            Generation 0 on the 36 clips gives <strong>10.18 mean / 8.72 median</strong>.</p>
+          <h4>How the fit grew (14 clips, CMA-ES on xy + measured cable height)</h4>
+          <div class="table-scroll"><table class="data-table compact">
+            <thead><tr><th>Row</th><th>What is fitted</th><th class="num">Values</th><th class="num">mm/node</th></tr></thead>
+            <tbody>
+              <tr><td>8</td><td>Uncalibrated</td><td class="num">0</td><td class="num">14.1</td></tr>
+              <tr><td>9</td><td>Shared fit + measured cable height (14 bend ke, 14 bend kd, mass)</td><td class="num">29</td><td class="num">8.6</td></tr>
+              <tr><td>10</td><td>+ Dahl hysteresis + 14 rest angles</td><td class="num">45</td><td class="num">8.1</td></tr>
+              <tr><td>11</td><td>+ per-joint twist</td><td class="num">59</td><td class="num">7.8</td></tr>
+              <tr><td>12</td><td>+ sliding friction freed (warm start row 10)</td><td class="num">47</td><td class="num">7.9</td></tr>
+              <tr><td>13</td><td>Mass pinned to 0.044&nbsp;kg/m; K stretch + all four frictions free</td><td class="num">63</td><td class="num">8.0</td></tr>
+              <tr><td>14</td><td>Per-cable fit: ke, kd, mass, rest per cable</td><td class="num">174</td><td class="num">7.7</td></tr>
+            </tbody>
+          </table></div>
+          <p class="muted-note">The 14-clip fits also matched the cable height measured from the video (Depth-Anything targets). The 36 clips have no depth targets, so their objective is xy only.</p>
+          <div class="detail-actions">
+            <span class="code-path"><i class="fas fa-folder"></i><code>newton_fit_t36/</code>, <code>approaches/03_newton.py</code></span>
+          </div>
+    </div>
+
+    <div class="ap-perclip" id="ap-perclip" hidden>
+      <h2 class="sub-title">Per-clip error on the 36 clips</h2>
+      <div class="ap-perclip-stats" id="ap-perclip-stats"></div>
+      <div class="chart-card"><div id="ap-perclip-chart" class="chart" role="img" aria-label="Error of Newton on each of the 36 clips"></div></div>
+    </div>
+
+    <nav class="ap-pager" aria-label="Other physics engines">
+      <span></span>
+      <a class="ap-pager-link next" href="mujoco.html"><span>Next physics engine<i class="fas fa-arrow-right"></i></span><b>MuJoCo</b></a>
+    </nav>
+  </div>
+</section>
+</main>
+
+<footer class="footer">
+  <div class="wrap narrow center">
+    <a class="icon-link" href="https://github.com/ludwigstr/wire-harness-approaches" aria-label="Code on GitHub"><i class="fab fa-github"></i></a>
+  </div>
+</footer>
+
+<div class="tooltip" id="tooltip" role="tooltip" hidden></div>
+<script src="../static/js/data.js"></script>
+<script src="../static/js/approach.js"></script>
+</body>
+</html>

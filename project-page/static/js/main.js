@@ -19,10 +19,10 @@
     { key: 'physworld',   name: 'PhysWorld',       paradigm: 'world',    score: 4.5,  median: med('physworld'),   status: 'final',   clips: 36, scored: '16 nodes, frames 5…T−1' },
     { key: 'newton',      name: 'Newton',          paradigm: 'physics',  score: 8.1,  median: null,               status: 'running', gen: 12,   clips: 36, scored: '16 nodes, every frame' },
     { key: 'mujoco',      name: 'MuJoCo',          paradigm: 'physics',  score: 10.9, median: null,               status: 'running', gen: 20,   clips: 36, scored: '16 nodes, every frame' },
-    { key: 'genesis',     name: 'Genesis',         paradigm: 'physics',  score: 12.7, median: null,               status: 'running', gen: 29,   clips: 36, scored: '16 nodes, every frame' },
+    { key: 'genesis',     name: 'Genesis',         paradigm: 'physics',  score: 12.7, median: med('genesis'),     status: 'final',   clips: 36, scored: '16 nodes, every frame' },
     { key: 'yang',        name: 'Yang et al.',     paradigm: 'dynamics', score: 13.3, median: 11.68,              status: 'partial', clips: 14,   scored: '16 nodes, frames 5…T−1' },
     { key: 'caporali',    name: 'Caporali et al.', paradigm: 'dynamics', score: 15.8, median: med('caporali'),    status: 'final',   clips: 36, scored: '16 nodes, every frame incl. 0' },
-    { key: 'dlolab',      name: 'DLO-Lab',         paradigm: 'physics',  score: 17.0, median: null,               status: 'running', gen: 19,   clips: 36, scored: '16 nodes, every frame' },
+    { key: 'dlolab',      name: 'DLO-Lab',         paradigm: 'physics',  score: 17.0, median: null,               status: 'running', gen: 21,   clips: 36, scored: '16 nodes, every frame' },
     { key: 'ropedreamer', name: 'RopeDreamer',     paradigm: 'world',    score: 18.3, median: 13.00,              status: 'partial', clips: 14,   scored: '16 nodes, frames 5…T−1' },
     { key: 'phystwin',    name: 'PhysTwin',        paradigm: 'world',    score: 22.0, median: med('phystwin'),    status: 'final',   clips: 36, scored: '14 inner nodes, every frame' },
     { key: 'adaptigraph', name: 'AdaptiGraph',     paradigm: 'dynamics', score: 29.4, median: med('adaptigraph'), status: 'final',   clips: 36, scored: '16 nodes, frames 5…T−1' }
@@ -192,12 +192,9 @@
   });
 
   // Open an approach from anywhere (chart click, table click).
+  // Every approach has its own page.
   function openApproach(key) {
-    var a = BY_KEY[key];
-    if (!a) return;
-    showCategory(a.paradigm);
-    var d = document.getElementById('detail-' + key);
-    if (d) { setOpen(d, true); d.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' }); }
+    if (BY_KEY[key]) location.href = 'approaches/' + key + '.html';
   }
 
   // ---------------------------------------------------------------- results: filter state
@@ -286,12 +283,12 @@
     });
   }
 
-  // ---------------------------------------------------------------- per-clip explorer (clip x error, 2-D zoom)
+  // ---------------------------------------------------------------- per-clip explorer (one row per method, 2-D zoom)
   var stripBox = document.getElementById('strip-chart');
   var legendBox = document.getElementById('strip-legend');
   var N = D.clips.length;
 
-  // Series with real per-clip numbers. Colour = paradigm (as everywhere on the page), shape = model.
+  // Series with real per-clip numbers. Colour = paradigm (as everywhere on the page); the row names the method.
   var SERIES = [];
   function addSeries(key, label, values) {
     if (values && BY_KEY[key]) SERIES.push({ key: key, label: label, paradigm: BY_KEY[key].paradigm, values: values });
@@ -300,26 +297,10 @@
   addSeries('phystwin', 'PhysTwin', D.perClip.phystwin);
   addSeries('caporali', 'Caporali et al.', D.perClip.caporali);
   addSeries('adaptigraph', 'AdaptiGraph', D.perClip.adaptigraph);
+  addSeries('genesis', 'Genesis', D.perClip.genesis);
   addSeries('newton', 'Newton (gen 0, interim)', D.newtonGen0 && D.newtonGen0.clips);
-  var SHAPES = ['circle', 'square', 'triangle'];
-  var shapeIx = {};
-  SERIES.forEach(function (s) { var i = shapeIx[s.paradigm] || 0; s.shape = SHAPES[i % SHAPES.length]; shapeIx[s.paradigm] = i + 1; });
   var SERIES_BY_KEY = {};
   SERIES.forEach(function (s) { SERIES_BY_KEY[s.key] = s; });
-
-  function marker(shape, parent) {
-    if (shape === 'square') return el('rect', { x: -4, y: -4, width: 8, height: 8, rx: 1.5 }, parent);
-    if (shape === 'triangle') return el('path', { d: 'M0,-5.4 L5,3.4 L-5,3.4 Z' }, parent);
-    return el('circle', { r: 4.6 }, parent);
-  }
-  function markerIcon(s) {
-    var svg = document.createElementNS(SVGNS, 'svg');
-    svg.setAttribute('viewBox', '-7 -7 14 14'); svg.setAttribute('width', 14); svg.setAttribute('height', 14);
-    svg.setAttribute('aria-hidden', 'true');
-    var m = marker(s.shape, svg);
-    m.setAttribute('style', 'fill:' + PARADIGM[s.paradigm].color);
-    return svg.outerHTML;
-  }
 
   // ---- method picker: "All methods" + one menu per paradigm
   var pick = { paradigm: 'all', key: null };
@@ -362,18 +343,18 @@
     });
   }
 
-  // ---- zoom state: x = clip index (1..N), y = mm/node
+  // ---- zoom state: x = mm/node, y = row position (row 1 at the top; a row spans ±0.5)
   var state = { clip: D.clips.indexOf('20261021_164755') >= 0 ? '20261021_164755' : D.clips[0], hover: null };
   var mode = 'box';
   function fullDomain() {
-    var vmax = 0;
-    activeSeries().forEach(function (s) { D.clips.forEach(function (c) { if (s.values[c] > vmax) vmax = s.values[c]; }); });
+    var vmax = 0, rows = activeSeries();
+    rows.forEach(function (s) { D.clips.forEach(function (c) { if (s.values[c] > vmax) vmax = s.values[c]; }); });
     vmax = vmax || 10;
-    return { x0: 0.5, x1: N + 0.5, y0: 0, y1: niceMax(vmax * 1.04, vmax > 40 ? 10 : vmax > 15 ? 5 : 2) };
+    return { x0: 0, x1: niceMax(vmax * 1.02, vmax > 40 ? 10 : vmax > 15 ? 5 : 2), y0: 0.5, y1: rows.length + 0.5 };
   }
   var FULL = fullDomain();
   var zoom = { x0: FULL.x0, x1: FULL.x1, y0: FULL.y0, y1: FULL.y1 };
-  var MIN_X = 2, MIN_Y = 0.5;
+  var MIN_X = 1, MIN_Y = 0.25;
   function clampAxis(a0, a1, f0, f1, minSpan) {
     var span = a1 - a0;
     if (span < minSpan) { var c = (a0 + a1) / 2; a0 = c - minSpan / 2; a1 = c + minSpan / 2; span = minSpan; }
@@ -424,21 +405,24 @@
     zb.out.disabled = !z;
     zb.reset.disabled = !z;
     zb.inn.disabled = (zoom.x1 - zoom.x0) <= MIN_X + 1e-9 && (zoom.y1 - zoom.y0) <= MIN_Y + 1e-9;
-    var c0 = Math.max(1, Math.ceil(zoom.x0)), c1 = Math.min(N, Math.floor(zoom.x1));
-    var d = zoom.y1 - zoom.y0 < 10 ? 1 : 0;
-    zb.range.textContent = 'Clips ' + c0 + '–' + c1 + ' · ' + zoom.y0.toFixed(d) + '–' + zoom.y1.toFixed(d) + ' mm/node';
+    var d = zoom.x1 - zoom.x0 < 10 ? 1 : 0;
+    var vz = (FULL.y1 - FULL.y0) / (zoom.y1 - zoom.y0);
+    zb.range.textContent = 'Showing ' + zoom.x0.toFixed(d) + '–' + zoom.x1.toFixed(d) + ' mm/node' +
+      (vz > 1.01 ? ' · vertical zoom ×' + vz.toFixed(1) : '');
   }
 
   function renderLegend() {
     if (!legendBox) return;
-    legendBox.innerHTML = activeSeries().map(function (s) {
-      return '<span>' + markerIcon(s) + esc(s.label) + '</span>';
+    var seen = {};
+    activeSeries().forEach(function (s) { seen[s.paradigm] = true; });
+    legendBox.innerHTML = ['world', 'dynamics', 'physics'].filter(function (p) { return seen[p]; }).map(function (p) {
+      return '<span><span class="swatch round" style="--sw:' + PARADIGM[p].color + '"></span>' + PARADIGM[p].label + '</span>';
     }).join('');
   }
 
+  // Tooltip: clip number, frames and every shown method's error (no date or time).
   function clipTip(c) {
-    var L = clipLabel(c);
-    var html = '<div class="tt-title">Clip ' + (D.clips.indexOf(c) + 1) + ' &middot; ' + L.date + ', ' + L.time + '</div>' +
+    var html = '<div class="tt-title">Clip ' + (D.clips.indexOf(c) + 1) + ' of ' + N + '</div>' +
       '<div class="tt-row"><span>Frames</span><b>' + D.frames[c] + '</b></div>';
     activeSeries().forEach(function (s) {
       html += '<div class="tt-row"><span><span class="dot" style="--sw:' + PARADIGM[s.paradigm].color + '"></span>' + esc(s.label) + '</span><b>' + fmt(s.values[c], 2) + '</b></div>';
@@ -459,14 +443,23 @@
   function renderStrip() {
     if (!SERIES.length) { stripBox.innerHTML = '<p class="muted-note">No per-clip data found.</p>'; return; }
     renderLegend();
+    var rows = activeSeries();
     var W = Math.max(300, stripBox.clientWidth);
     var narrow = W < 520;
-    var L = narrow ? 40 : 48, R = W - 14, T = 10, H = narrow ? 300 : 380, B = H - 44;
+    var R = W - 16, T = 8;
+    var plotH = Math.max(rows.length * 58, 150);
+    var B = T + plotH, H = B + 34;
     var z = zoom;
-    var sx = function (i) { return L + ((i - z.x0) / (z.x1 - z.x0)) * (R - L); };
-    var sy = function (v) { return B - ((v - z.y0) / (z.y1 - z.y0)) * (B - T); };
+    // label column wide enough for the longest row name actually shown
+    var probe = el('svg', { width: 0, height: 0, style: 'position:absolute' }, stripBox);
+    var pt = el('text', { 'class': 'row-label' }, probe), longest = 0;
+    rows.forEach(function (s) { pt.textContent = s.label; longest = Math.max(longest, pt.getComputedTextLength()); });
+    stripBox.removeChild(probe);
+    var L = Math.min(Math.round(W * 0.4), Math.max(narrow ? 80 : 100, Math.ceil(longest) + 22));
+    var sx = function (v) { return L + ((v - z.x0) / (z.x1 - z.x0)) * (R - L); };
+    var sy = function (r) { return T + ((r - z.y0) / (z.y1 - z.y0)) * (B - T); };
     var invX = function (px) { return z.x0 + ((px - L) / (R - L)) * (z.x1 - z.x0); };
-    var invY = function (py) { return z.y0 + ((B - py) / (B - T)) * (z.y1 - z.y0); };
+    var invY = function (py) { return z.y0 + ((py - T) / (B - T)) * (z.y1 - z.y0); };
 
     stripBox.innerHTML = '';
     pts = [];
@@ -474,45 +467,46 @@
     var toPt = function (e) { var r = svg.getBoundingClientRect(); return { x: (e.clientX - r.left) * (W / r.width), y: (e.clientY - r.top) * (H / r.height) }; };
     var defs = el('defs', {}, svg);
     var cp = el('clipPath', { id: 'pc-clip' }, defs);
-    el('rect', { x: L, y: T - 6, width: R - L, height: B - T + 12 }, cp);
+    el('rect', { x: L - 2, y: T, width: R - L + 4, height: B - T }, cp);
+    var cpl = el('clipPath', { id: 'pc-clip-labels' }, defs);
+    el('rect', { x: 0, y: T - 4, width: L, height: B - T + 8 }, cpl);
 
-    // y grid + labels
+    // x grid + ticks
     var grid = el('g', { 'class': 'grid' }, svg), ticks = el('g', { 'class': 'tick' }, svg);
-    var ys = niceStep(z.y1 - z.y0, narrow ? 4 : 6);
-    for (var v = Math.ceil(z.y0 / ys - 1e-9) * ys; v <= z.y1 + 1e-9; v += ys) {
-      el('line', { x1: L, x2: R, y1: sy(v), y2: sy(v) }, grid);
-      var ty = el('text', { x: L - 8, y: sy(v) + 4, 'text-anchor': 'end' }, ticks);
-      ty.textContent = ys < 1 ? v.toFixed(1) : Math.round(v);
+    var xs = niceStep(z.x1 - z.x0, narrow ? 4 : 7);
+    for (var v = Math.ceil(z.x0 / xs - 1e-9) * xs; v <= z.x1 + 1e-9; v += xs) {
+      el('line', { x1: sx(v), x2: sx(v), y1: T, y2: B }, grid);
+      var tx = el('text', { x: sx(v), y: B + 16, 'text-anchor': 'middle' }, ticks);
+      tx.textContent = xs < 1 ? v.toFixed(1) : Math.round(v);
     }
-    // x ticks: clip numbers
-    var xs = Math.max(1, Math.round(niceStep(z.x1 - z.x0, narrow ? 5 : 9)));
-    for (var i = Math.max(1, Math.ceil(z.x0 / xs) * xs); i <= Math.min(N, z.x1); i += xs) {
-      el('line', { x1: sx(i), x2: sx(i), y1: B, y2: B + 4, style: 'stroke: var(--axis)' }, svg);
-      var tx = el('text', { x: sx(i), y: B + 17, 'text-anchor': 'middle' }, ticks);
-      tx.textContent = i;
-    }
+    el('line', { 'class': 'baseline', x1: L, x2: L, y1: T, y2: B }, svg);
     el('line', { 'class': 'baseline', x1: L, x2: R, y1: B, y2: B }, svg);
-    var xl = el('text', { x: R, y: H - 6, 'text-anchor': 'end' }, svg);
-    xl.textContent = 'clip, in recording order';
+    var xl = el('text', { x: R, y: H - 4, 'text-anchor': 'end' }, svg);
+    xl.textContent = 'mm/node per clip';
     xl.setAttribute('style', 'fill: var(--muted); font-size: 11px');
-    var yl = el('text', { x: 4, y: T + 2, 'text-anchor': 'start', transform: 'rotate(-90 4 ' + (T + 2) + ')' }, svg);
-    yl.setAttribute('style', 'fill: var(--muted); font-size: 11px');
-    yl.setAttribute('x', -(B - 4)); yl.setAttribute('y', 12); yl.setAttribute('transform', 'rotate(-90)');
-    yl.setAttribute('text-anchor', 'start');
-    yl.textContent = 'mm/node';
 
+    // rows: centre line + label (labels stay put on the left, clipped to the plot height)
+    var labels = el('g', { 'clip-path': 'url(#pc-clip-labels)' }, svg);
     var plot = el('g', { 'clip-path': 'url(#pc-clip)' }, svg);
-    var guide = el('g', {}, plot);
-    var series = activeSeries();
-    series.forEach(function (s) {
+    var linkLayer = el('g', {}, plot);
+    // band half-height in row units; zooming in vertically spreads the dots apart
+    var JIT = 0.3;
+    rows.forEach(function (s, ri) {
+      var r = ri + 1;
+      var cy = sy(r);
+      el('line', { x1: L, x2: R, y1: cy, y2: cy, style: 'stroke: var(--line); pointer-events: none' }, plot);
+      if (r >= z.y0 - 0.5 && r <= z.y1 + 0.5) {
+        var lab = el('text', { 'class': 'row-label', x: L - 10, y: cy + 4, 'text-anchor': 'end' }, labels);
+        lab.textContent = s.label;
+      }
       D.clips.forEach(function (c, ci) {
         var val = s.values[c];
         if (val == null) return;
-        var idx = ci + 1;
-        if (idx < z.x0 - 0.5 || idx > z.x1 + 0.5 || val < z.y0 - (z.y1 - z.y0) * 0.05 || val > z.y1 + (z.y1 - z.y0) * 0.05) return;
-        var x = sx(idx), y = sy(val);
-        var m = marker(s.shape, plot);
-        pts.push({ clip: c, s: s, m: m, x: x, y: y });
+        var j = ((((ci * 37) % 11) - 5) / 5) * JIT; // deterministic spread in -0.3..0.3 rows
+        var yr = r + j;
+        if (val < z.x0 - (z.x1 - z.x0) * 0.02 || val > z.x1 + (z.x1 - z.x0) * 0.02 || yr < z.y0 - 0.1 || yr > z.y1 + 0.1) return;
+        var dot = el('circle', { 'class': 'clip-dot', cx: sx(val), cy: sy(yr), r: 4.5 }, plot);
+        pts.push({ clip: c, s: s, m: dot, x: sx(val), y: sy(yr) });
       });
     });
 
@@ -520,7 +514,7 @@
     var area = el('rect', { 'class': 'zoom-area', x: L, y: T, width: R - L, height: B - T, fill: 'transparent' }, svg);
     var drag = null;
     function nearest(p) {
-      var best = null, bd = 22 * 22;
+      var best = null, bd = 20 * 20;
       pts.forEach(function (q) { var dx = q.x - p.x, dy = q.y - p.y, d = dx * dx + dy * dy; if (d < bd) { bd = d; best = q; } });
       return best;
     }
@@ -544,7 +538,7 @@
           var d0 = drag;
           if (!d0.raf) d0.raf = requestAnimationFrame(function () {
             d0.raf = 0;
-            setZoom(d0.z.x0 - dx, d0.z.x1 - dx, d0.z.y0 + dy, d0.z.y1 + dy);
+            setZoom(d0.z.x0 - dx, d0.z.x1 - dx, d0.z.y0 - dy, d0.z.y1 - dy);
           });
         }
         return;
@@ -565,7 +559,7 @@
         var w = Math.abs(ax - d.x), h = Math.abs(ay - d.y);
         if (w < 6 && h < 6) return;
         var nx0 = w >= 6 ? invX(Math.min(ax, d.x)) : z.x0, nx1 = w >= 6 ? invX(Math.max(ax, d.x)) : z.x1;
-        var ny0 = h >= 6 ? invY(Math.max(ay, d.y)) : z.y0, ny1 = h >= 6 ? invY(Math.min(ay, d.y)) : z.y1;
+        var ny0 = h >= 6 ? invY(Math.min(ay, d.y)) : z.y0, ny1 = h >= 6 ? invY(Math.max(ay, d.y)) : z.y1;
         setZoom(nx0, nx1, ny0, ny1);
       }
     });
@@ -573,28 +567,29 @@
     area.addEventListener('pointerleave', function () { if (!drag && state.hover) { state.hover = null; paintStrip(); hideTip(); } });
     area.addEventListener('dblclick', resetZoom);
 
-    stripBox._guide = guide;
-    stripBox._geo = { L: L, R: R, T: T, B: B, toPt: toPt, invX: invX, invY: invY, sx: sx };
+    stripBox._link = linkLayer;
+    stripBox._geo = { L: L, R: R, T: T, B: B, toPt: toPt, invX: invX, invY: invY };
     syncZoomControls();
     paintStrip();
   }
 
   function paintStrip() {
     var focus = state.hover || state.clip;
-    var g = stripBox._geo, guide = stripBox._guide;
-    if (guide) {
-      guide.innerHTML = '';
-      var fi = D.clips.indexOf(focus) + 1;
-      if (g && fi > 0) el('line', { 'class': 'clip-guide', x1: g.sx(fi), x2: g.sx(fi), y1: g.T, y2: g.B }, guide);
-    }
+    var link = stripBox._link;
+    if (link) link.innerHTML = '';
+    var line = [];
     pts.forEach(function (q) {
       var on = q.clip === focus;
-      q.m.setAttribute('transform', 'translate(' + q.x + ' ' + q.y + ')' + (on ? ' scale(1.45)' : ''));
-      q.m.setAttribute('style', 'fill:' + PARADIGM[q.s.paradigm].color + '; stroke:' + (on ? 'var(--ink)' : 'var(--surface)') +
-        '; stroke-width: 1.6; vector-effect: non-scaling-stroke' + (state.hover && !on ? '; opacity: 0.35' : ''));
+      var isSel = q.clip === state.clip;
+      q.m.setAttribute('r', on ? 7 : 4.5);
+      q.m.setAttribute('style', 'fill:' + PARADIGM[q.s.paradigm].color + '; stroke:' + (on || isSel ? 'var(--ink)' : 'var(--surface)') +
+        '; stroke-width: 2' + (state.hover && !on ? '; opacity: 0.3' : ''));
+      if (on) line.push(q);
     });
-    // keep the focused clip's markers on top
-    pts.forEach(function (q) { if (q.clip === focus && q.m.parentNode) q.m.parentNode.appendChild(q.m); });
+    // connect the focused clip across rows, top to bottom, and keep its dots on top
+    line.sort(function (a, b) { return a.y - b.y; });
+    if (link && line.length > 1) el('polyline', { 'class': 'clip-link', points: line.map(function (q) { return q.x + ',' + q.y; }).join(' '), fill: 'none' }, link);
+    line.forEach(function (q) { if (q.m.parentNode) q.m.parentNode.appendChild(q.m); });
   }
 
   // ---------------------------------------------------------------- clip card
@@ -606,18 +601,17 @@
   function renderClipCard() {
     var c = state.clip;
     if (!c) { clipCard.hidden = true; return; }
-    var L = clipLabel(c);
     var series = activeSeries();
     var vmax = Math.max.apply(null, series.map(function (s) { return s.values[c]; }).concat([10]));
     var bars = series.map(function (s) {
       var v = s.values[c], col = PARADIGM[s.paradigm].color;
-      return '<span class="cb-name">' + markerIcon(s) + esc(s.label) + '</span>' +
+      return '<span class="cb-name"><span class="dot" style="--sw:' + col + '"></span>' + esc(s.label) + '</span>' +
         '<span class="cb-track"><span class="cb-fill" style="display:block;width:' + (v / vmax * 100).toFixed(1) + '%;background:' + col + '"></span></span>' +
         '<span class="cb-val">' + fmt(v, 2) + '<span class="cb-rank">#' + rankOf(s, c) + '/' + N + '</span></span>';
     }).join('');
     clipCard.innerHTML =
-      '<div><h4>Clip ' + (D.clips.indexOf(c) + 1) + ' &middot; ' + L.date + ', ' + L.time + '</h4>' +
-      '<p class="clip-meta"><code>' + c + '</code><br>' + D.frames[c] + ' frames &middot; ' + (D.frames[c] / FPS).toFixed(1) + ' s at 4 fps</p></div>' +
+      '<div><h4>Clip ' + (D.clips.indexOf(c) + 1) + ' of ' + N + '</h4>' +
+      '<p class="clip-meta">' + D.frames[c] + ' frames &middot; ' + (D.frames[c] / FPS).toFixed(1) + ' s at 4 fps</p></div>' +
       '<div><div class="clip-bars">' + bars + '</div>' +
       '<p class="muted-note">mm/node on this clip; #rank is the clip\'s rank among the 36 for that method (1 = easiest).</p></div>';
   }
@@ -656,10 +650,10 @@
   renderStrip();
   renderClipCard();
 
-  // Deep links: #detail-<key> opens that approach.
+  // Old deep links (#detail-<key>) forward to the approach's own page.
   function fromHash() {
     var m = /^#detail-([a-z]+)$/.exec(location.hash);
-    if (m && BY_KEY[m[1]]) openApproach(m[1]);
+    if (m && BY_KEY[m[1]]) location.replace('approaches/' + m[1] + '.html');
   }
   window.addEventListener('hashchange', fromHash);
   fromHash();
