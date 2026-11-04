@@ -10,8 +10,9 @@ Each folder holds one video per clip plus two stills per clip (worst frame, midd
 | `phystwin_22.0/` | PhysTwin, one spring-mass twin per clip | 22.03 | 14 inner nodes, every frame |
 | `caporali_15.8/` | Caporali et al., FiLM MLP + online estimation of (m, k_b, k_d), one step per frame | 15.78 | 16 nodes, every frame incl. frame 0 |
 | `adaptigraph_29.4/` | AdaptiGraph, simulator-trained + fine-tuned on the real clips, phi per cable from the first 5 frames | 29.42 | 16 nodes, frames 5..T-1 |
+| `physworld_4.5/` | PhysWorld, MPM twin per clip, one GNN on the demos of all 36 clips (the paper uses one per scene), per-node Phi fitted on the scored clip | 4.51 | 16 nodes, frames 5..T-1 |
 
-The three values are not defined identically (nodes and frames scored differ, see the last column).
+The values are not defined identically (nodes and frames scored differ, see the last column).
 Videos for the other approaches follow when their fits are finished.
 
 The recorder's own yellow debug text is in the export images. It shows faintly under the label band.
