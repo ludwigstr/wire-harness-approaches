@@ -12,6 +12,7 @@ Each folder holds one video per clip plus two stills per clip (worst frame, midd
 | `adaptigraph_29.4/` | AdaptiGraph, simulator-trained + fine-tuned on the real clips, phi per cable from the first 5 frames | 29.42 | 16 nodes, frames 5..T-1 |
 | `physworld_4.5/` | PhysWorld, MPM twin per clip, one GNN on the demos of all 36 clips (the paper uses one per scene), per-node Phi fitted on the scored clip | 4.51 | 16 nodes, frames 5..T-1 |
 | `genesis_12.7/` | Genesis general fit (185 parameters), stopped by the owner after generation 33; value from a fresh-process validation | 12.68 | 16 nodes, every frame |
+| `yang_16.0/` | Yang et al., interaction network + bi-LSTM trained on simulated Newton rollouts; parameters from differential evolution, stopped by the owner after 14 of 41 generations | 16.00 | 16 nodes, frames 5..T-1 |
 
 The values are not defined identically (nodes and frames scored differ, see the last column).
 Videos for the other approaches follow when their fits are finished.
