@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="World Models for Deformable Linear Objects: Benchmarking Physics-Based and Learned Approaches for Wire Harness Manufacturing">
+  <meta name="keywords" content="world models, deformable linear objects, wire harness, physics simulation, DLO, benchmarking, MuJoCo, PhysWorld">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>World Models for DLO Benchmarking</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.4/css/bulma.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+</head>
+
+<body>
+
+<!-- =============================== NAVBAR =============================== -->
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+</nav>
+
+<!-- =============================== HERO / TITLE =============================== -->
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+
+          <!-- Title -->
+          <h1 class="title is-1 publication-title">
+            World Models for Deformable Linear Objects: Benchmarking<br>
+            Physics-Based and Learned Approaches for Wire Harness Manufacturing
+          </h1>
+
+          <!-- Authors -->
+          <div class="is-size-5 publication-authors">
+            <span class="author-block main-author">
+              <a href="#">Ludwig Streloke</a><sup>a</sup>,
+            </span>
+            <span class="author-block">
+              <a href="#">Kishan Thummar</a><sup>a</sup>,
+            </span>
+            <span class="author-block">
+              <a href="#">Lukas Zeh</a><sup>b</sup>,
+            </span>
+            <span class="author-block">
+              <a href="#">Annalena Hartmann</a><sup>a</sup>,
+            </span>
+            <span class="author-block">
+              <a href="#">J&ouml;rg Franke</a><sup>a</sup>
+            </span>
+          </div>
+
+          <!-- Affiliations -->
+          <div class="is-size-6 publication-authors affiliations">
+            <span class="author-block"><sup>a</sup>Friedrich-Alexander-Universit&auml;t Erlangen-N&uuml;rnberg, Institute for Factory Automation and Production Systems (FAPS), Egerlandstra&szlig;e 7-9, Erlangen 91058, Germany</span>
+            <br>
+            <span class="author-block"><sup>b</sup>University of Stuttgart, Institute for Control Engineering of Machine Tools and Manufacturing Units (ISW), Seidenstra&szlig;e 34, Stuttgart 70174, Germany</span>
+          </div>
+
+          <!-- Links -->
+          <div class="column has-text-centered">
+            <div class="publication-links">
+
+              <!-- PDF Link -->
+              <span class="link-block">
+                <a href="#" class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon"><i class="fas fa-file-pdf"></i></span>
+                  <span>Paper</span>
+                </a>
+              </span>
+
+              <!-- Code Link -->
+              <span class="link-block">
+                <a href="https://github.com/KishanThummar007/World-Models-Benchmarking-for-the-DLOs"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon"><i class="fab fa-github"></i></span>
+                  <span>Code</span>
+                </a>
+              </span>
+
+              <!-- Video Link -->
+              <span class="link-block">
+                <a href="#video" class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon"><i class="fab fa-youtube"></i></span>
+                  <span>Video</span>
+                </a>
+              </span>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =============================== TEASER =============================== -->
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <div class="teaser-placeholder">
+        <i class="fas fa-image"></i>
+        <p>Teaser figure: overview of the 10 benchmark approaches on a real wire harness</p>
+        <p class="hint">Replace with: method overview figure or result comparison image</p>
+      </div>
+      <h2 class="subtitle has-text-centered">
+        A comprehensive benchmark of 10 physics-based and learned approaches for predicting
+        wire harness dynamics in manufacturing, evaluated on 36 real manipulation clips
+        with 4 cables and 16 tracked nodes each.
+      </h2>
+    </div>
+  </div>
+</section>
+
+<!-- =============================== ABSTRACT =============================== -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            The increasing automation of wire harness manufacturing creates a growing
+            demand for models that accurately predict the behavior of flexible wires
+            during manipulation. Research in Physical AI is advancing world models that
+            enable autonomous agents to predict the consequences of their actions, yet
+            remains largely disconnected from deformable linear object (DLO) modeling.
+            DLO research has long built dynamics models for diverse wire control tasks
+            without framing them as world models, while world model research has turned
+            to deformable objects but has so far largely overlooked wires.
+          </p>
+          <p>
+            This paper adopts a functional definition of world models to bridge the gap
+            between DLO dynamics modeling and world model research, benchmarking
+            representative approaches from both fields on a near-industry wire handling
+            task. The benchmark evaluates how world and dynamic models represent and
+            predict DLO motion, particularly how the physical properties like stiffness
+            and rest shape, that have a strong influence on the accuracy of DLO prediction,
+            are introduced. The benchmark establishes a common evaluation framework and
+            provides adoption guidance for comparing physics-based, world-model, and
+            dynamic-model approaches for DLO prediction.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =============================== PIPELINE OVERVIEW =============================== -->
+<section class="section" id="pipeline">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Pipeline Overview</h2>
+        <h3 class="title is-4">Perception &amp; DLO Tracking</h3>
+        <div class="content has-text-justified">
+          <p>
+            All approaches share a common perception front-end that extracts the wire
+            harness state from overhead camera recordings of real manipulation sequences:
+          </p>
+          <ol>
+            <li><strong>Segmentation</strong> &mdash; instance masks for each of the 4 cables
+                using a fine-tuned FastDLO model</li>
+            <li><strong>Centerline extraction</strong> &mdash; per-cable skeleton from the
+                segmentation mask</li>
+            <li><strong>Node tracking</strong> &mdash; 16 equidistant nodes resampled along
+                each centerline, tracked across frames to provide ground-truth positions</li>
+            <li><strong>Connector tracking</strong> &mdash; hub and plug positions measured
+                from fiducial markers, providing the boundary conditions (actions) for
+                every approach</li>
+          </ol>
+        </div>
+
+        <!-- Placeholder for perception pipeline figure -->
+        <div class="figure-placeholder">
+          <i class="fas fa-project-diagram"></i>
+          <p>Figure: Perception pipeline &mdash; camera frame &rarr; segmentation &rarr; centerline &rarr; tracked nodes</p>
+        </div>
+
+        <h3 class="title is-4">Benchmark Setup</h3>
+        <div class="content has-text-justified">
+          <p>
+            Each approach receives the same inputs: the initial cable configuration
+            (node positions at frame 0) and the measured connector trajectories.
+            The task is to predict the 14 interior node positions per cable at every
+            subsequent frame. Both end nodes (hub connector and plug connector) are
+            pinned to their measured tracks &mdash; they serve as the driving boundary
+            condition, not a prediction target.
+          </p>
+          <p>
+            The benchmark spans <strong>36 manipulation clips</strong> recorded on a
+            real wire harness assembly board, with a variety of connector motions
+            (insertions, retractions, lateral sweeps). Each clip contains 4 cables
+            with 16 tracked nodes, yielding 2,304 predicted node trajectories in total.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =============================== APPROACHES =============================== -->
+<section class="section" id="approaches">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">Benchmark Approaches</h2>
+    <p class="has-text-centered subtitle-text">
+      10 approaches across three paradigms: physics engines, world models, and learned dynamics models.
+    </p>
+
+    <!-- Approach category: Physics Engines -->
+    <h3 class="title is-4">Physics Engines</h3>
+    <div class="columns is-multiline">
+      <div class="column is-half">
+        <div class="approach-card">
+          <div class="approach-header">
+            <span class="approach-name">MuJoCo</span>
+            <span class="approach-score">10.9 mm/node</span>
+          </div>
+          <p>DER cable composite with CMA-ES parameter fitting. 16 nodes, ball joints with per-joint stiffness.</p>
+          <span class="approach-tag">Running gen 20</span>
+        </div>
+      </div>
+      <div class="column is-half">
+        <div class="approach-card">
+          <div class="approach-header">
+            <span class="approach-name">Genesis</span>
+            <span class="approach-score">12.7 mm/node</span>
+          </div>
+          <p>PD-controlled Cosserat rod with GPU-accelerated differentiable physics.</p>
+          <span class="approach-tag">Running gen 29</span>
+        </div>
+      </div>
+      <div class="column is-half">
+        <div class="approach-card">
+          <div class="approach-header">
+            <span class="approach-name">Newton</span>
+            <span class="approach-score">8.1 mm/node</span>
+          </div>
+          <p>Lumped-parameter DER model. Per-joint bending and twisting with CMA-ES optimization.</p>
+          <span class="approach-tag">Running gen 12</span>
+        </div>
+      </div>
+      <div class="column is-half">
+        <div class="approach-card">
+          <div class="approach-header">
+            <span class="approach-name">DLO-Lab</span>
+            <span class="approach-score">17.0 mm/node</span>
+          </div>
+          <p>MPM-based Cosserat rod with stretch and bending scaling factors.</p>
+          <span class="approach-tag">Running gen 19</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Approach category: World Models -->
+    <h3 class="title is-4">World Models</h3>
+    <div class="columns is-multiline">
+      <div class="column is-one-third">
+        <div class="approach-card best">
+          <div class="approach-header">
+            <span class="approach-name">PhysWorld</span>
+            <span class="approach-score best-score">4.5 mm/node</span>
+          </div>
+          <p>GNN world model with MPM-fitted particle fields. One GNN trained on all 36 clips.</p>
+          <span class="approach-tag best-tag">Best overall</span>
+        </div>
+      </div>
+      <div class="column is-one-third">
+        <div class="approach-card">
+          <div class="approach-header">
+            <span class="approach-name">RopeDreamer</span>
+            <span class="approach-score">18.3 mm/node</span>
+          </div>
+          <p>Dreamer RSSM with quaternion chain state. Pretrained on X-Planar clips, fine-tuned on eval data.</p>
+        </div>
+      </div>
+      <div class="column is-one-third">
+        <div class="approach-card">
+          <div class="approach-header">
+            <span class="approach-name">PhysTwin</span>
+            <span class="approach-score">22.0 mm/node</span>
+          </div>
+          <p>Mass-spring digital twin with per-clip spring fitting via differentiable simulation.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Approach category: Learned Dynamics -->
+    <h3 class="title is-4">Learned Dynamics Models</h3>
+    <div class="columns is-multiline">
+      <div class="column is-one-third">
+        <div class="approach-card">
+          <div class="approach-header">
+            <span class="approach-name">Yang et al.</span>
+            <span class="approach-score">13.3 mm/node</span>
+          </div>
+          <p>IN-biLSTM graph network. Interaction network with bidirectional LSTM along the chain.</p>
+        </div>
+      </div>
+      <div class="column is-one-third">
+        <div class="approach-card">
+          <div class="approach-header">
+            <span class="approach-name">Caporali et al.</span>
+            <span class="approach-score">15.8 mm/node</span>
+          </div>
+          <p>MLP dynamics model trained on MuJoCo transitions with real fine-tuning.</p>
+        </div>
+      </div>
+      <div class="column is-one-third">
+        <div class="approach-card">
+          <div class="approach-header">
+            <span class="approach-name">AdaptiGraph</span>
+            <span class="approach-score">29.4 mm/node</span>
+          </div>
+          <p>Material-adaptive GNN. Sim-pretrained with real adaptation. (45.5 sim-only)</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =============================== RESULTS =============================== -->
+<section class="section" id="results">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Results</h2>
+        <div class="content has-text-justified">
+          <p>
+            The table below summarises the mean node error (mm/node) across all 36 clips
+            and 4 cables. Physics engines are still running CMA-ES optimisation (since
+            2026-11-02) and their scores are interim.
+          </p>
+        </div>
+
+        <!-- Results table -->
+        <div class="table-container">
+          <table class="table is-bordered is-striped is-hoverable is-fullwidth results-table">
+            <thead>
+              <tr>
+                <th>Rank</th>
+                <th>Approach</th>
+                <th>Paradigm</th>
+                <th>mm/node</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="best-row">
+                <td>1</td>
+                <td><strong>PhysWorld</strong></td>
+                <td>World Model</td>
+                <td><strong>4.5</strong></td>
+                <td>Final</td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>Newton</td>
+                <td>Physics Engine</td>
+                <td>8.1</td>
+                <td>Running (gen 12)</td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>MuJoCo</td>
+                <td>Physics Engine</td>
+                <td>10.9</td>
+                <td>Running (gen 20)</td>
+              </tr>
+              <tr>
+                <td>4</td>
+                <td>Genesis</td>
+                <td>Physics Engine</td>
+                <td>12.7</td>
+                <td>Running (gen 29)</td>
+              </tr>
+              <tr>
+                <td>5</td>
+                <td>Yang et al.</td>
+                <td>Dynamics Model</td>
+                <td>13.3</td>
+                <td>Final</td>
+              </tr>
+              <tr>
+                <td>6</td>
+                <td>Caporali et al.</td>
+                <td>Dynamics Model</td>
+                <td>15.8</td>
+                <td>Final</td>
+              </tr>
+              <tr>
+                <td>7</td>
+                <td>DLO-Lab</td>
+                <td>Physics Engine</td>
+                <td>17.0</td>
+                <td>Running (gen 19)</td>
+              </tr>
+              <tr>
+                <td>8</td>
+                <td>RopeDreamer</td>
+                <td>World Model</td>
+                <td>18.3</td>
+                <td>Final</td>
+              </tr>
+              <tr>
+                <td>9</td>
+                <td>PhysTwin</td>
+                <td>World Model</td>
+                <td>22.0</td>
+                <td>Final</td>
+              </tr>
+              <tr>
+                <td>10</td>
+                <td>AdaptiGraph</td>
+                <td>Dynamics Model</td>
+                <td>29.4</td>
+                <td>Final</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Placeholder for result videos -->
+        <div class="figure-placeholder" id="video">
+          <i class="fas fa-video"></i>
+          <p>Video: side-by-side comparison of predicted vs. ground-truth cable motion</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =============================== APPROACH DETAILS (expandable) =============================== -->
+<section class="section" id="approach-details">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Approach Details</h2>
+        <p class="content has-text-justified">
+          Detailed explanation of each approach, including the original paper's method
+          and our benchmark implementation. Click to expand.
+        </p>
+
+        <!-- Expandable approach sections (to be filled step by step) -->
+        <div class="approach-detail" id="detail-physworld">
+          <button class="approach-toggle" onclick="toggleDetail('physworld')">
+            <span class="approach-detail-name">1. PhysWorld (4.5 mm/node)</span>
+            <span class="toggle-icon"><i class="fas fa-chevron-down"></i></span>
+          </button>
+          <div class="approach-content" id="content-physworld">
+            <p><em>Coming soon &mdash; MPM particle simulation + GNN world model pipeline</em></p>
+          </div>
+        </div>
+
+        <div class="approach-detail" id="detail-newton">
+          <button class="approach-toggle" onclick="toggleDetail('newton')">
+            <span class="approach-detail-name">2. Newton (8.1 mm/node)</span>
+            <span class="toggle-icon"><i class="fas fa-chevron-down"></i></span>
+          </button>
+          <div class="approach-content" id="content-newton">
+            <p><em>Coming soon &mdash; lumped-parameter DER physics engine</em></p>
+          </div>
+        </div>
+
+        <div class="approach-detail" id="detail-mujoco">
+          <button class="approach-toggle" onclick="toggleDetail('mujoco')">
+            <span class="approach-detail-name">3. MuJoCo (10.9 mm/node)</span>
+            <span class="toggle-icon"><i class="fas fa-chevron-down"></i></span>
+          </button>
+          <div class="approach-content" id="content-mujoco">
+            <p><em>Coming soon &mdash; cable composite with CMA-ES fitting</em></p>
+          </div>
+        </div>
+
+        <div class="approach-detail" id="detail-genesis">
+          <button class="approach-toggle" onclick="toggleDetail('genesis')">
+            <span class="approach-detail-name">4. Genesis (12.7 mm/node)</span>
+            <span class="toggle-icon"><i class="fas fa-chevron-down"></i></span>
+          </button>
+          <div class="approach-content" id="content-genesis">
+            <p><em>Coming soon &mdash; GPU-accelerated differentiable Cosserat rod</em></p>
+          </div>
+        </div>
+
+        <div class="approach-detail" id="detail-yang">
+          <button class="approach-toggle" onclick="toggleDetail('yang')">
+            <span class="approach-detail-name">5. Yang et al. (13.3 mm/node)</span>
+            <span class="toggle-icon"><i class="fas fa-chevron-down"></i></span>
+          </button>
+          <div class="approach-content" id="content-yang">
+            <p><em>Coming soon &mdash; IN-biLSTM graph network</em></p>
+          </div>
+        </div>
+
+        <div class="approach-detail" id="detail-caporali">
+          <button class="approach-toggle" onclick="toggleDetail('caporali')">
+            <span class="approach-detail-name">6. Caporali et al. (15.8 mm/node)</span>
+            <span class="toggle-icon"><i class="fas fa-chevron-down"></i></span>
+          </button>
+          <div class="approach-content" id="content-caporali">
+            <p><em>Coming soon &mdash; MLP dynamics with sim-to-real transfer</em></p>
+          </div>
+        </div>
+
+        <div class="approach-detail" id="detail-dlolab">
+          <button class="approach-toggle" onclick="toggleDetail('dlolab')">
+            <span class="approach-detail-name">7. DLO-Lab (17.0 mm/node)</span>
+            <span class="toggle-icon"><i class="fas fa-chevron-down"></i></span>
+          </button>
+          <div class="approach-content" id="content-dlolab">
+            <p><em>Coming soon &mdash; MPM Cosserat rod engine</em></p>
+          </div>
+        </div>
+
+        <div class="approach-detail" id="detail-ropedreamer">
+          <button class="approach-toggle" onclick="toggleDetail('ropedreamer')">
+            <span class="approach-detail-name">8. RopeDreamer (18.3 mm/node)</span>
+            <span class="toggle-icon"><i class="fas fa-chevron-down"></i></span>
+          </button>
+          <div class="approach-content" id="content-ropedreamer">
+            <p><em>Coming soon &mdash; RSSM world model with quaternion chain</em></p>
+          </div>
+        </div>
+
+        <div class="approach-detail" id="detail-phystwin">
+          <button class="approach-toggle" onclick="toggleDetail('phystwin')">
+            <span class="approach-detail-name">9. PhysTwin (22.0 mm/node)</span>
+            <span class="toggle-icon"><i class="fas fa-chevron-down"></i></span>
+          </button>
+          <div class="approach-content" id="content-phystwin">
+            <p><em>Coming soon &mdash; mass-spring digital twin</em></p>
+          </div>
+        </div>
+
+        <div class="approach-detail" id="detail-adaptigraph">
+          <button class="approach-toggle" onclick="toggleDetail('adaptigraph')">
+            <span class="approach-detail-name">10. AdaptiGraph (29.4 mm/node)</span>
+            <span class="toggle-icon"><i class="fas fa-chevron-down"></i></span>
+          </button>
+          <div class="approach-content" id="content-adaptigraph">
+            <p><em>Coming soon &mdash; material-adaptive GNN with sim-to-real</em></p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =============================== BIBTEX =============================== -->
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>@inproceedings{streloke2027worldmodels,
+  title     = {World Models for Deformable Linear Objects: Benchmarking
+               Physics-Based and Learned Approaches for Wire Harness
+               Manufacturing},
+  author    = {Streloke, Ludwig and Thummar, Kishan and Zeh, Lukas
+               and Hartmann, Annalena and Franke, J{\"o}rg},
+  booktitle = {Proceedings of the 57th CIRP Conference on Manufacturing
+               Systems (CMS 2027)},
+  year      = {2027}
+}</code></pre>
+  </div>
+</section>
+
+<!-- =============================== FOOTER =============================== -->
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+      <a class="icon-link" href="https://github.com/KishanThummar007/World-Models-Benchmarking-for-the-DLOs">
+        <i class="fab fa-github"></i>
+      </a>
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            This website template is adapted from
+            <a href="https://github.com/nerfies/nerfies.github.io">Nerfies</a>
+            and <a href="https://voxposer.github.io">VoxPoser</a>,
+            licensed under a
+            <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">
+              Creative Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+function toggleDetail(id) {
+  var content = document.getElementById('content-' + id);
+  var detail = document.getElementById('detail-' + id);
+  if (content.classList.contains('is-open')) {
+    content.classList.remove('is-open');
+    detail.classList.remove('is-open');
+  } else {
+    content.classList.add('is-open');
+    detail.classList.add('is-open');
+  }
+}
+
+// Navbar burger toggle
+document.addEventListener('DOMContentLoaded', function() {
+  var burgers = document.querySelectorAll('.navbar-burger');
+  burgers.forEach(function(burger) {
+    burger.addEventListener('click', function() {
+      var target = document.getElementById(burger.dataset.target);
+      burger.classList.toggle('is-active');
+      if (target) target.classList.toggle('is-active');
+    });
+  });
+});
+</script>
+
+</body>
+</html>
