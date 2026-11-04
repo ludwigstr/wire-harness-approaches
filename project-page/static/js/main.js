@@ -81,9 +81,8 @@
   // ---------------------------------------------------------------- theme
   var themeBtn = document.getElementById('theme-toggle');
   function effectiveTheme() {
-    var t = document.documentElement.getAttribute('data-theme');
-    if (t) return t;
-    return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    // Light (white) by default; dark only when the viewer picks it with the toggle.
+    return document.documentElement.getAttribute('data-theme') || 'light';
   }
   function syncThemeIcon() {
     themeBtn.innerHTML = effectiveTheme() === 'dark' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
@@ -91,7 +90,7 @@
   themeBtn.addEventListener('click', function () {
     var next = effectiveTheme() === 'dark' ? 'light' : 'dark';
     document.documentElement.setAttribute('data-theme', next);
-    try { localStorage.setItem('dlo-theme', next); } catch (e) {}
+    try { localStorage.setItem('dlo-theme-v2', next); } catch (e) {}
     syncThemeIcon();
   });
   syncThemeIcon();
