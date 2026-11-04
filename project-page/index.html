@@ -859,26 +859,28 @@
   <div class="wrap narrow">
     <h2 class="section-title">Per-clip Explorer</h2>
     <p class="prose">
-      Every dot is one of the 36 clips, for the four approaches whose 36-clip refit is finished.
-      Hover a dot to see the same clip in every row; click it to pin that clip in the card below.
+      Each point is one method on one of the 36 clips: clips run along the bottom in recording order, the error goes up. Show all methods, or pick a family or a single model from the menus. Hover a point for that clip's values; click it to pin the clip in the card below. Per-clip results exist for PhysWorld, PhysTwin, Caporali et al., AdaptiGraph and Newton (generation 0 of the running fit); the other models are listed but not yet available.
     </p>
+    <div class="filter-row pc-filters" role="group" aria-label="Choose the methods to show">
+      <button class="chip-btn is-active" id="pc-all" type="button">All methods</button>
+      <label class="select-wrap"><span class="swatch" style="--sw: var(--series-world)"></span><select id="pc-world" aria-label="World models"></select></label>
+      <label class="select-wrap"><span class="swatch" style="--sw: var(--series-dynamics)"></span><select id="pc-dynamics" aria-label="Dynamics models"></select></label>
+      <label class="select-wrap"><span class="swatch" style="--sw: var(--series-physics)"></span><select id="pc-physics" aria-label="Physics engines"></select></label>
+    </div>
     <div class="chart-card">
       <div class="chart-toolbar">
-        <div class="legend" aria-hidden="true">
-        <span><span class="swatch round" style="--sw: var(--series-world)"></span>World Model</span>
-        <span><span class="swatch round" style="--sw: var(--series-dynamics)"></span>Dynamics Model</span>
-        <span><span class="tick-key"></span>Median</span>
-      </div>
+        <div class="legend" id="strip-legend"></div>
         <div class="zoom-controls" role="group" aria-label="Zoom the per-clip chart">
-          <button class="icon-btn small" id="zoom-left" aria-label="Pan left" title="Pan left"><i class="fas fa-chevron-left"></i></button>
-          <button class="icon-btn small" id="zoom-out" aria-label="Zoom out" title="Zoom out"><i class="fas fa-magnifying-glass-minus"></i></button>
-          <button class="icon-btn small" id="zoom-in" aria-label="Zoom in" title="Zoom in"><i class="fas fa-magnifying-glass-plus"></i></button>
-          <button class="icon-btn small" id="zoom-right" aria-label="Pan right" title="Pan right"><i class="fas fa-chevron-right"></i></button>
-          <button class="text-btn" id="zoom-reset">Reset</button>
+          <button class="icon-btn small is-on" id="mode-box" type="button" aria-pressed="true" title="Box zoom: drag over an area to zoom into it"><i class="fas fa-vector-square"></i></button>
+          <button class="icon-btn small" id="mode-pan" type="button" aria-pressed="false" title="Pan: drag to move around"><i class="fas fa-hand"></i></button>
+          <span class="tb-sep"></span>
+          <button class="icon-btn small" id="zoom-out" type="button" aria-label="Zoom out" title="Zoom out"><i class="fas fa-magnifying-glass-minus"></i></button>
+          <button class="icon-btn small" id="zoom-in" type="button" aria-label="Zoom in" title="Zoom in"><i class="fas fa-magnifying-glass-plus"></i></button>
+          <button class="text-btn" id="zoom-reset" type="button">Reset</button>
         </div>
       </div>
-      <p class="zoom-hint"><span id="zoom-range"></span> &middot; drag across the chart to zoom into a range, Ctrl + scroll or pinch to zoom, double-click to reset</p>
-      <div id="strip-chart" class="chart" role="img" aria-label="Per-clip error for PhysWorld, Caporali, PhysTwin and AdaptiGraph"></div>
+      <p class="zoom-hint"><span id="zoom-range"></span> &middot; drag a box to zoom (both axes), switch to the hand to pan, Ctrl + scroll or pinch to zoom, double-click to reset</p>
+      <div id="strip-chart" class="chart" role="img" aria-label="Per-clip error of each method"></div>
     </div>
     <div class="clip-card" id="clip-card" aria-live="polite"></div>
   </div>

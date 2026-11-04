@@ -370,3 +370,32 @@ button { font-family: inherit; }
 .zoom-hint span { color: var(--ink-2); font-weight: 600; font-variant-numeric: tabular-nums; }
 .chart .zoom-area { cursor: crosshair; touch-action: pan-y; }
 .chart .brush { fill: var(--accent); fill-opacity: 0.12; stroke: var(--accent); stroke-width: 1; pointer-events: none; }
+
+/* ---------- Per-clip method picker + 2-D zoom ---------- */
+.pc-filters { margin-top: 0.4rem; }
+.select-wrap {
+  position: relative; display: inline-flex; align-items: center; gap: 0.5rem;
+  padding: 0 0.4rem 0 0.9rem; border: 1px solid var(--line); border-radius: 999px; background: var(--surface);
+  transition: border-color .15s, background .15s;
+}
+.select-wrap:hover { border-color: var(--axis); }
+.select-wrap.is-active { background: var(--ink); border-color: var(--ink); }
+.select-wrap select {
+  font-family: inherit; font-size: 0.9rem; font-weight: 600; color: var(--ink-2);
+  background: transparent; border: none; padding: 0.5rem 1.6rem 0.5rem 0; cursor: pointer;
+  field-sizing: content; max-width: 15rem; /* size to the chosen label, not the longest option */
+  appearance: none; -webkit-appearance: none;
+  background-image: linear-gradient(45deg, transparent 50%, currentColor 50%), linear-gradient(135deg, currentColor 50%, transparent 50%);
+  background-position: calc(100% - 10px) 55%, calc(100% - 5px) 55%; background-size: 5px 5px; background-repeat: no-repeat;
+}
+.select-wrap select:focus-visible { outline: none; }
+.select-wrap:focus-within { outline: 2px solid var(--accent); outline-offset: 2px; }
+.select-wrap.is-active select { color: var(--bg); }
+.select-wrap select option { color: #0b0b0b; background: #fff; font-weight: 500; }
+.select-wrap select option:disabled { color: #9a988f; }
+.icon-btn.is-on { background: var(--accent-wash); border-color: var(--accent); color: var(--accent-ink); }
+.tb-sep { width: 1px; height: 20px; background: var(--line); margin: 0 0.2rem; }
+.legend svg, .cb-name svg { flex: none; }
+.chart .clip-guide { stroke: var(--ink); stroke-width: 1; opacity: 0.25; pointer-events: none; }
+.chart.pan-mode .zoom-area { cursor: grab; touch-action: none; }
+.chart.pan-mode .zoom-area:active { cursor: grabbing; }
