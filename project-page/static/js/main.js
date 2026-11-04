@@ -1,9 +1,8 @@
-/* Project page interactions: theme, nav, pipeline stepper, approach tabs, charts, video viewer. */
+/* Project page interactions: theme, nav, pipeline stepper, approach tabs, charts, per-clip explorer. */
 (function () {
   'use strict';
 
   var D = window.BENCH_DATA || { clips: [], frames: {}, perClip: {}, meta: {}, stills: {} };
-  var MEDIA = '../clips36_final_v1/';
   var FPS = 4;
   var SVGNS = 'http://www.w3.org/2000/svg';
 
@@ -349,7 +348,7 @@
     VIDEO_KEYS.forEach(function (k) {
       html += '<div class="tt-row"><span><span class="dot" style="--sw:' + PARADIGM[BY_KEY[k].paradigm].color + '"></span>' + BY_KEY[k].name + '</span><b>' + fmt(D.perClip[k][c], 2) + '</b></div>';
     });
-    return html + '<div class="tt-row"><span></span><span>Click to watch</span></div>';
+    return html + '<div class="tt-row"><span></span><span>Click to pin</span></div>';
   }
 
   var stripDots = [];
@@ -409,7 +408,7 @@
         hit.addEventListener('mouseenter', function (e) { setHover(c); showTip(clipTip(c), e.clientX, e.clientY); });
         hit.addEventListener('mousemove', function (e) { showTip(clipTip(c), e.clientX, e.clientY); });
         hit.addEventListener('mouseleave', function () { setHover(null); hideTip(); });
-        hit.addEventListener('click', function () { hideTip(); selectClip(c, true); });
+        hit.addEventListener('click', function () { hideTip(); selectClip(c); });
       });
     });
     stripBox._linkLayer = linkLayer;
@@ -452,246 +451,17 @@
     }).join('');
     clipCard.innerHTML =
       '<div><h4>' + L.date + ', ' + L.time + '</h4>' +
-      '<p class="clip-meta"><code>' + c + '</code><br>' + D.frames[c] + ' frames &middot; ' + (D.frames[c] / FPS).toFixed(1) + ' s at 4 fps</p>' +
-      '<a class="pill-btn small" href="#videos" id="watch-clip"><i class="fas fa-play"></i>Watch this clip</a></div>' +
+      '<p class="clip-meta"><code>' + c + '</code><br>' + D.frames[c] + ' frames &middot; ' + (D.frames[c] / FPS).toFixed(1) + ' s at 4 fps</p>' + '</div>' +
       '<div><div class="clip-bars">' + bars + '</div>' +
       '<p class="muted-note">mm/node on this clip; #rank is the clip\'s rank among the 36 for that approach (1 = easiest).</p></div>';
   }
 
-  function selectClip(c, fromChart) {
+  function selectClip(c) {
     if (!c) return;
     state.clip = c;
     paintStrip();
     renderClipCard();
-    viewer.loadClip(c);
-    if (fromChart) clipSelect.value = c;
   }
-
-  // ---------------------------------------------------------------- video viewer
-  var clipSelect = document.getElementById('clip-select');
-  var SOURCES = VIDEO_KEYS.map(function (k) { return { id: k, label: BY_KEY[k].name + ' prediction' }; })
-    .concat([{ id: 'check', label: 'Tracking check (skeleton)' }, { id: 'split', label: 'Tracking split-screen' }]);
-
-  function srcUrl(source, clip) {
-    if (source === 'check') return MEDIA + 'check_videos/skeleton_check_' + clip + '.mp4';
-    if (source === 'split') return MEDIA + 'splitscreen_videos/skeleton_split_' + clip + '.mp4';
-    return MEDIA + 'prediction_videos/' + D.meta[source].folder + '/' + source + '_' + clip + '.mp4';
-  }
-
-  (function buildClipSelect() {
-    var groups = {};
-    D.clips.forEach(function (c) {
-      var L = clipLabel(c);
-      (groups[L.date] = groups[L.date] || []).push(c);
-    });
-    Object.keys(groups).forEach(function (date) {
-      var og = document.createElement('optgroup');
-      og.label = date;
-      groups[date].forEach(function (c) {
-        var o = document.createElement('option');
-        o.value = c;
-        o.textContent = clipLabel(c).time + '  (' + D.frames[c] + ' frames)';
-        og.appendChild(o);
-      });
-      clipSelect.appendChild(og);
-    });
-  })();
-
-  var viewer = (function () {
-    var playerEls = document.querySelectorAll('.player');
-    var players = [];
-    var defaults = ['physworld', VIDEO_KEYS.indexOf('phystwin') >= 0 ? 'phystwin' : 'check'];
-    var playBtn = document.getElementById('play-toggle');
-    var scrub = document.getElementById('scrubber');
-    var readout = document.getElementById('frame-readout');
-    var speedSel = document.getElementById('speed-select');
-    var current = null;
-    var playing = false;
-
-    playerEls.forEach(function (pe, i) {
-      var p = {
-        root: pe,
-        video: pe.querySelector('video'),
-        box: pe.querySelector('.video-box'),
-        err: pe.querySelector('.video-error'),
-        select: pe.querySelector('.source-select'),
-        score: pe.querySelector('.player-score'),
-        stills: pe.querySelector('.still-row'),
-        source: defaults[i] || 'check',
-        broken: false
-      };
-      SOURCES.forEach(function (s) {
-        var o = document.createElement('option');
-        o.value = s.id; o.textContent = s.label;
-        p.select.appendChild(o);
-      });
-      p.select.value = p.source;
-      p.select.addEventListener('change', function () { p.source = p.select.value; load(p, true); });
-      // Only treat the video as missing if nothing could be loaded; transient errors during a
-      // src swap must not cover a video that plays.
-      p.video.addEventListener('error', function () {
-        setTimeout(function () {
-          if (p.video.readyState === 0 && p.video.error) { p.broken = true; p.err.hidden = false; }
-        }, 400);
-      });
-      ['loadedmetadata', 'loadeddata', 'canplay'].forEach(function (ev) {
-        p.video.addEventListener(ev, function () { p.broken = false; p.err.hidden = true; });
-      });
-      p.video.addEventListener('ended', function () { if (p === master()) setPlaying(false); });
-      players.push(p);
-    });
-
-    function master() {
-      for (var i = 0; i < players.length; i++) if (!players[i].broken) return players[i];
-      return players[0];
-    }
-    function frames() { return current ? D.frames[current] : 0; }
-    function frameOf(t) { return Math.min(frames() - 1, Math.max(0, Math.floor(t * FPS + 1e-6))); }
-
-    function load(p, keepTime) {
-      if (!current) return;
-      var t = keepTime ? master().video.currentTime : 0;
-      var src = srcUrl(p.source, current);
-      p.broken = false; p.err.hidden = true;
-      p.box.classList.toggle('wide', p.source === 'split');
-      p.video.src = src;
-      p.video.playbackRate = parseFloat(speedSel.value);
-      p.video.load();
-      if (keepTime && t > 0) {
-        p.video.addEventListener('loadedmetadata', function once() {
-          p.video.removeEventListener('loadedmetadata', once);
-          p.video.currentTime = t;
-          if (playing) p.video.play().catch(function () {});
-        });
-      }
-      var isPred = !!D.perClip[p.source];
-      p.score.textContent = isPred ? fmt(D.perClip[p.source][current], 2) + ' mm/node' : '';
-      p.stills.innerHTML = '';
-      if (isPred && D.stills[p.source] && D.stills[p.source][current]) {
-        var s = D.stills[p.source][current];
-        ['worst', 'middle'].forEach(function (kind) {
-          if (!s[kind]) return;
-          var b = document.createElement('button');
-          b.className = 'still-btn';
-          b.type = 'button';
-          b.innerHTML = '<i class="fas ' + (kind === 'worst' ? 'fa-triangle-exclamation' : 'fa-crosshairs') + '"></i>' +
-            (kind === 'worst' ? 'Worst' : 'Middle') + ' frame ' + s[kind].frame;
-          b.addEventListener('click', function () { seekFrame(s[kind].frame); });
-          p.stills.appendChild(b);
-          var a = document.createElement('a');
-          a.className = 'still-btn';
-          a.href = MEDIA + 'prediction_videos/' + D.meta[p.source].folder + '/' + s[kind].file;
-          a.target = '_blank'; a.rel = 'noopener';
-          a.title = 'Open the ' + kind + '-frame still in full resolution';
-          a.setAttribute('aria-label', a.title);
-          a.innerHTML = '<i class="fas fa-image"></i>';
-          p.stills.appendChild(a);
-        });
-      } else if (!isPred) {
-        p.stills.innerHTML = '<span class="muted-note">Tracked skeletons only, no prediction.</span>';
-      }
-    }
-
-    function loadClip(c) {
-      current = c;
-      setPlaying(false);
-      scrub.max = Math.max(0, frames() - 1);
-      scrub.value = 0;
-      players.forEach(function (p) { load(p, false); });
-      updateReadout(0);
-    }
-
-    function setPlaying(on) {
-      playing = on;
-      playBtn.innerHTML = on ? '<i class="fas fa-pause"></i>' : '<i class="fas fa-play"></i>';
-      playBtn.setAttribute('aria-label', on ? 'Pause' : 'Play');
-      players.forEach(function (p) {
-        if (p.broken) return;
-        if (on) { var pr = p.video.play(); if (pr && pr.catch) pr.catch(function () {}); } else p.video.pause();
-      });
-    }
-    function seekFrame(k) {
-      k = Math.min(frames() - 1, Math.max(0, k));
-      var t = (k + 0.5) / FPS;
-      players.forEach(function (p) { if (!p.broken) p.video.currentTime = t; });
-      scrub.value = k;
-      updateReadout(k);
-    }
-    function updateReadout(k) {
-      readout.textContent = 'frame ' + k + ' / ' + Math.max(0, frames() - 1) + ' · ' + (k / FPS).toFixed(2) + ' s';
-    }
-
-    // Keep the followers on the master's clock.
-    players.forEach(function (p) {
-      p.video.addEventListener('timeupdate', function () {
-        if (p !== master()) return;
-        var t = p.video.currentTime;
-        var k = frameOf(t);
-        scrub.value = k;
-        updateReadout(k);
-        players.forEach(function (q) {
-          if (q === p || q.broken) return;
-          if (Math.abs(q.video.currentTime - t) > 0.15) q.video.currentTime = t;
-        });
-      });
-    });
-
-    playBtn.addEventListener('click', function () {
-      if (!playing && master().video.ended) seekFrame(0);
-      setPlaying(!playing);
-    });
-    document.getElementById('step-back').addEventListener('click', function () { setPlaying(false); seekFrame(+scrub.value - 1); });
-    document.getElementById('step-fwd').addEventListener('click', function () { setPlaying(false); seekFrame(+scrub.value + 1); });
-    scrub.addEventListener('input', function () { seekFrame(+scrub.value); });
-    speedSel.addEventListener('change', function () {
-      players.forEach(function (p) { p.video.playbackRate = parseFloat(speedSel.value); });
-    });
-
-    // Keyboard shortcuts while the viewer is on screen.
-    var inView = false;
-    var vs = document.getElementById('videos');
-    if ('IntersectionObserver' in window) {
-      new IntersectionObserver(function (en) { inView = en[0].isIntersecting; }, { threshold: 0.25 }).observe(vs);
-    }
-    document.addEventListener('keydown', function (e) {
-      if (!inView) return;
-      var tag = (e.target.tagName || '').toLowerCase();
-      if (tag === 'input' || tag === 'select' || tag === 'textarea' || tag === 'button' || e.target.isContentEditable) return;
-      if (e.key === ' ') { e.preventDefault(); playBtn.click(); }
-      else if (e.key === ',') { setPlaying(false); seekFrame(+scrub.value - 1); }
-      else if (e.key === '.') { setPlaying(false); seekFrame(+scrub.value + 1); }
-    });
-
-    return {
-      loadClip: loadClip,
-      setSource: function (i, source) {
-        var p = players[i];
-        if (!p) return;
-        p.source = source; p.select.value = source; load(p, false);
-      }
-    };
-  })();
-
-  clipSelect.addEventListener('change', function () { selectClip(clipSelect.value, false); });
-  function stepClip(d) {
-    var i = D.clips.indexOf(state.clip);
-    var n = D.clips[(i + d + D.clips.length) % D.clips.length];
-    clipSelect.value = n;
-    selectClip(n, false);
-  }
-  document.getElementById('clip-prev').addEventListener('click', function () { stepClip(-1); });
-  document.getElementById('clip-next').addEventListener('click', function () { stepClip(1); });
-
-  // "Watch predictions" buttons in the approach details.
-  document.querySelectorAll('.watch-btn').forEach(function (b) {
-    b.addEventListener('click', function () {
-      viewer.setSource(0, b.getAttribute('data-approach'));
-      document.getElementById('videos').scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth' });
-    });
-  });
-  document.querySelectorAll('[data-video-source]').forEach(function (a) {
-    a.addEventListener('click', function () { viewer.setSource(1, a.getAttribute('data-video-source')); });
-  });
 
   // ---------------------------------------------------------------- BibTeX copy
   var copyBtn = document.getElementById('copy-bib');
@@ -717,7 +487,6 @@
   renderTable();
   renderStrip();
   renderClipCard();
-  if (state.clip) { clipSelect.value = state.clip; viewer.loadClip(state.clip); }
 
   // Deep links: #detail-<key> opens that approach.
   function fromHash() {

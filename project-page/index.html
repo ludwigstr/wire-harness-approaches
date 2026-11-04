@@ -29,7 +29,6 @@
       <a href="#approaches">Approaches</a>
       <a href="#results">Results</a>
       <a href="#per-clip">Per clip</a>
-      <a href="#videos">Videos</a>
       <a href="#BibTeX">BibTeX</a>
     </nav>
     <div class="nav-actions">
@@ -48,7 +47,6 @@
 <!-- =============================== HERO / TITLE =============================== -->
 <section class="hero">
   <div class="wrap narrow center">
-    <p class="venue">57th CIRP Conference on Manufacturing Systems &middot; CMS 2027</p>
     <h1 class="publication-title">
       World Models for Deformable Linear Objects: Benchmarking
       Physics-Based and Learned Approaches for Wire Harness Manufacturing
@@ -69,7 +67,7 @@
     <div class="publication-links">
       <a href="#" class="pill-btn"><i class="fas fa-file-pdf"></i><span>Paper</span></a>
       <a href="https://github.com/KishanThummar007/World-Models-Benchmarking-for-the-DLOs" class="pill-btn"><i class="fab fa-github"></i><span>Code</span></a>
-      <a href="#videos" class="pill-btn"><i class="fas fa-play"></i><span>Videos</span></a>
+      <a href="#teaser" class="pill-btn"><i class="fas fa-play"></i><span>Video</span></a>
     </div>
 
     <div class="stat-row" aria-label="Benchmark at a glance">
@@ -83,12 +81,12 @@
 </section>
 
 <!-- =============================== TEASER =============================== -->
-<section class="teaser">
+<section class="teaser" id="teaser">
   <div class="wrap narrow">
     <figure class="teaser-figure">
-      <video id="teaser-video" muted loop playsinline preload="metadata"
-             poster="../clips36_final_v1/prediction_videos/physworld_4.5/physworld_20261021_164755_frame082_middle.png">
-        <source src="../clips36_final_v1/prediction_videos/physworld_4.5/physworld_20261021_164755.mp4" type="video/mp4">
+      <video id="teaser-video" muted loop playsinline controls preload="metadata"
+             poster="./static/media/physworld_best.jpg">
+        <source src="./static/media/physworld_best.mp4" type="video/mp4">
       </video>
       <figcaption>
         <h3>The best world model, open loop</h3>
@@ -99,7 +97,6 @@
           <li><span class="line-key dashed"></span>Predicted cable</li>
           <li><i class="fas fa-ruler-horizontal"></i>Clip mean error 3.13&nbsp;mm/node</li>
         </ul>
-        <a href="#videos" class="pill-btn small" style="align-self:flex-start"><i class="fas fa-play"></i>Compare any approach on any clip</a>
       </figcaption>
     </figure>
     <p class="teaser-sub">
@@ -223,7 +220,6 @@
         </div>
       </div>
     </div>
-    <p class="hint-line"><i class="fas fa-video"></i> See the tracked skeletons on any clip in the <a href="#videos" data-video-source="check">video viewer</a> (source &ldquo;Tracking check&rdquo;).</p>
 
     <h3 class="sub-title">Benchmark Setup</h3>
     <div class="prose">
@@ -348,7 +344,6 @@
           </table></div>
           <p class="muted-note">Wall clock on 14 clips: twins 14.2&nbsp;h, demos 12.8&nbsp;h, GNN 2.7&nbsp;h, &Phi; 1.3&nbsp;h.</p>
           <div class="detail-actions">
-            <button class="pill-btn small watch-btn" data-approach="physworld"><i class="fas fa-play"></i>Watch predictions</button>
             <span class="code-path"><i class="fas fa-folder"></i><code>physworld_mpm/</code>, <code>approaches/06_physworld.py</code></span>
           </div>
         </div></div>
@@ -458,7 +453,6 @@
             </tbody>
           </table></div>
           <div class="detail-actions">
-            <button class="pill-btn small watch-btn" data-approach="phystwin"><i class="fas fa-play"></i>Watch predictions</button>
             <span class="code-path"><i class="fas fa-folder"></i><code>approaches/05_phystwin.py</code>, <code>wire_model/phystwin/</code></span>
           </div>
         </div></div>
@@ -575,7 +569,6 @@
           </table></div>
           <p class="muted-note">Synthetic one-step error after training: 0.81&nbsp;mm/node. On the X-Planar run the per-frame model's gap to the per-second model came almost entirely from two clips whose open-loop rollout collapses (102713: 38.0 &rarr; 54.7; 134613: 25.6 &rarr; 40.3).</p>
           <div class="detail-actions">
-            <button class="pill-btn small watch-btn" data-approach="caporali"><i class="fas fa-play"></i>Watch predictions</button>
             <span class="code-path"><i class="fas fa-folder"></i><code>caporali_et_al/</code>, <code>approaches/09_caporali.py</code></span>
           </div>
         </div></div>
@@ -628,7 +621,6 @@
           </table></div>
           <p class="muted-note">On the 14 clips the fitted &phi; lies in &minus;0.2&hellip;1.15, and 22 of 56 cables sit on the lower bound &minus;0.2: the real cables are often stiffer or more plastic than the simulator's range covers.</p>
           <div class="detail-actions">
-            <button class="pill-btn small watch-btn" data-approach="adaptigraph"><i class="fas fa-play"></i>Watch predictions</button>
             <span class="code-path"><i class="fas fa-folder"></i><code>adaptigraph_c14/</code>, <code>approaches/10_adaptigraph.py</code></span>
           </div>
         </div></div>
@@ -890,7 +882,7 @@
     <h2 class="section-title">Per-clip Explorer</h2>
     <p class="prose">
       Every dot is one of the 36 clips, for the four approaches whose 36-clip refit is finished.
-      Hover a dot to see the same clip in every row; click it to load that clip in the video viewer.
+      Hover a dot to see the same clip in every row; click it to pin that clip in the card below.
     </p>
     <div class="chart-card">
       <div class="legend" aria-hidden="true">
@@ -901,75 +893,6 @@
       <div id="strip-chart" class="chart" role="img" aria-label="Per-clip error for PhysWorld, Caporali, PhysTwin and AdaptiGraph"></div>
     </div>
     <div class="clip-card" id="clip-card" aria-live="polite"></div>
-  </div>
-</section>
-
-<!-- =============================== VIDEOS =============================== -->
-<section class="section alt" id="videos">
-  <div class="wrap">
-    <h2 class="section-title center">Prediction Videos</h2>
-    <p class="prose center-text">
-      Camera image with the tracked cables (solid) and the prediction (dashed). The band at the top gives
-      the clip, the time, the current frame's error and the clip mean. Both players stay in sync.
-    </p>
-
-    <div class="viewer-controls">
-      <label class="field">
-        <span>Clip</span>
-        <select id="clip-select"></select>
-      </label>
-      <div class="field">
-        <span>Clip nav</span>
-        <div class="btn-group">
-          <button class="icon-btn" id="clip-prev" aria-label="Previous clip"><i class="fas fa-chevron-left"></i></button>
-          <button class="icon-btn" id="clip-next" aria-label="Next clip"><i class="fas fa-chevron-right"></i></button>
-        </div>
-      </div>
-      <label class="field">
-        <span>Speed</span>
-        <select id="speed-select">
-          <option value="0.25">0.25&times;</option>
-          <option value="0.5">0.5&times;</option>
-          <option value="1" selected>1&times; (4 fps)</option>
-          <option value="2">2&times;</option>
-          <option value="4">4&times;</option>
-        </select>
-      </label>
-    </div>
-
-    <div class="players">
-      <div class="player" data-player="a">
-        <div class="player-head">
-          <select class="source-select" aria-label="Left video source"></select>
-          <span class="player-score"></span>
-        </div>
-        <div class="video-box">
-          <video playsinline preload="metadata" muted></video>
-          <div class="video-error" hidden><i class="fas fa-film"></i><p>Video not found. Serve the page from the repository so that <code>../clips36_final_v1/</code> resolves.</p></div>
-        </div>
-        <div class="still-row"></div>
-      </div>
-      <div class="player" data-player="b">
-        <div class="player-head">
-          <select class="source-select" aria-label="Right video source"></select>
-          <span class="player-score"></span>
-        </div>
-        <div class="video-box">
-          <video playsinline preload="metadata" muted></video>
-          <div class="video-error" hidden><i class="fas fa-film"></i><p>Video not found. Serve the page from the repository so that <code>../clips36_final_v1/</code> resolves.</p></div>
-        </div>
-        <div class="still-row"></div>
-      </div>
-    </div>
-
-    <div class="transport">
-      <button class="icon-btn" id="step-back" aria-label="Previous frame" title="Previous frame (,)"><i class="fas fa-backward-step"></i></button>
-      <button class="icon-btn primary" id="play-toggle" aria-label="Play" title="Play / pause (space)"><i class="fas fa-play"></i></button>
-      <button class="icon-btn" id="step-fwd" aria-label="Next frame" title="Next frame (.)"><i class="fas fa-forward-step"></i></button>
-      <input type="range" id="scrubber" min="0" max="1" step="1" value="0" aria-label="Frame">
-      <span class="frame-readout" id="frame-readout">frame 0 / 0</span>
-    </div>
-    <p class="hint-line center-text"><i class="fas fa-keyboard"></i> Keys while the viewer is on screen: space plays or pauses, <kbd>,</kbd> / <kbd>.</kbd> step one frame (0.25&nbsp;s).</p>
   </div>
 </section>
 
