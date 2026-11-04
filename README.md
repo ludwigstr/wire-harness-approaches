@@ -28,6 +28,7 @@ One script per approach, in the order of the approaches table:
 | 15 | `adaptigraph_c14/` | AdaptiGraph with simulator data built from the 14 clips (speed-only variation) + real fine-tuning; snapshot of the current scripts, not yet adapted/tested in this repo | simulator (14 clips) + real fine-tune | summary row 6 | 21.1 |
 | 16 | `skeleton_from_export/` | Cable skeletons (4 x 16 nodes, metres, tracks14 format) from a segmentation export folder (raw image + class map per frame), using the project's tracking pipeline | tool | - | - |
 | 17 | `clips36_final_v1/` | **The 36 selected clips** (2 Nov 2026) with the newest tracking (final_v1): skeleton npz, check videos, split-screen videos, prediction overlay videos of the finished approaches | data | - | - |
+| 18 | `dlolab_fit_t36/` | Handoff: DLO-Lab fit on the 36 clips on another server; see its HANDOFF.md | fit on the 36 clips | summary row 10 | in progress |
 
 All numbers are **in-sample**: every approach is fitted or fine-tuned on the
 same 14 clips it is scored on (the physics rows fit their parameters there; the
