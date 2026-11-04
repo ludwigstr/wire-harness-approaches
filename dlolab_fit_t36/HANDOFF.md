@@ -13,7 +13,7 @@ by the hard deadline **2026-11-10 12:00 (Europe/Berlin)**.
 - **Model.** Cosserat rods from the DLO-Lab fork of Genesis (genesis-world 1.0.0), 4 cables driven by the measured
   motion of their ends, 16 tracked nodes each. **It runs on the CPU backend; no GPU is used.**
 - **Patched solver.** `extern/DLO-Lab-perjoint` is DLO-Lab with per-element stiffness scales added to the rod solver.
-  An unpatched DLO-Lab cannot run this fit. `scripts/dlolab_path.py` selects this copy; do not set `WIRE_DLOLAB`.
+  An unpatched DLO-Lab cannot run this fit. Use this copy, not `patches/dlo-lab-perjoint.patch` at the repo root: the two differ. `scripts/dlolab_path.py` selects this copy; do not set `WIRE_DLOLAB`.
 - **Parameters.** 293:
 
   | Parameter | Values |
@@ -175,7 +175,7 @@ the table carries them as "running".
 | `scripts/general_fit_validate.py` | fresh-process validation |
 | `scripts/dlolab_path.py` | selects the patched DLO-Lab copy |
 | `scripts/{clip_set,fit_clip,forecast_frames,genesis_full_scene,mujoco_camera,mujoco_scene}.py`, `wire_model/` | imported helpers |
-| `extern/DLO-Lab-perjoint/` | patched DLO-Lab, with its license; repo history and teaser image removed |
+| `extern/DLO-Lab-perjoint/` | patched DLO-Lab, with its license and real `genesis/assets`; repo history and teaser image removed. Force-added: the root `.gitignore` ignores `extern/` |
 | `data/tracks36/` | the 36 clips, with a README on the selection |
 | `data/genesis_rod_allclip_best.json` | read at start by the script even when resuming; needed for the file to load |
 | `state/dlolab_general_fit_t36_gen21.json` | start state: best of the main machine's run |
