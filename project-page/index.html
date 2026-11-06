@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <link rel="stylesheet" href="./static/css/index.css?v=20261106x">
+  <link rel="stylesheet" href="./static/css/index.css?v=20261106z">
   <script>
     // Apply the saved theme before first paint (no flash).
     try { var t = localStorage.getItem('dlo-theme-v2'); if (t) document.documentElement.setAttribute('data-theme', t); } catch (e) {}
@@ -424,13 +424,14 @@
   <div class="wrap narrow">
     <h2 class="section-title">Per-clip Explorer</h2>
     <p class="prose">
-      Every dot is one of the 36 clips, with one row per method. Show all methods, or pick a family or a single model from the menus. Hover a dot to see the same clip in every row; click it to pin that clip in the card below.
+      Every dot is one of the 36 clips, with one row per method. Show all methods, or tick the models you want to compare in the menus: any number, from one family or from several. Hover a dot to see the same clip in every row; click it to pin that clip in the card below.
     </p>
-    <div class="filter-row pc-filters" role="group" aria-label="Choose the methods to show">
+    <div class="filter-row pc-filters" role="group" aria-label="Choose the methods to compare">
       <button class="chip-btn is-active" id="pc-all" type="button">All methods</button>
-      <label class="select-wrap"><span class="swatch" style="--sw: var(--series-world)"></span><select id="pc-world" aria-label="World models"></select></label>
-      <label class="select-wrap"><span class="swatch" style="--sw: var(--series-dynamics)"></span><select id="pc-dynamics" aria-label="Dynamics models"></select></label>
-      <label class="select-wrap"><span class="swatch" style="--sw: var(--series-physics)"></span><select id="pc-physics" aria-label="Physics engines"></select></label>
+      <div class="ms" data-par="world"><button type="button" class="ms-btn" aria-haspopup="true" aria-expanded="false"><span class="swatch" style="--sw: var(--series-world)"></span>World Models<span class="ms-count"></span><i class="fas fa-chevron-down"></i></button><div class="ms-panel" role="group" aria-label="World Models" hidden></div></div>
+      <div class="ms" data-par="dynamics"><button type="button" class="ms-btn" aria-haspopup="true" aria-expanded="false"><span class="swatch" style="--sw: var(--series-dynamics)"></span>Dynamics Models<span class="ms-count"></span><i class="fas fa-chevron-down"></i></button><div class="ms-panel" role="group" aria-label="Dynamics Models" hidden></div></div>
+      <div class="ms" data-par="physics"><button type="button" class="ms-btn" aria-haspopup="true" aria-expanded="false"><span class="swatch" style="--sw: var(--series-physics)"></span>Physics Engines<span class="ms-count"></span><i class="fas fa-chevron-down"></i></button><div class="ms-panel" role="group" aria-label="Physics Engines" hidden></div></div>
+      <span class="pc-status" id="pc-status" aria-live="polite"></span>
     </div>
     <div class="chart-card">
       <div class="chart-toolbar">
@@ -491,8 +492,8 @@
 
 <div class="tooltip" id="tooltip" role="tooltip" hidden></div>
 
-<script src="./static/js/data.js?v=20261106x"></script>
-<script src="./static/js/main.js?v=20261106x"></script>
-<script src="./static/js/ux.js?v=20261106x"></script>
+<script src="./static/js/data.js?v=20261106z"></script>
+<script src="./static/js/main.js?v=20261106z"></script>
+<script src="./static/js/ux.js?v=20261106z"></script>
 </body>
 </html>

@@ -269,46 +269,80 @@
   var SERIES_BY_KEY = {};
   SERIES.forEach(function (s) { SERIES_BY_KEY[s.key] = s; });
 
-  // ---- method picker: "All methods" + one menu per paradigm
-  var pick = { paradigm: 'all', key: null };
+  // ---- method picker: "All methods" + one multi-select menu per paradigm.
+  // Any number of models can be ticked, from one family or from several.
+  var AVAILABLE = SERIES.filter(function (s) { return !s.empty; }).map(function (s) { return s.key; });
+  var pick = { all: true, keys: {} };   // all = every method (with the name-only rows); else the ticked keys
   var pickAll = document.getElementById('pc-all');
-  var pickers = { world: document.getElementById('pc-world'), dynamics: document.getElementById('pc-dynamics'), physics: document.getElementById('pc-physics') };
-  var MENU_TITLE = { world: 'World Models', dynamics: 'Dynamics Models', physics: 'Physics Engines' };
-  var MENU_ALL = { world: 'All world models', dynamics: 'All dynamics models', physics: 'All physics engines' };
-  Object.keys(pickers).forEach(function (par) {
-    var sel = pickers[par];
-    if (!sel) return;
-    var html = '<option value="">' + MENU_TITLE[par] + '</option><option value="all">' + MENU_ALL[par] + '</option>';
-    APPROACHES.filter(function (a) { return a.paradigm === par; }).forEach(function (a) {
-      var s = SERIES_BY_KEY[a.key];
-      html += s && !s.empty ? '<option value="' + a.key + '">' + esc(s.label) + '</option>'
-                : '<option value="' + a.key + '" disabled>' + esc(a.name) + '</option>';
+  var pcStatus = document.getElementById('pc-status');
+  var menus = Array.prototype.slice.call(document.querySelectorAll('.pc-filters .ms'));
+  function isOn(k) { return pick.all ? AVAILABLE.indexOf(k) >= 0 : !!pick.keys[k]; }
+  function chosen() { return AVAILABLE.filter(isOn); }
+  function setKeys(keys) {
+    pick = { all: false, keys: {} };
+    keys.forEach(function (k) { pick.keys[k] = true; });
+    if (keys.length === AVAILABLE.length) pick = { all: true, keys: {} };
+    syncPicker(); resetZoom();
+  }
+  function closeMenus(except) {
+    menus.forEach(function (m) {
+      if (m === except) return;
+      m.classList.remove('is-open');
+      m.querySelector('.ms-btn').setAttribute('aria-expanded', 'false');
+      m.querySelector('.ms-panel').hidden = true;
     });
-    sel.innerHTML = html;
-    sel.addEventListener('change', function () {
-      if (!sel.value) return;
-      pick = { paradigm: par, key: sel.value === 'all' ? null : sel.value };
-      syncPicker();
-      resetZoom();
+  }
+  menus.forEach(function (m) {
+    var par = m.getAttribute('data-par'), btn = m.querySelector('.ms-btn'), panel = m.querySelector('.ms-panel');
+    var models = APPROACHES.filter(function (a) { return a.paradigm === par; });
+    panel.innerHTML = '<div class="ms-tools"><button type="button" data-ms="all">Select all</button><button type="button" data-ms="none">None</button></div>' +
+      models.map(function (a) {
+        var ok = AVAILABLE.indexOf(a.key) >= 0;
+        return '<label class="ms-item' + (ok ? '' : ' is-off') + '"><input type="checkbox" value="' + a.key + '"' + (ok ? '' : ' disabled') + '>' +
+          '<span class="dot" style="--sw:' + PARADIGM[par].color + '"></span><span>' + esc(a.name) + '</span></label>';
+      }).join('');
+    btn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      var open = !m.classList.contains('is-open');
+      closeMenus(m);
+      m.classList.toggle('is-open', open);
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      panel.hidden = !open;
+    });
+    panel.addEventListener('click', function (e) { e.stopPropagation(); });
+    panel.addEventListener('change', function (e) {
+      if (e.target.type !== 'checkbox') return;
+      var keys = chosen().filter(function (k) { return k !== e.target.value; });
+      if (e.target.checked) keys.push(e.target.value);
+      setKeys(keys);
+    });
+    panel.querySelectorAll('[data-ms]').forEach(function (t) {
+      t.addEventListener('click', function () {
+        var mine = models.map(function (a) { return a.key; }).filter(function (k) { return AVAILABLE.indexOf(k) >= 0; });
+        var rest = chosen().filter(function (k) { return mine.indexOf(k) < 0; });
+        setKeys(t.getAttribute('data-ms') === 'all' ? rest.concat(mine) : rest);
+      });
     });
   });
-  if (pickAll) pickAll.addEventListener('click', function () { pick = { paradigm: 'all', key: null }; syncPicker(); resetZoom(); });
+  document.addEventListener('click', function () { closeMenus(); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeMenus(); });
+  if (pickAll) pickAll.addEventListener('click', function () { pick = { all: true, keys: {} }; syncPicker(); resetZoom(); });
   function syncPicker() {
-    if (pickAll) pickAll.classList.toggle('is-active', pick.paradigm === 'all');
-    Object.keys(pickers).forEach(function (par) {
-      var sel = pickers[par];
-      if (!sel) return;
-      var on = pick.paradigm === par;
-      sel.parentNode.classList.toggle('is-active', on);
-      sel.value = on ? (pick.key || 'all') : '';
+    if (pickAll) pickAll.classList.toggle('is-active', pick.all);
+    menus.forEach(function (m) {
+      var par = m.getAttribute('data-par');
+      var mine = AVAILABLE.filter(function (k) { return SERIES_BY_KEY[k].paradigm === par; });
+      var n = mine.filter(isOn).length;
+      m.querySelectorAll('input[type=checkbox]').forEach(function (cb) { cb.checked = isOn(cb.value); });
+      m.classList.toggle('has-pick', !pick.all && n > 0);
+      m.querySelector('.ms-count').textContent = pick.all ? '' : n ? n + '/' + mine.length : '';
     });
+    var c = chosen().length;
+    if (pcStatus) pcStatus.textContent = pick.all ? 'All methods' : c === 0 ? 'No model selected' : 'Comparing ' + c + ' model' + (c === 1 ? '' : 's');
   }
   function withData(list) { return list.filter(function (s) { return !s.empty; }); }
   function activeSeries() {
-    return SERIES.filter(function (s) {
-      if (pick.paradigm === 'all') return true;
-      return s.paradigm === pick.paradigm && (!pick.key || s.key === pick.key);
-    });
+    return SERIES.filter(function (s) { return pick.all ? true : !!pick.keys[s.key]; });
   }
 
   // ---- zoom state: x = mm/node, y = row position (row 1 at the top; a row spans ±0.5)
@@ -410,6 +444,11 @@
   var pts = [];
   function renderStrip() {
     if (!SERIES.length) { stripBox.innerHTML = '<p class="muted-note">No per-clip data found.</p>'; return; }
+    if (!activeSeries().length) {
+      stripBox.innerHTML = '<p class="pc-empty"><i class="fas fa-hand-pointer"></i>Pick at least one model from the menus above.</p>';
+      if (legendBox) legendBox.innerHTML = '';
+      stripBox._geo = null; pts = []; return;
+    }
     renderLegend();
     var rows = activeSeries();
     var W = Math.max(300, stripBox.clientWidth);

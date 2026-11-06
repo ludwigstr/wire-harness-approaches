@@ -861,3 +861,32 @@ button.cfg-tile { text-align: center; }
 .fig-image { margin: 0; padding: 0.75rem; border: 1px solid var(--line); border-radius: var(--radius); background: #fff; box-shadow: var(--shadow); }
 .fig-image a { display: block; cursor: zoom-in; }
 .fig-image img { width: 100%; height: auto; display: block; border-radius: 6px; }
+
+/* per-clip explorer: multi-select menus */
+.ms { position: relative; }
+.ms-btn {
+  display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.42rem 0.85rem; border-radius: 999px;
+  border: 1px solid var(--line); background: var(--surface); color: var(--ink); font: inherit; font-size: 0.9rem; font-weight: 600; cursor: pointer;
+  transition: border-color .15s, background .15s;
+}
+.ms-btn:hover { border-color: var(--axis); }
+.ms-btn i { font-size: 0.7rem; color: var(--muted); transition: transform .2s var(--ease-out); }
+.ms.is-open .ms-btn i { transform: rotate(180deg); }
+.ms.has-pick .ms-btn { border-color: var(--ink); box-shadow: 0 0 0 1px var(--ink) inset; }
+.ms-count:not(:empty) { font-size: 0.72rem; font-weight: 700; padding: 0.05rem 0.4rem; border-radius: 999px; background: var(--ink); color: var(--bg); }
+.ms-panel {
+  position: absolute; top: calc(100% + 6px); left: 0; z-index: 40; min-width: 230px; padding: 0.4rem;
+  background: var(--surface); border: 1px solid var(--line); border-radius: 12px; box-shadow: 0 12px 32px -12px rgba(0, 0, 0, .25);
+}
+.ms-tools { display: flex; justify-content: space-between; padding: 0.25rem 0.45rem 0.4rem; border-bottom: 1px solid var(--line); margin-bottom: 0.25rem; }
+.ms-tools button { border: 0; background: none; padding: 0.15rem 0; font: inherit; font-size: 0.78rem; font-weight: 600; color: var(--accent-ink); cursor: pointer; }
+.ms-tools button:hover { text-decoration: underline; }
+.ms-item { display: flex; align-items: center; gap: 0.55rem; padding: 0.45rem 0.5rem; border-radius: 8px; font-size: 0.88rem; color: var(--ink); cursor: pointer; }
+.ms-item:hover { background: var(--surface-2); }
+.ms-item input { width: 16px; height: 16px; margin: 0; accent-color: var(--ink); cursor: pointer; }
+.ms-item.is-off { color: var(--muted); cursor: default; }
+.ms-item.is-off input { cursor: default; }
+.ms-item.is-off .dot { opacity: 0.35; }
+.pc-status { margin-left: auto; font-size: 0.82rem; color: var(--muted); }
+.pc-empty { display: flex; align-items: center; justify-content: center; gap: 0.5rem; min-height: 180px; margin: 0; color: var(--muted); }
+@media (max-width: 640px) { .pc-status { width: 100%; margin-left: 0; } .ms-panel { min-width: 210px; } .ms:last-of-type .ms-panel { left: auto; right: 0; } }
