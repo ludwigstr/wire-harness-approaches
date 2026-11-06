@@ -1,0 +1,92 @@
+[14:10:10] === Newton EVERYTHING fit: 231 params, all per cable, nothing shared, nothing default (CMA-ES); MASS PINNED 0.044 kg/m ===
+[14:10:10] popsize=18, gens=30, workers=28 on GPUs [0, 1, 2, 3]; warm start data/newton_fit_everything_pinned.npz (a finished run of this fit, used as is)
+[14:10:10] clip set data/tracks36: 36 clips, whole clips from the npz; z weight 0.0
+[14:24:17] gen 0 per clip: mean 10.186 median 8.728 -> newton_fit_everything_pinned_t36_gen0.json
+[14:24:17] gen 0/30 (x0 = data/newton_fit_everything_pinned.npz, nothing moved): fit=10.19 (xy=10.19, z-err=nanmm) (847s)
+[17:48:28] gen 1/30: best=9.28 (xy=9.28, z-err=nanmm) mean=11.27 best_ever=9.28 (12251s)  mass=pinned K=900 mu=[0.3298, 0.4569, 0.0311, 0.0001] eps/tau=0.052/0.194
+[21:12:58] gen 2/30: best=9.33 (xy=9.33, z-err=nanmm) mean=9.82 best_ever=9.28 (12270s)  mass=pinned K=900 mu=[0.3298, 0.4569, 0.0311, 0.0001] eps/tau=0.052/0.194
+[00:37:31] gen 3/30: best=9.05 (xy=9.05, z-err=nanmm) mean=9.63 best_ever=9.05 (12272s)  mass=pinned K=1014 mu=[0.711, 0.2751, 0.0711, 0.0002] eps/tau=0.076/0.210
+[04:02:10] gen 4/30: best=8.94 (xy=8.94, z-err=nanmm) mean=9.48 best_ever=8.94 (12279s)  mass=pinned K=374 mu=[0.5443, 0.2684, 0.0174, 0.0002] eps/tau=0.061/0.336
+[07:26:36] gen 5/30: best=8.62 (xy=8.62, z-err=nanmm) mean=9.16 best_ever=8.62 (12266s)  mass=pinned K=724 mu=[0.1977, 0.6122, 0.0191, 0.0001] eps/tau=0.061/0.360
+[10:51:23] gen 6/30: best=8.65 (xy=8.65, z-err=nanmm) mean=9.15 best_ever=8.62 (12287s)  mass=pinned K=724 mu=[0.1977, 0.6122, 0.0191, 0.0001] eps/tau=0.061/0.360
+[10:52:37] === Newton EVERYTHING fit: 231 params, all per cable, nothing shared, nothing default (CMA-ES); MASS PINNED 0.044 kg/m ===
+[10:52:37] popsize=18, gens=30, workers=28 on GPUs [0, 1, 2, 3]; warm start data/newton_fit_everything_pinned.npz (a finished run of this fit, used as is)
+[10:52:37] clip set data/tracks36: 36 clips, whole clips from the npz; z weight 0.0
+[10:52:37] RESUMED from newton_fit_everything_pinned_t36_es.pkl after gen 6, best_ever 8.62
+[14:16:52] gen 7/30: best=8.60 (xy=8.60, z-err=nanmm) mean=9.08 best_ever=8.60 (12255s)  mass=pinned K=499 mu=[0.2488, 0.5263, 0.03, 0.0001] eps/tau=0.042/0.310
+[17:40:35] gen 8/30: best=8.63 (xy=8.63, z-err=nanmm) mean=9.07 best_ever=8.60 (12223s)  mass=pinned K=499 mu=[0.2488, 0.5263, 0.03, 0.0001] eps/tau=0.042/0.310
+[21:04:36] gen 9/30: best=8.40 (xy=8.40, z-err=nanmm) mean=8.80 best_ever=8.40 (12241s)  mass=pinned K=1044 mu=[0.1442, 0.956, 0.0157, 0.0001] eps/tau=0.061/0.287
+[00:28:28] gen 10/30: best=8.56 (xy=8.56, z-err=nanmm) mean=8.99 best_ever=8.40 (12232s)  mass=pinned K=1044 mu=[0.1442, 0.956, 0.0157, 0.0001] eps/tau=0.061/0.287
+[03:52:29] gen 11/30: best=8.07 (xy=8.07, z-err=nanmm) mean=8.67 best_ever=8.07 (12240s)  mass=pinned K=462 mu=[0.1924, 0.6961, 0.0225, 0.0002] eps/tau=0.059/0.284
+[07:16:17] gen 12/30: best=8.28 (xy=8.28, z-err=nanmm) mean=8.75 best_ever=8.07 (12228s)  mass=pinned K=462 mu=[0.1924, 0.6961, 0.0225, 0.0002] eps/tau=0.059/0.284
+[10:40:39] gen 13/30: best=8.31 (xy=8.31, z-err=nanmm) mean=8.60 best_ever=8.07 (12262s)  mass=pinned K=462 mu=[0.1924, 0.6961, 0.0225, 0.0002] eps/tau=0.059/0.284
+[10:41:51] === Newton EVERYTHING fit: 231 params, all per cable, nothing shared, nothing default (CMA-ES); MASS PINNED 0.044 kg/m ===
+[10:41:51] popsize=18, gens=30, workers=28 on GPUs [0, 1, 2, 3]; warm start data/newton_fit_everything_pinned.npz (a finished run of this fit, used as is)
+[10:41:51] clip set data/tracks36: 36 clips, whole clips from the npz; z weight 0.0
+[10:41:51] RESUMED from newton_fit_everything_pinned_t36_es.pkl after gen 13, best_ever 8.07
+[14:05:51] gen 14/30: best=8.16 (xy=8.16, z-err=nanmm) mean=8.65 best_ever=8.07 (12240s)  mass=pinned K=462 mu=[0.1924, 0.6961, 0.0225, 0.0002] eps/tau=0.059/0.284
+[17:29:42] gen 15/30: best=8.15 (xy=8.15, z-err=nanmm) mean=8.52 best_ever=8.07 (12231s)  mass=pinned K=462 mu=[0.1924, 0.6961, 0.0225, 0.0002] eps/tau=0.059/0.284
+[20:53:07] gen 16/30: best=7.96 (xy=7.96, z-err=nanmm) mean=8.45 best_ever=7.96 (12205s)  mass=pinned K=1351 mu=[0.1802, 0.9055, 0.0226, 0.0001] eps/tau=0.050/0.202
+[00:16:40] gen 17/30: best=8.12 (xy=8.12, z-err=nanmm) mean=8.48 best_ever=7.96 (12213s)  mass=pinned K=1351 mu=[0.1802, 0.9055, 0.0226, 0.0001] eps/tau=0.050/0.202
+[03:40:35] gen 18/30: best=7.88 (xy=7.88, z-err=nanmm) mean=8.26 best_ever=7.88 (12235s)  mass=pinned K=792 mu=[0.2401, 0.7766, 0.0537, 0.0002] eps/tau=0.048/0.183
+[07:04:26] gen 19/30: best=7.84 (xy=7.84, z-err=nanmm) mean=8.19 best_ever=7.84 (12232s)  mass=pinned K=663 mu=[0.2036, 0.4189, 0.0393, 0.0001] eps/tau=0.050/0.178
+[10:28:28] gen 20/30: best=7.63 (xy=7.63, z-err=nanmm) mean=8.25 best_ever=7.63 (12242s)  mass=pinned K=348 mu=[0.2599, 0.5153, 0.0533, 0.0001] eps/tau=0.043/0.199
+[10:29:46] === Newton EVERYTHING fit: 231 params, all per cable, nothing shared, nothing default (CMA-ES); MASS PINNED 0.044 kg/m ===
+[10:29:46] popsize=18, gens=30, workers=28 on GPUs [0, 1, 2, 3]; warm start data/newton_fit_everything_pinned.npz (a finished run of this fit, used as is)
+[10:29:46] clip set data/tracks36: 36 clips, whole clips from the npz; z weight 0.0
+[10:29:47] RESUMED from newton_fit_everything_pinned_t36_es.pkl after gen 20, best_ever 7.63
+[13:54:37] gen 21/30: best=7.89 (xy=7.89, z-err=nanmm) mean=8.31 best_ever=7.63 (12291s)  mass=pinned K=348 mu=[0.2599, 0.5153, 0.0533, 0.0001] eps/tau=0.043/0.199
+[17:19:11] gen 22/30: best=7.68 (xy=7.68, z-err=nanmm) mean=8.13 best_ever=7.63 (12274s)  mass=pinned K=348 mu=[0.2599, 0.5153, 0.0533, 0.0001] eps/tau=0.043/0.199
+[20:44:00] gen 23/30: best=7.68 (xy=7.68, z-err=nanmm) mean=8.22 best_ever=7.63 (12289s)  mass=pinned K=348 mu=[0.2599, 0.5153, 0.0533, 0.0001] eps/tau=0.043/0.199
+[00:09:00] gen 24/30: best=7.79 (xy=7.79, z-err=nanmm) mean=8.16 best_ever=7.63 (12300s)  mass=pinned K=348 mu=[0.2599, 0.5153, 0.0533, 0.0001] eps/tau=0.043/0.199
+[03:33:41] gen 25/30: best=7.79 (xy=7.79, z-err=nanmm) mean=8.03 best_ever=7.63 (12281s)  mass=pinned K=348 mu=[0.2599, 0.5153, 0.0533, 0.0001] eps/tau=0.043/0.199
+[06:58:31] gen 26/30: best=7.62 (xy=7.62, z-err=nanmm) mean=8.07 best_ever=7.62 (12290s)  mass=pinned K=641 mu=[0.1548, 0.4983, 0.0292, 0.0] eps/tau=0.050/0.235
+[06:59:48] === Newton EVERYTHING fit: 231 params, all per cable, nothing shared, nothing default (CMA-ES); MASS PINNED 0.044 kg/m ===
+[06:59:48] popsize=18, gens=30, workers=28 on GPUs [0, 1, 2, 3]; warm start data/newton_fit_everything_pinned.npz (a finished run of this fit, used as is)
+[06:59:49] clip set data/tracks36: 36 clips, whole clips from the npz; z weight 0.0
+[06:59:49] RESUMED from newton_fit_everything_pinned_t36_es.pkl after gen 26, best_ever 7.62
+[10:24:57] gen 27/30: best=7.67 (xy=7.67, z-err=nanmm) mean=8.15 best_ever=7.62 (12308s)  mass=pinned K=641 mu=[0.1548, 0.4983, 0.0292, 0.0] eps/tau=0.050/0.235
+[13:48:52] gen 28/30: best=7.57 (xy=7.57, z-err=nanmm) mean=7.96 best_ever=7.57 (12236s)  mass=pinned K=443 mu=[0.3458, 0.431, 0.045, 0.0002] eps/tau=0.071/0.201
+[17:12:52] gen 29/30: best=7.69 (xy=7.69, z-err=nanmm) mean=7.99 best_ever=7.57 (12240s)  mass=pinned K=443 mu=[0.3458, 0.431, 0.045, 0.0002] eps/tau=0.071/0.201
+[20:36:52] gen 30/30: best=7.57 (xy=7.57, z-err=nanmm) mean=7.96 best_ever=7.57 (12239s)  mass=pinned K=443 mu=[0.3458, 0.431, 0.045, 0.0002] eps/tau=0.071/0.201
+[20:36:52] fit done: 30 generations, 49023s; best fit 7.57 (gen 0 was 10.19)
+[20:36:52] === final validation: 10 iterations, all 36 clips of data/tracks36 (IN-SAMPLE) ===
+[20:50:30] final result: xy 7.70 mm/node (median 6.52), z-err nan mm (IN-SAMPLE); mass 0.044; K_stretch 443; mu shape 0.346 cable 0.431 tors 0.0450 roll 0.00016; dahl eps 0.071 tau 0.201
+[20:50:30]   20261021_175638      xy   18.9  z-err    nan
+[20:50:30]   20261026_130441      xy   16.0  z-err    nan
+[20:50:30]   20261028_105803      xy   15.4  z-err    nan
+[20:50:30]   20261021_180139      xy   13.3  z-err    nan
+[20:50:30]   20261028_121810      xy    9.4  z-err    nan
+[20:50:30]   20261021_163244      xy    9.0  z-err    nan
+[20:50:30]   20261028_100701      xy    7.9  z-err    nan
+[20:50:30]   20261021_162632      xy    7.9  z-err    nan
+[20:50:30]   20261021_171620      xy    7.6  z-err    nan
+[20:50:30]   20261021_172716      xy    7.5  z-err    nan
+[20:50:30]   20261021_180422      xy    7.2  z-err    nan
+[20:50:30]   20261028_101001      xy    7.1  z-err    nan
+[20:50:30]   20261021_165018      xy    7.1  z-err    nan
+[20:50:30]   20261021_160124      xy    7.1  z-err    nan
+[20:50:30]   20261021_165246      xy    6.9  z-err    nan
+[20:50:30]   20261021_172103      xy    6.9  z-err    nan
+[20:50:30]   20261028_101510      xy    6.9  z-err    nan
+[20:50:30]   20261028_114103      xy    6.6  z-err    nan
+[20:50:30]   20261021_162340      xy    6.5  z-err    nan
+[20:50:30]   20261021_174701      xy    6.4  z-err    nan
+[20:50:30]   20261021_173628      xy    6.4  z-err    nan
+[20:50:30]   20261021_180646      xy    6.4  z-err    nan
+[20:50:30]   20261021_173234      xy    6.3  z-err    nan
+[20:50:30]   20261021_171842      xy    6.3  z-err    nan
+[20:50:30]   20261026_130128      xy    6.3  z-err    nan
+[20:50:30]   20261021_173858      xy    6.3  z-err    nan
+[20:50:30]   20261021_174117      xy    6.3  z-err    nan
+[20:50:30]   20261021_172928      xy    6.1  z-err    nan
+[20:50:30]   20261021_164010      xy    5.9  z-err    nan
+[20:50:30]   20261021_172318      xy    5.8  z-err    nan
+[20:50:30]   20261021_170550      xy    5.7  z-err    nan
+[20:50:30]   20261026_125511      xy    5.6  z-err    nan
+[20:50:30]   20261021_165753      xy    5.6  z-err    nan
+[20:50:30]   20261021_164524      xy    5.5  z-err    nan
+[20:50:30]   20261021_164755      xy    5.5  z-err    nan
+[20:50:30]   20261021_163624      xy    5.4  z-err    nan
+[20:50:30] -> /home/hpc/ws32/ws32101h/Python/Cable_model/wire-harness-approaches/newton_fit_t36/data/newton_fit_everything_pinned_t36.npz
+[20:50:30] === DONE ===

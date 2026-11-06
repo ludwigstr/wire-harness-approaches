@@ -1,0 +1,12 @@
+[2026-11-02 14:09:58] fit start
+[2026-11-03 10:52:05] WATCHDOG gen 6/30 saved (es.pkl 2026-11-03 10:51:23); scancel 1859858 so the next chain link starts
+[2026-11-03 10:52:19] fit start
+[2026-11-04 10:41:09] WATCHDOG gen 13/30 saved; 669s left < last gen 12262s + 600s -> stopping fit (pgid 627388) for the next chain link
+[2026-11-04 10:41:40] fit start
+[2026-11-05 10:29:03] WATCHDOG gen 20/30 saved; 756s left < last gen 12242s + 600s -> stopping fit (pgid 671386) for the next chain link
+[2026-11-05 10:29:35] fit start
+[2026-11-06 06:59:06] WATCHDOG gen 26/30 saved; 12628s left < last gen 12290s + 600s -> stopping fit (pgid 898982) for the next chain link
+[2026-11-06 06:59:38] fit start
+[2026-11-06 20:50:31] fit done: [20:50:30] final result: xy 7.70 mm/node (median 6.52), z-err nan mm (IN-SAMPLE); mass 0.044; K_stretch 443; mu shape 0.346 cable 0.431 tors 0.0450 roll 0.00016; dahl eps 0.071 tau 0.201
+[2026-11-06 21:04:35] fresh-process validation: mean 7.562  median 6.528 mm/node over 36 clips, 843s -> data/newton_fit_everything_pinned_t36_validate.json
+[2026-11-06 21:04:35] ALL DONE

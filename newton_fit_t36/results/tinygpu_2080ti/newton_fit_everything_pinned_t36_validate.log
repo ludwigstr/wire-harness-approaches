@@ -1,0 +1,765 @@
+/home/woody/ws32/ws32101h/venvs/newton_t36/lib/python3.11/site-packages/cma/s.py:16: UserWarning: Could not import matplotlib.pyplot, therefore ``cma.plot()`` etc. is not available
+  _warnings.warn('Could not import matplotlib.pyplot, therefore'
+/home/woody/ws32/ws32101h/venvs/newton_t36/lib/python3.11/site-packages/cma/s.py:16: UserWarning: Could not import matplotlib.pyplot, therefore ``cma.plot()`` etc. is not available
+  _warnings.warn('Could not import matplotlib.pyplot, therefore'
+/home/woody/ws32/ws32101h/venvs/newton_t36/lib/python3.11/site-packages/cma/s.py:16: UserWarning: Could not import matplotlib.pyplot, therefore ``cma.plot()`` etc. is not available
+  _warnings.warn('Could not import matplotlib.pyplot, therefore'
+/home/woody/ws32/ws32101h/venvs/newton_t36/lib/python3.11/site-packages/cma/s.py:16: UserWarning: Could not import matplotlib.pyplot, therefore ``cma.plot()`` etc. is not available
+  _warnings.warn('Could not import matplotlib.pyplot, therefore'
+/home/woody/ws32/ws32101h/venvs/newton_t36/lib/python3.11/site-packages/cma/s.py:16: UserWarning: Could not import matplotlib.pyplot, therefore ``cma.plot()`` etc. is not available
+  _warnings.warn('Could not import matplotlib.pyplot, therefore'
+/home/woody/ws32/ws32101h/venvs/newton_t36/lib/python3.11/site-packages/cma/s.py:16: UserWarning: Could not import matplotlib.pyplot, therefore ``cma.plot()`` etc. is not available
+  _warnings.warn('Could not import matplotlib.pyplot, therefore'
+/home/woody/ws32/ws32101h/venvs/newton_t36/lib/python3.11/site-packages/cma/s.py:16: UserWarning: Could not import matplotlib.pyplot, therefore ``cma.plot()`` etc. is not available
+  _warnings.warn('Could not import matplotlib.pyplot, therefore'
+/home/woody/ws32/ws32101h/venvs/newton_t36/lib/python3.11/site-packages/cma/s.py:16: UserWarning: Could not import matplotlib.pyplot, therefore ``cma.plot()`` etc. is not available
+  _warnings.warn('Could not import matplotlib.pyplot, therefore'
+/home/woody/ws32/ws32101h/venvs/newton_t36/lib/python3.11/site-packages/cma/s.py:16: UserWarning: Could not import matplotlib.pyplot, therefore ``cma.plot()`` etc. is not available
+  _warnings.warn('Could not import matplotlib.pyplot, therefore'
+/home/woody/ws32/ws32101h/venvs/newton_t36/lib/python3.11/site-packages/cma/s.py:16: UserWarning: Could not import matplotlib.pyplot, therefore ``cma.plot()`` etc. is not available
+  _warnings.warn('Could not import matplotlib.pyplot, therefore'
+/home/woody/ws32/ws32101h/venvs/newton_t36/lib/python3.11/site-packages/cma/s.py:16: UserWarning: Could not import matplotlib.pyplot, therefore ``cma.plot()`` etc. is not available
+  _warnings.warn('Could not import matplotlib.pyplot, therefore'
+/home/woody/ws32/ws32101h/venvs/newton_t36/lib/python3.11/site-packages/cma/s.py:16: UserWarning: Could not import matplotlib.pyplot, therefore ``cma.plot()`` etc. is not available
+  _warnings.warn('Could not import matplotlib.pyplot, therefore'
+/home/woody/ws32/ws32101h/venvs/newton_t36/lib/python3.11/site-packages/cma/s.py:16: UserWarning: Could not import matplotlib.pyplot, therefore ``cma.plot()`` etc. is not available
+  _warnings.warn('Could not import matplotlib.pyplot, therefore'
+/home/woody/ws32/ws32101h/venvs/newton_t36/lib/python3.11/site-packages/cma/s.py:16: UserWarning: Could not import matplotlib.pyplot, therefore ``cma.plot()`` etc. is not available
+  _warnings.warn('Could not import matplotlib.pyplot, therefore'
+/home/woody/ws32/ws32101h/venvs/newton_t36/lib/python3.11/site-packages/cma/s.py:16: UserWarning: Could not import matplotlib.pyplot, therefore ``cma.plot()`` etc. is not available
+  _warnings.warn('Could not import matplotlib.pyplot, therefore'
+/home/woody/ws32/ws32101h/venvs/newton_t36/lib/python3.11/site-packages/cma/s.py:16: UserWarning: Could not import matplotlib.pyplot, therefore ``cma.plot()`` etc. is not available
+  _warnings.warn('Could not import matplotlib.pyplot, therefore'
+/home/woody/ws32/ws32101h/venvs/newton_t36/lib/python3.11/site-packages/cma/s.py:16: UserWarning: Could not import matplotlib.pyplot, therefore ``cma.plot()`` etc. is not available
+  _warnings.warn('Could not import matplotlib.pyplot, therefore'
+/home/woody/ws32/ws32101h/venvs/newton_t36/lib/python3.11/site-packages/cma/s.py:16: UserWarning: Could not import matplotlib.pyplot, therefore ``cma.plot()`` etc. is not available
+  _warnings.warn('Could not import matplotlib.pyplot, therefore'
+/home/woody/ws32/ws32101h/venvs/newton_t36/lib/python3.11/site-packages/cma/s.py:16: UserWarning: Could not import matplotlib.pyplot, therefore ``cma.plot()`` etc. is not available
+  _warnings.warn('Could not import matplotlib.pyplot, therefore'
+/home/woody/ws32/ws32101h/venvs/newton_t36/lib/python3.11/site-packages/cma/s.py:16: UserWarning: Could not import matplotlib.pyplot, therefore ``cma.plot()`` etc. is not available
+  _warnings.warn('Could not import matplotlib.pyplot, therefore'
+/home/woody/ws32/ws32101h/venvs/newton_t36/lib/python3.11/site-packages/cma/s.py:16: UserWarning: Could not import matplotlib.pyplot, therefore ``cma.plot()`` etc. is not available
+  _warnings.warn('Could not import matplotlib.pyplot, therefore'
+/home/woody/ws32/ws32101h/venvs/newton_t36/lib/python3.11/site-packages/cma/s.py:16: UserWarning: Could not import matplotlib.pyplot, therefore ``cma.plot()`` etc. is not available
+  _warnings.warn('Could not import matplotlib.pyplot, therefore'
+/home/woody/ws32/ws32101h/venvs/newton_t36/lib/python3.11/site-packages/cma/s.py:16: UserWarning: Could not import matplotlib.pyplot, therefore ``cma.plot()`` etc. is not available
+  _warnings.warn('Could not import matplotlib.pyplot, therefore'
+/home/woody/ws32/ws32101h/venvs/newton_t36/lib/python3.11/site-packages/cma/s.py:16: UserWarning: Could not import matplotlib.pyplot, therefore ``cma.plot()`` etc. is not available
+  _warnings.warn('Could not import matplotlib.pyplot, therefore'
+/home/woody/ws32/ws32101h/venvs/newton_t36/lib/python3.11/site-packages/cma/s.py:16: UserWarning: Could not import matplotlib.pyplot, therefore ``cma.plot()`` etc. is not available
+  _warnings.warn('Could not import matplotlib.pyplot, therefore'
+/home/woody/ws32/ws32101h/venvs/newton_t36/lib/python3.11/site-packages/cma/s.py:16: UserWarning: Could not import matplotlib.pyplot, therefore ``cma.plot()`` etc. is not available
+  _warnings.warn('Could not import matplotlib.pyplot, therefore'
+/home/woody/ws32/ws32101h/venvs/newton_t36/lib/python3.11/site-packages/cma/s.py:16: UserWarning: Could not import matplotlib.pyplot, therefore ``cma.plot()`` etc. is not available
+  _warnings.warn('Could not import matplotlib.pyplot, therefore'
+/home/woody/ws32/ws32101h/venvs/newton_t36/lib/python3.11/site-packages/cma/s.py:16: UserWarning: Could not import matplotlib.pyplot, therefore ``cma.plot()`` etc. is not available
+  _warnings.warn('Could not import matplotlib.pyplot, therefore'
+Warp 1.16.0 initialized:
+   CUDA Toolkit 12.9, Driver 13.5
+   Devices:
+     "cpu"      : "x86_64"
+     "cuda:0"   : "NVIDIA GeForce RTX 2080 Ti" (11 GiB, sm_75, mempool enabled)
+     "cuda:1"   : "NVIDIA GeForce RTX 2080 Ti" (11 GiB, sm_75, mempool enabled)
+     "cuda:2"   : "NVIDIA GeForce RTX 2080 Ti" (11 GiB, sm_75, mempool enabled)
+     "cuda:3"   : "NVIDIA GeForce RTX 2080 Ti" (11 GiB, sm_75, mempool enabled)
+   CUDA peer access:
+     Not supported
+   Kernel cache:
+     /home/hpc/ws32/ws32101h/.cache/warp/1.16.0
+Warp 1.16.0 initialized:
+   CUDA Toolkit 12.9, Driver 13.5
+   Devices:
+     "cpu"      : "x86_64"
+     "cuda:0"   : "NVIDIA GeForce RTX 2080 Ti" (11 GiB, sm_75, mempool enabled)
+     "cuda:1"   : "NVIDIA GeForce RTX 2080 Ti" (11 GiB, sm_75, mempool enabled)
+     "cuda:2"   : "NVIDIA GeForce RTX 2080 Ti" (11 GiB, sm_75, mempool enabled)
+     "cuda:3"   : "NVIDIA GeForce RTX 2080 Ti" (11 GiB, sm_75, mempool enabled)
+   CUDA peer access:
+     Not supported
+   Kernel cache:
+     /home/hpc/ws32/ws32101h/.cache/warp/1.16.0
+Warp 1.16.0 initialized:
+   CUDA Toolkit 12.9, Driver 13.5
+   Devices:
+     "cpu"      : "x86_64"
+     "cuda:0"   : "NVIDIA GeForce RTX 2080 Ti" (11 GiB, sm_75, mempool enabled)
+     "cuda:1"   : "NVIDIA GeForce RTX 2080 Ti" (11 GiB, sm_75, mempool enabled)
+     "cuda:2"   : "NVIDIA GeForce RTX 2080 Ti" (11 GiB, sm_75, mempool enabled)
+     "cuda:3"   : "NVIDIA GeForce RTX 2080 Ti" (11 GiB, sm_75, mempool enabled)
+   CUDA peer access:
+     Not supported
+   Kernel cache:
+     /home/hpc/ws32/ws32101h/.cache/warp/1.16.0
+Warp 1.16.0 initialized:
+   CUDA Toolkit 12.9, Driver 13.5
+   Devices:
+     "cpu"      : "x86_64"
+     "cuda:0"   : "NVIDIA GeForce RTX 2080 Ti" (11 GiB, sm_75, mempool enabled)
+     "cuda:1"   : "NVIDIA GeForce RTX 2080 Ti" (11 GiB, sm_75, mempool enabled)
+     "cuda:2"   : "NVIDIA GeForce RTX 2080 Ti" (11 GiB, sm_75, mempool enabled)
+     "cuda:3"   : "NVIDIA GeForce RTX 2080 Ti" (11 GiB, sm_75, mempool enabled)
+   CUDA peer access:
+     Not supported
+   Kernel cache:
+     /home/hpc/ws32/ws32101h/.cache/warp/1.16.0
+Warp 1.16.0 initialized:
+   CUDA Toolkit 12.9, Driver 13.5
+   Devices:
+     "cpu"      : "x86_64"
+     "cuda:0"   : "NVIDIA GeForce RTX 2080 Ti" (11 GiB, sm_75, mempool enabled)
+     "cuda:1"   : "NVIDIA GeForce RTX 2080 Ti" (11 GiB, sm_75, mempool enabled)
+     "cuda:2"   : "NVIDIA GeForce RTX 2080 Ti" (11 GiB, sm_75, mempool enabled)
+     "cuda:3"   : "NVIDIA GeForce RTX 2080 Ti" (11 GiB, sm_75, mempool enabled)
+   CUDA peer access:
+     Not supported
+   Kernel cache:
+     /home/hpc/ws32/ws32101h/.cache/warp/1.16.0
+Warp 1.16.0 initialized:
+   CUDA Toolkit 12.9, Driver 13.5
+   Devices:
+     "cpu"      : "x86_64"
+     "cuda:0"   : "NVIDIA GeForce RTX 2080 Ti" (11 GiB, sm_75, mempool enabled)
+     "cuda:1"   : "NVIDIA GeForce RTX 2080 Ti" (11 GiB, sm_75, mempool enabled)
+     "cuda:2"   : "NVIDIA GeForce RTX 2080 Ti" (11 GiB, sm_75, mempool enabled)
+     "cuda:3"   : "NVIDIA GeForce RTX 2080 Ti" (11 GiB, sm_75, mempool enabled)
+   CUDA peer access:
+     Not supported
+   Kernel cache:
+     /home/hpc/ws32/ws32101h/.cache/warp/1.16.0
+Warp 1.16.0 initialized:
+   CUDA Toolkit 12.9, Driver 13.5
+   Devices:
+     "cpu"      : "x86_64"
+     "cuda:0"   : "NVIDIA GeForce RTX 2080 Ti" (11 GiB, sm_75, mempool enabled)
+     "cuda:1"   : "NVIDIA GeForce RTX 2080 Ti" (11 GiB, sm_75, mempool enabled)
+     "cuda:2"   : "NVIDIA GeForce RTX 2080 Ti" (11 GiB, sm_75, mempool enabled)
+     "cuda:3"   : "NVIDIA GeForce RTX 2080 Ti" (11 GiB, sm_75, mempool enabled)
+   CUDA peer access:
+     Not supported
+   Kernel cache:
+     /home/hpc/ws32/ws32101h/.cache/warp/1.16.0
+Warp 1.16.0 initialized:
+   CUDA Toolkit 12.9, Driver 13.5
+   Devices:
+     "cpu"      : "x86_64"
+     "cuda:0"   : "NVIDIA GeForce RTX 2080 Ti" (11 GiB, sm_75, mempool enabled)
+     "cuda:1"   : "NVIDIA GeForce RTX 2080 Ti" (11 GiB, sm_75, mempool enabled)
+     "cuda:2"   : "NVIDIA GeForce RTX 2080 Ti" (11 GiB, sm_75, mempool enabled)
+     "cuda:3"   : "NVIDIA GeForce RTX 2080 Ti" (11 GiB, sm_75, mempool enabled)
+   CUDA peer access:
+     Not supported
+   Kernel cache:
+     /home/hpc/ws32/ws32101h/.cache/warp/1.16.0
+Warp 1.16.0 initialized:
+   CUDA Toolkit 12.9, Driver 13.5
+   Devices:
+     "cpu"      : "x86_64"
+     "cuda:0"   : "NVIDIA GeForce RTX 2080 Ti" (11 GiB, sm_75, mempool enabled)
+     "cuda:1"   : "NVIDIA GeForce RTX 2080 Ti" (11 GiB, sm_75, mempool enabled)
+     "cuda:2"   : "NVIDIA GeForce RTX 2080 Ti" (11 GiB, sm_75, mempool enabled)
+     "cuda:3"   : "NVIDIA GeForce RTX 2080 Ti" (11 GiB, sm_75, mempool enabled)
+   CUDA peer access:
+     Not supported
+   Kernel cache:
+     /home/hpc/ws32/ws32101h/.cache/warp/1.16.0
+Warp 1.16.0 initialized:
+   CUDA Toolkit 12.9, Driver 13.5
+   Devices:
+     "cpu"      : "x86_64"
+     "cuda:0"   : "NVIDIA GeForce RTX 2080 Ti" (11 GiB, sm_75, mempool enabled)
+     "cuda:1"   : "NVIDIA GeForce RTX 2080 Ti" (11 GiB, sm_75, mempool enabled)
+     "cuda:2"   : "NVIDIA GeForce RTX 2080 Ti" (11 GiB, sm_75, mempool enabled)
+     "cuda:3"   : "NVIDIA GeForce RTX 2080 Ti" (11 GiB, sm_75, mempool enabled)
+   CUDA peer access:
+     Not supported
+   Kernel cache:
+     /home/hpc/ws32/ws32101h/.cache/warp/1.16.0
+Warp 1.16.0 initialized:
+   CUDA Toolkit 12.9, Driver 13.5
+   Devices:
+     "cpu"      : "x86_64"
+     "cuda:0"   : "NVIDIA GeForce RTX 2080 Ti" (11 GiB, sm_75, mempool enabled)
+     "cuda:1"   : "NVIDIA GeForce RTX 2080 Ti" (11 GiB, sm_75, mempool enabled)
+     "cuda:2"   : "NVIDIA GeForce RTX 2080 Ti" (11 GiB, sm_75, mempool enabled)
+     "cuda:3"   : "NVIDIA GeForce RTX 2080 Ti" (11 GiB, sm_75, mempool enabled)
+   CUDA peer access:
+     Not supported
+   Kernel cache:
+     /home/hpc/ws32/ws32101h/.cache/warp/1.16.0
+Warp 1.16.0 initialized:
+   CUDA Toolkit 12.9, Driver 13.5
+   Devices:
+     "cpu"      : "x86_64"
+     "cuda:0"   : "NVIDIA GeForce RTX 2080 Ti" (11 GiB, sm_75, mempool enabled)
+     "cuda:1"   : "NVIDIA GeForce RTX 2080 Ti" (11 GiB, sm_75, mempool enabled)
+     "cuda:2"   : "NVIDIA GeForce RTX 2080 Ti" (11 GiB, sm_75, mempool enabled)
+     "cuda:3"   : "NVIDIA GeForce RTX 2080 Ti" (11 GiB, sm_75, mempool enabled)
+   CUDA peer access:
+     Not supported
+   Kernel cache:
+     /home/hpc/ws32/ws32101h/.cache/warp/1.16.0
+Warp 1.16.0 initialized:
+   CUDA Toolkit 12.9, Driver 13.5
+   Devices:
+     "cpu"      : "x86_64"
+     "cuda:0"   : "NVIDIA GeForce RTX 2080 Ti" (11 GiB, sm_75, mempool enabled)
+     "cuda:1"   : "NVIDIA GeForce RTX 2080 Ti" (11 GiB, sm_75, mempool enabled)
+     "cuda:2"   : "NVIDIA GeForce RTX 2080 Ti" (11 GiB, sm_75, mempool enabled)
+     "cuda:3"   : "NVIDIA GeForce RTX 2080 Ti" (11 GiB, sm_75, mempool enabled)
+   CUDA peer access:
+     Not supported
+   Kernel cache:
+     /home/hpc/ws32/ws32101h/.cache/warp/1.16.0
+Warp 1.16.0 initialized:
+   CUDA Toolkit 12.9, Driver 13.5
+   Devices:
+     "cpu"      : "x86_64"
+     "cuda:0"   : "NVIDIA GeForce RTX 2080 Ti" (11 GiB, sm_75, mempool enabled)
+     "cuda:1"   : "NVIDIA GeForce RTX 2080 Ti" (11 GiB, sm_75, mempool enabled)
+     "cuda:2"   : "NVIDIA GeForce RTX 2080 Ti" (11 GiB, sm_75, mempool enabled)
+     "cuda:3"   : "NVIDIA GeForce RTX 2080 Ti" (11 GiB, sm_75, mempool enabled)
+   CUDA peer access:
+     Not supported
+   Kernel cache:
+     /home/hpc/ws32/ws32101h/.cache/warp/1.16.0
+Warp 1.16.0 initialized:
+   CUDA Toolkit 12.9, Driver 13.5
+   Devices:
+     "cpu"      : "x86_64"
+     "cuda:0"   : "NVIDIA GeForce RTX 2080 Ti" (11 GiB, sm_75, mempool enabled)
+     "cuda:1"   : "NVIDIA GeForce RTX 2080 Ti" (11 GiB, sm_75, mempool enabled)
+     "cuda:2"   : "NVIDIA GeForce RTX 2080 Ti" (11 GiB, sm_75, mempool enabled)
+     "cuda:3"   : "NVIDIA GeForce RTX 2080 Ti" (11 GiB, sm_75, mempool enabled)
+   CUDA peer access:
+     Not supported
+   Kernel cache:
+     /home/hpc/ws32/ws32101h/.cache/warp/1.16.0
+Warp 1.16.0 initialized:
+   CUDA Toolkit 12.9, Driver 13.5
+   Devices:
+     "cpu"      : "x86_64"
+     "cuda:0"   : "NVIDIA GeForce RTX 2080 Ti" (11 GiB, sm_75, mempool enabled)
+     "cuda:1"   : "NVIDIA GeForce RTX 2080 Ti" (11 GiB, sm_75, mempool enabled)
+     "cuda:2"   : "NVIDIA GeForce RTX 2080 Ti" (11 GiB, sm_75, mempool enabled)
+     "cuda:3"   : "NVIDIA GeForce RTX 2080 Ti" (11 GiB, sm_75, mempool enabled)
+   CUDA peer access:
+     Not supported
+   Kernel cache:
+     /home/hpc/ws32/ws32101h/.cache/warp/1.16.0
+Warp 1.16.0 initialized:
+   CUDA Toolkit 12.9, Driver 13.5
+   Devices:
+     "cpu"      : "x86_64"
+     "cuda:0"   : "NVIDIA GeForce RTX 2080 Ti" (11 GiB, sm_75, mempool enabled)
+     "cuda:1"   : "NVIDIA GeForce RTX 2080 Ti" (11 GiB, sm_75, mempool enabled)
+     "cuda:2"   : "NVIDIA GeForce RTX 2080 Ti" (11 GiB, sm_75, mempool enabled)
+     "cuda:3"   : "NVIDIA GeForce RTX 2080 Ti" (11 GiB, sm_75, mempool enabled)
+   CUDA peer access:
+     Not supported
+   Kernel cache:
+     /home/hpc/ws32/ws32101h/.cache/warp/1.16.0
+Warp 1.16.0 initialized:
+   CUDA Toolkit 12.9, Driver 13.5
+   Devices:
+     "cpu"      : "x86_64"
+     "cuda:0"   : "NVIDIA GeForce RTX 2080 Ti" (11 GiB, sm_75, mempool enabled)
+     "cuda:1"   : "NVIDIA GeForce RTX 2080 Ti" (11 GiB, sm_75, mempool enabled)
+     "cuda:2"   : "NVIDIA GeForce RTX 2080 Ti" (11 GiB, sm_75, mempool enabled)
+     "cuda:3"   : "NVIDIA GeForce RTX 2080 Ti" (11 GiB, sm_75, mempool enabled)
+   CUDA peer access:
+     Not supported
+   Kernel cache:
+     /home/hpc/ws32/ws32101h/.cache/warp/1.16.0
+Warp 1.16.0 initialized:
+   CUDA Toolkit 12.9, Driver 13.5
+   Devices:
+     "cpu"      : "x86_64"
+     "cuda:0"   : "NVIDIA GeForce RTX 2080 Ti" (11 GiB, sm_75, mempool enabled)
+     "cuda:1"   : "NVIDIA GeForce RTX 2080 Ti" (11 GiB, sm_75, mempool enabled)
+     "cuda:2"   : "NVIDIA GeForce RTX 2080 Ti" (11 GiB, sm_75, mempool enabled)
+     "cuda:3"   : "NVIDIA GeForce RTX 2080 Ti" (11 GiB, sm_75, mempool enabled)
+   CUDA peer access:
+     Not supported
+   Kernel cache:
+     /home/hpc/ws32/ws32101h/.cache/warp/1.16.0
+Warp 1.16.0 initialized:
+   CUDA Toolkit 12.9, Driver 13.5
+   Devices:
+     "cpu"      : "x86_64"
+     "cuda:0"   : "NVIDIA GeForce RTX 2080 Ti" (11 GiB, sm_75, mempool enabled)
+     "cuda:1"   : "NVIDIA GeForce RTX 2080 Ti" (11 GiB, sm_75, mempool enabled)
+     "cuda:2"   : "NVIDIA GeForce RTX 2080 Ti" (11 GiB, sm_75, mempool enabled)
+     "cuda:3"   : "NVIDIA GeForce RTX 2080 Ti" (11 GiB, sm_75, mempool enabled)
+   CUDA peer access:
+     Not supported
+   Kernel cache:
+     /home/hpc/ws32/ws32101h/.cache/warp/1.16.0
+Warp 1.16.0 initialized:
+   CUDA Toolkit 12.9, Driver 13.5
+   Devices:
+     "cpu"      : "x86_64"
+     "cuda:0"   : "NVIDIA GeForce RTX 2080 Ti" (11 GiB, sm_75, mempool enabled)
+     "cuda:1"   : "NVIDIA GeForce RTX 2080 Ti" (11 GiB, sm_75, mempool enabled)
+     "cuda:2"   : "NVIDIA GeForce RTX 2080 Ti" (11 GiB, sm_75, mempool enabled)
+     "cuda:3"   : "NVIDIA GeForce RTX 2080 Ti" (11 GiB, sm_75, mempool enabled)
+   CUDA peer access:
+     Not supported
+   Kernel cache:
+     /home/hpc/ws32/ws32101h/.cache/warp/1.16.0
+Warp 1.16.0 initialized:
+   CUDA Toolkit 12.9, Driver 13.5
+   Devices:
+     "cpu"      : "x86_64"
+     "cuda:0"   : "NVIDIA GeForce RTX 2080 Ti" (11 GiB, sm_75, mempool enabled)
+     "cuda:1"   : "NVIDIA GeForce RTX 2080 Ti" (11 GiB, sm_75, mempool enabled)
+     "cuda:2"   : "NVIDIA GeForce RTX 2080 Ti" (11 GiB, sm_75, mempool enabled)
+     "cuda:3"   : "NVIDIA GeForce RTX 2080 Ti" (11 GiB, sm_75, mempool enabled)
+   CUDA peer access:
+     Not supported
+   Kernel cache:
+     /home/hpc/ws32/ws32101h/.cache/warp/1.16.0
+Warp 1.16.0 initialized:
+   CUDA Toolkit 12.9, Driver 13.5
+   Devices:
+     "cpu"      : "x86_64"
+     "cuda:0"   : "NVIDIA GeForce RTX 2080 Ti" (11 GiB, sm_75, mempool enabled)
+     "cuda:1"   : "NVIDIA GeForce RTX 2080 Ti" (11 GiB, sm_75, mempool enabled)
+     "cuda:2"   : "NVIDIA GeForce RTX 2080 Ti" (11 GiB, sm_75, mempool enabled)
+     "cuda:3"   : "NVIDIA GeForce RTX 2080 Ti" (11 GiB, sm_75, mempool enabled)
+   CUDA peer access:
+     Not supported
+   Kernel cache:
+     /home/hpc/ws32/ws32101h/.cache/warp/1.16.0
+Warp 1.16.0 initialized:
+   CUDA Toolkit 12.9, Driver 13.5
+   Devices:
+     "cpu"      : "x86_64"
+     "cuda:0"   : "NVIDIA GeForce RTX 2080 Ti" (11 GiB, sm_75, mempool enabled)
+     "cuda:1"   : "NVIDIA GeForce RTX 2080 Ti" (11 GiB, sm_75, mempool enabled)
+     "cuda:2"   : "NVIDIA GeForce RTX 2080 Ti" (11 GiB, sm_75, mempool enabled)
+     "cuda:3"   : "NVIDIA GeForce RTX 2080 Ti" (11 GiB, sm_75, mempool enabled)
+   CUDA peer access:
+     Not supported
+   Kernel cache:
+     /home/hpc/ws32/ws32101h/.cache/warp/1.16.0
+Warp 1.16.0 initialized:
+   CUDA Toolkit 12.9, Driver 13.5
+   Devices:
+     "cpu"      : "x86_64"
+     "cuda:0"   : "NVIDIA GeForce RTX 2080 Ti" (11 GiB, sm_75, mempool enabled)
+     "cuda:1"   : "NVIDIA GeForce RTX 2080 Ti" (11 GiB, sm_75, mempool enabled)
+     "cuda:2"   : "NVIDIA GeForce RTX 2080 Ti" (11 GiB, sm_75, mempool enabled)
+     "cuda:3"   : "NVIDIA GeForce RTX 2080 Ti" (11 GiB, sm_75, mempool enabled)
+   CUDA peer access:
+     Not supported
+   Kernel cache:
+     /home/hpc/ws32/ws32101h/.cache/warp/1.16.0
+Warp 1.16.0 initialized:
+   CUDA Toolkit 12.9, Driver 13.5
+   Devices:
+     "cpu"      : "x86_64"
+     "cuda:0"   : "NVIDIA GeForce RTX 2080 Ti" (11 GiB, sm_75, mempool enabled)
+     "cuda:1"   : "NVIDIA GeForce RTX 2080 Ti" (11 GiB, sm_75, mempool enabled)
+     "cuda:2"   : "NVIDIA GeForce RTX 2080 Ti" (11 GiB, sm_75, mempool enabled)
+     "cuda:3"   : "NVIDIA GeForce RTX 2080 Ti" (11 GiB, sm_75, mempool enabled)
+   CUDA peer access:
+     Not supported
+   Kernel cache:
+     /home/hpc/ws32/ws32101h/.cache/warp/1.16.0
+Warp 1.16.0 initialized:
+   CUDA Toolkit 12.9, Driver 13.5
+   Devices:
+     "cpu"      : "x86_64"
+     "cuda:0"   : "NVIDIA GeForce RTX 2080 Ti" (11 GiB, sm_75, mempool enabled)
+     "cuda:1"   : "NVIDIA GeForce RTX 2080 Ti" (11 GiB, sm_75, mempool enabled)
+     "cuda:2"   : "NVIDIA GeForce RTX 2080 Ti" (11 GiB, sm_75, mempool enabled)
+     "cuda:3"   : "NVIDIA GeForce RTX 2080 Ti" (11 GiB, sm_75, mempool enabled)
+   CUDA peer access:
+     Not supported
+   Kernel cache:
+     /home/hpc/ws32/ws32101h/.cache/warp/1.16.0
+Warp 1.16.0 initialized:
+   CUDA Toolkit 12.9, Driver 13.5
+   Devices:
+     "cpu"      : "x86_64"
+     "cuda:0"   : "NVIDIA GeForce RTX 2080 Ti" (11 GiB, sm_75, mempool enabled)
+     "cuda:1"   : "NVIDIA GeForce RTX 2080 Ti" (11 GiB, sm_75, mempool enabled)
+     "cuda:2"   : "NVIDIA GeForce RTX 2080 Ti" (11 GiB, sm_75, mempool enabled)
+     "cuda:3"   : "NVIDIA GeForce RTX 2080 Ti" (11 GiB, sm_75, mempool enabled)
+   CUDA peer access:
+     Not supported
+   Kernel cache:
+     /home/hpc/ws32/ws32101h/.cache/warp/1.16.0
+Module warp._src.coloring 0a2f0aa load on device 'cpu' took 13.29 ms  (cached)
+Module warp._src.coloring 0a2f0aa load on device 'cpu' took 4.20 ms  (cached)
+Module warp._src.coloring 0a2f0aa load on device 'cpu' took 3.93 ms  (cached)
+Module validate_and_correct_inertia_kernel_5e18b3cd 5e18b3c load on device 'cuda:2' took 11.28 ms  (cached)
+Module newton._src.geometry.bvh cca3a6c load on device 'cuda:2' took 9.25 ms  (cached)
+Module validate_and_correct_inertia_kernel_5e18b3cd 5e18b3c load on device 'cuda:3' took 31.80 ms  (cached)
+Module newton._src.geometry.bvh cca3a6c load on device 'cuda:3' took 3.92 ms  (cached)
+Module warp._src.coloring 0a2f0aa load on device 'cpu' took 2.96 ms  (cached)
+Module newton._src.solvers.vbd.rigid_vbd_kernels 630080b load on device 'cpu' took 4.92 ms  (cached)
+Module warp._src.coloring 0a2f0aa load on device 'cpu' took 3.96 ms  (cached)
+Module newton._src.solvers.vbd.rigid_vbd_kernels 630080b load on device 'cpu' took 1.47 ms  (cached)
+Module validate_and_correct_inertia_kernel_5e18b3cd 5e18b3c load on device 'cuda:2' took 25.33 ms  (cached)
+Module warp._src.coloring 0a2f0aa load on device 'cpu' took 6.19 ms  (cached)
+Module newton._src.solvers.vbd.rigid_vbd_kernels eff954d load on device 'cuda:2' took 47.69 ms  (cached)
+Module newton._src.geometry.bvh cca3a6c load on device 'cuda:2' took 3.27 ms  (cached)
+Module warp._src.coloring 0a2f0aa load on device 'cpu' took 4.22 ms  (cached)
+Module newton._src.solvers.solver db37500 load on device 'cuda:2' took 10.35 ms  (cached)
+Module newton._src.solvers.vbd.rigid_vbd_kernels eff954d load on device 'cuda:3' took 40.60 ms  (cached)
+Module newton._src.solvers.solver db37500 load on device 'cuda:3' took 4.30 ms  (cached)
+Module warp._src.coloring 0a2f0aa load on device 'cpu' took 2.98 ms  (cached)
+Module newton._src.sim.collide 4a8a6d9 load on device 'cuda:2' took 14.78 ms  (cached)
+Module newton._src.sim.collide 4a8a6d9 load on device 'cuda:3' took 3.47 ms  (cached)
+Module newton._src.geometry.broad_phase_nxn 68fddfc load on device 'cuda:2' took 7.35 ms  (cached)
+Module newton._src.geometry.broad_phase_nxn 68fddfc load on device 'cuda:3' took 3.38 ms  (cached)
+Module narrow_phase_primitive_write_contact dd23331 load on device 'cuda:2' took 9.49 ms  (cached)
+Module narrow_phase_primitive_write_contact dd23331 load on device 'cuda:3' took 4.11 ms  (cached)
+Module warp._src.coloring 0a2f0aa load on device 'cpu' took 2.96 ms  (cached)
+Module newton._src.solvers.vbd.rigid_vbd_kernels 630080b load on device 'cpu' took 1.38 ms  (cached)
+Module warp._src.coloring 0a2f0aa load on device 'cpu' took 4.87 ms  (cached)
+Module warp._src.coloring 0a2f0aa load on device 'cpu' took 3.91 ms  (cached)
+Module warp._src.coloring 0a2f0aa load on device 'cpu' took 4.18 ms  (cached)
+Module narrow_phase_gjk_mpr_True_write_contact_default_default 219e94c load on device 'cuda:3' took 13.27 ms  (cached)
+Module newton._src.geometry.narrow_phase a137686 load on device 'cuda:3' took 9.54 ms  (cached)
+Module narrow_phase_gjk_mpr_True_write_contact_default_default 219e94c load on device 'cuda:2' took 10.08 ms  (cached)
+Module newton._src.geometry.narrow_phase a137686 load on device 'cuda:2' took 3.80 ms  (cached)
+Module warp._src.coloring 0a2f0aa load on device 'cpu' took 3.30 ms  (cached)
+Module newton._src.solvers.vbd.rigid_vbd_kernels eff954d load on device 'cuda:2' took 62.80 ms  (cached)
+Module newton._src.solvers.solver db37500 load on device 'cuda:2' took 2.89 ms  (cached)
+Module newton._src.solvers.xpbd.kernels 23d48b8 load on device 'cuda:3' took 24.29 ms  (cached)
+Module warp._src.coloring 0a2f0aa load on device 'cpu' took 5.04 ms  (cached)
+Module warp._src.coloring 0a2f0aa load on device 'cpu' took 3.23 ms  (cached)
+Module warp._src.coloring 0a2f0aa load on device 'cpu' took 3.04 ms  (cached)
+Module warp._src.coloring 0a2f0aa load on device 'cpu' took 4.16 ms  (cached)
+Module newton._src.sim.collide 4a8a6d9 load on device 'cuda:2' took 2.66 ms  (cached)
+Module newton._src.geometry.broad_phase_nxn 68fddfc load on device 'cuda:2' took 2.27 ms  (cached)
+Module newton._src.solvers.xpbd.kernels 23d48b8 load on device 'cuda:2' took 20.04 ms  (cached)
+Module narrow_phase_primitive_write_contact dd23331 load on device 'cuda:2' took 3.01 ms  (cached)
+Module warp._src.coloring 0a2f0aa load on device 'cpu' took 3.18 ms  (cached)
+Module warp._src.coloring 0a2f0aa load on device 'cpu' took 4.05 ms  (cached)
+Module warp._src.coloring 0a2f0aa load on device 'cpu' took 4.16 ms  (cached)
+Module warp._src.coloring 0a2f0aa load on device 'cpu' took 2.89 ms  (cached)
+Module warp._src.coloring 0a2f0aa load on device 'cpu' took 2.77 ms  (cached)
+Module warp._src.coloring 0a2f0aa load on device 'cpu' took 3.99 ms  (cached)
+Module warp._src.coloring 0a2f0aa load on device 'cpu' took 3.62 ms  (cached)
+Module warp._src.coloring 0a2f0aa load on device 'cpu' took 4.08 ms  (cached)
+Module warp._src.coloring 0a2f0aa load on device 'cpu' took 4.53 ms  (cached)
+Module narrow_phase_gjk_mpr_True_write_contact_default_default 219e94c load on device 'cuda:2' took 6.05 ms  (cached)
+Module warp._src.coloring 0a2f0aa load on device 'cpu' took 2.77 ms  (cached)
+Module newton._src.geometry.narrow_phase a137686 load on device 'cuda:2' took 3.16 ms  (cached)
+Module warp._src.coloring 0a2f0aa load on device 'cpu' took 3.40 ms  (cached)
+Module newton._src.solvers.xpbd.kernels 23d48b8 load on device 'cuda:2' took 19.18 ms  (cached)
+Module validate_and_correct_inertia_kernel_5e18b3cd 5e18b3c load on device 'cuda:1' took 40.41 ms  (cached)
+Module newton._src.geometry.bvh cca3a6c load on device 'cuda:1' took 3.10 ms  (cached)
+Module newton._src.solvers.vbd.rigid_vbd_kernels 630080b load on device 'cpu' took 1.51 ms  (cached)
+Module newton._src.solvers.vbd.rigid_vbd_kernels eff954d load on device 'cuda:1' took 122.52 ms  (cached)
+Module newton._src.solvers.solver db37500 load on device 'cuda:1' took 3.34 ms  (cached)
+Module newton._src.sim.collide 4a8a6d9 load on device 'cuda:1' took 2.81 ms  (cached)
+Module newton._src.geometry.broad_phase_nxn 68fddfc load on device 'cuda:1' took 2.32 ms  (cached)
+Module narrow_phase_primitive_write_contact dd23331 load on device 'cuda:1' took 3.15 ms  (cached)
+Module narrow_phase_gjk_mpr_True_write_contact_default_default 219e94c load on device 'cuda:1' took 6.02 ms  (cached)
+Module newton._src.geometry.narrow_phase a137686 load on device 'cuda:1' took 2.96 ms  (cached)
+Module newton._src.solvers.xpbd.kernels 23d48b8 load on device 'cuda:1' took 18.64 ms  (cached)
+Module validate_and_correct_inertia_kernel_5e18b3cd 5e18b3c load on device 'cuda:1' took 30.67 ms  (cached)
+Module newton._src.geometry.bvh cca3a6c load on device 'cuda:1' took 3.48 ms  (cached)
+Module newton._src.solvers.vbd.rigid_vbd_kernels 630080b load on device 'cpu' took 1.38 ms  (cached)
+Module newton._src.solvers.vbd.rigid_vbd_kernels eff954d load on device 'cuda:1' took 90.09 ms  (cached)
+Module newton._src.solvers.solver db37500 load on device 'cuda:1' took 3.10 ms  (cached)
+Module newton._src.sim.collide 4a8a6d9 load on device 'cuda:1' took 2.81 ms  (cached)
+Module newton._src.geometry.broad_phase_nxn 68fddfc load on device 'cuda:1' took 2.87 ms  (cached)
+Module narrow_phase_primitive_write_contact dd23331 load on device 'cuda:1' took 3.64 ms  (cached)
+Module narrow_phase_gjk_mpr_True_write_contact_default_default 219e94c load on device 'cuda:1' took 6.51 ms  (cached)
+Module newton._src.geometry.narrow_phase a137686 load on device 'cuda:1' took 3.70 ms  (cached)
+Module newton._src.solvers.xpbd.kernels 23d48b8 load on device 'cuda:1' took 22.21 ms  (cached)
+Module validate_and_correct_inertia_kernel_5e18b3cd 5e18b3c load on device 'cuda:3' took 28.32 ms  (cached)
+Module newton._src.geometry.bvh cca3a6c load on device 'cuda:3' took 3.54 ms  (cached)
+Module validate_and_correct_inertia_kernel_5e18b3cd 5e18b3c load on device 'cuda:3' took 4.22 ms  (cached)
+Module newton._src.geometry.bvh cca3a6c load on device 'cuda:3' took 3.53 ms  (cached)
+Module validate_and_correct_inertia_kernel_5e18b3cd 5e18b3c load on device 'cuda:1' took 5.32 ms  (cached)
+Module newton._src.geometry.bvh cca3a6c load on device 'cuda:1' took 4.15 ms  (cached)
+Module newton._src.solvers.vbd.rigid_vbd_kernels 630080b load on device 'cpu' took 1.49 ms  (cached)
+Module validate_and_correct_inertia_kernel_5e18b3cd 5e18b3c load on device 'cuda:1' took 4.22 ms  (cached)
+Module newton._src.geometry.bvh cca3a6c load on device 'cuda:1' took 3.05 ms  (cached)
+Module validate_and_correct_inertia_kernel_5e18b3cd 5e18b3c load on device 'cuda:0' took 7.64 ms  (cached)
+Module validate_and_correct_inertia_kernel_5e18b3cd 5e18b3c load on device 'cuda:0' took 4.50 ms  (cached)
+Module newton._src.geometry.bvh cca3a6c load on device 'cuda:0' took 3.89 ms  (cached)
+Module newton._src.solvers.vbd.rigid_vbd_kernels eff954d load on device 'cuda:3' took 22.69 ms  (cached)
+Module newton._src.solvers.vbd.rigid_vbd_kernels 630080b load on device 'cpu' took 1.82 ms  (cached)
+Module newton._src.solvers.solver db37500 load on device 'cuda:3' took 5.85 ms  (cached)
+Module validate_and_correct_inertia_kernel_5e18b3cd 5e18b3c load on device 'cuda:0' took 10.52 ms  (cached)
+Module newton._src.geometry.bvh cca3a6c load on device 'cuda:0' took 4.69 ms  (cached)
+Module validate_and_correct_inertia_kernel_5e18b3cd 5e18b3c load on device 'cuda:2' took 4.19 ms  (cached)
+Module validate_and_correct_inertia_kernel_5e18b3cd 5e18b3c load on device 'cuda:2' took 4.65 ms  (cached)
+Module validate_and_correct_inertia_kernel_5e18b3cd 5e18b3c load on device 'cuda:1' took 3.32 ms  (cached)
+Module validate_and_correct_inertia_kernel_5e18b3cd 5e18b3c load on device 'cuda:3' took 3.38 ms  (cached)
+Module validate_and_correct_inertia_kernel_5e18b3cd 5e18b3c load on device 'cuda:0' took 3.67 ms  (cached)
+Module newton._src.geometry.bvh cca3a6c load on device 'cuda:0' took 4.37 ms  (cached)
+Module newton._src.solvers.vbd.rigid_vbd_kernels 630080b load on device 'cpu' took 1.75 ms  (cached)
+Module newton._src.geometry.bvh cca3a6c load on device 'cuda:2' took 4.27 ms  (cached)
+Module validate_and_correct_inertia_kernel_5e18b3cd 5e18b3c load on device 'cuda:0' took 3.69 ms  (cached)
+Module validate_and_correct_inertia_kernel_5e18b3cd 5e18b3c load on device 'cuda:1' took 3.54 ms  (cached)
+Module newton._src.geometry.bvh cca3a6c load on device 'cuda:2' took 4.39 ms  (cached)
+Module validate_and_correct_inertia_kernel_5e18b3cd 5e18b3c load on device 'cuda:3' took 2.70 ms  (cached)
+Module validate_and_correct_inertia_kernel_5e18b3cd 5e18b3c load on device 'cuda:2' took 3.07 ms  (cached)
+Module validate_and_correct_inertia_kernel_5e18b3cd 5e18b3c load on device 'cuda:2' took 4.01 ms  (cached)
+Module newton._src.geometry.bvh cca3a6c load on device 'cuda:1' took 4.61 ms  (cached)
+Module validate_and_correct_inertia_kernel_5e18b3cd 5e18b3c load on device 'cuda:0' took 3.44 ms  (cached)
+Module newton._src.geometry.bvh cca3a6c load on device 'cuda:3' took 4.14 ms  (cached)
+Module newton._src.sim.collide 4a8a6d9 load on device 'cuda:3' took 3.99 ms  (cached)
+Module validate_and_correct_inertia_kernel_5e18b3cd 5e18b3c load on device 'cuda:0' took 3.26 ms  (cached)
+Module validate_and_correct_inertia_kernel_5e18b3cd 5e18b3c load on device 'cuda:2' took 3.31 ms  (cached)
+Module validate_and_correct_inertia_kernel_5e18b3cd 5e18b3c load on device 'cuda:3' took 4.17 ms  (cached)
+Module newton._src.geometry.bvh cca3a6c load on device 'cuda:0' took 4.07 ms  (cached)
+Module newton._src.solvers.vbd.rigid_vbd_kernels eff954d load on device 'cuda:3' took 17.04 ms  (cached)
+Module newton._src.geometry.broad_phase_nxn 68fddfc load on device 'cuda:3' took 2.80 ms  (cached)
+Module newton._src.geometry.bvh cca3a6c load on device 'cuda:0' took 3.92 ms  (cached)
+Module newton._src.geometry.bvh cca3a6c load on device 'cuda:3' took 3.99 ms  (cached)
+Module newton._src.geometry.bvh cca3a6c load on device 'cuda:2' took 4.33 ms  (cached)
+Module newton._src.geometry.bvh cca3a6c load on device 'cuda:1' took 4.29 ms  (cached)
+Module validate_and_correct_inertia_kernel_5e18b3cd 5e18b3c load on device 'cuda:1' took 3.33 ms  (cached)
+Module newton._src.solvers.solver db37500 load on device 'cuda:3' took 4.76 ms  (cached)
+Module newton._src.geometry.bvh cca3a6c load on device 'cuda:0' took 3.86 ms  (cached)
+Module newton._src.geometry.bvh cca3a6c load on device 'cuda:2' took 4.16 ms  (cached)
+Module newton._src.geometry.bvh cca3a6c load on device 'cuda:0' took 3.93 ms  (cached)
+Module validate_and_correct_inertia_kernel_5e18b3cd 5e18b3c load on device 'cuda:3' took 4.95 ms  (cached)
+Module newton._src.geometry.bvh cca3a6c load on device 'cuda:2' took 4.25 ms  (cached)
+Module newton._src.geometry.bvh cca3a6c load on device 'cuda:3' took 4.72 ms  (cached)
+Module newton._src.geometry.bvh cca3a6c load on device 'cuda:1' took 3.22 ms  (cached)
+Module newton._src.solvers.vbd.rigid_vbd_kernels 630080b load on device 'cpu' took 1.48 ms  (cached)
+Module narrow_phase_primitive_write_contact dd23331 load on device 'cuda:3' took 4.72 ms  (cached)
+Module newton._src.geometry.bvh cca3a6c load on device 'cuda:3' took 4.27 ms  (cached)
+Module newton._src.solvers.vbd.rigid_vbd_kernels 630080b load on device 'cpu' took 1.52 ms  (cached)
+Module newton._src.solvers.vbd.rigid_vbd_kernels 630080b load on device 'cpu' took 1.19 ms  (cached)
+Module newton._src.sim.collide 4a8a6d9 load on device 'cuda:3' took 3.59 ms  (cached)
+Module newton._src.geometry.broad_phase_nxn 68fddfc load on device 'cuda:3' took 2.80 ms  (cached)
+Module newton._src.solvers.vbd.rigid_vbd_kernels eff954d load on device 'cuda:1' took 24.02 ms  (cached)
+Module newton._src.solvers.solver db37500 load on device 'cuda:1' took 4.51 ms  (cached)
+Module narrow_phase_primitive_write_contact dd23331 load on device 'cuda:3' took 4.48 ms  (cached)
+Module newton._src.solvers.vbd.rigid_vbd_kernels eff954d load on device 'cuda:0' took 15.06 ms  (cached)
+Module newton._src.solvers.solver db37500 load on device 'cuda:0' took 3.05 ms  (cached)
+Module newton._src.solvers.vbd.rigid_vbd_kernels eff954d load on device 'cuda:0' took 22.32 ms  (cached)
+Module newton._src.solvers.vbd.rigid_vbd_kernels 630080b load on device 'cpu' took 1.77 ms  (cached)
+Module newton._src.solvers.vbd.rigid_vbd_kernels 630080b load on device 'cpu' took 1.44 ms  (cached)
+Module newton._src.sim.collide 4a8a6d9 load on device 'cuda:1' took 3.50 ms  (cached)
+Module newton._src.solvers.solver db37500 load on device 'cuda:0' took 3.95 ms  (cached)
+Module newton._src.solvers.vbd.rigid_vbd_kernels 630080b load on device 'cpu' took 1.67 ms  (cached)
+Module newton._src.geometry.broad_phase_nxn 68fddfc load on device 'cuda:1' took 2.98 ms  (cached)
+Module newton._src.solvers.vbd.rigid_vbd_kernels 630080b load on device 'cpu' took 1.59 ms  (cached)
+Module newton._src.solvers.vbd.rigid_vbd_kernels 630080b load on device 'cpu' took 1.36 ms  (cached)
+Module newton._src.sim.collide 4a8a6d9 load on device 'cuda:0' took 2.40 ms  (cached)
+Module newton._src.solvers.vbd.rigid_vbd_kernels 630080b load on device 'cpu' took 1.44 ms  (cached)
+Module newton._src.solvers.vbd.rigid_vbd_kernels 630080b load on device 'cpu' took 1.64 ms  (cached)
+Module newton._src.solvers.vbd.rigid_vbd_kernels eff954d load on device 'cuda:1' took 22.87 ms  (cached)
+Module newton._src.geometry.broad_phase_nxn 68fddfc load on device 'cuda:0' took 2.21 ms  (cached)
+Module newton._src.solvers.solver db37500 load on device 'cuda:1' took 4.15 ms  (cached)
+Module narrow_phase_gjk_mpr_True_write_contact_default_default 219e94c load on device 'cuda:3' took 10.93 ms  (cached)
+Module newton._src.solvers.vbd.rigid_vbd_kernels 630080b load on device 'cpu' took 1.36 ms  (cached)
+Module narrow_phase_primitive_write_contact dd23331 load on device 'cuda:1' took 4.50 ms  (cached)
+Module newton._src.solvers.vbd.rigid_vbd_kernels 630080b load on device 'cpu' took 1.33 ms  (cached)
+Module newton._src.solvers.vbd.rigid_vbd_kernels 630080b load on device 'cpu' took 1.68 ms  (cached)
+Module newton._src.solvers.vbd.rigid_vbd_kernels 630080b load on device 'cpu' took 1.64 ms  (cached)
+Module narrow_phase_primitive_write_contact dd23331 load on device 'cuda:0' took 3.31 ms  (cached)
+Module newton._src.solvers.vbd.rigid_vbd_kernels 630080b load on device 'cpu' took 1.47 ms  (cached)
+Module newton._src.geometry.narrow_phase a137686 load on device 'cuda:3' took 4.48 ms  (cached)
+Module newton._src.sim.collide 4a8a6d9 load on device 'cuda:0' took 3.45 ms  (cached)
+Module newton._src.solvers.vbd.rigid_vbd_kernels 630080b load on device 'cpu' took 1.47 ms  (cached)
+Module newton._src.solvers.vbd.rigid_vbd_kernels 630080b load on device 'cpu' took 1.42 ms  (cached)
+Module newton._src.solvers.vbd.rigid_vbd_kernels 630080b load on device 'cpu' took 1.25 ms  (cached)
+Module newton._src.geometry.broad_phase_nxn 68fddfc load on device 'cuda:0' took 2.60 ms  (cached)
+Module newton._src.solvers.vbd.rigid_vbd_kernels 630080b load on device 'cpu' took 1.53 ms  (cached)
+Module newton._src.solvers.vbd.rigid_vbd_kernels 630080b load on device 'cpu' took 1.54 ms  (cached)
+Module newton._src.sim.collide 4a8a6d9 load on device 'cuda:1' took 3.58 ms  (cached)
+Module narrow_phase_gjk_mpr_True_write_contact_default_default 219e94c load on device 'cuda:3' took 9.23 ms  (cached)
+Module newton._src.geometry.broad_phase_nxn 68fddfc load on device 'cuda:1' took 2.77 ms  (cached)
+Module narrow_phase_primitive_write_contact dd23331 load on device 'cuda:0' took 4.46 ms  (cached)
+Module newton._src.solvers.vbd.rigid_vbd_kernels eff954d load on device 'cuda:2' took 21.06 ms  (cached)
+Module newton._src.geometry.narrow_phase a137686 load on device 'cuda:3' took 4.24 ms  (cached)
+Module newton._src.solvers.vbd.rigid_vbd_kernels eff954d load on device 'cuda:0' took 22.37 ms  (cached)
+Module newton._src.solvers.vbd.rigid_vbd_kernels eff954d load on device 'cuda:3' took 20.92 ms  (cached)
+Module newton._src.solvers.solver db37500 load on device 'cuda:2' took 4.15 ms  (cached)
+Module newton._src.solvers.solver db37500 load on device 'cuda:0' took 4.32 ms  (cached)
+Module newton._src.solvers.vbd.rigid_vbd_kernels eff954d load on device 'cuda:0' took 19.80 ms  (cached)
+Module newton._src.solvers.solver db37500 load on device 'cuda:3' took 4.13 ms  (cached)
+Module newton._src.solvers.vbd.rigid_vbd_kernels eff954d load on device 'cuda:2' took 22.72 ms  (cached)
+Module newton._src.solvers.solver db37500 load on device 'cuda:0' took 3.75 ms  (cached)
+Module newton._src.solvers.vbd.rigid_vbd_kernels eff954d load on device 'cuda:3' took 22.36 ms  (cached)
+Module narrow_phase_primitive_write_contact dd23331 load on device 'cuda:1' took 4.24 ms  (cached)
+Module newton._src.solvers.vbd.rigid_vbd_kernels eff954d load on device 'cuda:1' took 22.82 ms  (cached)
+Module newton._src.solvers.solver db37500 load on device 'cuda:3' took 3.80 ms  (cached)
+Module newton._src.solvers.solver db37500 load on device 'cuda:2' took 4.96 ms  (cached)
+Module narrow_phase_gjk_mpr_True_write_contact_default_default 219e94c load on device 'cuda:0' took 8.88 ms  (cached)
+Module newton._src.solvers.solver db37500 load on device 'cuda:1' took 3.61 ms  (cached)
+Module newton._src.solvers.xpbd.kernels 23d48b8 load on device 'cuda:3' took 34.50 ms  (cached)
+Module newton._src.solvers.vbd.rigid_vbd_kernels eff954d load on device 'cuda:1' took 15.24 ms  (cached)
+Module newton._src.geometry.narrow_phase a137686 load on device 'cuda:0' took 4.24 ms  (cached)
+Module newton._src.solvers.vbd.rigid_vbd_kernels eff954d load on device 'cuda:2' took 22.80 ms  (cached)
+Module newton._src.solvers.vbd.rigid_vbd_kernels eff954d load on device 'cuda:0' took 23.98 ms  (cached)
+Module newton._src.solvers.vbd.rigid_vbd_kernels eff954d load on device 'cuda:1' took 24.42 ms  (cached)
+Module newton._src.solvers.vbd.rigid_vbd_kernels eff954d load on device 'cuda:3' took 22.60 ms  (cached)
+Module newton._src.sim.collide 4a8a6d9 load on device 'cuda:0' took 2.67 ms  (cached)
+Module newton._src.solvers.solver db37500 load on device 'cuda:1' took 6.38 ms  (cached)
+Module newton._src.solvers.vbd.rigid_vbd_kernels eff954d load on device 'cuda:0' took 21.18 ms  (cached)
+Module newton._src.solvers.vbd.rigid_vbd_kernels eff954d load on device 'cuda:2' took 22.87 ms  (cached)
+Module newton._src.solvers.vbd.rigid_vbd_kernels eff954d load on device 'cuda:0' took 23.33 ms  (cached)
+Module newton._src.sim.collide 4a8a6d9 load on device 'cuda:2' took 5.04 ms  (cached)
+Module newton._src.solvers.solver db37500 load on device 'cuda:2' took 4.30 ms  (cached)
+Module newton._src.geometry.broad_phase_nxn 68fddfc load on device 'cuda:0' took 2.39 ms  (cached)
+Module newton._src.solvers.solver db37500 load on device 'cuda:1' took 4.52 ms  (cached)
+Module newton._src.solvers.solver db37500 load on device 'cuda:3' took 4.20 ms  (cached)
+Module newton._src.sim.collide 4a8a6d9 load on device 'cuda:3' took 3.58 ms  (cached)
+Module narrow_phase_gjk_mpr_True_write_contact_default_default 219e94c load on device 'cuda:1' took 8.32 ms  (cached)
+Module newton._src.solvers.solver db37500 load on device 'cuda:2' took 4.99 ms  (cached)
+Module newton._src.solvers.solver db37500 load on device 'cuda:0' took 6.26 ms  (cached)
+Module newton._src.solvers.solver db37500 load on device 'cuda:0' took 3.89 ms  (cached)
+Module newton._src.solvers.solver db37500 load on device 'cuda:0' took 5.90 ms  (cached)
+Module newton._src.sim.collide 4a8a6d9 load on device 'cuda:1' took 2.38 ms  (cached)
+Module newton._src.geometry.broad_phase_nxn 68fddfc load on device 'cuda:2' took 3.42 ms  (cached)
+Module newton._src.sim.collide 4a8a6d9 load on device 'cuda:0' took 3.93 ms  (cached)
+Module newton._src.geometry.broad_phase_nxn 68fddfc load on device 'cuda:3' took 2.95 ms  (cached)
+Module newton._src.geometry.broad_phase_nxn 68fddfc load on device 'cuda:1' took 2.52 ms  (cached)
+Module newton._src.sim.collide 4a8a6d9 load on device 'cuda:3' took 3.77 ms  (cached)
+Module newton._src.geometry.broad_phase_nxn 68fddfc load on device 'cuda:0' took 2.78 ms  (cached)
+Module newton._src.solvers.vbd.rigid_vbd_kernels eff954d load on device 'cuda:2' took 27.46 ms  (cached)
+Module newton._src.sim.collide 4a8a6d9 load on device 'cuda:2' took 4.00 ms  (cached)
+Module narrow_phase_primitive_write_contact dd23331 load on device 'cuda:0' took 3.31 ms  (cached)
+Module newton._src.geometry.broad_phase_nxn 68fddfc load on device 'cuda:3' took 2.66 ms  (cached)
+Module newton._src.geometry.narrow_phase a137686 load on device 'cuda:1' took 4.32 ms  (cached)
+Module newton._src.solvers.xpbd.kernels 23d48b8 load on device 'cuda:3' took 36.02 ms  (cached)
+Module newton._src.solvers.solver db37500 load on device 'cuda:2' took 4.03 ms  (cached)
+Module newton._src.solvers.vbd.rigid_vbd_kernels eff954d load on device 'cuda:3' took 24.74 ms  (cached)
+Module newton._src.geometry.broad_phase_nxn 68fddfc load on device 'cuda:2' took 4.33 ms  (cached)
+Module narrow_phase_primitive_write_contact dd23331 load on device 'cuda:1' took 3.83 ms  (cached)
+Module newton._src.solvers.solver db37500 load on device 'cuda:3' took 3.97 ms  (cached)
+Module newton._src.sim.collide 4a8a6d9 load on device 'cuda:1' took 3.75 ms  (cached)
+Module narrow_phase_primitive_write_contact dd23331 load on device 'cuda:3' took 4.51 ms  (cached)
+Module narrow_phase_primitive_write_contact dd23331 load on device 'cuda:2' took 4.63 ms  (cached)
+Module newton._src.sim.collide 4a8a6d9 load on device 'cuda:2' took 3.45 ms  (cached)
+Module narrow_phase_primitive_write_contact dd23331 load on device 'cuda:0' took 3.64 ms  (cached)
+Module newton._src.sim.collide 4a8a6d9 load on device 'cuda:3' took 3.63 ms  (cached)
+Module newton._src.geometry.broad_phase_nxn 68fddfc load on device 'cuda:1' took 3.85 ms  (cached)
+Module newton._src.sim.collide 4a8a6d9 load on device 'cuda:1' took 3.61 ms  (cached)
+Module narrow_phase_primitive_write_contact dd23331 load on device 'cuda:3' took 4.47 ms  (cached)
+Module newton._src.geometry.broad_phase_nxn 68fddfc load on device 'cuda:2' took 2.64 ms  (cached)
+Module newton._src.geometry.broad_phase_nxn 68fddfc load on device 'cuda:3' took 3.21 ms  (cached)
+Module newton._src.sim.collide 4a8a6d9 load on device 'cuda:2' took 3.41 ms  (cached)
+Module newton._src.sim.collide 4a8a6d9 load on device 'cuda:0' took 3.37 ms  (cached)
+Module narrow_phase_gjk_mpr_True_write_contact_default_default 219e94c load on device 'cuda:0' took 11.71 ms  (cached)
+Module newton._src.sim.collide 4a8a6d9 load on device 'cuda:0' took 3.27 ms  (cached)
+Module newton._src.geometry.broad_phase_nxn 68fddfc load on device 'cuda:1' took 2.63 ms  (cached)
+Module newton._src.sim.collide 4a8a6d9 load on device 'cuda:0' took 3.40 ms  (cached)
+Module newton._src.geometry.broad_phase_nxn 68fddfc load on device 'cuda:2' took 3.18 ms  (cached)
+Module newton._src.geometry.broad_phase_nxn 68fddfc load on device 'cuda:0' took 2.96 ms  (cached)
+Module narrow_phase_primitive_write_contact dd23331 load on device 'cuda:2' took 4.88 ms  (cached)
+Module newton._src.solvers.xpbd.kernels 23d48b8 load on device 'cuda:0' took 34.76 ms  (cached)
+Module newton._src.geometry.broad_phase_nxn 68fddfc load on device 'cuda:0' took 3.39 ms  (cached)
+Module newton._src.geometry.broad_phase_nxn 68fddfc load on device 'cuda:0' took 3.24 ms  (cached)
+Module newton._src.geometry.narrow_phase a137686 load on device 'cuda:0' took 4.22 ms  (cached)
+Module narrow_phase_gjk_mpr_True_write_contact_default_default 219e94c load on device 'cuda:1' took 10.39 ms  (cached)
+Module narrow_phase_primitive_write_contact dd23331 load on device 'cuda:1' took 5.24 ms  (cached)
+Module narrow_phase_gjk_mpr_True_write_contact_default_default 219e94c load on device 'cuda:0' took 6.44 ms  (cached)
+Module newton._src.sim.collide 4a8a6d9 load on device 'cuda:2' took 3.88 ms  (cached)
+Module narrow_phase_primitive_write_contact dd23331 load on device 'cuda:2' took 4.34 ms  (cached)
+Module newton._src.sim.collide 4a8a6d9 load on device 'cuda:3' took 3.53 ms  (cached)
+Module narrow_phase_primitive_write_contact dd23331 load on device 'cuda:3' took 4.74 ms  (cached)
+Module newton._src.geometry.broad_phase_nxn 68fddfc load on device 'cuda:2' took 2.94 ms  (cached)
+Module newton._src.geometry.narrow_phase a137686 load on device 'cuda:0' took 3.56 ms  (cached)
+Module narrow_phase_primitive_write_contact dd23331 load on device 'cuda:1' took 4.68 ms  (cached)
+Module newton._src.geometry.narrow_phase a137686 load on device 'cuda:1' took 4.16 ms  (cached)
+Module newton._src.geometry.broad_phase_nxn 68fddfc load on device 'cuda:3' took 3.07 ms  (cached)
+Module newton._src.solvers.xpbd.kernels 23d48b8 load on device 'cuda:1' took 30.72 ms  (cached)
+Module narrow_phase_primitive_write_contact dd23331 load on device 'cuda:2' took 4.62 ms  (cached)
+Module narrow_phase_primitive_write_contact dd23331 load on device 'cuda:0' took 4.68 ms  (cached)
+Module narrow_phase_primitive_write_contact dd23331 load on device 'cuda:0' took 4.57 ms  (cached)
+Module narrow_phase_primitive_write_contact dd23331 load on device 'cuda:0' took 3.53 ms  (cached)
+Module narrow_phase_gjk_mpr_True_write_contact_default_default 219e94c load on device 'cuda:1' took 7.13 ms  (cached)
+Module newton._src.geometry.narrow_phase a137686 load on device 'cuda:1' took 3.38 ms  (cached)
+Module narrow_phase_primitive_write_contact dd23331 load on device 'cuda:2' took 4.93 ms  (cached)
+Module narrow_phase_primitive_write_contact dd23331 load on device 'cuda:3' took 5.02 ms  (cached)
+Module newton._src.solvers.xpbd.kernels 23d48b8 load on device 'cuda:0' took 20.09 ms  (cached)
+Module newton._src.solvers.xpbd.kernels 23d48b8 load on device 'cuda:0' took 33.47 ms  (cached)
+Module narrow_phase_gjk_mpr_True_write_contact_default_default 219e94c load on device 'cuda:3' took 12.60 ms  (cached)
+Module narrow_phase_gjk_mpr_True_write_contact_default_default 219e94c load on device 'cuda:0' took 9.82 ms  (cached)
+Module narrow_phase_gjk_mpr_True_write_contact_default_default 219e94c load on device 'cuda:3' took 10.16 ms  (cached)
+Module newton._src.solvers.xpbd.kernels 23d48b8 load on device 'cuda:1' took 21.19 ms  (cached)
+Module newton._src.solvers.xpbd.kernels 23d48b8 load on device 'cuda:1' took 33.08 ms  (cached)
+Module newton._src.geometry.narrow_phase a137686 load on device 'cuda:0' took 4.36 ms  (cached)
+Module narrow_phase_gjk_mpr_True_write_contact_default_default 219e94c load on device 'cuda:2' took 12.41 ms  (cached)
+Module newton._src.geometry.narrow_phase a137686 load on device 'cuda:3' took 4.11 ms  (cached)
+Module newton._src.geometry.narrow_phase a137686 load on device 'cuda:3' took 5.80 ms  (cached)
+Module narrow_phase_gjk_mpr_True_write_contact_default_default 219e94c load on device 'cuda:2' took 11.29 ms  (cached)
+Module narrow_phase_gjk_mpr_True_write_contact_default_default 219e94c load on device 'cuda:1' took 9.45 ms  (cached)
+Module newton._src.geometry.narrow_phase a137686 load on device 'cuda:2' took 4.54 ms  (cached)
+Module narrow_phase_gjk_mpr_True_write_contact_default_default 219e94c load on device 'cuda:2' took 9.97 ms  (cached)
+Module narrow_phase_gjk_mpr_True_write_contact_default_default 219e94c load on device 'cuda:3' took 9.95 ms  (cached)
+Module newton._src.geometry.narrow_phase a137686 load on device 'cuda:2' took 7.28 ms  (cached)
+Module newton._src.geometry.narrow_phase a137686 load on device 'cuda:1' took 5.84 ms  (cached)
+Module narrow_phase_gjk_mpr_True_write_contact_default_default 219e94c load on device 'cuda:1' took 11.09 ms  (cached)
+Module newton._src.geometry.narrow_phase a137686 load on device 'cuda:2' took 5.62 ms  (cached)
+Module newton._src.geometry.narrow_phase a137686 load on device 'cuda:3' took 5.11 ms  (cached)
+Module narrow_phase_gjk_mpr_True_write_contact_default_default 219e94c load on device 'cuda:0' took 10.21 ms  (cached)
+Module narrow_phase_gjk_mpr_True_write_contact_default_default 219e94c load on device 'cuda:2' took 10.56 ms  (cached)
+Module narrow_phase_gjk_mpr_True_write_contact_default_default 219e94c load on device 'cuda:0' took 11.89 ms  (cached)
+Module newton._src.geometry.narrow_phase a137686 load on device 'cuda:1' took 4.19 ms  (cached)
+Module newton._src.geometry.narrow_phase a137686 load on device 'cuda:0' took 3.82 ms  (cached)
+Module narrow_phase_gjk_mpr_True_write_contact_default_default 219e94c load on device 'cuda:0' took 10.93 ms  (cached)
+Module newton._src.geometry.narrow_phase a137686 load on device 'cuda:2' took 4.42 ms  (cached)
+Module newton._src.geometry.narrow_phase a137686 load on device 'cuda:0' took 4.06 ms  (cached)
+Module narrow_phase_gjk_mpr_True_write_contact_default_default 219e94c load on device 'cuda:2' took 6.90 ms  (cached)
+Module newton._src.geometry.narrow_phase a137686 load on device 'cuda:0' took 5.20 ms  (cached)
+Module newton._src.solvers.xpbd.kernels 23d48b8 load on device 'cuda:3' took 30.63 ms  (cached)
+Module narrow_phase_gjk_mpr_True_write_contact_default_default 219e94c load on device 'cuda:3' took 10.80 ms  (cached)
+Module newton._src.solvers.xpbd.kernels 23d48b8 load on device 'cuda:3' took 32.94 ms  (cached)
+Module newton._src.solvers.xpbd.kernels 23d48b8 load on device 'cuda:0' took 34.68 ms  (cached)
+Module newton._src.geometry.narrow_phase a137686 load on device 'cuda:2' took 3.41 ms  (cached)
+Module newton._src.geometry.narrow_phase a137686 load on device 'cuda:3' took 4.64 ms  (cached)
+Module newton._src.solvers.xpbd.kernels 23d48b8 load on device 'cuda:2' took 32.01 ms  (cached)
+Module newton._src.solvers.xpbd.kernels 23d48b8 load on device 'cuda:2' took 30.62 ms  (cached)
+Module newton._src.solvers.xpbd.kernels 23d48b8 load on device 'cuda:1' took 29.89 ms  (cached)
+Module newton._src.solvers.xpbd.kernels 23d48b8 load on device 'cuda:2' took 33.02 ms  (cached)
+Module newton._src.solvers.xpbd.kernels 23d48b8 load on device 'cuda:3' took 32.83 ms  (cached)
+Module newton._src.solvers.xpbd.kernels 23d48b8 load on device 'cuda:0' took 29.95 ms  (cached)
+Module newton._src.solvers.xpbd.kernels 23d48b8 load on device 'cuda:1' took 36.84 ms  (cached)
+Module newton._src.solvers.xpbd.kernels 23d48b8 load on device 'cuda:0' took 35.76 ms  (cached)
+Module newton._src.solvers.xpbd.kernels 23d48b8 load on device 'cuda:2' took 34.58 ms  (cached)
+Module newton._src.solvers.xpbd.kernels 23d48b8 load on device 'cuda:0' took 36.28 ms  (cached)
+Module newton._src.solvers.xpbd.kernels 23d48b8 load on device 'cuda:2' took 34.40 ms  (cached)
+Module newton._src.solvers.xpbd.kernels 23d48b8 load on device 'cuda:3' took 35.04 ms  (cached)
+[1/36] 20261021_175638: 18.943 mm/node, 155 frames, 533s (total 533s)
+[2/36] 20261021_172103: 6.924 mm/node, 156 frames, 536s (total 537s)
+[3/36] 20261021_180139: 13.318 mm/node, 156 frames, 541s (total 541s)
+[4/36] 20261021_172716: 7.515 mm/node, 159 frames, 548s (total 549s)
+[5/36] 20261021_172318: 5.807 mm/node, 161 frames, 548s (total 549s)
+[6/36] 20261021_170550: 5.708 mm/node, 158 frames, 549s (total 550s)
+[7/36] 20261028_101001: 7.105 mm/node, 161 frames, 551s (total 552s)
+[8/36] 20261021_164755: 5.466 mm/node, 164 frames, 559s (total 559s)
+[9/36] 20261021_173858: 6.265 mm/node, 160 frames, 559s (total 559s)
+[10/36] 20261026_130441: 15.962 mm/node, 164 frames, 559s (total 560s)
+[11/36] 20261021_171842: 6.320 mm/node, 164 frames, 563s (total 564s)
+[12/36] 20261028_100701: 7.947 mm/node, 165 frames, 564s (total 564s)
+[13/36] 20261026_125511: 5.639 mm/node, 168 frames, 565s (total 565s)
+[14/36] 20261028_101510: 6.864 mm/node, 166 frames, 569s (total 570s)
+[15/36] 20261021_163624: 5.396 mm/node, 170 frames, 570s (total 571s)
+[16/36] 20261021_165018: 7.084 mm/node, 166 frames, 572s (total 573s)
+[17/36] 20261021_173628: 6.430 mm/node, 168 frames, 574s (total 574s)
+[18/36] 20261021_160124: 7.201 mm/node, 166 frames, 577s (total 578s)
+[19/36] 20261021_162632: 7.930 mm/node, 171 frames, 586s (total 586s)
+[20/36] 20261021_165753: 5.588 mm/node, 172 frames, 588s (total 588s)
+[21/36] 20261021_164524: 5.502 mm/node, 176 frames, 589s (total 589s)
+[22/36] 20261026_130128: 6.316 mm/node, 178 frames, 592s (total 592s)
+[23/36] 20261021_180422: 7.249 mm/node, 176 frames, 594s (total 594s)
+[24/36] 20261021_162340: 6.467 mm/node, 175 frames, 596s (total 596s)
+[25/36] 20261021_174701: 6.448 mm/node, 173 frames, 596s (total 597s)
+[26/36] 20261021_174117: 6.254 mm/node, 174 frames, 597s (total 598s)
+[27/36] 20261021_165246: 6.937 mm/node, 181 frames, 601s (total 601s)
+[28/36] 20261021_164010: 5.861 mm/node, 181 frames, 601s (total 601s)
+[29/36] 20261021_163244: 9.049 mm/node, 123 frames, 244s (total 803s)
+[30/36] 20261021_171620: 7.634 mm/node, 149 frames, 289s (total 830s)
+[31/36] 20261021_180646: 6.420 mm/node, 147 frames, 281s (total 830s)
+[32/36] 20261021_172928: 6.140 mm/node, 149 frames, 285s (total 834s)
+[33/36] 20261028_121810: 9.477 mm/node, 155 frames, 304s (total 837s)
+[34/36] 20261021_173234: 6.332 mm/node, 154 frames, 302s (total 839s)
+[35/36] 20261028_114103: 6.588 mm/node, 146 frames, 289s (total 841s)
+[36/36] 20261028_105803: 10.162 mm/node, 146 frames, 291s (total 841s)
+mean 7.562  median 6.528 mm/node over 36 clips, 843s -> data/newton_fit_everything_pinned_t36_validate.json
