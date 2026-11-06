@@ -267,6 +267,44 @@ window.BENCH_DATA = {
    "20261028_105803": 17.513,
    "20261028_114103": 16.98,
    "20261028_121810": 16.868
+  },
+  "yang": {
+   "20261021_160124": 22.223,
+   "20261021_162340": 15.777,
+   "20261021_162632": 13.061,
+   "20261021_163244": 13.155,
+   "20261021_163624": 10.0,
+   "20261021_164010": 9.988,
+   "20261021_164524": 7.613,
+   "20261021_164755": 7.977,
+   "20261021_165018": 8.247,
+   "20261021_165246": 9.408,
+   "20261021_165753": 14.243,
+   "20261021_170550": 7.535,
+   "20261021_171620": 32.839,
+   "20261021_171842": 10.847,
+   "20261021_172103": 9.215,
+   "20261021_172318": 8.741,
+   "20261021_172716": 10.123,
+   "20261021_172928": 12.524,
+   "20261021_173234": 13.916,
+   "20261021_173628": 8.817,
+   "20261021_173858": 11.264,
+   "20261021_174117": 13.852,
+   "20261021_174701": 10.312,
+   "20261021_175638": 33.456,
+   "20261021_180139": 54.226,
+   "20261021_180422": 20.496,
+   "20261021_180646": 13.529,
+   "20261026_125511": 11.041,
+   "20261026_130128": 11.691,
+   "20261026_130441": 24.902,
+   "20261028_100701": 12.207,
+   "20261028_101001": 10.872,
+   "20261028_101510": 9.404,
+   "20261028_105803": 12.931,
+   "20261028_114103": 32.625,
+   "20261028_121810": 47.052
   }
  },
  "meta": {
@@ -304,6 +342,13 @@ window.BENCH_DATA = {
    "approach": "Genesis general fit, 36-clip refit (stopped after generation 33)",
    "median": 10.0725,
    "folder": "genesis_12.7"
+  },
+  "yang": {
+   "mean": 16.003002484639484,
+   "metric": "16 nodes (ends pinned), mean over cables, frames 5..T-1 (after warm-up)",
+   "approach": "Yang et al., IN + bi-LSTM trained on Newton rollouts from the DE fit (stored network replayed, no re-training)",
+   "median": 11.949000000000002,
+   "folder": "yang_16.0"
   }
  },
  "stills": {
@@ -2114,6 +2159,368 @@ window.BENCH_DATA = {
     "middle": {
      "file": "genesis_20261028_121810_frame077_middle.png",
      "frame": 77
+    }
+   }
+  },
+  "yang": {
+   "20261021_160124": {
+    "middle": {
+     "file": "yang_20261021_160124_frame083_middle.png",
+     "frame": 83
+    },
+    "worst": {
+     "file": "yang_20261021_160124_frame160_worst.png",
+     "frame": 160
+    }
+   },
+   "20261021_162340": {
+    "middle": {
+     "file": "yang_20261021_162340_frame087_middle.png",
+     "frame": 87
+    },
+    "worst": {
+     "file": "yang_20261021_162340_frame119_worst.png",
+     "frame": 119
+    }
+   },
+   "20261021_162632": {
+    "middle": {
+     "file": "yang_20261021_162632_frame085_middle.png",
+     "frame": 85
+    },
+    "worst": {
+     "file": "yang_20261021_162632_frame111_worst.png",
+     "frame": 111
+    }
+   },
+   "20261021_163244": {
+    "worst": {
+     "file": "yang_20261021_163244_frame050_worst.png",
+     "frame": 50
+    },
+    "middle": {
+     "file": "yang_20261021_163244_frame061_middle.png",
+     "frame": 61
+    }
+   },
+   "20261021_163624": {
+    "middle": {
+     "file": "yang_20261021_163624_frame085_middle.png",
+     "frame": 85
+    },
+    "worst": {
+     "file": "yang_20261021_163624_frame122_worst.png",
+     "frame": 122
+    }
+   },
+   "20261021_164010": {
+    "middle": {
+     "file": "yang_20261021_164010_frame090_middle.png",
+     "frame": 90
+    },
+    "worst": {
+     "file": "yang_20261021_164010_frame124_worst.png",
+     "frame": 124
+    }
+   },
+   "20261021_164524": {
+    "middle": {
+     "file": "yang_20261021_164524_frame088_middle.png",
+     "frame": 88
+    },
+    "worst": {
+     "file": "yang_20261021_164524_frame091_worst.png",
+     "frame": 91
+    }
+   },
+   "20261021_164755": {
+    "middle": {
+     "file": "yang_20261021_164755_frame082_middle.png",
+     "frame": 82
+    },
+    "worst": {
+     "file": "yang_20261021_164755_frame096_worst.png",
+     "frame": 96
+    }
+   },
+   "20261021_165018": {
+    "middle": {
+     "file": "yang_20261021_165018_frame083_middle.png",
+     "frame": 83
+    },
+    "worst": {
+     "file": "yang_20261021_165018_frame088_worst.png",
+     "frame": 88
+    }
+   },
+   "20261021_165246": {
+    "middle": {
+     "file": "yang_20261021_165246_frame090_middle.png",
+     "frame": 90
+    },
+    "worst": {
+     "file": "yang_20261021_165246_frame097_worst.png",
+     "frame": 97
+    }
+   },
+   "20261021_165753": {
+    "middle": {
+     "file": "yang_20261021_165753_frame086_middle.png",
+     "frame": 86
+    },
+    "worst": {
+     "file": "yang_20261021_165753_frame171_worst.png",
+     "frame": 171
+    }
+   },
+   "20261021_170550": {
+    "middle": {
+     "file": "yang_20261021_170550_frame079_middle.png",
+     "frame": 79
+    },
+    "worst": {
+     "file": "yang_20261021_170550_frame144_worst.png",
+     "frame": 144
+    }
+   },
+   "20261021_171620": {
+    "middle": {
+     "file": "yang_20261021_171620_frame074_middle.png",
+     "frame": 74
+    },
+    "worst": {
+     "file": "yang_20261021_171620_frame148_worst.png",
+     "frame": 148
+    }
+   },
+   "20261021_171842": {
+    "middle": {
+     "file": "yang_20261021_171842_frame082_middle.png",
+     "frame": 82
+    },
+    "worst": {
+     "file": "yang_20261021_171842_frame163_worst.png",
+     "frame": 163
+    }
+   },
+   "20261021_172103": {
+    "middle": {
+     "file": "yang_20261021_172103_frame078_middle.png",
+     "frame": 78
+    },
+    "worst": {
+     "file": "yang_20261021_172103_frame103_worst.png",
+     "frame": 103
+    }
+   },
+   "20261021_172318": {
+    "middle": {
+     "file": "yang_20261021_172318_frame080_middle.png",
+     "frame": 80
+    },
+    "worst": {
+     "file": "yang_20261021_172318_frame111_worst.png",
+     "frame": 111
+    }
+   },
+   "20261021_172716": {
+    "middle": {
+     "file": "yang_20261021_172716_frame079_middle.png",
+     "frame": 79
+    },
+    "worst": {
+     "file": "yang_20261021_172716_frame158_worst.png",
+     "frame": 158
+    }
+   },
+   "20261021_172928": {
+    "middle": {
+     "file": "yang_20261021_172928_frame074_middle.png",
+     "frame": 74
+    },
+    "worst": {
+     "file": "yang_20261021_172928_frame104_worst.png",
+     "frame": 104
+    }
+   },
+   "20261021_173234": {
+    "middle": {
+     "file": "yang_20261021_173234_frame077_middle.png",
+     "frame": 77
+    },
+    "worst": {
+     "file": "yang_20261021_173234_frame107_worst.png",
+     "frame": 107
+    }
+   },
+   "20261021_173628": {
+    "middle": {
+     "file": "yang_20261021_173628_frame084_middle.png",
+     "frame": 84
+    },
+    "worst": {
+     "file": "yang_20261021_173628_frame093_worst.png",
+     "frame": 93
+    }
+   },
+   "20261021_173858": {
+    "middle": {
+     "file": "yang_20261021_173858_frame080_middle.png",
+     "frame": 80
+    },
+    "worst": {
+     "file": "yang_20261021_173858_frame121_worst.png",
+     "frame": 121
+    }
+   },
+   "20261021_174117": {
+    "middle": {
+     "file": "yang_20261021_174117_frame087_middle.png",
+     "frame": 87
+    },
+    "worst": {
+     "file": "yang_20261021_174117_frame093_worst.png",
+     "frame": 93
+    }
+   },
+   "20261021_174701": {
+    "middle": {
+     "file": "yang_20261021_174701_frame086_middle.png",
+     "frame": 86
+    },
+    "worst": {
+     "file": "yang_20261021_174701_frame104_worst.png",
+     "frame": 104
+    }
+   },
+   "20261021_175638": {
+    "middle": {
+     "file": "yang_20261021_175638_frame077_middle.png",
+     "frame": 77
+    },
+    "worst": {
+     "file": "yang_20261021_175638_frame153_worst.png",
+     "frame": 153
+    }
+   },
+   "20261021_180139": {
+    "middle": {
+     "file": "yang_20261021_180139_frame078_middle.png",
+     "frame": 78
+    },
+    "worst": {
+     "file": "yang_20261021_180139_frame148_worst.png",
+     "frame": 148
+    }
+   },
+   "20261021_180422": {
+    "middle": {
+     "file": "yang_20261021_180422_frame088_middle.png",
+     "frame": 88
+    },
+    "worst": {
+     "file": "yang_20261021_180422_frame106_worst.png",
+     "frame": 106
+    }
+   },
+   "20261021_180646": {
+    "middle": {
+     "file": "yang_20261021_180646_frame073_middle.png",
+     "frame": 73
+    },
+    "worst": {
+     "file": "yang_20261021_180646_frame117_worst.png",
+     "frame": 117
+    }
+   },
+   "20261026_125511": {
+    "middle": {
+     "file": "yang_20261026_125511_frame084_middle.png",
+     "frame": 84
+    },
+    "worst": {
+     "file": "yang_20261026_125511_frame167_worst.png",
+     "frame": 167
+    }
+   },
+   "20261026_130128": {
+    "middle": {
+     "file": "yang_20261026_130128_frame089_middle.png",
+     "frame": 89
+    },
+    "worst": {
+     "file": "yang_20261026_130128_frame158_worst.png",
+     "frame": 158
+    }
+   },
+   "20261026_130441": {
+    "middle": {
+     "file": "yang_20261026_130441_frame082_middle.png",
+     "frame": 82
+    },
+    "worst": {
+     "file": "yang_20261026_130441_frame110_worst.png",
+     "frame": 110
+    }
+   },
+   "20261028_100701": {
+    "middle": {
+     "file": "yang_20261028_100701_frame082_middle.png",
+     "frame": 82
+    },
+    "worst": {
+     "file": "yang_20261028_100701_frame106_worst.png",
+     "frame": 106
+    }
+   },
+   "20261028_101001": {
+    "middle": {
+     "file": "yang_20261028_101001_frame080_middle.png",
+     "frame": 80
+    },
+    "worst": {
+     "file": "yang_20261028_101001_frame160_worst.png",
+     "frame": 160
+    }
+   },
+   "20261028_101510": {
+    "middle": {
+     "file": "yang_20261028_101510_frame083_middle.png",
+     "frame": 83
+    },
+    "worst": {
+     "file": "yang_20261028_101510_frame165_worst.png",
+     "frame": 165
+    }
+   },
+   "20261028_105803": {
+    "middle": {
+     "file": "yang_20261028_105803_frame073_middle.png",
+     "frame": 73
+    },
+    "worst": {
+     "file": "yang_20261028_105803_frame091_worst.png",
+     "frame": 91
+    }
+   },
+   "20261028_114103": {
+    "middle": {
+     "file": "yang_20261028_114103_frame073_middle.png",
+     "frame": 73
+    },
+    "worst": {
+     "file": "yang_20261028_114103_frame136_worst.png",
+     "frame": 136
+    }
+   },
+   "20261028_121810": {
+    "middle": {
+     "file": "yang_20261028_121810_frame077_middle.png",
+     "frame": 77
+    },
+    "worst": {
+     "file": "yang_20261028_121810_frame148_worst.png",
+     "frame": 148
     }
    }
   }

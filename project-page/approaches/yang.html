@@ -5,10 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Yang et al. in the DLO world-model benchmark: Identify a simulator from the real clips, generate synthetic data from it, and train an interaction network + bidirectional LSTM along the chain. We use NVIDIA Newton instead of the paper&#x27;s AGX Dynamics.">
   <title>Yang et al. &middot; DLO Benchmark</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230b0b0b'/%3E%3Cg fill='none' stroke-width='2.4' stroke-linecap='round'%3E%3Cpath d='M7 19C14 19 15 8 25 8' stroke='%233987e5'/%3E%3Cpath d='M7 19C15 19 17 15 25 15' stroke='%23eb6834'/%3E%3Cpath d='M7 19C15 20 17 23 25 23' stroke='%231baf7a'/%3E%3C/g%3E%3Ccircle cx='7' cy='19' r='3.2' fill='%23fff'/%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <link rel="stylesheet" href="../static/css/index.css">
+  <link rel="stylesheet" href="../static/css/index.css?v=20261106x">
   <script>
     try { var t = localStorage.getItem('dlo-theme-v2'); if (t) document.documentElement.setAttribute('data-theme', t); } catch (e) {}
   </script>
@@ -35,22 +36,45 @@
 
 <main>
 <section class="section ap-hero">
-  <div class="wrap narrow">
+  <div class="wrap">
     <a class="back-link" href="../index.html#approaches"><i class="fas fa-arrow-left"></i>All approaches</a>
     <p class="ap-kicker"><span class="swatch" style="--sw: var(--series-dynamics)"></span>Dynamics Model</p>
     <h1 class="ap-title">Yang et al.</h1>
     <p class="ap-cite">RAS 2022</p>
-    <div class="ap-stats">
-      <div class="stat"><span class="stat-value">13.3</span><span class="stat-label">mm/node error</span></div>
-      <div class="stat"><span class="stat-value ap-stat-text">Dynamics Model</span><span class="stat-label">paradigm</span></div>
-      <div class="stat"><span class="stat-value">14</span><span class="stat-label">clips</span></div>
+    <div class="cfg-boxes" aria-label="Reported configuration and cable parameters">
+      <button type="button" class="cfg-score" data-x="score" aria-expanded="false" aria-controls="cfg-explain"><span class="cfg-score-v">16.0</span><span class="cfg-score-l">mm/node</span></button>
+      <div class="cfg-groups">
+        <div class="cfg-group"><p class="cfg-title"><b>Identified simulator + network</b><span>Newton simulator, IN + bi-LSTM</span></p><div class="cfg-tiles"><div class="cfg-cell"><span class="cfg-l"><span>Stretching<em> &middot; N/m</em></span></span><button type="button" class="cfg-tile" data-x="g0-ks" aria-expanded="false" aria-controls="cfg-explain" aria-label="Stretching: explain"><span class="cfg-v">4.4&middot;10<sup>3</sup></span></button></div><div class="cfg-cell"><span class="cfg-l"><span>Bending<em> &middot; N&middot;m/rad</em></span></span><button type="button" class="cfg-tile" data-x="g0-kb" aria-expanded="false" aria-controls="cfg-explain" aria-label="Bending: explain"><span class="cfg-v">3.66</span></button></div><div class="cfg-cell"><span class="cfg-l"><span>Twisting<em> &middot; N&middot;m/rad</em></span></span><button type="button" class="cfg-tile" data-x="g0-kt" aria-expanded="false" aria-controls="cfg-explain" aria-label="Twisting: explain"><span class="cfg-v">0.053</span></button></div><div class="cfg-cell"><span class="cfg-l"><span>Density<em> &middot; kg/m</em></span></span><button type="button" class="cfg-tile" data-x="g0-rho" aria-expanded="false" aria-controls="cfg-explain" aria-label="Density: explain"><span class="cfg-v">0.087</span></button></div><div class="cfg-cell"><span class="cfg-l"><span>Friction</span></span><button type="button" class="cfg-tile" data-x="g0-mu" aria-expanded="false" aria-controls="cfg-explain" aria-label="Friction: explain"><span class="cfg-v">4.48</span></button></div><div class="cfg-cell"><span class="cfg-l"><span>Rest shape</span></span><button type="button" class="cfg-tile" data-x="g0-rest" aria-expanded="false" aria-controls="cfg-explain" aria-label="Rest shape: explain"><span class="cfg-v">&minus;40&deg;<span class="cfg-to">&ndash;</span>+75&deg;</span></button></div><div class="cfg-cell"><span class="cfg-l"><span>Parameters<em> &middot; weights</em></span></span><button type="button" class="cfg-tile" data-x="g0-weights" aria-expanded="false" aria-controls="cfg-explain" aria-label="Parameters: explain"><span class="cfg-v">1.16&thinsp;M</span></button></div><div class="cfg-cell"><span class="cfg-l"><span>Fitting / training<em> &middot; h</em></span></span><button type="button" class="cfg-tile" data-x="g0-time" aria-expanded="false" aria-controls="cfg-explain" aria-label="Fitting / training: explain"><span class="cfg-v">55</span></button></div><div class="cfg-cell"><span class="cfg-l"><span>Data<em> &middot; transitions</em></span></span><button type="button" class="cfg-tile" data-x="g0-data" aria-expanded="false" aria-controls="cfg-explain" aria-label="Data: explain"><span class="cfg-v">2.16M</span></button></div></div></div>
+      </div>
     </div>
+    <div class="cfg-explain" id="cfg-explain" role="region" aria-label="Parameter explanation" aria-live="polite" hidden></div>
+    <script type="application/json" id="cfg-explain-data">{"score": {"t": "Mean node error", "sym": "mm/node", "v": "16.0", "what": "How far, on average, the predicted cable is from the real one, in millimetres per node.", "how": "Averaged over the 16 nodes of the 4 cables and over every frame after a 5-frame warm-up, then over the clips. After the warm-up the model runs open loop with only the measured motion of the hub and the plugs.", "why": "It is the number every approach is ranked by. Lower is better."}, "g0-ks": {"t": "Stretching", "sym": "k_stretch", "v": "4.4&middot;10<sup>3<\/sup> N/m", "grp": "Identified simulator + network", "what": "How stiff the simulated cable is against stretching.", "how": "Identified by differential evolution: the simulator is tuned until its one-step prediction matches the real clips.", "why": "The simulator with these values makes all the training data."}, "g0-kb": {"t": "Bending", "sym": "k_bend", "v": "3.66 N&middot;m/rad", "grp": "Identified simulator + network", "what": "How strongly the simulated cable resists bending.", "how": "Identified by differential evolution together with the other seven values.", "why": "Bending stiffness has the largest effect on the cable’s curve."}, "g0-kt": {"t": "Twisting", "sym": "k_twist", "v": "0.053 N&middot;m/rad", "grp": "Identified simulator + network", "what": "How strongly the simulated cable resists twisting.", "how": "Identified by differential evolution.", "why": "Twist changes how a cable rolls when its ends turn."}, "g0-rho": {"t": "Density", "sym": "mass per metre", "v": "0.087 kg/m", "grp": "Identified simulator + network", "what": "How heavy the simulated cable is per metre.", "how": "Identified by differential evolution.", "why": "Weight decides how much a cable sags and swings."}, "g0-mu": {"t": "Friction", "sym": "μ", "v": "4.48", "grp": "Identified simulator + network", "what": "How strongly the board holds the simulated cable back.", "how": "Identified by differential evolution.", "why": "Friction decides whether a cable slides along the board."}, "g0-rest": {"t": "Rest shape", "sym": "rest angles", "v": "&minus;40&deg; &ndash; +75&deg;", "grp": "Identified simulator + network", "what": "The bend the simulated cable keeps when nothing pushes it.", "how": "Part of the Newton simulator that generates the training data.", "why": "A real cable keeps a bent shape; the data has to show that."}, "g0-weights": {"t": "Parameters", "sym": "network weights", "v": "1.16&thinsp;M weights", "grp": "Identified simulator + network", "what": "The number of learned values in the network: an interaction network plus a bidirectional LSTM along the chain.", "how": "Trained on the synthetic data for 60 epochs.", "why": "The network replaces the simulator when predicting."}, "g0-time": {"t": "Fitting / training", "sym": "wall-clock time", "v": "55 h", "grp": "Identified simulator + network", "what": "How long the whole pipeline took.", "how": "Identifying the simulator (the largest part), generating the data and training the network.", "why": "Most of the cost is the identification, not the network."}, "g0-data": {"t": "Data", "sym": "transitions", "v": "2.16M", "grp": "Identified simulator + network", "what": "The number of synthetic training steps.", "how": "Rollouts of the identified simulator on the real mover paths, with speed variation and randomised parameters.", "why": "More varied data helps the network generalise to the real cable."}}</script>
+    <p class="cfg-note">Reported configuration and its cable parameters (paper, Fig.&nbsp;3). <span class="cfg-hint"><i class="fas fa-hand-pointer"></i>Click a box to see what it means.</span></p>
   </div>
 </section>
 
 <section class="section ap-section">
-  <div class="wrap narrow">
-    <div class="approach-inner ap-body">
+  <div class="wrap ap-dash" id="ap-dash">
+
+    <div class="dash-card">
+      <div class="dash-head">
+        <h3>Error on each of the 36 clips</h3>
+        <div class="dash-controls">
+          <div class="seg" role="group" aria-label="Order">
+            <button type="button" class="seg-btn is-on" data-order="clip">Recording order</button>
+            <button type="button" class="seg-btn" data-order="sorted">Sorted by error</button>
+          </div>
+          <label class="select-wrap compact"><span class="muted">Compare</span><select id="ap-compare" aria-label="Compare with another model"></select></label>
+        </div>
+      </div>
+      <div class="legend" id="ap-clips-legend"></div>
+      <div id="ap-clips" class="chart" role="img" aria-label="Error on each clip"></div>
+    </div>
+
+    <div class="dash-card method-card">
+      <div class="dash-head"><h3><i class="fas fa-book-open"></i>Method details</h3></div>
+      <div class="approach-inner ap-body">
+
           <p class="lead">Identify a simulator from the real clips, generate synthetic data from it, and train an
             <strong>interaction network + bidirectional LSTM</strong> along the chain. We use NVIDIA Newton instead of the paper's AGX Dynamics.</p>
           <dl class="facts">
@@ -58,7 +82,8 @@
             <div><dt>Physical properties</dt><dd>8 global Newton parameters, identified by differential evolution</dd></div>
             <div><dt>Model</dt><dd>IN + bi-LSTM, 1.16&nbsp;M weights, 60 epochs</dd></div>
             <div><dt>Scored</dt><dd>16 nodes, ends pinned, frames 5&hellip;T&minus;1</dd></div>
-            <div><dt>Result</dt><dd>13.33 mean / 11.68 median (14 clips)</dd></div>
+            <div><dt>36-clip result</dt><dd>16.00 mean; parameters from differential evolution, stopped after 14 of 41 generations</dd></div>
+            <div><dt>14-clip result</dt><dd>13.33 mean</dd></div>
           </dl>
           <h4>Pipeline</h4>
           <ol>
@@ -94,15 +119,10 @@
           <div class="detail-actions">
             <span class="code-path"><i class="fas fa-folder"></i><code>yang_et_al/</code></span>
           </div>
+      </div>
     </div>
 
-    <div class="ap-perclip" id="ap-perclip" hidden>
-      <h2 class="sub-title">Per-clip error on the 36 clips</h2>
-      <div class="ap-perclip-stats" id="ap-perclip-stats"></div>
-      <div class="chart-card"><div id="ap-perclip-chart" class="chart" role="img" aria-label="Error of Yang et al. on each of the 36 clips"></div></div>
-    </div>
-
-    <nav class="ap-pager" aria-label="Other dynamics models">
+        <nav class="ap-pager" aria-label="Other dynamics models">
       <span></span>
       <a class="ap-pager-link next" href="caporali.html"><span>Next dynamics model<i class="fas fa-arrow-right"></i></span><b>Caporali et al.</b></a>
     </nav>
@@ -117,7 +137,8 @@
 </footer>
 
 <div class="tooltip" id="tooltip" role="tooltip" hidden></div>
-<script src="../static/js/data.js"></script>
-<script src="../static/js/approach.js"></script>
+<script src="../static/js/data.js?v=20261106x"></script>
+<script src="../static/js/approach.js?v=20261106x"></script>
+<script src="../static/js/ux.js?v=20261106x"></script>
 </body>
 </html>

@@ -5,10 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="AdaptiGraph in the DLO world-model benchmark: A material-conditioned graph-based neural dynamics model (GBND) with one physical property variable φ, estimated few-shot on each real cable.">
   <title>AdaptiGraph &middot; DLO Benchmark</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230b0b0b'/%3E%3Cg fill='none' stroke-width='2.4' stroke-linecap='round'%3E%3Cpath d='M7 19C14 19 15 8 25 8' stroke='%233987e5'/%3E%3Cpath d='M7 19C15 19 17 15 25 15' stroke='%23eb6834'/%3E%3Cpath d='M7 19C15 20 17 23 25 23' stroke='%231baf7a'/%3E%3C/g%3E%3Ccircle cx='7' cy='19' r='3.2' fill='%23fff'/%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <link rel="stylesheet" href="../static/css/index.css">
+  <link rel="stylesheet" href="../static/css/index.css?v=20261106x">
   <script>
     try { var t = localStorage.getItem('dlo-theme-v2'); if (t) document.documentElement.setAttribute('data-theme', t); } catch (e) {}
   </script>
@@ -35,22 +36,46 @@
 
 <main>
 <section class="section ap-hero">
-  <div class="wrap narrow">
+  <div class="wrap">
     <a class="back-link" href="../index.html#approaches"><i class="fas fa-arrow-left"></i>All approaches</a>
     <p class="ap-kicker"><span class="swatch" style="--sw: var(--series-dynamics)"></span>Dynamics Model</p>
     <h1 class="ap-title">AdaptiGraph</h1>
     <p class="ap-cite">Zhang et al. RSS 2024</p>
-    <div class="ap-stats">
-      <div class="stat"><span class="stat-value">29.4</span><span class="stat-label">mm/node error</span></div>
-      <div class="stat"><span class="stat-value ap-stat-text">Dynamics Model</span><span class="stat-label">paradigm</span></div>
-      <div class="stat"><span class="stat-value">36</span><span class="stat-label">clips</span></div>
+    <div class="cfg-boxes" aria-label="Reported configuration and cable parameters">
+      <button type="button" class="cfg-score" data-x="score" aria-expanded="false" aria-controls="cfg-explain"><span class="cfg-score-v">29.4</span><span class="cfg-score-l">mm/node</span></button>
+      <div class="cfg-groups">
+        <div class="cfg-group"><p class="cfg-title"><b>Network training</b><span>GBND, simulator + real fine-tuning</span></p><div class="cfg-tiles"><div class="cfg-cell"><span class="cfg-l"><span>Stretching<em> &middot; N/m</em></span></span><button type="button" class="cfg-tile" data-x="g0-ks" aria-expanded="false" aria-controls="cfg-explain" aria-label="Stretching: explain"><span class="cfg-v">1&middot;10<sup>5</sup></span></button></div><div class="cfg-cell"><span class="cfg-l"><span>Bending</span></span><button type="button" class="cfg-tile" data-x="g0-kb" aria-expanded="false" aria-controls="cfg-explain" aria-label="Bending: explain"><span class="cfg-v">0.2<span class="cfg-to">&ndash;</span>3.0<span class="cfg-u"> N&middot;m/rad</span></span></button></div><div class="cfg-cell"><span class="cfg-l"><span>Twisting</span></span><span class="cfg-tile is-empty" title="Not part of this configuration"><span class="cfg-v">&ndash;</span></span></div><div class="cfg-cell"><span class="cfg-l"><span>Density<em> &middot; kg/m</em></span></span><button type="button" class="cfg-tile" data-x="g0-m" aria-expanded="false" aria-controls="cfg-explain" aria-label="Density: explain"><span class="cfg-v">0.022<span class="cfg-to">&ndash;</span>0.17</span></button></div><div class="cfg-cell"><span class="cfg-l"><span>Friction<em> &middot; N</em></span></span><button type="button" class="cfg-tile" data-x="g0-kc" aria-expanded="false" aria-controls="cfg-explain" aria-label="Friction: explain"><span class="cfg-v">0.05<span class="cfg-to">&ndash;</span>0.4</span></button></div><div class="cfg-cell"><span class="cfg-l"><span>Rest shape</span></span><button type="button" class="cfg-tile" data-x="g0-rest" aria-expanded="false" aria-controls="cfg-explain" aria-label="Rest shape: explain"><span class="cfg-v">&minus;34&deg;<span class="cfg-to">&ndash;</span>+34&deg;</span></button></div><div class="cfg-cell"><span class="cfg-l"><span>Parameters</span></span><button type="button" class="cfg-tile" data-x="g0-weights" aria-expanded="false" aria-controls="cfg-explain" aria-label="Parameters: explain"><span class="cfg-v">0.51&thinsp;M<span class="cfg-u"> weights</span></span></button></div><div class="cfg-cell"><span class="cfg-l"><span>Fitting / training<em> &middot; h</em></span></span><button type="button" class="cfg-tile" data-x="g0-time" aria-expanded="false" aria-controls="cfg-explain" aria-label="Fitting / training: explain"><span class="cfg-v">0.3</span></button></div><div class="cfg-cell"><span class="cfg-l"><span>Data<em> &middot; transitions</em></span></span><button type="button" class="cfg-tile" data-x="g0-data" aria-expanded="false" aria-controls="cfg-explain" aria-label="Data: explain"><span class="cfg-v">771k + 22.7k</span></button></div></div></div>
+        <div class="cfg-group"><p class="cfg-title"><b>&phi; estimation</b><span>per cable, from 5 frames</span></p><div class="cfg-tiles"><div class="cfg-cell"><span class="cfg-l"><span>Stretching<em> &middot; N/m</em></span></span><span class="cfg-tile is-empty" title="Not part of this configuration"><span class="cfg-v">&ndash;</span></span></div><div class="cfg-cell"><span class="cfg-l"><span>Bending</span></span><button type="button" class="cfg-tile" data-x="g1-phi" aria-expanded="false" aria-controls="cfg-explain" aria-label="Bending: explain"><span class="cfg-v">&minus;0.2<span class="cfg-to">&ndash;</span>1.12</span></button></div><div class="cfg-cell"><span class="cfg-l"><span>Twisting</span></span><span class="cfg-tile is-empty" title="Not part of this configuration"><span class="cfg-v">&ndash;</span></span></div><div class="cfg-cell"><span class="cfg-l"><span>Density<em> &middot; kg/m</em></span></span><span class="cfg-tile is-empty" title="Not part of this configuration"><span class="cfg-v">&ndash;</span></span></div><div class="cfg-cell"><span class="cfg-l"><span>Friction<em> &middot; N</em></span></span><span class="cfg-tile is-empty" title="Not part of this configuration"><span class="cfg-v">&ndash;</span></span></div><div class="cfg-cell"><span class="cfg-l"><span>Rest shape</span></span><span class="cfg-tile is-empty" title="Not part of this configuration"><span class="cfg-v">&ndash;</span></span></div><div class="cfg-cell"><span class="cfg-l"><span>Parameters</span></span><button type="button" class="cfg-tile" data-x="g1-n" aria-expanded="false" aria-controls="cfg-explain" aria-label="Parameters: explain"><span class="cfg-v">144</span></button></div><div class="cfg-cell"><span class="cfg-l"><span>Fitting / training<em> &middot; h</em></span></span><button type="button" class="cfg-tile" data-x="g1-time" aria-expanded="false" aria-controls="cfg-explain" aria-label="Fitting / training: explain"><span class="cfg-v">&lt;0.01</span></button></div><div class="cfg-cell"><span class="cfg-l"><span>Data<em> &middot; transitions</em></span></span><span class="cfg-tile is-empty" title="Not part of this configuration"><span class="cfg-v">&ndash;</span></span></div></div></div>
+      </div>
     </div>
+    <div class="cfg-explain" id="cfg-explain" role="region" aria-label="Parameter explanation" aria-live="polite" hidden></div>
+    <script type="application/json" id="cfg-explain-data">{"score": {"t": "Mean node error", "sym": "mm/node", "v": "29.4", "what": "How far, on average, the predicted cable is from the real one, in millimetres per node.", "how": "Averaged over the 16 nodes of the 4 cables and over every frame after a 5-frame warm-up, then over the clips. After the warm-up the model runs open loop with only the measured motion of the hub and the plugs.", "why": "It is the number every approach is ranked by. Lower is better."}, "g0-ks": {"t": "Stretching", "sym": "spring stiffness", "v": "1&middot;10<sup>5<\/sup> N/m", "grp": "Network training", "what": "How stiff the simulator’s springs are against stretching.", "how": "A fixed value of the analytical mass-spring simulator (same as Caporali).", "why": "It keeps the simulated cable at its length."}, "g0-kb": {"t": "Bending", "sym": "k_b", "v": "0.2 &ndash; 3.0 N&middot;m/rad", "grp": "Network training", "what": "How stiff the simulated cables are against bending.", "how": "Sampled at random for each training example; the network gets it as the property φ (0–1).", "why": "The network learns how stiffness changes the motion."}, "g0-m": {"t": "Density", "sym": "mass", "v": "0.022 &ndash; 0.17 kg/m", "grp": "Network training", "what": "How heavy the simulated cables are, per metre.", "how": "Sampled at random for each training example.", "why": "Weight changes how a cable sags."}, "g0-kc": {"t": "Friction", "sym": "k_c per node", "v": "0.05 &ndash; 0.4 N", "grp": "Network training", "what": "The friction force between the board and each node.", "how": "Sampled at random in 0.05–0.4 N.", "why": "Friction decides whether a cable slides."}, "g0-rest": {"t": "Rest shape", "sym": "rest angles", "v": "&minus;34&deg; &ndash; +34&deg;", "grp": "Network training", "what": "The bend the simulated cable keeps.", "how": "Frame-0 angles ×0.6–1.2, capped at 0.6 rad.", "why": "Real cables keep a bent shape."}, "g0-weights": {"t": "Parameters", "sym": "network weights", "v": "0.51&thinsp;M weights", "grp": "Network training", "what": "The number of learned values in the graph network (GBND, 4 rounds of message passing).", "how": "Trained on simulator data, then fine-tuned on the real frames with φ fixed at 0.5.", "why": "The network predicts how every node moves."}, "g0-time": {"t": "Fitting / training", "sym": "wall-clock time", "v": "0.3 h", "grp": "Network training", "what": "How long training took.", "how": "20 epochs on simulator data plus the real fine-tuning.", "why": "Training is cheap."}, "g0-data": {"t": "Data", "sym": "transitions", "v": "771k + 22.7k", "grp": "Network training", "what": "The training examples: simulated and real.", "how": "771k simulated transitions, then 22.7k real transitions for fine-tuning.", "why": "The real data teaches the network the real cables’ look and feel."}, "g1-phi": {"t": "Bending", "sym": "φ", "v": "&minus;0.2 &ndash; 1.12", "grp": "φ estimation", "what": "One number per cable for its bending stiffness: the normalised mean log stiffness (0 = softest, 1 = stiffest in training).", "how": "Chosen from the first 5 frames of the real clip by trying a grid of 29 values in −0.2–1.2 and keeping the best.", "why": "It is the only thing adapted to each real cable. Many cables end on the lower bound, so the real ones lie partly outside the training range."}, "g1-n": {"t": "Parameters", "sym": "φ values", "v": "144", "grp": "φ estimation", "what": "How many numbers are adapted on the real clips.", "how": "One φ per cable: 4 cables × 36 clips = 144.", "why": "Adapting one number per cable is very cheap."}, "g1-time": {"t": "Fitting / training", "sym": "wall-clock time", "v": "&lt;0.01 h", "grp": "φ estimation", "what": "How long the φ estimation took.", "how": "A grid search over 29 values on 5 frames.", "why": "It is almost free."}}</script>
+    <p class="cfg-note">Reported configuration and its cable parameters (paper, Fig.&nbsp;3). <span class="cfg-hint"><i class="fas fa-hand-pointer"></i>Click a box to see what it means.</span></p>
   </div>
 </section>
 
 <section class="section ap-section">
-  <div class="wrap narrow">
-    <div class="approach-inner ap-body">
+  <div class="wrap ap-dash" id="ap-dash">
+
+    <div class="dash-card">
+      <div class="dash-head">
+        <h3>Error on each of the 36 clips</h3>
+        <div class="dash-controls">
+          <div class="seg" role="group" aria-label="Order">
+            <button type="button" class="seg-btn is-on" data-order="clip">Recording order</button>
+            <button type="button" class="seg-btn" data-order="sorted">Sorted by error</button>
+          </div>
+          <label class="select-wrap compact"><span class="muted">Compare</span><select id="ap-compare" aria-label="Compare with another model"></select></label>
+        </div>
+      </div>
+      <div class="legend" id="ap-clips-legend"></div>
+      <div id="ap-clips" class="chart" role="img" aria-label="Error on each clip"></div>
+    </div>
+
+    <div class="dash-card method-card">
+      <div class="dash-head"><h3><i class="fas fa-book-open"></i>Method details</h3></div>
+      <div class="approach-inner ap-body">
+
           <p class="lead">A material-conditioned <strong>graph-based neural dynamics</strong> model (GBND) with one physical property
             variable &phi;, estimated few-shot on each real cable.</p>
           <dl class="facts">
@@ -89,15 +114,10 @@
           <div class="detail-actions">
             <span class="code-path"><i class="fas fa-folder"></i><code>adaptigraph_c14/</code>, <code>approaches/10_adaptigraph.py</code></span>
           </div>
+      </div>
     </div>
 
-    <div class="ap-perclip" id="ap-perclip" hidden>
-      <h2 class="sub-title">Per-clip error on the 36 clips</h2>
-      <div class="ap-perclip-stats" id="ap-perclip-stats"></div>
-      <div class="chart-card"><div id="ap-perclip-chart" class="chart" role="img" aria-label="Error of AdaptiGraph on each of the 36 clips"></div></div>
-    </div>
-
-    <nav class="ap-pager" aria-label="Other dynamics models">
+        <nav class="ap-pager" aria-label="Other dynamics models">
       <a class="ap-pager-link prev" href="caporali.html"><span><i class="fas fa-arrow-left"></i>Previous dynamics model</span><b>Caporali et al.</b></a>
       <span></span>
     </nav>
@@ -112,7 +132,8 @@
 </footer>
 
 <div class="tooltip" id="tooltip" role="tooltip" hidden></div>
-<script src="../static/js/data.js"></script>
-<script src="../static/js/approach.js"></script>
+<script src="../static/js/data.js?v=20261106x"></script>
+<script src="../static/js/approach.js?v=20261106x"></script>
+<script src="../static/js/ux.js?v=20261106x"></script>
 </body>
 </html>

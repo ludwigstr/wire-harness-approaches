@@ -1,0 +1,388 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 620" font-family="'Segoe UI', Arial, sans-serif">
+  <defs>
+    <filter id="shadow" x="-2%" y="-2%" width="104%" height="104%">
+      <feDropShadow dx="1" dy="2" stdDeviation="2" flood-opacity="0.06"/>
+    </filter>
+  </defs>
+
+  <rect width="1400" height="620" fill="#fff" rx="6"/>
+
+  <!-- ===== SECTION A ===== -->
+  <rect x="20" y="18" width="290" height="584" rx="8" fill="#FAFBFD" stroke="#D8DEE8" stroke-width="1.2" filter="url(#shadow)"/>
+  <rect x="20" y="18" width="290" height="34" rx="8" fill="#34567A"/>
+  <rect x="20" y="42" width="290" height="10" fill="#34567A"/>
+  <text x="165" y="41" text-anchor="middle" fill="#fff" font-size="14" font-weight="700" letter-spacing="0.5">A &#160; Input Pipeline</text>
+
+  <!-- Overhead Camera -->
+  <g transform="translate(145, 68)">
+    <rect x="0" y="0" width="40" height="28" rx="4" fill="#556"/>
+    <circle cx="20" cy="14" r="8" fill="none" stroke="#B0B8C0" stroke-width="1.5"/>
+    <circle cx="20" cy="14" r="3" fill="#B0B8C0"/>
+    <rect x="28" y="3" width="6" height="4" rx="1" fill="#556"/>
+  </g>
+  <text x="165" y="116" text-anchor="middle" font-size="10.5" fill="#556">Overhead Camera</text>
+
+  <!-- Down arrow -->
+  <line x1="165" y1="122" x2="165" y2="140" stroke="#8898A8" stroke-width="1.5"/>
+  <polygon points="161,140 165,148 169,140" fill="#8898A8"/>
+
+  <!-- Video Data label -->
+  <rect x="110" y="148" width="110" height="22" rx="4" fill="#34567A"/>
+  <text x="165" y="164" text-anchor="middle" fill="#fff" font-size="10.5" font-weight="600">Video Data</text>
+
+  <!-- Video recording box -->
+  <rect x="40" y="172" width="250" height="160" rx="6" fill="#fff" stroke="#C8D0D8" stroke-width="1"/>
+  <rect x="50" y="177" width="230" height="150" rx="4" fill="#F5F5F3"/>
+
+  <!-- 5 movers -->
+  <rect x="70" y="188" width="28" height="28" rx="3" fill="#48505A" stroke="#333" stroke-width="0.8"/>
+  <rect x="77" y="195" width="14" height="14" rx="2" fill="#606870"/>
+  <rect x="215" y="186" width="28" height="28" rx="3" fill="#48505A" stroke="#333" stroke-width="0.8"/>
+  <rect x="222" y="193" width="14" height="14" rx="2" fill="#606870"/>
+  <rect x="65" y="258" width="28" height="28" rx="3" fill="#48505A" stroke="#333" stroke-width="0.8"/>
+  <rect x="72" y="265" width="14" height="14" rx="2" fill="#606870"/>
+  <rect x="178" y="248" width="28" height="28" rx="3" fill="#48505A" stroke="#333" stroke-width="0.8"/>
+  <rect x="185" y="255" width="14" height="14" rx="2" fill="#606870"/>
+  <rect x="210" y="295" width="28" height="28" rx="3" fill="#48505A" stroke="#333" stroke-width="0.8"/>
+  <rect x="217" y="302" width="14" height="14" rx="2" fill="#606870"/>
+
+  <!-- Cables from hub center (79,272) -->
+  <path d="M79,272 Q80,245 83,225 Q84,212 84,202" fill="none" stroke="#606870" stroke-width="1.8"/>
+  <path d="M79,272 Q140,230 200,208 Q220,202 229,200" fill="none" stroke="#707880" stroke-width="1.8"/>
+  <path d="M79,272 Q125,265 155,262 Q175,260 192,262" fill="none" stroke="#606870" stroke-width="1.8"/>
+  <path d="M79,272 Q130,298 170,308 Q200,314 224,309" fill="none" stroke="#707880" stroke-width="1.8"/>
+
+  <!-- Down arrow -->
+  <line x1="165" y1="337" x2="165" y2="357" stroke="#8898A8" stroke-width="1.5"/>
+  <polygon points="161,357 165,365 169,357" fill="#8898A8"/>
+
+  <!-- Perception box -->
+  <rect x="50" y="370" width="230" height="40" rx="6" fill="#fff" stroke="#34567A" stroke-width="1.2"/>
+  <text x="165" y="387" text-anchor="middle" font-size="12" font-weight="700" fill="#34567A">Perception</text>
+  <text x="165" y="402" text-anchor="middle" font-size="10" fill="#889">Tracking &amp; node densification</text>
+
+  <!-- Down arrow -->
+  <line x1="165" y1="410" x2="165" y2="430" stroke="#8898A8" stroke-width="1.5"/>
+  <polygon points="161,430 165,438 169,430" fill="#8898A8"/>
+
+  <!-- Tracked Nodes label -->
+  <rect x="100" y="432" width="130" height="22" rx="4" fill="#34567A"/>
+  <text x="165" y="448" text-anchor="middle" fill="#fff" font-size="10.5" font-weight="600">Tracked Nodes</text>
+
+  <!-- Tracked Nodes box -->
+  <rect x="40" y="456" width="250" height="140" rx="6" fill="#fff" stroke="#34567A" stroke-width="1.2"/>
+  <rect x="50" y="461" width="230" height="130" rx="4" fill="#F5F5F3"/>
+
+  <!-- 5 movers -->
+  <rect x="70" y="470" width="28" height="28" rx="3" fill="#48505A" stroke="#333" stroke-width="0.8"/>
+  <rect x="77" y="477" width="14" height="14" rx="2" fill="#606870"/>
+  <rect x="215" y="468" width="28" height="28" rx="3" fill="#48505A" stroke="#333" stroke-width="0.8"/>
+  <rect x="222" y="475" width="14" height="14" rx="2" fill="#606870"/>
+  <rect x="65" y="535" width="28" height="28" rx="3" fill="#48505A" stroke="#333" stroke-width="0.8"/>
+  <rect x="72" y="542" width="14" height="14" rx="2" fill="#606870"/>
+  <rect x="178" y="525" width="28" height="28" rx="3" fill="#48505A" stroke="#333" stroke-width="0.8"/>
+  <rect x="185" y="532" width="14" height="14" rx="2" fill="#606870"/>
+  <rect x="210" y="565" width="28" height="28" rx="3" fill="#48505A" stroke="#333" stroke-width="0.8"/>
+  <rect x="217" y="572" width="14" height="14" rx="2" fill="#606870"/>
+
+  <!-- Cables from hub center (79,549) -->
+  <path d="M79,549 Q80,520 83,505 Q84,494 84,484" fill="none" stroke="#606870" stroke-width="1.8"/>
+  <path d="M79,549 Q140,510 200,490 Q220,485 229,482" fill="none" stroke="#707880" stroke-width="1.8"/>
+  <path d="M79,549 Q125,544 155,540 Q175,538 192,539" fill="none" stroke="#606870" stroke-width="1.8"/>
+  <path d="M79,549 Q130,572 170,578 Q200,582 224,579" fill="none" stroke="#707880" stroke-width="1.8"/>
+
+  <!-- Node dots on bezier curves -->
+  <circle cx="80" cy="535" r="1.5" fill="#34567A"/>
+  <circle cx="81" cy="524" r="1.5" fill="#34567A"/>
+  <circle cx="82" cy="513" r="1.5" fill="#34567A"/>
+  <circle cx="83" cy="500" r="1.5" fill="#34567A"/>
+  <circle cx="84" cy="490" r="1.5" fill="#34567A"/>
+  <circle cx="103" cy="534" r="1.5" fill="#34567A"/>
+  <circle cx="128" cy="521" r="1.5" fill="#34567A"/>
+  <circle cx="152" cy="509" r="1.5" fill="#34567A"/>
+  <circle cx="176" cy="499" r="1.5" fill="#34567A"/>
+  <circle cx="200" cy="490" r="1.5" fill="#34567A"/>
+  <circle cx="217" cy="486" r="1.5" fill="#34567A"/>
+  <circle cx="101" cy="547" r="1.5" fill="#34567A"/>
+  <circle cx="121" cy="544" r="1.5" fill="#34567A"/>
+  <circle cx="139" cy="542" r="1.5" fill="#34567A"/>
+  <circle cx="155" cy="540" r="1.5" fill="#34567A"/>
+  <circle cx="174" cy="539" r="1.5" fill="#34567A"/>
+  <circle cx="104" cy="559" r="1.5" fill="#34567A"/>
+  <circle cx="127" cy="568" r="1.5" fill="#34567A"/>
+  <circle cx="149" cy="574" r="1.5" fill="#34567A"/>
+  <circle cx="170" cy="578" r="1.5" fill="#34567A"/>
+  <circle cx="199" cy="580" r="1.5" fill="#34567A"/>
+
+
+  <!-- ===== ARROW A to B ===== -->
+  <line x1="318" y1="310" x2="356" y2="310" stroke="#8898A8" stroke-width="2"/>
+  <polygon points="356,306 364,310 356,314" fill="#8898A8"/>
+
+
+  <!-- ===== SECTION B ===== -->
+  <rect x="375" y="18" width="590" height="584" rx="8" fill="#FAFBFD" stroke="#D8DEE8" stroke-width="1.2" filter="url(#shadow)"/>
+  <rect x="375" y="18" width="590" height="34" rx="8" fill="#34567A"/>
+  <rect x="375" y="42" width="590" height="10" fill="#34567A"/>
+  <text x="670" y="41" text-anchor="middle" fill="#fff" font-size="14" font-weight="700" letter-spacing="0.5">B &#160; Benchmarked Approaches (10 Methods)</text>
+
+  <!-- World Models subgroup -->
+  <rect x="388" y="66" width="564" height="265" rx="6" fill="#FAFBFD" stroke="#D0D8E0" stroke-width="1"/>
+  <text x="403" y="86" font-size="12" font-weight="700" fill="#34567A">World Models &amp; Learned Dynamics</text>
+
+  <!-- Row 1 -->
+  <g transform="translate(398, 96)">
+    <rect x="0" y="0" width="168" height="105" rx="5" fill="#fff" stroke="#C0C8D0" stroke-width="1"/>
+    <rect x="0" y="0" width="168" height="23" rx="5" fill="#34567A"/>
+    <rect x="0" y="17" width="168" height="6" fill="#34567A"/>
+    <text x="84" y="16" text-anchor="middle" fill="#fff" font-size="11.5" font-weight="700">PhysWorld</text>
+    <text x="84" y="40" text-anchor="middle" font-size="9.5" fill="#556">GNN dynamics model</text>
+    <text x="84" y="53" text-anchor="middle" font-size="9.5" fill="#556">Physics-aware demo synthesis</text>
+    <text x="84" y="66" text-anchor="middle" font-size="9.5" fill="#556">Per-node &#966; conditioning</text>
+    <text x="84" y="79" text-anchor="middle" font-size="9.5" fill="#556">Multi-step rollout (MPM)</text>
+    <rect x="29" y="87" width="110" height="14" rx="3" fill="#E8EDF2"/>
+    <text x="84" y="98" text-anchor="middle" font-size="9" font-weight="600" fill="#2A4460">4.5 mm/node (best)</text>
+  </g>
+
+  <g transform="translate(580, 96)">
+    <rect x="0" y="0" width="168" height="105" rx="5" fill="#fff" stroke="#C0C8D0" stroke-width="1"/>
+    <rect x="0" y="0" width="168" height="23" rx="5" fill="#4A6E94"/>
+    <rect x="0" y="17" width="168" height="6" fill="#4A6E94"/>
+    <text x="84" y="16" text-anchor="middle" fill="#fff" font-size="11.5" font-weight="700">RopeDreamer</text>
+    <text x="84" y="40" text-anchor="middle" font-size="9.5" fill="#556">Latent world model (RSSM)</text>
+    <text x="84" y="53" text-anchor="middle" font-size="9.5" fill="#556">Structured cable state</text>
+    <text x="84" y="66" text-anchor="middle" font-size="9.5" fill="#556">Video/state prediction</text>
+    <text x="84" y="79" text-anchor="middle" font-size="9.5" fill="#556">Physical constraints</text>
+    <rect x="29" y="87" width="110" height="14" rx="3" fill="#EEF0F2"/>
+    <text x="84" y="98" text-anchor="middle" font-size="9" font-weight="600" fill="#445">12.3 mm/node</text>
+  </g>
+
+  <g transform="translate(762, 96)">
+    <rect x="0" y="0" width="168" height="105" rx="5" fill="#fff" stroke="#C0C8D0" stroke-width="1"/>
+    <rect x="0" y="0" width="168" height="23" rx="5" fill="#6086A8"/>
+    <rect x="0" y="17" width="168" height="6" fill="#6086A8"/>
+    <text x="84" y="16" text-anchor="middle" fill="#fff" font-size="11.5" font-weight="700">AdaptiGraph</text>
+    <text x="84" y="40" text-anchor="middle" font-size="9.5" fill="#556">Adaptive GNN dynamics</text>
+    <text x="84" y="53" text-anchor="middle" font-size="9.5" fill="#556">Online parameter estimation</text>
+    <text x="84" y="66" text-anchor="middle" font-size="9.5" fill="#556">Stiffness, damping cond.</text>
+    <text x="84" y="79" text-anchor="middle" font-size="9.5" fill="#556">Variable cable properties</text>
+    <rect x="29" y="87" width="110" height="14" rx="3" fill="#EEF0F2"/>
+    <text x="84" y="98" text-anchor="middle" font-size="9" font-weight="600" fill="#445">18.2 mm/node</text>
+  </g>
+
+  <!-- Row 2 -->
+  <g transform="translate(398, 213)">
+    <rect x="0" y="0" width="168" height="105" rx="5" fill="#fff" stroke="#C0C8D0" stroke-width="1"/>
+    <rect x="0" y="0" width="168" height="23" rx="5" fill="#789CB8"/>
+    <rect x="0" y="17" width="168" height="6" fill="#789CB8"/>
+    <text x="84" y="16" text-anchor="middle" fill="#fff" font-size="11.5" font-weight="700">PhysTwin</text>
+    <text x="84" y="40" text-anchor="middle" font-size="9.5" fill="#556">Spring-mass digital twin</text>
+    <text x="84" y="53" text-anchor="middle" font-size="9.5" fill="#556">CMA-ES + Adam fitting</text>
+    <text x="84" y="66" text-anchor="middle" font-size="9.5" fill="#556">Per-spring stiffness</text>
+    <text x="84" y="79" text-anchor="middle" font-size="9.5" fill="#556">Real-world calibration</text>
+    <rect x="29" y="87" width="110" height="14" rx="3" fill="#EEF0F2"/>
+    <text x="84" y="98" text-anchor="middle" font-size="9" font-weight="600" fill="#445">19.8 mm/node</text>
+  </g>
+
+  <g transform="translate(580, 213)">
+    <rect x="0" y="0" width="168" height="105" rx="5" fill="#fff" stroke="#C0C8D0" stroke-width="1"/>
+    <rect x="0" y="0" width="168" height="23" rx="5" fill="#90B0C8"/>
+    <rect x="0" y="17" width="168" height="6" fill="#90B0C8"/>
+    <text x="84" y="16" text-anchor="middle" fill="#fff" font-size="11.5" font-weight="700">Caporali et al.</text>
+    <text x="84" y="40" text-anchor="middle" font-size="9.5" fill="#556">Analytical + neural hybrid</text>
+    <text x="84" y="53" text-anchor="middle" font-size="9.5" fill="#556">Mass-spring base model</text>
+    <text x="84" y="66" text-anchor="middle" font-size="9.5" fill="#556">Neural residual correction</text>
+    <text x="84" y="79" text-anchor="middle" font-size="9.5" fill="#556">Online param. estimation</text>
+    <rect x="29" y="87" width="110" height="14" rx="3" fill="#EEF0F2"/>
+    <text x="84" y="98" text-anchor="middle" font-size="9" font-weight="600" fill="#445">21.4 mm/node</text>
+  </g>
+
+  <g transform="translate(762, 213)">
+    <rect x="0" y="0" width="168" height="105" rx="5" fill="#fff" stroke="#C0C8D0" stroke-width="1"/>
+    <rect x="0" y="0" width="168" height="23" rx="5" fill="#A8C0D4"/>
+    <rect x="0" y="17" width="168" height="6" fill="#A8C0D4"/>
+    <text x="84" y="16" text-anchor="middle" fill="#34567A" font-size="11.5" font-weight="700">DeformNet</text>
+    <text x="84" y="40" text-anchor="middle" font-size="9.5" fill="#556">Latent dynamics (RSSM)</text>
+    <text x="84" y="53" text-anchor="middle" font-size="9.5" fill="#556">Transformer encoder</text>
+    <text x="84" y="66" text-anchor="middle" font-size="9.5" fill="#556">Action-conditioned</text>
+    <text x="84" y="79" text-anchor="middle" font-size="9.5" fill="#556">MPC for manipulation</text>
+    <rect x="29" y="87" width="110" height="14" rx="3" fill="#EEF0F2"/>
+    <text x="84" y="98" text-anchor="middle" font-size="9" font-weight="600" fill="#445">25.6 mm/node</text>
+  </g>
+
+  <!-- Physics Engines -->
+  <rect x="388" y="345" width="564" height="145" rx="6" fill="#FAFAF8" stroke="#D8D4CC" stroke-width="1"/>
+  <text x="403" y="365" font-size="12" font-weight="700" fill="#5A5040">Classical Physics Engines</text>
+
+  <g transform="translate(398, 378)">
+    <rect x="0" y="0" width="126" height="95" rx="5" fill="#fff" stroke="#D0CCC4" stroke-width="1"/>
+    <rect x="0" y="0" width="126" height="22" rx="5" fill="#7A7060"/>
+    <rect x="0" y="16" width="126" height="6" fill="#7A7060"/>
+    <text x="63" y="15" text-anchor="middle" fill="#fff" font-size="11" font-weight="700">MuJoCo</text>
+    <text x="63" y="38" text-anchor="middle" font-size="9" fill="#556">Contact-rich physics</text>
+    <text x="63" y="51" text-anchor="middle" font-size="9" fill="#556">CMA-ES param. fitting</text>
+    <text x="63" y="64" text-anchor="middle" font-size="9" fill="#556">Composite cable model</text>
+    <rect x="13" y="74" width="100" height="14" rx="3" fill="#F0EDE8"/>
+    <text x="63" y="85" text-anchor="middle" font-size="9" font-weight="600" fill="#6A6050">In progress</text>
+  </g>
+
+  <g transform="translate(538, 378)">
+    <rect x="0" y="0" width="126" height="95" rx="5" fill="#fff" stroke="#D0CCC4" stroke-width="1"/>
+    <rect x="0" y="0" width="126" height="22" rx="5" fill="#8A8070"/>
+    <rect x="0" y="16" width="126" height="6" fill="#8A8070"/>
+    <text x="63" y="15" text-anchor="middle" fill="#fff" font-size="11" font-weight="700">Genesis</text>
+    <text x="63" y="38" text-anchor="middle" font-size="9" fill="#556">Differentiable simulator</text>
+    <text x="63" y="51" text-anchor="middle" font-size="9" fill="#556">MPM / FEM solvers</text>
+    <text x="63" y="64" text-anchor="middle" font-size="9" fill="#556">GPU-accelerated</text>
+    <rect x="13" y="74" width="100" height="14" rx="3" fill="#F0EDE8"/>
+    <text x="63" y="85" text-anchor="middle" font-size="9" font-weight="600" fill="#6A6050">In progress</text>
+  </g>
+
+  <g transform="translate(678, 378)">
+    <rect x="0" y="0" width="126" height="95" rx="5" fill="#fff" stroke="#D0CCC4" stroke-width="1"/>
+    <rect x="0" y="0" width="126" height="22" rx="5" fill="#9A9080"/>
+    <rect x="0" y="16" width="126" height="6" fill="#9A9080"/>
+    <text x="63" y="15" text-anchor="middle" fill="#fff" font-size="11" font-weight="700">Newton</text>
+    <text x="63" y="38" text-anchor="middle" font-size="9" fill="#556">Real-time deformables</text>
+    <text x="63" y="51" text-anchor="middle" font-size="9" fill="#556">XPBD solver</text>
+    <text x="63" y="64" text-anchor="middle" font-size="9" fill="#556">Position-based dynamics</text>
+    <rect x="13" y="74" width="100" height="14" rx="3" fill="#F0EDE8"/>
+    <text x="63" y="85" text-anchor="middle" font-size="9" font-weight="600" fill="#6A6050">In progress</text>
+  </g>
+
+  <g transform="translate(818, 378)">
+    <rect x="0" y="0" width="126" height="95" rx="5" fill="#fff" stroke="#D0CCC4" stroke-width="1"/>
+    <rect x="0" y="0" width="126" height="22" rx="5" fill="#AAA090"/>
+    <rect x="0" y="16" width="126" height="6" fill="#AAA090"/>
+    <text x="63" y="15" text-anchor="middle" fill="#fff" font-size="11" font-weight="700">DLO-Lab</text>
+    <text x="63" y="38" text-anchor="middle" font-size="9" fill="#556">DLO-specific engine</text>
+    <text x="63" y="51" text-anchor="middle" font-size="9" fill="#556">Cosserat rod theory</text>
+    <text x="63" y="64" text-anchor="middle" font-size="9" fill="#556">Industrial focus</text>
+    <rect x="13" y="74" width="100" height="14" rx="3" fill="#F0EDE8"/>
+    <text x="63" y="85" text-anchor="middle" font-size="9" font-weight="600" fill="#6A6050">In progress</text>
+  </g>
+
+  <!-- Task description -->
+  <rect x="388" y="500" width="564" height="90" rx="6" fill="#fff" stroke="#D0D8E0" stroke-width="1"/>
+  <text x="670" y="522" text-anchor="middle" font-size="12" font-weight="700" fill="#34567A">Evaluation Task: Open-Loop Prediction</text>
+  <text x="670" y="540" text-anchor="middle" font-size="10.5" fill="#556">Given connector motions (end-node trajectories), predict the full cable state</text>
+  <text x="670" y="555" text-anchor="middle" font-size="10.5" fill="#556">over all future frames without observing the cable during rollout.</text>
+  <text x="670" y="575" text-anchor="middle" font-size="10.5" fill="#556">Metric: mean Euclidean error (mm) per node across all frames and cables.</text>
+
+
+  <!-- ===== ARROW B to C ===== -->
+  <line x1="973" y1="310" x2="1008" y2="310" stroke="#8898A8" stroke-width="2"/>
+  <polygon points="1008,306 1016,310 1008,314" fill="#8898A8"/>
+
+
+  <!-- ===== SECTION C ===== -->
+  <rect x="1025" y="18" width="355" height="584" rx="8" fill="#FAFBFD" stroke="#D8DEE8" stroke-width="1.2" filter="url(#shadow)"/>
+  <rect x="1025" y="18" width="355" height="34" rx="8" fill="#34567A"/>
+  <rect x="1025" y="42" width="355" height="10" fill="#34567A"/>
+  <text x="1202" y="41" text-anchor="middle" fill="#fff" font-size="14" font-weight="700" letter-spacing="0.5">C &#160; Evaluation &amp; Results</text>
+
+  <!-- Predicted vs Ground Truth -->
+  <rect x="1042" y="66" width="322" height="190" rx="6" fill="#fff" stroke="#D0D8E0" stroke-width="1"/>
+  <text x="1202" y="88" text-anchor="middle" font-size="12" font-weight="700" fill="#34567A">Predicted vs. Ground Truth</text>
+
+  <g transform="translate(1072, 98)">
+    <!-- Movers -->
+    <rect x="50" y="5" width="22" height="22" rx="3" fill="#48505A" stroke="#333" stroke-width="0.8"/>
+    <rect x="55" y="10" width="12" height="12" rx="2" fill="#606870"/>
+    <rect x="230" y="3" width="22" height="22" rx="3" fill="#48505A" stroke="#333" stroke-width="0.8"/>
+    <rect x="235" y="8" width="12" height="12" rx="2" fill="#606870"/>
+    <rect x="38" y="55" width="22" height="22" rx="3" fill="#48505A" stroke="#333" stroke-width="0.8"/>
+    <rect x="43" y="60" width="12" height="12" rx="2" fill="#606870"/>
+    <rect x="180" y="48" width="22" height="22" rx="3" fill="#48505A" stroke="#333" stroke-width="0.8"/>
+    <rect x="185" y="53" width="12" height="12" rx="2" fill="#606870"/>
+    <rect x="220" y="82" width="22" height="22" rx="3" fill="#48505A" stroke="#333" stroke-width="0.8"/>
+    <rect x="225" y="87" width="12" height="12" rx="2" fill="#606870"/>
+
+    <!-- Ground truth cables - dark blue -->
+    <path d="M49,66 Q50,46 54,32 Q57,22 61,16" fill="none" stroke="#34567A" stroke-width="2"/>
+    <path d="M49,66 Q115,30 175,20 Q210,15 241,14" fill="none" stroke="#34567A" stroke-width="2"/>
+    <path d="M49,66 Q100,62 140,60 Q168,59 191,59" fill="none" stroke="#34567A" stroke-width="2"/>
+    <path d="M49,66 Q110,85 155,90 Q195,94 231,93" fill="none" stroke="#34567A" stroke-width="2"/>
+
+    <!-- Predicted cables - muted warm gray, dashed -->
+    <path d="M49,66 Q52,48 56,35 Q59,26 63,20" fill="none" stroke="#A09088" stroke-width="1.6" stroke-dasharray="5,3"/>
+    <path d="M49,66 Q117,34 177,24 Q212,19 241,18" fill="none" stroke="#A09088" stroke-width="1.6" stroke-dasharray="5,3"/>
+    <path d="M49,66 Q102,65 142,63 Q170,62 191,63" fill="none" stroke="#A09088" stroke-width="1.6" stroke-dasharray="5,3"/>
+    <path d="M49,66 Q112,89 157,94 Q197,98 231,97" fill="none" stroke="#A09088" stroke-width="1.6" stroke-dasharray="5,3"/>
+
+    <!-- Node dots on ground truth bezier curves -->
+    <!-- Cable 1: M49,66 Q50,46 54,32 Q57,22 61,16 -->
+    <circle cx="50" cy="54" r="1.5" fill="#34567A"/>
+    <circle cx="52" cy="42" r="1.5" fill="#34567A"/>
+    <circle cx="54" cy="32" r="1.5" fill="#34567A"/>
+    <circle cx="57" cy="23" r="1.5" fill="#34567A"/>
+    <!-- Cable 2: M49,66 Q115,30 175,20 Q210,15 241,14 -->
+    <circle cx="75" cy="53" r="1.5" fill="#34567A"/>
+    <circle cx="101" cy="41" r="1.5" fill="#34567A"/>
+    <circle cx="126" cy="32" r="1.5" fill="#34567A"/>
+    <circle cx="151" cy="25" r="1.5" fill="#34567A"/>
+    <circle cx="175" cy="20" r="1.5" fill="#34567A"/>
+    <circle cx="209" cy="16" r="1.5" fill="#34567A"/>
+    <!-- Cable 3: M49,66 Q100,62 140,60 Q168,59 191,59 -->
+    <circle cx="74" cy="64" r="1.5" fill="#34567A"/>
+    <circle cx="97" cy="63" r="1.5" fill="#34567A"/>
+    <circle cx="119" cy="61" r="1.5" fill="#34567A"/>
+    <circle cx="167" cy="59" r="1.5" fill="#34567A"/>
+    <!-- Cable 4: M49,66 Q110,85 155,90 Q195,94 231,93 -->
+    <circle cx="68" cy="72" r="1.5" fill="#34567A"/>
+    <circle cx="93" cy="79" r="1.5" fill="#34567A"/>
+    <circle cx="124" cy="87" r="1.5" fill="#34567A"/>
+    <circle cx="155" cy="90" r="1.5" fill="#34567A"/>
+    <circle cx="194" cy="93" r="1.5" fill="#34567A"/>
+  </g>
+
+  <!-- Legend -->
+  <g transform="translate(1075, 218)">
+    <line x1="0" y1="0" x2="28" y2="0" stroke="#34567A" stroke-width="2.2"/>
+    <text x="33" y="4" font-size="10" fill="#556">Ground truth (tracked)</text>
+    <line x1="150" y1="0" x2="178" y2="0" stroke="#A09088" stroke-width="1.8" stroke-dasharray="5,3"/>
+    <text x="183" y="4" font-size="10" fill="#556">Prediction (simulated)</text>
+  </g>
+
+  <!-- Bar chart -->
+  <rect x="1042" y="268" width="322" height="195" rx="6" fill="#fff" stroke="#D0D8E0" stroke-width="1"/>
+  <text x="1202" y="290" text-anchor="middle" font-size="12" font-weight="700" fill="#34567A">Mean Error (mm/node)</text>
+
+  <g transform="translate(1062, 303)">
+    <rect x="0" y="0" width="20" height="135" rx="2" fill="#34567A"/>
+    <text x="10" y="150" text-anchor="middle" font-size="8" fill="#556" transform="rotate(-45, 10, 150)">PhysWorld</text>
+
+    <rect x="45" y="30" width="20" height="105" rx="2" fill="#4A6E94"/>
+    <text x="55" y="150" text-anchor="middle" font-size="8" fill="#556" transform="rotate(-45, 55, 150)">RopeDream.</text>
+
+    <rect x="90" y="48" width="20" height="87" rx="2" fill="#6086A8"/>
+    <text x="100" y="150" text-anchor="middle" font-size="8" fill="#556" transform="rotate(-45, 100, 150)">AdaptiGraph</text>
+
+    <rect x="135" y="55" width="20" height="80" rx="2" fill="#789CB8"/>
+    <text x="145" y="150" text-anchor="middle" font-size="8" fill="#556" transform="rotate(-45, 145, 150)">PhysTwin</text>
+
+    <rect x="180" y="60" width="20" height="75" rx="2" fill="#90B0C8"/>
+    <text x="190" y="150" text-anchor="middle" font-size="8" fill="#556" transform="rotate(-45, 190, 150)">Caporali</text>
+
+    <rect x="225" y="68" width="20" height="67" rx="2" fill="#A8C0D4"/>
+    <text x="235" y="150" text-anchor="middle" font-size="8" fill="#556" transform="rotate(-45, 235, 150)">DeformNet</text>
+
+    <text x="-5" y="5" text-anchor="end" font-size="8" fill="#999">0</text>
+    <text x="-5" y="72" text-anchor="end" font-size="8" fill="#999">15</text>
+    <text x="-5" y="140" text-anchor="end" font-size="8" fill="#999">30</text>
+    <line x1="-2" y1="0" x2="260" y2="0" stroke="#E0E0E0" stroke-width="0.5"/>
+    <line x1="-2" y1="67" x2="260" y2="67" stroke="#E0E0E0" stroke-width="0.5"/>
+    <line x1="-2" y1="135" x2="260" y2="135" stroke="#E0E0E0" stroke-width="0.5"/>
+  </g>
+
+  <!-- Key findings -->
+  <rect x="1042" y="478" width="322" height="112" rx="6" fill="#fff" stroke="#D0D8E0" stroke-width="1"/>
+  <g transform="translate(1060, 498)">
+    <text x="0" y="0" font-size="12" font-weight="700" fill="#34567A">Key Findings</text>
+    <text x="0" y="20" font-size="10.5" fill="#556">&#8226; PhysWorld achieves best accuracy</text>
+    <text x="0" y="35" font-size="10.5" fill="#556">&#160;&#160;(4.5 mm/node with MPM twin)</text>
+    <text x="0" y="55" font-size="10.5" fill="#556">&#8226; Learned world models outperform</text>
+    <text x="0" y="70" font-size="10.5" fill="#556">&#160;&#160;pure physics-based approaches</text>
+    <text x="0" y="90" font-size="10.5" fill="#556">&#8226; Digital twin quality is the key factor</text>
+  </g>
+</svg>

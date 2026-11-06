@@ -24,7 +24,8 @@
   var me = models.filter(function (m) { return m.key === 'dlolab'; })[0];
   var rank = models.indexOf(me) + 1, best = models[0];
   var gain = F.base_f - F.best_f;
-  document.getElementById('fit-kpis').innerHTML = [
+  var $ = function (id) { return document.getElementById(id); };
+  if ($('fit-kpis')) $('fit-kpis').innerHTML = [
     { v: F.best_f.toFixed(2), l: 'best mm/node so far (gen ' + F.best_gen + ')' },
     { v: F.base_f.toFixed(2), l: 'start, generation 0' },
     { v: '−' + (gain / F.base_f * 100).toFixed(0) + ' %', l: '−' + gain.toFixed(2) + ' mm/node since the start' },
@@ -35,8 +36,8 @@
 
   // ---------------------------------------------------------------- fit progress
   var pBox = document.getElementById('fit-progress');
-  document.getElementById('fit-progress-badge').textContent = '−' + gain.toFixed(2) + ' mm/node in ' + F.last_gen + ' generations';
-  document.getElementById('fit-progress-note').textContent =
+  if (pBox) $('fit-progress-badge').textContent = '−' + gain.toFixed(2) + ' mm/node in ' + F.last_gen + ' generations';
+  if (pBox) $('fit-progress-note').textContent =
     'The main machine stopped after generation ' + F.last_gen + ' (shared RAM limit, 4 Nov 2026). Another machine continues from the best state with a fresh CMA-ES step size; ' +
     'the result is validated in fresh processes. Candidates that crash the solver are scored 1000 and never become the best.';
   function drawProgress() {
@@ -239,12 +240,12 @@
     return (v - lo) / (hi - lo);
   }
   function change(v, w) { return w ? '×' + (v / w).toFixed(2) + ' vs warm start' : 'from 0'; }
-  gauge(document.getElementById('fit-globals'), F.globals.map(function (g) {
+  if ($('fit-globals')) gauge($('fit-globals'), F.globals.map(function (g) {
     return { label: g.label, dot: '', color: PHYS, valText: sci(g.value), warmText: sci(g.warm), loText: sci(g.lo), hiText: sci(g.hi),
       pv: pos(g.scale, g.value, g.lo, g.hi), pw: pos(g.scale, g.warm, g.lo, g.hi), change: change(g.value, g.warm) };
   }));
   var M = F.mass;
-  gauge(document.getElementById('fit-mass'), M.values.map(function (v, i) {
+  if ($('fit-mass')) gauge($('fit-mass'), M.values.map(function (v, i) {
     return { label: CABLES[i], dot: '<span class="dot" style="--sw:' + CABLE_VARS[i] + '"></span>', color: CABLE_VARS[i],
       valText: v.toFixed(4) + ' ' + M.unit, warmText: M.warm + ' ' + M.unit, loText: M.lo + ' ' + M.unit, hiText: M.hi + ' ' + M.unit,
       pv: pos('log', v, M.lo, M.hi), pw: pos('log', M.warm, M.lo, M.hi), change: change(v, M.warm) };
@@ -294,12 +295,12 @@
   }
 
   // ---------------------------------------------------------------- spec sheet
-  document.getElementById('fit-numbers').innerHTML = [
+  if ($('fit-numbers')) $('fit-numbers').innerHTML = [
     { v: String(F.n_params), l: 'parameters' }, { v: String(F.run.popsize), l: 'candidates per generation' },
     { v: String(F.run.sims_per_gen), l: 'simulations per generation' }, { v: '~' + (F.run.sec_per_gen / 3600).toFixed(1) + ' h', l: 'per generation, ' + F.run.workers + ' workers' },
     { v: F.run.backend, l: 'backend (no GPU)' }, { v: '36', l: 'clips, 5,853 frames' }
   ].map(function (n) { return '<div class="num-tile"><b>' + esc(n.v) + '</b><span>' + esc(n.l) + '</span></div>'; }).join('');
-  document.getElementById('fit-spec').innerHTML = [
+  if ($('fit-spec')) $('fit-spec').innerHTML = [
     ['Model', 'Cosserat rods of the DLO-Lab fork of Genesis (1.0.0), one per cable, ends driven by the measured motion'],
     ['Patched solver', 'Per-element stiffness scales added to the rod solver (dlolab_fit_t36/extern/DLO-Lab-perjoint)'],
     ['Optimiser', 'CMA-ES, population 20, fixed per-coordinate step sizes, bounds per parameter group'],
@@ -310,7 +311,7 @@
   ].map(function (r) { return '<div><dt>' + esc(r[0]) + '</dt><dd>' + esc(r[1]) + '</dd></div>'; }).join('');
 
   // ---------------------------------------------------------------- render + re-render on resize / theme change
-  function all() { drawProgress(); drawPJ(); drawGroups(); drawRows(); }
+  function all() { if (pBox) drawProgress(); drawPJ(); if (gBox) drawGroups(); if (rBox) drawRows(); }
   all();
   A.onResize(all);
   new MutationObserver(function () { drawPJ(); }).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });

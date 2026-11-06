@@ -5,10 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="PhysTwin in the DLO world-model benchmark: A planar spring-mass digital twin fitted to each clip&#x27;s video, then re-simulated from frame 0 with the measured end motions.">
   <title>PhysTwin &middot; DLO Benchmark</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230b0b0b'/%3E%3Cg fill='none' stroke-width='2.4' stroke-linecap='round'%3E%3Cpath d='M7 19C14 19 15 8 25 8' stroke='%233987e5'/%3E%3Cpath d='M7 19C15 19 17 15 25 15' stroke='%23eb6834'/%3E%3Cpath d='M7 19C15 20 17 23 25 23' stroke='%231baf7a'/%3E%3C/g%3E%3Ccircle cx='7' cy='19' r='3.2' fill='%23fff'/%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <link rel="stylesheet" href="../static/css/index.css">
+  <link rel="stylesheet" href="../static/css/index.css?v=20261106x">
   <script>
     try { var t = localStorage.getItem('dlo-theme-v2'); if (t) document.documentElement.setAttribute('data-theme', t); } catch (e) {}
   </script>
@@ -35,22 +36,45 @@
 
 <main>
 <section class="section ap-hero">
-  <div class="wrap narrow">
+  <div class="wrap">
     <a class="back-link" href="../index.html#approaches"><i class="fas fa-arrow-left"></i>All approaches</a>
     <p class="ap-kicker"><span class="swatch" style="--sw: var(--series-world)"></span>World Model</p>
     <h1 class="ap-title">PhysTwin</h1>
     <p class="ap-cite">Jiang et al. 2025</p>
-    <div class="ap-stats">
-      <div class="stat"><span class="stat-value">22.0</span><span class="stat-label">mm/node error</span></div>
-      <div class="stat"><span class="stat-value ap-stat-text">World Model</span><span class="stat-label">paradigm</span></div>
-      <div class="stat"><span class="stat-value">36</span><span class="stat-label">clips</span></div>
+    <div class="cfg-boxes" aria-label="Reported configuration and cable parameters">
+      <button type="button" class="cfg-score" data-x="score" aria-expanded="false" aria-controls="cfg-explain"><span class="cfg-score-v">22.0</span><span class="cfg-score-l">mm/node</span></button>
+      <div class="cfg-groups">
+        <div class="cfg-group"><p class="cfg-title"><b>Spring-mass twin</b><span>one twin fitted per clip</span></p><div class="cfg-tiles"><div class="cfg-cell"><span class="cfg-l"><span>Stretching<em> &middot; N/m</em></span></span><button type="button" class="cfg-tile" data-x="g0-k1" aria-expanded="false" aria-controls="cfg-explain" aria-label="Stretching: explain"><span class="cfg-v">1<span class="cfg-to">&ndash;</span>1500</span></button></div><div class="cfg-cell"><span class="cfg-l"><span>Bending<em> &middot; N/m</em></span></span><button type="button" class="cfg-tile" data-x="g0-k2" aria-expanded="false" aria-controls="cfg-explain" aria-label="Bending: explain"><span class="cfg-v">1<span class="cfg-to">&ndash;</span>1500</span></button></div><div class="cfg-cell"><span class="cfg-l"><span>Twisting</span></span><span class="cfg-tile is-empty" title="Not part of this configuration"><span class="cfg-v">&ndash;</span></span></div><div class="cfg-cell"><span class="cfg-l"><span>Density<em> &middot; kg/m</em></span></span><button type="button" class="cfg-tile" data-x="g0-rho" aria-expanded="false" aria-controls="cfg-explain" aria-label="Density: explain"><span class="cfg-v">0.046</span></button></div><div class="cfg-cell"><span class="cfg-l"><span>Friction</span></span><button type="button" class="cfg-tile" data-x="g0-mu" aria-expanded="false" aria-controls="cfg-explain" aria-label="Friction: explain"><span class="cfg-v">0.0015<span class="cfg-to">&ndash;</span>2.2</span></button></div><div class="cfg-cell"><span class="cfg-l"><span>Rest shape<em> &middot; mm</em></span></span><button type="button" class="cfg-tile" data-x="g0-rest" aria-expanded="false" aria-controls="cfg-explain" aria-label="Rest shape: explain"><span class="cfg-v">71<span class="cfg-to">&ndash;</span>241</span></button></div><div class="cfg-cell"><span class="cfg-l"><span>Parameters</span></span><button type="button" class="cfg-tile" data-x="g0-n" aria-expanded="false" aria-controls="cfg-explain" aria-label="Parameters: explain"><span class="cfg-v">6254</span></button></div><div class="cfg-cell"><span class="cfg-l"><span>Fitting / training<em> &middot; h</em></span></span><button type="button" class="cfg-tile" data-x="g0-time" aria-expanded="false" aria-controls="cfg-explain" aria-label="Fitting / training: explain"><span class="cfg-v">2.5</span></button></div><div class="cfg-cell"><span class="cfg-l"><span>Data<em> &middot; transitions</em></span></span><span class="cfg-tile is-empty" title="Not part of this configuration"><span class="cfg-v">&ndash;</span></span></div></div></div>
+      </div>
     </div>
+    <div class="cfg-explain" id="cfg-explain" role="region" aria-label="Parameter explanation" aria-live="polite" hidden></div>
+    <script type="application/json" id="cfg-explain-data">{"score": {"t": "Mean node error", "sym": "mm/node", "v": "22.0", "what": "How far, on average, the predicted cable is from the real one, in millimetres per node.", "how": "Averaged over the 16 nodes of the 4 cables and over every frame from frame 0, then over the 36 clips. The simulation only gets the measured motion of the hub and the plugs.", "why": "It is the number every approach is ranked by. Lower is better."}, "g0-k1": {"t": "Stretching", "sym": "stretch springs", "v": "1 &ndash; 1500 N/m", "grp": "Spring-mass twin", "what": "How stiff the springs between neighbouring nodes are. They keep the cable at its length.", "how": "Stage 1 fits one shared stiffness with CMA-ES; stage 2 tunes a stiffness for every spring with gradient descent through the simulator. Values are kept within 1–1500 N/m.", "why": "Too soft and the cable stretches; too stiff and the simulation becomes jumpy."}, "g0-k2": {"t": "Bending", "sym": "bend springs", "v": "1 &ndash; 1500 N/m", "grp": "Spring-mass twin", "what": "A spring-mass model has no bending angle, so extra springs between nodes further apart resist bending.", "how": "Fitted per spring in the same two stages as the stretch springs, within 1–1500 N/m.", "why": "These springs decide how much the cable curves."}, "g0-rho": {"t": "Density", "sym": "mass per metre", "v": "0.046 kg/m", "grp": "Spring-mass twin", "what": "How heavy the cable is per metre.", "how": "Not fitted: each of the 16 nodes is a mass point of 2 g.", "why": "A fixed, measured weight keeps the fit from trading mass against stiffness."}, "g0-mu": {"t": "Friction", "sym": "board friction μ", "v": "0.0015 &ndash; 2.2", "grp": "Spring-mass twin", "what": "How strongly the board holds the cable back when it slides (Coulomb friction).", "how": "Fitted per clip together with damping and drag; the four cables share it. The box shows the range over the clips.", "why": "It decides whether a cable slides along or stays where it is."}, "g0-rest": {"t": "Rest shape", "sym": "spring rest lengths", "v": "71 &ndash; 241 mm", "grp": "Spring-mass twin", "what": "The length each spring wants to have. Springs pull the nodes back to the distances they had in the first frame.", "how": "Measured from frame 0 of the clip, not fitted. Springs connect chain neighbours and node pairs closer than a fitted radius.", "why": "This keeps the starting curve of the cable, its rest shape."}, "g0-n": {"t": "Parameters", "sym": "fitted values", "v": "6254", "grp": "Spring-mass twin", "what": "How many numbers were fitted over all clips.", "how": "Mostly one stiffness per spring, plus damping, drag and friction per clip.", "why": "Every clip gets its own twin, so nothing is shared between clips."}, "g0-time": {"t": "Fitting / training", "sym": "wall-clock time", "v": "2.5 h", "grp": "Spring-mass twin", "what": "How long fitting the twins took.", "how": "The two-stage fit per clip, about 15 min each on one GPU, run in parallel.", "why": "It shows the cost of building one twin per clip."}}</script>
+    <p class="cfg-note">Reported configuration and its cable parameters (paper, Fig.&nbsp;3). <span class="cfg-hint"><i class="fas fa-hand-pointer"></i>Click a box to see what it means.</span></p>
   </div>
 </section>
 
 <section class="section ap-section">
-  <div class="wrap narrow">
-    <div class="approach-inner ap-body">
+  <div class="wrap ap-dash" id="ap-dash">
+
+    <div class="dash-card">
+      <div class="dash-head">
+        <h3>Error on each of the 36 clips</h3>
+        <div class="dash-controls">
+          <div class="seg" role="group" aria-label="Order">
+            <button type="button" class="seg-btn is-on" data-order="clip">Recording order</button>
+            <button type="button" class="seg-btn" data-order="sorted">Sorted by error</button>
+          </div>
+          <label class="select-wrap compact"><span class="muted">Compare</span><select id="ap-compare" aria-label="Compare with another model"></select></label>
+        </div>
+      </div>
+      <div class="legend" id="ap-clips-legend"></div>
+      <div id="ap-clips" class="chart" role="img" aria-label="Error on each clip"></div>
+    </div>
+
+    <div class="dash-card method-card">
+      <div class="dash-head"><h3><i class="fas fa-book-open"></i>Method details</h3></div>
+      <div class="approach-inner ap-body">
+
           <p class="lead">A planar <strong>spring-mass digital twin</strong> fitted to each clip's video, then re-simulated from frame 0
             with the measured end motions.</p>
           <dl class="facts">
@@ -87,15 +111,20 @@
           <div class="detail-actions">
             <span class="code-path"><i class="fas fa-folder"></i><code>approaches/05_phystwin.py</code>, <code>wire_model/phystwin/</code></span>
           </div>
+      </div>
     </div>
 
-    <div class="ap-perclip" id="ap-perclip" hidden>
-      <h2 class="sub-title">Per-clip error on the 36 clips</h2>
-      <div class="ap-perclip-stats" id="ap-perclip-stats"></div>
-      <div class="chart-card"><div id="ap-perclip-chart" class="chart" role="img" aria-label="Error of PhysTwin on each of the 36 clips"></div></div>
+    <div class="dash-card" id="pg-card">
+      <div class="dash-head"><h3>Per-joint parameters along each cable</h3></div>
+      <div class="phi-bar"><div class="param-tabs" role="tablist" aria-label="Parameter" id="pg-tabs"></div></div>
+      <p class="dash-sub" id="pg-sub"></p>
+      <div class="legend" id="pg-legend"></div>
+      <div id="pg-chart" class="chart" role="img" aria-label="Fitted per-joint parameter values"></div>
+      <div class="pj-cards" id="pg-cards"></div>
+      <p class="muted-note" id="pg-note"></p>
     </div>
 
-    <nav class="ap-pager" aria-label="Other world models">
+        <nav class="ap-pager" aria-label="Other world models">
       <a class="ap-pager-link prev" href="ropedreamer.html"><span><i class="fas fa-arrow-left"></i>Previous world model</span><b>RopeDreamer</b></a>
       <span></span>
     </nav>
@@ -110,7 +139,10 @@
 </footer>
 
 <div class="tooltip" id="tooltip" role="tooltip" hidden></div>
-<script src="../static/js/data.js"></script>
-<script src="../static/js/approach.js"></script>
+<script src="../static/js/data.js?v=20261106x"></script>
+<script src="../static/js/approach.js?v=20261106x"></script>
+<script src="../static/js/param_grids.js?v=20261106x"></script>
+<script src="../static/js/paramgrid.js?v=20261106x"></script>
+<script src="../static/js/ux.js?v=20261106x"></script>
 </body>
 </html>

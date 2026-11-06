@@ -12,37 +12,31 @@
     physics:  { label: 'Physics Engine', color: 'var(--series-physics)' }
   };
 
-  function med(key) { return D.meta[key] ? D.meta[key].median : null; }
-
-  // Scores shown on the page. Physics-engine values are interim (fits running).
+  // Results come only from the finished 36-clip refits in the repo (clips36_final_v1/prediction_videos).
+  // An approach without them keeps its name on the charts and nothing else.
+  function mean(key) { return D.meta[key] ? D.meta[key].mean : null; }
   var APPROACHES = [
-    { key: 'physworld',   name: 'PhysWorld',       paradigm: 'world',    score: 4.5,  median: med('physworld'),   status: 'final',   clips: 36, scored: '16 nodes, frames 5…T−1' },
-    { key: 'newton',      name: 'Newton',          paradigm: 'physics',  score: 8.1,  median: null,               status: 'running', gen: 12,   clips: 36, scored: '16 nodes, every frame' },
-    { key: 'mujoco',      name: 'MuJoCo',          paradigm: 'physics',  score: 10.9, median: null,               status: 'running', gen: 20,   clips: 36, scored: '16 nodes, every frame' },
-    { key: 'genesis',     name: 'Genesis',         paradigm: 'physics',  score: 12.7, median: med('genesis'),     status: 'final',   clips: 36, scored: '16 nodes, every frame' },
-    { key: 'yang',        name: 'Yang et al.',     paradigm: 'dynamics', score: 13.3, median: 11.68,              status: 'partial', clips: 14,   scored: '16 nodes, frames 5…T−1' },
-    { key: 'caporali',    name: 'Caporali et al.', paradigm: 'dynamics', score: 15.8, median: med('caporali'),    status: 'final',   clips: 36, scored: '16 nodes, every frame incl. 0' },
-    { key: 'dlolab',      name: 'DLO-Lab',         paradigm: 'physics',  score: 17.0, median: null,               status: 'running', gen: 21,   clips: 36, scored: '16 nodes, every frame' },
-    { key: 'ropedreamer', name: 'RopeDreamer',     paradigm: 'world',    score: 18.3, median: 13.00,              status: 'partial', clips: 14,   scored: '16 nodes, frames 5…T−1' },
-    { key: 'phystwin',    name: 'PhysTwin',        paradigm: 'world',    score: 22.0, median: med('phystwin'),    status: 'final',   clips: 36, scored: '14 inner nodes, every frame' },
-    { key: 'adaptigraph', name: 'AdaptiGraph',     paradigm: 'dynamics', score: 29.4, median: med('adaptigraph'), status: 'final',   clips: 36, scored: '16 nodes, frames 5…T−1' }
+    { key: 'physworld',   name: 'PhysWorld',       paradigm: 'world' },
+    { key: 'ropedreamer', name: 'RopeDreamer',     paradigm: 'world' },
+    { key: 'phystwin',    name: 'PhysTwin',        paradigm: 'world' },
+    { key: 'yang',        name: 'Yang et al.',     paradigm: 'dynamics' },
+    { key: 'caporali',    name: 'Caporali et al.', paradigm: 'dynamics' },
+    { key: 'adaptigraph', name: 'AdaptiGraph',     paradigm: 'dynamics' },
+    { key: 'newton',      name: 'Newton',          paradigm: 'physics' },
+    { key: 'mujoco',      name: 'MuJoCo',          paradigm: 'physics' },
+    { key: 'genesis',     name: 'Genesis',         paradigm: 'physics' },
+    { key: 'dlolab',      name: 'DLO-Lab',         paradigm: 'physics' }
   ];
-  APPROACHES.forEach(function (a, i) { a.rank = i + 1; });
+  APPROACHES.forEach(function (a) {
+    a.score = mean(a.key);
+    a.clips = D.perClip[a.key] ? Object.keys(D.perClip[a.key]).length : 0;
+  });
+  // with results first (best first), then the ones without, in menu order
+  var RANKED = APPROACHES.filter(function (a) { return a.score != null; }).sort(function (x, y) { return x.score - y.score; })
+    .concat(APPROACHES.filter(function (a) { return a.score == null; }));
   var BY_KEY = {};
   APPROACHES.forEach(function (a) { BY_KEY[a.key] = a; });
 
-  // The four approaches with finished 36-clip refits and videos, ordered by mean.
-  var VIDEO_KEYS = ['physworld', 'caporali', 'phystwin', 'adaptigraph'].filter(function (k) { return D.perClip[k]; });
-
-  function statusText(a) {
-    if (a.status === 'final') return 'Final';
-    if (a.status === 'running') return 'Running (gen ' + a.gen + ')';
-    return '14-clip result';
-  }
-  function statusChip(a) {
-    var icon = a.status === 'final' ? 'fa-check' : a.status === 'running' ? 'fa-rotate' : 'fa-circle-info';
-    return '<span class="status-chip ' + a.status + '"><i class="fas ' + icon + '"></i>' + statusText(a) + '</span>';
-  }
   function fmt(v, d) { return v == null ? '–' : Number(v).toFixed(d == null ? 1 : d); }
   function el(tag, attrs, parent) {
     var n = document.createElementNS(SVGNS, tag);
@@ -96,35 +90,15 @@
   syncThemeIcon();
 
   // ---------------------------------------------------------------- nav
-  var burger = document.getElementById('nav-burger');
-  var links = document.getElementById('nav-links');
-  burger.addEventListener('click', function () {
-    var open = links.classList.toggle('is-open');
-    burger.setAttribute('aria-expanded', open ? 'true' : 'false');
-  });
-  links.addEventListener('click', function (e) {
-    if (e.target.tagName === 'A') { links.classList.remove('is-open'); burger.setAttribute('aria-expanded', 'false'); }
-  });
-  if ('IntersectionObserver' in window) {
-    var navMap = {};
-    links.querySelectorAll('a').forEach(function (a) { navMap[a.getAttribute('href').slice(1)] = a; });
-    var spy = new IntersectionObserver(function (entries) {
-      entries.forEach(function (en) {
-        if (en.isIntersecting && navMap[en.target.id]) {
-          links.querySelectorAll('a').forEach(function (a) { a.classList.remove('is-current'); });
-          navMap[en.target.id].classList.add('is-current');
-        }
-      });
-    }, { rootMargin: '-45% 0px -50% 0px' });
-    Object.keys(navMap).forEach(function (id) { var s = document.getElementById(id); if (s) spy.observe(s); });
-  }
+  // The left sidebar menu (burger, scroll spy) lives in ux.js, shared by every page.
 
   // ---------------------------------------------------------------- hero numbers
   if (D.clips.length) {
     var fr = D.clips.map(function (c) { return D.frames[c]; });
     var total = fr.reduce(function (s, v) { return s + v; }, 0);
-    document.getElementById('stat-frames').textContent = total.toLocaleString('en-US');
-    document.getElementById('frames-range').textContent = Math.min.apply(null, fr) + '–' + Math.max.apply(null, fr);
+    var sf = document.getElementById('stat-frames'), frr = document.getElementById('frames-range');
+    if (sf) sf.textContent = total.toLocaleString('en-US');
+    if (frr) frr.textContent = Math.min.apply(null, fr) + '–' + Math.max.apply(null, fr);
   }
 
   // ---------------------------------------------------------------- teaser
@@ -198,27 +172,23 @@
   }
 
   // ---------------------------------------------------------------- results: filter state
-  var filter = { paradigm: 'all', interim: true };
+  var filter = { paradigm: 'all' };
   function visible(a) {
-    if (filter.paradigm !== 'all' && a.paradigm !== filter.paradigm) return false;
-    if (!filter.interim && a.status === 'running') return false;
-    return true;
+    return filter.paradigm === 'all' || a.paradigm === filter.paradigm;
   }
-  document.querySelectorAll('.filter-row .chip-btn').forEach(function (b) {
+  var rankChips = document.querySelectorAll('#rank-filters .chip-btn');
+  rankChips.forEach(function (b) {
     b.addEventListener('click', function () {
       filter.paradigm = b.getAttribute('data-filter');
-      document.querySelectorAll('.filter-row .chip-btn').forEach(function (x) { x.classList.toggle('is-active', x === b); });
+      rankChips.forEach(function (x) { x.classList.toggle('is-active', x === b); });
       renderRank();
     });
-  });
-  document.getElementById('show-interim').addEventListener('change', function (e) {
-    filter.interim = e.target.checked; renderRank();
   });
 
   function approachTip(a) {
     var p = PARADIGM[a.paradigm];
     return '<div class="tt-title"><span class="swatch" style="--sw:' + p.color + '"></span>' + esc(a.name) + '</div>' +
-      '<div class="tt-row"><span>Error</span><b>' + fmt(a.score) + ' mm/node</b></div>' +
+      '<div class="tt-row"><span>Error</span><b>' + fmt(a.score, 2) + ' mm/node</b></div>' +
       '<div class="tt-row"><span>Paradigm</span><b>' + p.label + '</b></div>' +
       '<div class="tt-row"><span>Clips</span><b>' + a.clips + '</b></div>';
   }
@@ -226,14 +196,14 @@
   // ---------------------------------------------------------------- results: ranked bar chart
   var rankBox = document.getElementById('rank-chart');
   function renderRank() {
-    var rows = APPROACHES.filter(visible);
+    var rows = RANKED.filter(visible);
     var W = Math.max(300, rankBox.clientWidth);
     var narrow = W < 520;
     var labelW = narrow ? 104 : 132, valueW = narrow ? 76 : 96;
     var rowH = 34, barH = 18, top = 6, axisH = 30;
     var H = top + rows.length * rowH + axisH;
     var x0 = labelW, x1 = W - valueW;
-    var xMax = niceMax(Math.max.apply(null, APPROACHES.map(function (a) { return a.score; })), 5);
+    var xMax = niceMax(Math.max.apply(null, RANKED.filter(function (a) { return a.score != null; }).map(function (a) { return a.score; }).concat([5])), 5);
     var sx = function (v) { return x0 + (v / xMax) * (x1 - x0); };
 
     rankBox.innerHTML = '';
@@ -258,7 +228,12 @@
 
     rows.forEach(function (a, i) {
       var y = top + i * rowH + (rowH - barH) / 2;
-      var g = el('g', { 'class': 'bar-row', tabindex: 0, role: 'button', 'aria-label': a.name + ', ' + fmt(a.score) + ' mm/node, ' + statusText(a) }, svg);
+      if (a.score == null) { // no result in the repo yet: the name only
+        var nl = el('text', { 'class': 'row-label pending', x: x0 - 10, y: y + barH / 2 + 4, 'text-anchor': 'end' }, svg);
+        nl.textContent = a.name;
+        return;
+      }
+      var g = el('g', { 'class': 'bar-row', tabindex: 0, role: 'button', 'aria-label': a.name + ', ' + fmt(a.score) + ' mm/node' }, svg);
       el('rect', { 'class': 'hit', x: 0, y: top + i * rowH, width: W, height: rowH, fill: 'transparent' }, g);
       var lab = el('text', { 'class': 'row-label', x: x0 - 10, y: y + barH / 2 + 4, 'text-anchor': 'end' }, g);
       lab.textContent = a.name;
@@ -266,14 +241,9 @@
       var d = 'M' + x0 + ',' + y + ' H' + (bx - r) + ' Q' + bx + ',' + y + ' ' + bx + ',' + (y + r) +
               ' V' + (y + h - r) + ' Q' + bx + ',' + (y + h) + ' ' + (bx - r) + ',' + (y + h) + ' H' + x0 + ' Z';
       var bar = el('path', { 'class': 'bar', d: d }, g);
-      bar.setAttribute('style', 'fill:' + PARADIGM[a.paradigm].color + (a.status === 'running' ? '; opacity: 0.42' : ''));
+      bar.setAttribute('style', 'fill:' + PARADIGM[a.paradigm].color);
       var v = el('text', { 'class': 'value-label', x: bx + 7, y: y + barH / 2 + 4 }, g);
-      v.textContent = fmt(a.score);
-      if (a.status !== 'final') {
-        var s = el('tspan', { dx: 5 }, v);
-        s.textContent = a.status === 'running' ? 'interim' : '14 clips';
-        s.setAttribute('style', 'fill: var(--muted); font-weight: 400; font-size: 11px');
-      }
+      v.textContent = fmt(a.score, 2);
       g.addEventListener('mousemove', function (e) { showTip(approachTip(a), e.clientX, e.clientY); });
       g.addEventListener('mouseleave', hideTip);
       g.addEventListener('focus', function () { tipAt(bar, approachTip(a)); });
@@ -293,12 +263,9 @@
   function addSeries(key, label, values) {
     if (values && BY_KEY[key]) SERIES.push({ key: key, label: label, paradigm: BY_KEY[key].paradigm, values: values });
   }
-  addSeries('physworld', 'PhysWorld', D.perClip.physworld);
-  addSeries('phystwin', 'PhysTwin', D.perClip.phystwin);
-  addSeries('caporali', 'Caporali et al.', D.perClip.caporali);
-  addSeries('adaptigraph', 'AdaptiGraph', D.perClip.adaptigraph);
-  addSeries('genesis', 'Genesis', D.perClip.genesis);
-  addSeries('newton', 'Newton (gen 0, interim)', D.newtonGen0 && D.newtonGen0.clips);
+  // methods with per-clip results, grouped by paradigm; the others follow as name-only rows
+  APPROACHES.forEach(function (a) { addSeries(a.key, a.name, D.perClip[a.key]); });
+  APPROACHES.forEach(function (a) { if (!D.perClip[a.key]) SERIES.push({ key: a.key, label: a.name, paradigm: a.paradigm, values: {}, empty: true }); });
   var SERIES_BY_KEY = {};
   SERIES.forEach(function (s) { SERIES_BY_KEY[s.key] = s; });
 
@@ -314,8 +281,8 @@
     var html = '<option value="">' + MENU_TITLE[par] + '</option><option value="all">' + MENU_ALL[par] + '</option>';
     APPROACHES.filter(function (a) { return a.paradigm === par; }).forEach(function (a) {
       var s = SERIES_BY_KEY[a.key];
-      html += s ? '<option value="' + a.key + '">' + esc(s.label) + '</option>'
-                : '<option value="' + a.key + '" disabled>' + esc(a.name) + ' (no per-clip data yet)</option>';
+      html += s && !s.empty ? '<option value="' + a.key + '">' + esc(s.label) + '</option>'
+                : '<option value="' + a.key + '" disabled>' + esc(a.name) + '</option>';
     });
     sel.innerHTML = html;
     sel.addEventListener('change', function () {
@@ -336,6 +303,7 @@
       sel.value = on ? (pick.key || 'all') : '';
     });
   }
+  function withData(list) { return list.filter(function (s) { return !s.empty; }); }
   function activeSeries() {
     return SERIES.filter(function (s) {
       if (pick.paradigm === 'all') return true;
@@ -414,7 +382,7 @@
   function renderLegend() {
     if (!legendBox) return;
     var seen = {};
-    activeSeries().forEach(function (s) { seen[s.paradigm] = true; });
+    withData(activeSeries()).forEach(function (s) { seen[s.paradigm] = true; });
     legendBox.innerHTML = ['world', 'dynamics', 'physics'].filter(function (p) { return seen[p]; }).map(function (p) {
       return '<span><span class="swatch round" style="--sw:' + PARADIGM[p].color + '"></span>' + PARADIGM[p].label + '</span>';
     }).join('');
@@ -424,7 +392,7 @@
   function clipTip(c) {
     var html = '<div class="tt-title">Clip ' + (D.clips.indexOf(c) + 1) + ' of ' + N + '</div>' +
       '<div class="tt-row"><span>Frames</span><b>' + D.frames[c] + '</b></div>';
-    activeSeries().forEach(function (s) {
+    withData(activeSeries()).forEach(function (s) {
       html += '<div class="tt-row"><span><span class="dot" style="--sw:' + PARADIGM[s.paradigm].color + '"></span>' + esc(s.label) + '</span><b>' + fmt(s.values[c], 2) + '</b></div>';
     });
     return html + '<div class="tt-row"><span></span><span>Click to pin</span></div>';
@@ -496,7 +464,7 @@
       var cy = sy(r);
       el('line', { x1: L, x2: R, y1: cy, y2: cy, style: 'stroke: var(--line); pointer-events: none' }, plot);
       if (r >= z.y0 - 0.5 && r <= z.y1 + 0.5) {
-        var lab = el('text', { 'class': 'row-label', x: L - 10, y: cy + 4, 'text-anchor': 'end' }, labels);
+        var lab = el('text', { 'class': 'row-label' + (s.empty ? ' pending' : ''), x: L - 10, y: cy + 4, 'text-anchor': 'end' }, labels);
         lab.textContent = s.label;
       }
       D.clips.forEach(function (c, ci) {
@@ -601,7 +569,7 @@
   function renderClipCard() {
     var c = state.clip;
     if (!c) { clipCard.hidden = true; return; }
-    var series = activeSeries();
+    var series = withData(activeSeries());
     var vmax = Math.max.apply(null, series.map(function (s) { return s.values[c]; }).concat([10]));
     var bars = series.map(function (s) {
       var v = s.values[c], col = PARADIGM[s.paradigm].color;

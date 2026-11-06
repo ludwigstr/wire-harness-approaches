@@ -5,10 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="RopeDreamer in the DLO world-model benchmark: A Dreamer-style recurrent state-space model whose state is a kinematic chain (base position + one unit quaternion per link), so a decoded state can never stretch the cable.">
   <title>RopeDreamer &middot; DLO Benchmark</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230b0b0b'/%3E%3Cg fill='none' stroke-width='2.4' stroke-linecap='round'%3E%3Cpath d='M7 19C14 19 15 8 25 8' stroke='%233987e5'/%3E%3Cpath d='M7 19C15 19 17 15 25 15' stroke='%23eb6834'/%3E%3Cpath d='M7 19C15 20 17 23 25 23' stroke='%231baf7a'/%3E%3C/g%3E%3Ccircle cx='7' cy='19' r='3.2' fill='%23fff'/%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <link rel="stylesheet" href="../static/css/index.css">
+  <link rel="stylesheet" href="../static/css/index.css?v=20261106x">
   <script>
     try { var t = localStorage.getItem('dlo-theme-v2'); if (t) document.documentElement.setAttribute('data-theme', t); } catch (e) {}
   </script>
@@ -35,22 +36,30 @@
 
 <main>
 <section class="section ap-hero">
-  <div class="wrap narrow">
+  <div class="wrap">
     <a class="back-link" href="../index.html#approaches"><i class="fas fa-arrow-left"></i>All approaches</a>
     <p class="ap-kicker"><span class="swatch" style="--sw: var(--series-world)"></span>World Model</p>
     <h1 class="ap-title">RopeDreamer</h1>
     <p class="ap-cite">Missal et al. 2026</p>
-    <div class="ap-stats">
-      <div class="stat"><span class="stat-value">18.3</span><span class="stat-label">mm/node error</span></div>
-      <div class="stat"><span class="stat-value ap-stat-text">World Model</span><span class="stat-label">paradigm</span></div>
-      <div class="stat"><span class="stat-value">14</span><span class="stat-label">clips</span></div>
+    <div class="cfg-boxes" aria-label="Reported configuration and cable parameters">
+      <button type="button" class="cfg-score" data-x="score" aria-expanded="false" aria-controls="cfg-explain"><span class="cfg-score-v">18.3</span><span class="cfg-score-l">mm/node</span></button>
+      <div class="cfg-groups">
+        <div class="cfg-group"><p class="cfg-title"><b>World model</b><span>RSSM trained on MuJoCo twins</span></p><div class="cfg-tiles"><div class="cfg-cell"><span class="cfg-l"><span>Stretching</span></span><span class="cfg-tile is-empty" title="Not part of this configuration"><span class="cfg-v">&ndash;</span></span></div><div class="cfg-cell"><span class="cfg-l"><span>Bending<em> &middot; N&middot;m/rad</em></span></span><button type="button" class="cfg-tile" data-x="g0-bend" aria-expanded="false" aria-controls="cfg-explain" aria-label="Bending: explain"><span class="cfg-v">0.003<span class="cfg-to">&ndash;</span>8.2</span></button></div><div class="cfg-cell"><span class="cfg-l"><span>Twisting<em> &middot; Pa</em></span></span><button type="button" class="cfg-tile" data-x="g0-twist" aria-expanded="false" aria-controls="cfg-explain" aria-label="Twisting: explain"><span class="cfg-v">2.7&middot;10<sup>4</sup><span class="cfg-to">&ndash;</span>4.2&middot;10<sup>5</sup></span></button></div><div class="cfg-cell"><span class="cfg-l"><span>Density<em> &middot; kg/m</em></span></span><button type="button" class="cfg-tile" data-x="g0-rho" aria-expanded="false" aria-controls="cfg-explain" aria-label="Density: explain"><span class="cfg-v">0.13<span class="cfg-to">&ndash;</span>0.36</span></button></div><div class="cfg-cell"><span class="cfg-l"><span>Friction</span></span><button type="button" class="cfg-tile" data-x="g0-mu" aria-expanded="false" aria-controls="cfg-explain" aria-label="Friction: explain"><span class="cfg-v">0.24<span class="cfg-to">&ndash;</span>0.94</span></button></div><div class="cfg-cell"><span class="cfg-l"><span>Rest shape</span></span><button type="button" class="cfg-tile" data-x="g0-rest" aria-expanded="false" aria-controls="cfg-explain" aria-label="Rest shape: explain"><span class="cfg-v">&minus;47&deg;<span class="cfg-to">&ndash;</span>+34&deg;</span></button></div><div class="cfg-cell"><span class="cfg-l"><span>Parameters<em> &middot; weights</em></span></span><button type="button" class="cfg-tile" data-x="g0-weights" aria-expanded="false" aria-controls="cfg-explain" aria-label="Parameters: explain"><span class="cfg-v">5.6&thinsp;M</span></button></div><div class="cfg-cell"><span class="cfg-l"><span>Fitting / training<em> &middot; h</em></span></span><button type="button" class="cfg-tile" data-x="g0-time" aria-expanded="false" aria-controls="cfg-explain" aria-label="Fitting / training: explain"><span class="cfg-v">11.8</span></button></div><div class="cfg-cell"><span class="cfg-l"><span>Data<em> &middot; transitions</em></span></span><button type="button" class="cfg-tile" data-x="g0-data" aria-expanded="false" aria-controls="cfg-explain" aria-label="Data: explain"><span class="cfg-v">219k</span></button></div></div></div>
+      </div>
     </div>
+    <div class="cfg-explain" id="cfg-explain" role="region" aria-label="Parameter explanation" aria-live="polite" hidden></div>
+    <script type="application/json" id="cfg-explain-data">{"score": {"t": "Mean node error", "sym": "mm/node", "v": "18.3", "what": "How far, on average, the predicted cable is from the real one, in millimetres per node.", "how": "Averaged over the 16 nodes of the 4 cables and over every frame after a 5-frame warm-up, then over the clips. After the warm-up the model runs open loop with only the measured motion of the hub and the plugs.", "why": "It is the number every approach is ranked by. Lower is better."}, "g0-bend": {"t": "Bending", "sym": "bending stiffness", "v": "0.003 &ndash; 8.2 N&middot;m/rad", "grp": "World model", "what": "How stiff the simulated cable joints are in the training data. RopeDreamer itself has no stiffness value: it only learns from these simulations.", "how": "Every clip gets a MuJoCo twin from the general fit. Each training rollout scales the bend stiffness at random by ×0.5–2 (plus a small jitter per cable). The box shows the spread over the training data.", "why": "Seeing many stiffnesses teaches the model how cables in general react, so it can cope with the real one."}, "g0-twist": {"t": "Twisting", "sym": "twist stiffness", "v": "2.7&middot;10<sup>4<\/sup> &ndash; 4.2&middot;10<sup>5<\/sup> Pa", "grp": "World model", "what": "How strongly the simulated cable resists being twisted.", "how": "Randomised around the twin’s value, ×0.5–2, like the bending stiffness.", "why": "Twist changes how a cable rolls and swings when its ends turn."}, "g0-rho": {"t": "Density", "sym": "mass per metre", "v": "0.13 &ndash; 0.36 kg/m", "grp": "World model", "what": "How heavy the simulated cable is, in kilograms per metre.", "how": "The twin’s mass scaled at random by ×0.7–1.4 (kept within 0.01–0.5 kg/m).", "why": "Weight decides how much a cable sags and swings."}, "g0-mu": {"t": "Friction", "sym": "μ", "v": "0.24 &ndash; 0.94", "grp": "World model", "what": "How strongly the board holds the cable back when it slides.", "how": "The twin’s friction scaled at random by ×0.5–2.", "why": "Friction decides whether a cable slides along the board or stays put."}, "g0-rest": {"t": "Rest shape", "sym": "rest angles", "v": "&minus;47&deg; &ndash; +34&deg;", "grp": "World model", "what": "The bend each joint keeps when nothing pushes it: the cable’s plastic set.", "how": "Taken from the twins’ fitted rest angles and scaled at random by ×0.8–1.2 per rollout.", "why": "A real cable does not relax to a straight line; the training data has to show that."}, "g0-weights": {"t": "Parameters", "sym": "network weights", "v": "5.6&thinsp;M weights", "grp": "World model", "what": "The number of learned values in the world model, a Dreamer-style recurrent state-space model (size S).", "how": "Learned in training on the simulated rollouts. Its state is a kinematic chain (a base point and one rotation per link), so a decoded cable can never stretch.", "why": "These weights hold everything the model knows about cable motion."}, "g0-time": {"t": "Fitting / training", "sym": "wall-clock time", "v": "11.8 h", "grp": "World model", "what": "How long it took to make the training data and train the model.", "how": "About 6.1 h to simulate the rollouts on 16 workers plus about 5.7 h of training (stopped at epoch 106).", "why": "It shows what the approach costs before it can predict anything."}, "g0-data": {"t": "Data", "sym": "transitions", "v": "219k", "grp": "World model", "what": "The number of training steps: the cable now, the end motion, and the cable one frame later.", "how": "All from MuJoCo: 5,173 rollouts kept (557 rejected because they added mover contacts the real clip does not have).", "why": "No real camera frames are used for training: everything is simulation."}}</script>
+    <p class="cfg-note">Reported configuration and its cable parameters (paper, Fig.&nbsp;3). <span class="cfg-hint"><i class="fas fa-hand-pointer"></i>Click a box to see what it means.</span></p>
   </div>
 </section>
 
 <section class="section ap-section">
-  <div class="wrap narrow">
-    <div class="approach-inner ap-body">
+  <div class="wrap ap-dash">
+
+    <div class="dash-card method-card">
+      <div class="dash-head"><h3><i class="fas fa-book-open"></i>Method details</h3></div>
+      <div class="approach-inner ap-body">
+
           <p class="lead">A Dreamer-style <strong>recurrent state-space model</strong> whose state is a <strong>kinematic chain</strong>
             (base position + one unit quaternion per link), so a decoded state can never stretch the cable.</p>
           <dl class="facts">
@@ -96,15 +105,20 @@
           <div class="detail-actions">
             <span class="code-path"><i class="fas fa-folder"></i><code>ropedreamer_twins14/</code>, <code>approaches/08_ropedreamer.py</code></span>
           </div>
+      </div>
     </div>
 
-    <div class="ap-perclip" id="ap-perclip" hidden>
-      <h2 class="sub-title">Per-clip error on the 36 clips</h2>
-      <div class="ap-perclip-stats" id="ap-perclip-stats"></div>
-      <div class="chart-card"><div id="ap-perclip-chart" class="chart" role="img" aria-label="Error of RopeDreamer on each of the 36 clips"></div></div>
+    <div class="dash-card" id="pg-card">
+      <div class="dash-head"><h3>Per-joint parameters along each cable</h3></div>
+      <div class="phi-bar"><div class="param-tabs" role="tablist" aria-label="Parameter" id="pg-tabs"></div></div>
+      <p class="dash-sub" id="pg-sub"></p>
+      <div class="legend" id="pg-legend"></div>
+      <div id="pg-chart" class="chart" role="img" aria-label="Fitted per-joint parameter values"></div>
+      <div class="pj-cards" id="pg-cards"></div>
+      <p class="muted-note" id="pg-note"></p>
     </div>
 
-    <nav class="ap-pager" aria-label="Other world models">
+        <nav class="ap-pager" aria-label="Other world models">
       <a class="ap-pager-link prev" href="physworld.html"><span><i class="fas fa-arrow-left"></i>Previous world model</span><b>PhysWorld</b></a>
       <a class="ap-pager-link next" href="phystwin.html"><span>Next world model<i class="fas fa-arrow-right"></i></span><b>PhysTwin</b></a>
     </nav>
@@ -119,7 +133,10 @@
 </footer>
 
 <div class="tooltip" id="tooltip" role="tooltip" hidden></div>
-<script src="../static/js/data.js"></script>
-<script src="../static/js/approach.js"></script>
+<script src="../static/js/data.js?v=20261106x"></script>
+<script src="../static/js/approach.js?v=20261106x"></script>
+<script src="../static/js/param_grids.js?v=20261106x"></script>
+<script src="../static/js/paramgrid.js?v=20261106x"></script>
+<script src="../static/js/ux.js?v=20261106x"></script>
 </body>
 </html>

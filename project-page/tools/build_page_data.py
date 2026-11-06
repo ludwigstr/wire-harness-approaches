@@ -16,6 +16,7 @@ APPROACHES = {           # folder -> page key
     "phystwin_22.0": "phystwin",
     "adaptigraph_29.4": "adaptigraph",
     "genesis_12.7": "genesis",
+    "yang_16.0": "yang",
 }
 
 clips = sorted(p.stem for p in npz_dir.glob("*.npz"))

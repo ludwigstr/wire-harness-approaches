@@ -5,10 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="PhysWorld in the DLO world-model benchmark: Real video → a differentiable MPM digital twin per clip → physics-aware synthetic demonstrations → a graph world model trained on them, with a per-node physical property Φ adapted on the real clip.">
   <title>PhysWorld &middot; DLO Benchmark</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230b0b0b'/%3E%3Cg fill='none' stroke-width='2.4' stroke-linecap='round'%3E%3Cpath d='M7 19C14 19 15 8 25 8' stroke='%233987e5'/%3E%3Cpath d='M7 19C15 19 17 15 25 15' stroke='%23eb6834'/%3E%3Cpath d='M7 19C15 20 17 23 25 23' stroke='%231baf7a'/%3E%3C/g%3E%3Ccircle cx='7' cy='19' r='3.2' fill='%23fff'/%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <link rel="stylesheet" href="../static/css/index.css">
+  <link rel="stylesheet" href="../static/css/index.css?v=20261106x">
   <script>
     try { var t = localStorage.getItem('dlo-theme-v2'); if (t) document.documentElement.setAttribute('data-theme', t); } catch (e) {}
   </script>
@@ -40,7 +41,16 @@
     <p class="ap-kicker"><span class="swatch" style="--sw: var(--series-world)"></span>World Model</p>
     <h1 class="ap-title">PhysWorld</h1>
     <p class="ap-cite">Yang et al. 2025 &middot; MPM digital twin &rarr; synthetic demos &rarr; graph world model, per-node &Phi; adapted on the real clip</p>
-    <div class="kpi-grid" id="ap-kpis"></div>
+    <div class="cfg-boxes" aria-label="Reported configurations and cable parameters">
+      <button type="button" class="cfg-score" data-x="score" aria-expanded="false" aria-controls="cfg-explain"><span class="cfg-score-v">4.5</span><span class="cfg-score-l">mm/node</span></button>
+      <div class="cfg-groups">
+        <div class="cfg-group"><p class="cfg-title"><b>Twin &amp; world model</b><span>MPM twins, graph network</span></p><div class="cfg-tiles"><div class="cfg-cell"><span class="cfg-l"><span>Stretching</span></span><button type="button" class="cfg-tile" data-x="tw-nu" aria-expanded="false" aria-controls="cfg-explain" aria-label="Stretching: explain"><span class="cfg-v">0.046<span class="cfg-to">&ndash;</span>0.42</span></button></div><div class="cfg-cell"><span class="cfg-l"><span>Bending<em> &middot; Pa</em></span></span><button type="button" class="cfg-tile" data-x="tw-E" aria-expanded="false" aria-controls="cfg-explain" aria-label="Bending: explain"><span class="cfg-v">6.4&middot;10<sup>5</sup><span class="cfg-to">&ndash;</span>2.9&middot;10<sup>6</sup></span></button></div><div class="cfg-cell"><span class="cfg-l"><span>Twisting</span></span><span class="cfg-tile is-empty" title="Not part of this configuration"><span class="cfg-v">&ndash;</span></span></div><div class="cfg-cell"><span class="cfg-l"><span>Density<em> &middot; kg/m</em></span></span><button type="button" class="cfg-tile" data-x="tw-rho" aria-expanded="false" aria-controls="cfg-explain" aria-label="Density: explain"><span class="cfg-v">4.7&middot;10<sup>&minus;3</sup><span class="cfg-to">&ndash;</span>0.02</span></button></div><div class="cfg-cell"><span class="cfg-l"><span>Friction</span></span><button type="button" class="cfg-tile" data-x="tw-mu" aria-expanded="false" aria-controls="cfg-explain" aria-label="Friction: explain"><span class="cfg-v">0.031<span class="cfg-to">&ndash;</span>0.14</span></button></div><div class="cfg-cell"><span class="cfg-l"><span>Rest shape<em> &middot; Pa</em></span></span><button type="button" class="cfg-tile" data-x="tw-sy" aria-expanded="false" aria-controls="cfg-explain" aria-label="Rest shape: explain"><span class="cfg-v">2.3&middot;10<sup>4</sup><span class="cfg-to">&ndash;</span>9.1&middot;10<sup>4</sup></span></button></div><div class="cfg-cell"><span class="cfg-l"><span>Parameters</span></span><button type="button" class="cfg-tile" data-x="tw-weights" aria-expanded="false" aria-controls="cfg-explain" aria-label="Parameters: explain"><span class="cfg-v">0.86&thinsp;M<span class="cfg-u"> weights</span></span></button></div><div class="cfg-cell"><span class="cfg-l"><span>Fitting / training<em> &middot; h</em></span></span><button type="button" class="cfg-tile" data-x="tw-time" aria-expanded="false" aria-controls="cfg-explain" aria-label="Fitting / training: explain"><span class="cfg-v">30</span></button></div><div class="cfg-cell"><span class="cfg-l"><span>Data<em> &middot; transitions</em></span></span><button type="button" class="cfg-tile" data-x="tw-data" aria-expanded="false" aria-controls="cfg-explain" aria-label="Data: explain"><span class="cfg-v">235k</span></button></div></div></div>
+        <div class="cfg-group"><p class="cfg-title"><b>&Phi; adaptation</b><span>per node, on the real clips</span></p><div class="cfg-tiles"><div class="cfg-cell"><span class="cfg-l"><span>Stretching</span></span><span class="cfg-tile is-empty" title="Not part of this configuration"><span class="cfg-v">&ndash;</span></span></div><div class="cfg-cell"><span class="cfg-l"><span>Bending<em> &middot; Pa</em></span></span><button type="button" class="cfg-tile" data-x="phi-E" aria-expanded="false" aria-controls="cfg-explain" aria-label="Bending: explain"><span class="cfg-v">3.0&middot;10<sup>5</sup><span class="cfg-to">&ndash;</span>6.3&middot;10<sup>6</sup></span></button></div><div class="cfg-cell"><span class="cfg-l"><span>Twisting</span></span><span class="cfg-tile is-empty" title="Not part of this configuration"><span class="cfg-v">&ndash;</span></span></div><div class="cfg-cell"><span class="cfg-l"><span>Density<em> &middot; kg/m</em></span></span><button type="button" class="cfg-tile" data-x="phi-rho" aria-expanded="false" aria-controls="cfg-explain" aria-label="Density: explain"><span class="cfg-v">0.0014<span class="cfg-to">&ndash;</span>0.061</span></button></div><div class="cfg-cell"><span class="cfg-l"><span>Friction</span></span><span class="cfg-tile is-empty" title="Not part of this configuration"><span class="cfg-v">&ndash;</span></span></div><div class="cfg-cell"><span class="cfg-l"><span>Rest shape<em> &middot; Pa</em></span></span><span class="cfg-tile is-empty" title="Not part of this configuration"><span class="cfg-v">&ndash;</span></span></div><div class="cfg-cell"><span class="cfg-l"><span>Parameters</span></span><button type="button" class="cfg-tile" data-x="phi-n" aria-expanded="false" aria-controls="cfg-explain" aria-label="Parameters: explain"><span class="cfg-v">4608</span></button></div><div class="cfg-cell"><span class="cfg-l"><span>Fitting / training<em> &middot; h</em></span></span><button type="button" class="cfg-tile" data-x="phi-time" aria-expanded="false" aria-controls="cfg-explain" aria-label="Fitting / training: explain"><span class="cfg-v">2.0</span></button></div><div class="cfg-cell"><span class="cfg-l"><span>Data<em> &middot; transitions</em></span></span><span class="cfg-tile is-empty" title="Not part of this configuration"><span class="cfg-v">&ndash;</span></span></div></div></div>
+      </div>
+    </div>
+    <div class="cfg-explain" id="cfg-explain" role="region" aria-label="Parameter explanation" aria-live="polite" hidden></div>
+    <script type="application/json" id="cfg-explain-data">{"score": {"t": "Mean node error", "sym": "mm/node", "v": "4.5", "what": "How far, on average, the predicted cable is from the real one. For every frame we measure the distance between each predicted node and the tracked node, in millimetres.", "how": "Averaged over the 16 nodes of the 4 cables and over every frame after a 5-frame warm-up, then over the 36 clips. The model runs open loop: after the warm-up it only gets the measured motion of the hub and the plugs.", "why": "It is the number every approach is ranked by. Lower is better: 4.5 mm/node is the best of the ten approaches."}, "tw-nu": {"t": "Stretching", "sym": "Poisson’s ratio ν", "v": "0.046 – 0.42", "grp": "Twin", "what": "How much the cable material gets thinner when it is pulled longer. It is a plain number between 0 and 0.5 (0 = it keeps its width, 0.5 = it keeps its volume).", "how": "Each clip gets its own simulated copy of the cable, an MPM digital twin. The computer adjusts ν step by step (gradient descent) until the simulated cable moves like the one in the video. The box shows the lowest and the highest value over the fitted twins.", "why": "Together with the stiffness it decides how strongly the material resists being stretched or squeezed."}, "tw-E": {"t": "Bending", "sym": "Young’s modulus E", "v": "6.4·10<sup>5</sup> – 2.9·10<sup>6</sup> Pa", "grp": "Twin", "what": "How stiff the cable material is. A high value means a stiff cable that hardly bends; a low value means a floppy one.", "how": "Fitted in the twin in two steps: first one value for the whole cable, then a separate value for each of the about 23,000 simulation particles, so softer and stiffer spots can differ. The fit compares the simulated cable with the video in every frame.", "why": "Stiffness has the largest effect on how a cable curves when its ends move."}, "tw-rho": {"t": "Density", "sym": "ρ", "v": "4.7·10<sup>−3</sup> – 0.02 kg/m", "grp": "Twin", "what": "How heavy the cable is, in kilograms per metre of cable.", "how": "Fitted together with the stiffness: first for the whole cable, then per particle.", "why": "Weight decides how much the cable sags and how it keeps swinging after a fast motion."}, "tw-mu": {"t": "Friction", "sym": "μ", "v": "0.031 – 0.14", "grp": "Twin", "what": "How strongly the board holds the cable back when it slides over it. 0 would be ice; higher values grip more.", "how": "Fitted in the twin like the other properties: one value first, then refined per particle.", "why": "The cables lie on the board, so friction decides whether a cable slides along or stays where it is."}, "tw-sy": {"t": "Rest shape", "sym": "yield stress", "v": "2.3·10<sup>4</sup> – 9.1·10<sup>4</sup> Pa", "grp": "Twin", "what": "The force per area above which the cable bends permanently instead of springing back. A real cable keeps a bent shape (its plastic set) and does not relax to a straight line.", "how": "One value per clip in the twin, which uses an elastoplastic material: below this stress the material springs back, above it the change of shape stays.", "why": "This is how PhysWorld captures the cable’s rest shape, the property that helps most in every approach."}, "tw-weights": {"t": "Parameters", "sym": "network weights", "v": "0.86 M", "grp": "World model", "what": "The number of learned values inside the world model, a graph neural network (GNN). Every cable node is a point in the graph, linked to its neighbours.", "how": "Learned in training: from the last 3 frames and the connector motion the network predicts the next cable shape, and its weights are adjusted until the predictions match the training data.", "why": "These weights hold everything the model has learned about how cables move."}, "tw-time": {"t": "Fitting / training", "sym": "wall-clock time", "v": "30 h", "grp": "World model", "what": "How long the whole first stage took on the computer.", "how": "The sum of fitting the twins, letting the twins generate the training demonstrations, and training the graph network.", "why": "It shows the cost of the approach: most of the time goes into the twins, not into the network."}, "tw-data": {"t": "Data", "sym": "transitions", "v": "235k", "grp": "World model", "what": "The number of training examples. One transition is one step: the cable now, the connector motion, and the cable one frame later.", "how": "All of them come from the twins: each fitted twin plays 40 new demonstration motions. No real camera frames are used for training.", "why": "The twins turn a few real clips into a lot of physically sensible training data."}, "phi-E": {"t": "Bending per node", "sym": "E inside Φ", "v": "3.0·10<sup>5</sup> – 6.3·10<sup>6</sup> Pa", "grp": "Φ adaptation", "what": "A separate stiffness for every node of every cable, given to the trained network as an input.", "how": "With the network frozen, these values are tuned on the real clip until the open-loop prediction matches the tracked cable. Each value may move at most 1.5 (on a log scale) away from the twin’s value. The box shows the range over all nodes and clips.", "why": "It lets one trained network fit each real cable without retraining."}, "phi-rho": {"t": "Density per node", "sym": "ρ inside Φ", "v": "0.0014 – 0.061 kg/m", "grp": "Φ adaptation", "what": "A separate weight per metre for every node, also an input of the network.", "how": "Tuned together with the stiffness per node, network frozen, within the same limit around the twin’s value.", "why": "Local weight changes where and how much a cable sags."}, "phi-n": {"t": "Parameters", "sym": "Φ values", "v": "4608", "grp": "Φ adaptation", "what": "How many numbers are adapted on the real clips.", "how": "2 values (stiffness and density) × 16 nodes × 4 cables = 128 per clip, × 36 clips = 4608.", "why": "Only these few numbers change per clip; the 0.86 M network weights stay the same."}, "phi-time": {"t": "Fitting / training", "sym": "wall-clock time", "v": "2.0 h", "grp": "Φ adaptation", "what": "How long it took to tune Φ on all clips.", "how": "For each clip the frozen network is rolled out and Φ is adjusted to reduce the error.", "why": "Adapting to a new cable is cheap compared with the 30 h first stage."}}</script>
+    <p class="cfg-note">All reported configurations and their cable parameters (paper, Fig.&nbsp;3). <span class="cfg-hint"><i class="fas fa-hand-pointer"></i>Click a box to see what it means.</span></p>
   </div>
 </section>
 
@@ -62,46 +72,8 @@
       <div id="ap-clips" class="chart" role="img" aria-label="Error on each clip"></div>
     </div>
 
-    <div class="dash-grid">
-      <div class="dash-card">
-        <div class="dash-head"><h3>Head-to-head on the same clips</h3></div>
-        <p class="dash-sub">Clips where PhysWorld has the lower error, out of 36</p>
-        <div id="ap-h2h"></div>
-      </div>
-      <div class="dash-card">
-        <div class="dash-head"><h3>Distribution of clip errors</h3></div>
-        <p class="dash-sub" id="ap-hist-sub"></p>
-        <div id="ap-hist" class="chart" role="img" aria-label="Histogram of clip errors"></div>
-      </div>
-    </div>
-
-    <div class="dash-card">
-      <div class="dash-head"><h3>Variants</h3></div>
-      <p class="dash-sub">Mean error per variant (bar) and median (tick). 14-clip variants are scored on the earlier 14-clip set.</p>
-      <div id="ap-variants" class="chart" role="img" aria-label="Mean error per variant"></div>
-    </div>
-
-    <div class="dash-grid">
-      <div class="dash-card">
-        <div class="dash-head"><h3>Error vs clip length</h3><span class="dash-badge" id="ap-corr"></span></div>
-        <p class="dash-sub">Does the open-loop error grow on longer clips?</p>
-        <div id="ap-scatter" class="chart" role="img" aria-label="Clip error against number of frames"></div>
-      </div>
-      <div class="dash-card">
-        <div class="dash-head"><h3>Compute</h3><span class="dash-badge" id="ap-compute-total"></span></div>
-        <p class="dash-sub" id="ap-compute-sub"></p>
-        <div id="ap-compute" class="chart" role="img" aria-label="Wall-clock hours per stage"></div>
-      </div>
-    </div>
-
-    <div class="dash-card">
-      <div class="dash-head"><h3>Spec sheet</h3></div>
-      <div class="num-tiles" id="ap-numbers"></div>
-      <dl class="spec" id="ap-spec"></dl>
-    </div>
-
-    <details class="method-details">
-      <summary><i class="fas fa-book-open"></i>Method details</summary>
+    <div class="dash-card method-card">
+      <div class="dash-head"><h3><i class="fas fa-book-open"></i>Method details</h3></div>
       <div class="approach-inner ap-body">
           <h4>Pipeline</h4>
           <ol>
@@ -120,7 +92,27 @@
             <span class="code-path"><i class="fas fa-folder"></i><code>physworld_mpm/</code>, <code>approaches/06_physworld.py</code></span>
           </div>
       </div>
-    </details>
+    </div>
+
+    <div class="dash-card" id="phi-card">
+      <div class="dash-head">
+        <h3>Per-node &Phi; along each cable</h3>
+      </div>
+      <div class="phi-bar">
+        <div class="param-tabs" role="tablist" aria-label="Quantity" id="phi-tabs"></div>
+        <div class="seg" role="group" aria-label="Show">
+          <button type="button" class="seg-btn is-on" data-pshow="fit" aria-pressed="true">Fitted value</button>
+          <button type="button" class="seg-btn" data-pshow="change" aria-pressed="false">Change vs twin</button>
+        </div>
+      </div>
+      <p class="dash-sub" id="phi-sub"></p>
+      <div class="legend" id="phi-legend"></div>
+      <div id="phi-chart" class="chart" role="img" aria-label="Per-node stiffness and density of each cable"></div>
+      <div class="pj-cards" id="phi-cards"></div>
+      <p class="muted-note"><i class="fas fa-circle-info"></i> &Phi; holds 2 values per node (stiffness E and density &rho;) for the 16 nodes of the 4 cables: 128 per clip.
+        Each clip starts from its twin&rsquo;s values and is fine-tuned on the real clip with the network frozen. Shown: the 14-clip run (one GNN per clip,
+        <code>physworld_mpm/data/gnn</code>), the run whose per-node &Phi; is in the repository.</p>
+    </div>
 
     <nav class="ap-pager" aria-label="Other world models">
       <span></span>
@@ -173,7 +165,10 @@
 </footer>
 
 <div class="tooltip" id="tooltip" role="tooltip" hidden></div>
-<script src="../static/js/data.js"></script>
-<script src="../static/js/approach.js"></script>
+<script src="../static/js/data.js?v=20261106x"></script>
+<script src="../static/js/approach.js?v=20261106x"></script>
+<script src="../static/js/physworld_phi.js?v=20261106x"></script>
+<script src="../static/js/physworld.js?v=20261106x"></script>
+<script src="../static/js/ux.js?v=20261106x"></script>
 </body>
 </html>

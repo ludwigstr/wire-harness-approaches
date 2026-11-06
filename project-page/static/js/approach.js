@@ -73,12 +73,7 @@
     syncIcon();
   });
   syncIcon();
-  var burger = document.getElementById('nav-burger');
-  var links = document.getElementById('nav-links');
-  burger.addEventListener('click', function () {
-    var open = links.classList.toggle('is-open');
-    burger.setAttribute('aria-expanded', open ? 'true' : 'false');
-  });
+  // The left sidebar menu (burger, current page) lives in ux.js, shared by every page.
 
   // ---------------------------------------------------------------- tooltip
   var tip = document.getElementById('tooltip');
@@ -154,7 +149,8 @@
     kpis.push({ v: '#' + rank + ' of ' + MODELS.length, l: rank === 1
       ? 'next: ' + neighbour.name + ' (+' + (neighbour.score - me.score).toFixed(1) + ')'
       : 'best: ' + neighbour.name + ' (' + (me.score - neighbour.score).toFixed(1) + ' lower)' });
-    document.getElementById('ap-kpis').innerHTML = kpis.map(function (k) {
+    var kpiBox = document.getElementById('ap-kpis');
+    if (kpiBox) kpiBox.innerHTML = kpis.map(function (k) {
       return '<div class="stat"><span class="stat-value' + (k.small ? ' kpi-small' : '') + '">' + k.v + '</span><span class="stat-label">' + esc(k.l) + '</span></div>';
     }).join('');
 
@@ -379,16 +375,25 @@
     }
 
     // ---- spec sheet
-    document.getElementById('ap-numbers').innerHTML = (cfg.numbers || []).map(function (n) {
+    var numBox = document.getElementById('ap-numbers'), specBox = document.getElementById('ap-spec');
+    if (numBox) numBox.innerHTML = (cfg.numbers || []).map(function (n) {
       return '<div class="num-tile"><b>' + esc(n.value) + '</b><span>' + esc(n.label) + '</span></div>';
     }).join('');
-    document.getElementById('ap-spec').innerHTML = (cfg.spec || []).map(function (r) {
+    if (specBox) specBox.innerHTML = (cfg.spec || []).map(function (r) {
       return '<div><dt>' + esc(r[0]) + '</dt><dd>' + esc(r[1]) + '</dd></div>';
     }).join('');
 
-    function all() { drawClips(); drawH2H(); drawHist(); drawVariants(); drawScatter(); drawCompute(); }
+    // draw only the cards that are on the page
+    function all() {
+      drawClips();
+      if (h2hBox) drawH2H();
+      if (histBox) drawHist();
+      if (varBox) drawVariants();
+      if (scBox) drawScatter();
+      if (cBox) drawCompute();
+    }
     all();
-    resizers.push(function () { drawClips(); drawHist(); drawVariants(); drawScatter(); drawCompute(); });
+    resizers.push(all);
   }
 
   // ================================================================= simple per-clip chart (pages not converted yet)
@@ -432,4 +437,54 @@
     render();
     resizers.push(render);
   }
+})();
+
+/* Parameter boxes in the approach hero: click a box to open a plain-language explanation below them. */
+(function () {
+  'use strict';
+  var panel = document.getElementById('cfg-explain');
+  var src = document.getElementById('cfg-explain-data');
+  if (!panel || !src) return;
+  var X;
+  try { X = JSON.parse(src.textContent); } catch (e) { return; }
+  var tiles = document.querySelectorAll('[data-x]');
+  var current = null;
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+  function close() {
+    current = null;
+    panel.hidden = true;
+    panel.classList.remove('is-open');
+    tiles.forEach(function (t) { t.classList.remove('is-active'); t.setAttribute('aria-expanded', 'false'); });
+  }
+  function open(key, tile) {
+    var d = X[key];
+    if (!d) return;
+    current = key;
+    tiles.forEach(function (t) { var on = t === tile; t.classList.toggle('is-active', on); t.setAttribute('aria-expanded', on ? 'true' : 'false'); });
+    // "v" may hold <sup> markup written by us; everything else is plain text
+    panel.innerHTML =
+      '<div class="cx-head">' +
+        '<div><p class="cx-kicker">' + esc(d.grp || 'Result') + '</p>' +
+        '<h4 class="cx-title">' + esc(d.t) + ' <span>' + esc(d.sym) + '</span></h4></div>' +
+        '<span class="cx-value">' + d.v + '</span>' +
+        '<button type="button" class="cx-close" aria-label="Close the explanation"><i class="fas fa-xmark"></i></button>' +
+      '</div>' +
+      '<dl class="cx-body">' +
+        '<div><dt><i class="fas fa-circle-question"></i>What it is</dt><dd>' + esc(d.what) + '</dd></div>' +
+        '<div><dt><i class="fas fa-calculator"></i>How it is found</dt><dd>' + esc(d.how) + '</dd></div>' +
+        '<div><dt><i class="fas fa-bullseye"></i>Why it matters</dt><dd>' + esc(d.why) + '</dd></div>' +
+      '</dl>';
+    panel.hidden = false;
+    requestAnimationFrame(function () { panel.classList.add('is-open'); });
+    panel.querySelector('.cx-close').addEventListener('click', function () { var t = tile; close(); t.focus(); });
+    var r = panel.getBoundingClientRect();
+    if (r.bottom > window.innerHeight) panel.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+  }
+  tiles.forEach(function (t) {
+    t.addEventListener('click', function () {
+      var k = t.getAttribute('data-x');
+      if (k === current) close(); else open(k, t);
+    });
+  });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && current) close(); });
 })();

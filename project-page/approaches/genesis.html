@@ -5,10 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Genesis in the DLO world-model benchmark: Each cable as a hinge chain (MJCF loaded into Genesis 1.3.3, CPU backend) in the measured scene; hub and plugs PD-driven along their tracks, movers as colliding boxes.">
   <title>Genesis &middot; DLO Benchmark</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230b0b0b'/%3E%3Cg fill='none' stroke-width='2.4' stroke-linecap='round'%3E%3Cpath d='M7 19C14 19 15 8 25 8' stroke='%233987e5'/%3E%3Cpath d='M7 19C15 19 17 15 25 15' stroke='%23eb6834'/%3E%3Cpath d='M7 19C15 20 17 23 25 23' stroke='%231baf7a'/%3E%3C/g%3E%3Ccircle cx='7' cy='19' r='3.2' fill='%23fff'/%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <link rel="stylesheet" href="../static/css/index.css">
+  <link rel="stylesheet" href="../static/css/index.css?v=20261106x">
   <script>
     try { var t = localStorage.getItem('dlo-theme-v2'); if (t) document.documentElement.setAttribute('data-theme', t); } catch (e) {}
   </script>
@@ -35,22 +36,45 @@
 
 <main>
 <section class="section ap-hero">
-  <div class="wrap narrow">
+  <div class="wrap">
     <a class="back-link" href="../index.html#approaches"><i class="fas fa-arrow-left"></i>All approaches</a>
     <p class="ap-kicker"><span class="swatch" style="--sw: var(--series-physics)"></span>Physics Engine</p>
     <h1 class="ap-title">Genesis</h1>
     <p class="ap-cite">genesis-world 1.3.3</p>
-    <div class="ap-stats">
-      <div class="stat"><span class="stat-value">12.7</span><span class="stat-label">mm/node error</span></div>
-      <div class="stat"><span class="stat-value ap-stat-text">Physics Engine</span><span class="stat-label">paradigm</span></div>
-      <div class="stat"><span class="stat-value">36</span><span class="stat-label">clips</span></div>
+    <div class="cfg-boxes" aria-label="Reported configuration and cable parameters">
+      <button type="button" class="cfg-score" data-x="score" aria-expanded="false" aria-controls="cfg-explain"><span class="cfg-score-v">12.7</span><span class="cfg-score-l">mm/node</span></button>
+      <div class="cfg-groups">
+        <div class="cfg-group"><p class="cfg-title"><b>General fit</b><span>CMA-ES on all 36 clips</span></p><div class="cfg-tiles"><div class="cfg-cell"><span class="cfg-l"><span>Stretching</span></span><span class="cfg-tile is-empty" title="Not part of this configuration"><span class="cfg-v">&ndash;</span></span></div><div class="cfg-cell"><span class="cfg-l"><span>Bending<em> &middot; N&middot;m/rad</em></span></span><button type="button" class="cfg-tile" data-x="g0-kb" aria-expanded="false" aria-controls="cfg-explain" aria-label="Bending: explain"><span class="cfg-v">0.028<span class="cfg-to">&ndash;</span>36</span></button></div><div class="cfg-cell"><span class="cfg-l"><span>Twisting</span></span><span class="cfg-tile is-empty" title="Not part of this configuration"><span class="cfg-v">&ndash;</span></span></div><div class="cfg-cell"><span class="cfg-l"><span>Density<em> &middot; kg/m</em></span></span><button type="button" class="cfg-tile" data-x="g0-rho" aria-expanded="false" aria-controls="cfg-explain" aria-label="Density: explain"><span class="cfg-v">0.051<span class="cfg-to">&ndash;</span>0.21</span></button></div><div class="cfg-cell"><span class="cfg-l"><span>Friction</span></span><button type="button" class="cfg-tile" data-x="g0-mu" aria-expanded="false" aria-controls="cfg-explain" aria-label="Friction: explain"><span class="cfg-v">4.75</span></button></div><div class="cfg-cell"><span class="cfg-l"><span>Rest shape</span></span><button type="button" class="cfg-tile" data-x="g0-rest" aria-expanded="false" aria-controls="cfg-explain" aria-label="Rest shape: explain"><span class="cfg-v">&minus;49&deg;<span class="cfg-to">&ndash;</span>+73&deg;</span></button></div><div class="cfg-cell"><span class="cfg-l"><span>Parameters</span></span><button type="button" class="cfg-tile" data-x="g0-n" aria-expanded="false" aria-controls="cfg-explain" aria-label="Parameters: explain"><span class="cfg-v">185</span></button></div><div class="cfg-cell"><span class="cfg-l"><span>Fitting / training<em> &middot; h</em></span></span><button type="button" class="cfg-tile" data-x="g0-time" aria-expanded="false" aria-controls="cfg-explain" aria-label="Fitting / training: explain"><span class="cfg-v">52</span></button></div><div class="cfg-cell"><span class="cfg-l"><span>Data<em> &middot; transitions</em></span></span><span class="cfg-tile is-empty" title="Not part of this configuration"><span class="cfg-v">&ndash;</span></span></div></div></div>
+      </div>
     </div>
+    <div class="cfg-explain" id="cfg-explain" role="region" aria-label="Parameter explanation" aria-live="polite" hidden></div>
+    <script type="application/json" id="cfg-explain-data">{"score": {"t": "Mean node error", "sym": "mm/node", "v": "12.7", "what": "How far, on average, the predicted cable is from the real one, in millimetres per node.", "how": "Averaged over the 16 nodes of the 4 cables and over every frame from frame 0, then over the 36 clips. The simulation only gets the measured motion of the hub and the plugs.", "why": "It is the number every approach is ranked by. Lower is better."}, "g0-kb": {"t": "Bending", "sym": "joint stiffness", "v": "0.028 &ndash; 36 N&middot;m/rad", "grp": "General fit", "what": "How strongly each hinge joint resists bending.", "how": "Fitted by CMA-ES so the simulated cables follow the tracked ones (general fit, 185 values, stopped after generation 33).", "why": "Stiffness shapes the cable’s curve."}, "g0-rho": {"t": "Density", "sym": "mass per metre", "v": "0.051 &ndash; 0.21 kg/m", "grp": "General fit", "what": "How heavy the cables are per metre.", "how": "Fitted by CMA-ES.", "why": "Weight decides how much a cable sags."}, "g0-mu": {"t": "Friction", "sym": "μ", "v": "4.75", "grp": "General fit", "what": "How strongly the board and movers hold the cables back.", "how": "Fitted by CMA-ES.", "why": "Friction decides whether a cable slides along."}, "g0-rest": {"t": "Rest shape", "sym": "rest angles", "v": "&minus;49&deg; &ndash; +73&deg;", "grp": "General fit", "what": "The bend each joint keeps when nothing pushes it.", "how": "Fitted by CMA-ES.", "why": "Real cables keep a bent shape."}, "g0-n": {"t": "Parameters", "sym": "fitted values", "v": "185", "grp": "General fit", "what": "How many numbers are fitted in the general fit.", "how": "Per-joint stiffness, damping and rest angles plus global values, shared by all clips.", "why": "One parameter set has to fit every clip."}, "g0-time": {"t": "Fitting / training", "sym": "wall-clock time", "v": "52 h", "grp": "General fit", "what": "How long the fit ran.", "how": "CMA-ES, stopped by the owner after generation 33; the value comes from a fresh-process validation.", "why": "Every candidate is a full simulation."}}</script>
+    <p class="cfg-note">Reported configuration and its cable parameters (paper, Fig.&nbsp;3). <span class="cfg-hint"><i class="fas fa-hand-pointer"></i>Click a box to see what it means.</span></p>
   </div>
 </section>
 
 <section class="section ap-section">
-  <div class="wrap narrow">
-    <div class="approach-inner ap-body">
+  <div class="wrap ap-dash" id="ap-dash">
+
+    <div class="dash-card">
+      <div class="dash-head">
+        <h3>Error on each of the 36 clips</h3>
+        <div class="dash-controls">
+          <div class="seg" role="group" aria-label="Order">
+            <button type="button" class="seg-btn is-on" data-order="clip">Recording order</button>
+            <button type="button" class="seg-btn" data-order="sorted">Sorted by error</button>
+          </div>
+          <label class="select-wrap compact"><span class="muted">Compare</span><select id="ap-compare" aria-label="Compare with another model"></select></label>
+        </div>
+      </div>
+      <div class="legend" id="ap-clips-legend"></div>
+      <div id="ap-clips" class="chart" role="img" aria-label="Error on each clip"></div>
+    </div>
+
+    <div class="dash-card method-card">
+      <div class="dash-head"><h3><i class="fas fa-book-open"></i>Method details</h3></div>
+      <div class="approach-inner ap-body">
+
           <p class="lead">Each cable as a <strong>hinge chain</strong> (MJCF loaded into Genesis 1.3.3, CPU backend) in the measured scene; hub and plugs
             PD-driven along their tracks, movers as colliding boxes.</p>
           <dl class="facts">
@@ -73,15 +97,20 @@
           <div class="detail-actions">
             <span class="code-path"><i class="fas fa-folder"></i><code>approaches/02_genesis.py</code>, <code>engines/genesis_*.py</code></span>
           </div>
+      </div>
     </div>
 
-    <div class="ap-perclip" id="ap-perclip" hidden>
-      <h2 class="sub-title">Per-clip error on the 36 clips</h2>
-      <div class="ap-perclip-stats" id="ap-perclip-stats"></div>
-      <div class="chart-card"><div id="ap-perclip-chart" class="chart" role="img" aria-label="Error of Genesis on each of the 36 clips"></div></div>
+    <div class="dash-card" id="pg-card">
+      <div class="dash-head"><h3>Per-joint parameters along each cable</h3></div>
+      <div class="phi-bar"><div class="param-tabs" role="tablist" aria-label="Parameter" id="pg-tabs"></div></div>
+      <p class="dash-sub" id="pg-sub"></p>
+      <div class="legend" id="pg-legend"></div>
+      <div id="pg-chart" class="chart" role="img" aria-label="Fitted per-joint parameter values"></div>
+      <div class="pj-cards" id="pg-cards"></div>
+      <p class="muted-note" id="pg-note"></p>
     </div>
 
-    <nav class="ap-pager" aria-label="Other physics engines">
+        <nav class="ap-pager" aria-label="Other physics engines">
       <a class="ap-pager-link prev" href="mujoco.html"><span><i class="fas fa-arrow-left"></i>Previous physics engine</span><b>MuJoCo</b></a>
       <a class="ap-pager-link next" href="dlolab.html"><span>Next physics engine<i class="fas fa-arrow-right"></i></span><b>DLO-Lab</b></a>
     </nav>
@@ -96,7 +125,10 @@
 </footer>
 
 <div class="tooltip" id="tooltip" role="tooltip" hidden></div>
-<script src="../static/js/data.js"></script>
-<script src="../static/js/approach.js"></script>
+<script src="../static/js/data.js?v=20261106x"></script>
+<script src="../static/js/approach.js?v=20261106x"></script>
+<script src="../static/js/param_grids.js?v=20261106x"></script>
+<script src="../static/js/paramgrid.js?v=20261106x"></script>
+<script src="../static/js/ux.js?v=20261106x"></script>
 </body>
 </html>
