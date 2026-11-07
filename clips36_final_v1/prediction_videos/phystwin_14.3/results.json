@@ -1,0 +1,304 @@
+{
+ "approach": "PhysTwin, per-clip dense twins refitted on the 36-clip selection",
+ "params": "data/wm/phystwin_twins_t36_v2/<clip>.pt",
+ "device": "cuda",
+ "reported_source": "data/wm/phystwin_sel_t36_v2_<clip>.json ('mittel')",
+ "metric": "14 inner nodes (ends kinematic), mean over cables, every frame",
+ "n_clips": 36,
+ "mean_reproduced": 14.323070287704468,
+ "mean_reported": 14.323070287704468,
+ "max_abs_clip_diff": 0.0,
+ "tolerance_mm": 0.5,
+ "clips_over_tolerance": {},
+ "ok": true,
+ "clips": {
+  "20261021_160124": {
+   "reproduced": 41.0186767578125,
+   "reported": 41.0186767578125,
+   "diff": 0.0,
+   "topology_matches_saved_adj": true,
+   "nan_nodes": 0,
+   "n_frames": 166
+  },
+  "20261021_162340": {
+   "reproduced": 7.6044392585754395,
+   "reported": 7.6044392585754395,
+   "diff": 0.0,
+   "topology_matches_saved_adj": true,
+   "nan_nodes": 0,
+   "n_frames": 175
+  },
+  "20261021_162632": {
+   "reproduced": 10.324220657348633,
+   "reported": 10.324220657348633,
+   "diff": 0.0,
+   "topology_matches_saved_adj": true,
+   "nan_nodes": 0,
+   "n_frames": 171
+  },
+  "20261021_163244": {
+   "reproduced": 9.932406425476074,
+   "reported": 9.932406425476074,
+   "diff": 0.0,
+   "topology_matches_saved_adj": true,
+   "nan_nodes": 0,
+   "n_frames": 123
+  },
+  "20261021_163624": {
+   "reproduced": 12.084731101989746,
+   "reported": 12.084731101989746,
+   "diff": 0.0,
+   "topology_matches_saved_adj": true,
+   "nan_nodes": 0,
+   "n_frames": 170
+  },
+  "20261021_164010": {
+   "reproduced": 6.457944869995117,
+   "reported": 6.457944869995117,
+   "diff": 0.0,
+   "topology_matches_saved_adj": true,
+   "nan_nodes": 0,
+   "n_frames": 181
+  },
+  "20261021_164524": {
+   "reproduced": 7.423418998718262,
+   "reported": 7.423418998718262,
+   "diff": 0.0,
+   "topology_matches_saved_adj": true,
+   "nan_nodes": 0,
+   "n_frames": 176
+  },
+  "20261021_164755": {
+   "reproduced": 6.819363594055176,
+   "reported": 6.819363594055176,
+   "diff": 0.0,
+   "topology_matches_saved_adj": true,
+   "nan_nodes": 0,
+   "n_frames": 164
+  },
+  "20261021_165018": {
+   "reproduced": 13.352712631225586,
+   "reported": 13.352712631225586,
+   "diff": 0.0,
+   "topology_matches_saved_adj": true,
+   "nan_nodes": 0,
+   "n_frames": 166
+  },
+  "20261021_165246": {
+   "reproduced": 15.553122520446777,
+   "reported": 15.553122520446777,
+   "diff": 0.0,
+   "topology_matches_saved_adj": true,
+   "nan_nodes": 0,
+   "n_frames": 181
+  },
+  "20261021_165753": {
+   "reproduced": 6.730073928833008,
+   "reported": 6.730073928833008,
+   "diff": 0.0,
+   "topology_matches_saved_adj": true,
+   "nan_nodes": 0,
+   "n_frames": 172
+  },
+  "20261021_170550": {
+   "reproduced": 8.971717834472656,
+   "reported": 8.971717834472656,
+   "diff": 0.0,
+   "topology_matches_saved_adj": true,
+   "nan_nodes": 0,
+   "n_frames": 158
+  },
+  "20261021_171620": {
+   "reproduced": 20.535375595092773,
+   "reported": 20.535375595092773,
+   "diff": 0.0,
+   "topology_matches_saved_adj": true,
+   "nan_nodes": 0,
+   "n_frames": 149
+  },
+  "20261021_171842": {
+   "reproduced": 15.376348495483398,
+   "reported": 15.376348495483398,
+   "diff": 0.0,
+   "topology_matches_saved_adj": true,
+   "nan_nodes": 0,
+   "n_frames": 164
+  },
+  "20261021_172103": {
+   "reproduced": 7.511220932006836,
+   "reported": 7.511220932006836,
+   "diff": 0.0,
+   "topology_matches_saved_adj": true,
+   "nan_nodes": 0,
+   "n_frames": 156
+  },
+  "20261021_172318": {
+   "reproduced": 8.050324440002441,
+   "reported": 8.050324440002441,
+   "diff": 0.0,
+   "topology_matches_saved_adj": true,
+   "nan_nodes": 0,
+   "n_frames": 161
+  },
+  "20261021_172716": {
+   "reproduced": 11.139192581176758,
+   "reported": 11.139192581176758,
+   "diff": 0.0,
+   "topology_matches_saved_adj": true,
+   "nan_nodes": 0,
+   "n_frames": 159
+  },
+  "20261021_172928": {
+   "reproduced": 8.347368240356445,
+   "reported": 8.347368240356445,
+   "diff": 0.0,
+   "topology_matches_saved_adj": true,
+   "nan_nodes": 0,
+   "n_frames": 149
+  },
+  "20261021_173234": {
+   "reproduced": 8.798258781433105,
+   "reported": 8.798258781433105,
+   "diff": 0.0,
+   "topology_matches_saved_adj": true,
+   "nan_nodes": 0,
+   "n_frames": 154
+  },
+  "20261021_173628": {
+   "reproduced": 8.148149490356445,
+   "reported": 8.148149490356445,
+   "diff": 0.0,
+   "topology_matches_saved_adj": true,
+   "nan_nodes": 0,
+   "n_frames": 168
+  },
+  "20261021_173858": {
+   "reproduced": 8.130754470825195,
+   "reported": 8.130754470825195,
+   "diff": 0.0,
+   "topology_matches_saved_adj": true,
+   "nan_nodes": 0,
+   "n_frames": 160
+  },
+  "20261021_174117": {
+   "reproduced": 20.68977928161621,
+   "reported": 20.68977928161621,
+   "diff": 0.0,
+   "topology_matches_saved_adj": true,
+   "nan_nodes": 0,
+   "n_frames": 174
+  },
+  "20261021_174701": {
+   "reproduced": 11.40689754486084,
+   "reported": 11.40689754486084,
+   "diff": 0.0,
+   "topology_matches_saved_adj": true,
+   "nan_nodes": 0,
+   "n_frames": 173
+  },
+  "20261021_175638": {
+   "reproduced": 37.02243423461914,
+   "reported": 37.02243423461914,
+   "diff": 0.0,
+   "topology_matches_saved_adj": true,
+   "nan_nodes": 0,
+   "n_frames": 155
+  },
+  "20261021_180139": {
+   "reproduced": 36.98542022705078,
+   "reported": 36.98542022705078,
+   "diff": 0.0,
+   "topology_matches_saved_adj": true,
+   "nan_nodes": 0,
+   "n_frames": 156
+  },
+  "20261021_180422": {
+   "reproduced": 9.962485313415527,
+   "reported": 9.962485313415527,
+   "diff": 0.0,
+   "topology_matches_saved_adj": true,
+   "nan_nodes": 0,
+   "n_frames": 176
+  },
+  "20261021_180646": {
+   "reproduced": 8.694744110107422,
+   "reported": 8.694744110107422,
+   "diff": 0.0,
+   "topology_matches_saved_adj": true,
+   "nan_nodes": 0,
+   "n_frames": 147
+  },
+  "20261026_125511": {
+   "reproduced": 19.1793212890625,
+   "reported": 19.1793212890625,
+   "diff": 0.0,
+   "topology_matches_saved_adj": true,
+   "nan_nodes": 0,
+   "n_frames": 168
+  },
+  "20261026_130128": {
+   "reproduced": 6.1891093254089355,
+   "reported": 6.1891093254089355,
+   "diff": 0.0,
+   "topology_matches_saved_adj": true,
+   "nan_nodes": 0,
+   "n_frames": 178
+  },
+  "20261026_130441": {
+   "reproduced": 41.14830017089844,
+   "reported": 41.14830017089844,
+   "diff": 0.0,
+   "topology_matches_saved_adj": true,
+   "nan_nodes": 0,
+   "n_frames": 164
+  },
+  "20261028_100701": {
+   "reproduced": 11.567362785339355,
+   "reported": 11.567362785339355,
+   "diff": 0.0,
+   "topology_matches_saved_adj": true,
+   "nan_nodes": 0,
+   "n_frames": 165
+  },
+  "20261028_101001": {
+   "reproduced": 9.445158958435059,
+   "reported": 9.445158958435059,
+   "diff": 0.0,
+   "topology_matches_saved_adj": true,
+   "nan_nodes": 0,
+   "n_frames": 161
+  },
+  "20261028_101510": {
+   "reproduced": 11.332185745239258,
+   "reported": 11.332185745239258,
+   "diff": 0.0,
+   "topology_matches_saved_adj": true,
+   "nan_nodes": 0,
+   "n_frames": 166
+  },
+  "20261028_105803": {
+   "reproduced": 15.08254623413086,
+   "reported": 15.08254623413086,
+   "diff": 0.0,
+   "topology_matches_saved_adj": true,
+   "nan_nodes": 0,
+   "n_frames": 146
+  },
+  "20261028_114103": {
+   "reproduced": 23.01786994934082,
+   "reported": 23.01786994934082,
+   "diff": 0.0,
+   "topology_matches_saved_adj": true,
+   "nan_nodes": 0,
+   "n_frames": 146
+  },
+  "20261028_121810": {
+   "reproduced": 11.59709358215332,
+   "reported": 11.59709358215332,
+   "diff": 0.0,
+   "topology_matches_saved_adj": true,
+   "nan_nodes": 0,
+   "n_frames": 155
+  }
+ }
+}
