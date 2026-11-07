@@ -51,6 +51,15 @@ two means. Over the other 35 clips the mean difference is +0.0078 and the median
 
 The closing `fit done` line of `_log.jsonl` reports the time of the last chain link only (49023 s), not the whole fit.
 
+## Overlay videos
+
+`clips36_final_v1/prediction_videos/newton_7.6/` holds one video per clip, two stills per clip and `results.json`,
+made with `newton_overlay.py` (job on 2 x RTX 2080 Ti, 14 workers, same load per GPU as the validation).
+
+- **Third evaluation:** these rollouts give mean 7.562 and median 6.534, against 7.562 and 6.528 in the validation. The largest per-clip difference is 0.159 mm/node (`20261021_171620`), so per-clip values vary by more than the median absolute difference above suggests.
+- **Clip `20261028_105803`:** 10.185 here. Two of three evaluations are near 10.2; the in-script 15.358 is the exception. The cause is still not investigated.
+- **Deviation from the other folders:** drawn on `check_videos/` because the raw camera images are not on the cluster. See the README in `prediction_videos/`.
+
 ## best_ever per generation
 
 | gen | best | mean | best_ever |
